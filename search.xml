@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>First blog</title>
+    <url>/2024/02/19/First-blog/</url>
+    <content><![CDATA[<h1 id="哇，hexo博客"><a href="#哇，hexo博客" class="headerlink" title="哇，hexo博客"></a>哇，hexo博客</h1><p>这次的博客如果搭建成功了，那么绝对是技术力大爆发，现在还在改配置，这个博客主题太多了，设置也多只，没有之前的那个博客无脑，不过总之，先开始搞吧˘ᗜ˘</p>
+<hr>
+<p>(ó﹏ò｡) 靠靠靠，搞了几个小时，终于搞成了，先发这一篇博客，回头再说cdn的事_(´□&#96;」 ∠)_</p>
+<hr>
+<p>OK啊，评论搞好了，然后发现Github pages自带CDN在国内即使打开没那么快，但是也是能打开的，毕竟人家也不是专门搞这个的</p>
+<p>最最最重要的是主题美化啦，尽管现在没那么好看，但是上线高啊</p>
+<p>大概就是这些了，应该不会有大变动了꒰ <em>•ɷ•</em> ꒱</p>
+]]></content>
+      <categories>
+        <category>闲聊</category>
+      </categories>
+      <tags>
+        <tag>闲聊</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何免费创建Hexo博客</title>
     <url>/2024/02/20/%E5%A6%82%E4%BD%95%E5%85%8D%E8%B4%B9%E5%88%9B%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h4 id="emsp-Hexo博客算是一个最好的博客框架之一了，但是用他搭建博客的话有的方法很简单，有的方法比较复杂，但是简单的方法还得拥有自己的域名，咱们现在教你的方法就是永久免费（除非Github跑路，但是也不太可能）"><a href="#emsp-Hexo博客算是一个最好的博客框架之一了，但是用他搭建博客的话有的方法很简单，有的方法比较复杂，但是简单的方法还得拥有自己的域名，咱们现在教你的方法就是永久免费（除非Github跑路，但是也不太可能）" class="headerlink" title="&emsp;Hexo博客算是一个最好的博客框架之一了，但是用他搭建博客的话有的方法很简单，有的方法比较复杂，但是简单的方法还得拥有自己的域名，咱们现在教你的方法就是永久免费（除非Github跑路，但是也不太可能）"></a>&emsp;Hexo博客算是一个最好的博客框架之一了，但是用他搭建博客的话有的方法很简单，有的方法比较复杂，但是简单的方法还得拥有自己的域名，咱们现在教你的方法就是永久免费（除非Github跑路，但是也不太可能）</h4><hr>
@@ -45,24 +63,6 @@
 ]]></content>
       <tags>
         <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>First blog</title>
-    <url>/2024/02/19/First-blog/</url>
-    <content><![CDATA[<h1 id="哇，hexo博客"><a href="#哇，hexo博客" class="headerlink" title="哇，hexo博客"></a>哇，hexo博客</h1><p>这次的博客如果搭建成功了，那么绝对是技术力大爆发，现在还在改配置，这个博客主题太多了，设置也多只，没有之前的那个博客无脑，不过总之，先开始搞吧˘ᗜ˘</p>
-<hr>
-<p>(ó﹏ò｡) 靠靠靠，搞了几个小时，终于搞成了，先发这一篇博客，回头再说cdn的事_(´□&#96;」 ∠)_</p>
-<hr>
-<p>OK啊，评论搞好了，然后发现Github pages自带CDN在国内即使打开没那么快，但是也是能打开的，毕竟人家也不是专门搞这个的</p>
-<p>最最最重要的是主题美化啦，尽管现在没那么好看，但是上线高啊</p>
-<p>大概就是这些了，应该不会有大变动了꒰ <em>•ɷ•</em> ꒱</p>
-]]></content>
-      <categories>
-        <category>闲聊</category>
-      </categories>
-      <tags>
-        <tag>闲聊</tag>
       </tags>
   </entry>
 </search>
