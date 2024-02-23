@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>First blog</title>
+    <url>/2024/02/19/First-blog/</url>
+    <content><![CDATA[<h1 id="哇，hexo博客"><a href="#哇，hexo博客" class="headerlink" title="哇，hexo博客"></a>哇，hexo博客</h1><p>这次的博客如果搭建成功了，那么绝对是技术力大爆发，现在还在改配置，这个博客主题太多了，设置也多只，没有之前的那个博客无脑，不过总之，先开始搞吧˘ᗜ˘</p>
+<hr>
+<p>(ó﹏ò｡) 靠靠靠，搞了几个小时，终于搞成了，先发这一篇博客，回头再说cdn的事_(´□&#96;」 ∠)_</p>
+<hr>
+<p>OK啊，评论搞好了，然后发现Github pages自带CDN在国内即使打开没那么快，但是也是能打开的，毕竟人家也不是专门搞这个的</p>
+<p>最最最重要的是主题美化啦，尽管现在没那么好看，但是上线高啊</p>
+<p>大概就是这些了，应该不会有大变动了꒰ <em>•ɷ•</em> ꒱</p>
+]]></content>
+      <categories>
+        <category>闲聊</category>
+      </categories>
+      <tags>
+        <tag>闲聊</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2024/02/23/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>如何免费创建Hexo博客</title>
+    <url>/2024/02/20/%E5%A6%82%E4%BD%95%E5%85%8D%E8%B4%B9%E5%88%9B%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h4 id="emsp-Hexo博客算是一个最好的博客框架之一了，但是用他搭建博客的话有的方法很简单，有的方法比较复杂，但是简单的方法还得拥有自己的域名，咱们现在教你的方法就是永久免费（除非Github跑路，但是也不太可能）"><a href="#emsp-Hexo博客算是一个最好的博客框架之一了，但是用他搭建博客的话有的方法很简单，有的方法比较复杂，但是简单的方法还得拥有自己的域名，咱们现在教你的方法就是永久免费（除非Github跑路，但是也不太可能）" class="headerlink" title="&emsp;Hexo博客算是一个最好的博客框架之一了，但是用他搭建博客的话有的方法很简单，有的方法比较复杂，但是简单的方法还得拥有自己的域名，咱们现在教你的方法就是永久免费（除非Github跑路，但是也不太可能）"></a>&emsp;Hexo博客算是一个最好的博客框架之一了，但是用他搭建博客的话有的方法很简单，有的方法比较复杂，但是简单的方法还得拥有自己的域名，咱们现在教你的方法就是永久免费（除非Github跑路，但是也不太可能）</h4><hr>
+<ul>
+<li><strong>首先，注册一个邮箱</strong></li>
+</ul>
+<p>在国内想要好的体验的话，建议注册outlook<br><a href="https://account.microsoft.com/account/Account?mkt=zh-CN">链接</a><br>点击登陆，再点击创建一个用户，然后进行设置，如果创建完成后可以下载一个邮箱管理软件，也可以网页管理邮箱  </p>
+<ul>
+<li><strong>注册Github，创建repository</strong></li>
+</ul>
+<blockquote>
+<p>提醒:在国内注册Github可能有点卡，如果太卡可以换个时间点，这个我也没办法  </p>
+</blockquote>
+<p>  点击<a href="https://github.com/">Github链接</a>然后在 Email address里填入自己注册的链接<br>再点击下面的紫色按钮，开始注册<br>注册完成登陆后<a href="https://github.com/new">点击这个链接</a><br>Repository name里填 “username.github.io”<br>username替换为你的用户名  </p>
+<h4 id="注意！注意！注意！你的用户名是说你注册Github的用户名，例如：”liutsyyds-github-io”，而不是”你的用户名-github-io”，下文同样如此"><a href="#注意！注意！注意！你的用户名是说你注册Github的用户名，例如：”liutsyyds-github-io”，而不是”你的用户名-github-io”，下文同样如此" class="headerlink" title="注意！注意！注意！你的用户名是说你注册Github的用户名，例如：”liutsyyds.github.io”，而不是”你的用户名.github.io”，下文同样如此"></a>注意！注意！注意！你的用户名是说你注册Github的用户名，例如：”liutsyyds.github.io”，而不是”你的用户名.github.io”，下文同样如此</h4><p>其他的不用管，点击Create repository<br>创建成功后，进行下一步</p>
+<ul>
+<li><strong>安装termux并进行配置</strong></li>
+</ul>
+<p><a href="https://f-droid.org/repo/com.termux_118.apk">下载链接</a><br>如果访问不了或太慢建议百度搜索一下<br>接着使用代码进行更新  </p>
+<h4 id="如果运行过程中停顿并出现-Y-n-选项，输入y并回车"><a href="#如果运行过程中停顿并出现-Y-n-选项，输入y并回车" class="headerlink" title="如果运行过程中停顿并出现[Y&#x2F;n]选项，输入y并回车"></a>如果运行过程中停顿并出现[Y&#x2F;n]选项，输入y并回车</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade &amp;&amp; apt install wget curl git vim </span><br></pre></td></tr></table></figure>
+<p>然后再安装proot-distro，通过proot-distro安装ubuntu，再登陆进去，而且以后进入ubuntu只需执行第三行代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt install proot-distro</span><br><span class="line">proot-distro install ubuntu-20.04</span><br><span class="line">proot-distro login ubuntu</span><br></pre></td></tr></table></figure>
+<p>输入代码时可以三行一起输，也可以一行一行输。<br>进入ubuntu后输入  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade &amp;&amp; apt install wget curl git vim nodejs npm &amp;&amp; npm cache clean -f &amp;&amp; npm install -g n &amp;&amp; n stable</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>安装Hexo</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init 自己喜欢的名字（仅英文）    <span class="comment">#这是你博客的根目录</span></span><br><span class="line"><span class="built_in">cd</span> 自己喜欢的名字（仅英文）</span><br><span class="line">npm install</span><br><span class="line">```  </span><br><span class="line">接着输入，期间一直回车就行了，遇到(y/n)选项时输入y再回车  </span><br><span class="line">```bash</span><br><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你注册github的邮箱&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你注册github的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后输入<code>cd</code>  </p>
+<p>再输入<code>vi .ssh/id_rsa.pub</code>  </p>
+<p>复制其中的全部内容，然后打开<a href="https://github.com/settings/ssh/new">链接</a>粘贴到key里，然后点Add ssh key<br>接着<code>cd 之前设置的你喜欢的英文名字/</code>  </p>
+<p><code>vi _config.yml</code>  </p>
+<p>找到文件最后一行的 deploy 替换以下代码</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的github用户名/你的github用户名.github.io.git,main</span></span><br></pre></td></tr></table></figure>
+<h3 id="注意：文件的排列必须和上面的代码一样，不然会报错"><a href="#注意：文件的排列必须和上面的代码一样，不然会报错" class="headerlink" title="注意：文件的排列必须和上面的代码一样，不然会报错"></a>注意：文件的排列必须和上面的代码一样，不然会报错</h3><p>接着输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>然后打开<a href="https://github.com/settings/tokens">链接</a><br>点击 Generate new token<br>出现弹窗，选择下面的那个。<br>点击Expiration下面的小方块，选择最下面的选项<br>然后把能打的对勾都打上，点击Generate token，把生成的密钥保存上，一定要保存好。<br>接着回到termux，然后输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
+<p>出现username输入Github的用户名，出现password输入之前的token，如果没显示token不用慌，这是保护隐私的设置，输完后回车就行。</p>
+<p>最后稍等几分钟，在浏览器输入<br>你的github用户名.github.io<br>即可<br>如果想要创建新的文章，就输入<br><code>hexo new &quot;标题&quot;</code>  </p>
+<p>记得要在博客根目录执行</p>
+]]></content>
+      <tags>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+</search>
