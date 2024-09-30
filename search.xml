@@ -114,6 +114,71 @@
       </tags>
   </entry>
   <entry>
+    <title>创建hexo博客</title>
+    <url>/2024/04/14/hexoblog/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>&emsp;Hexo博客是一个优秀的静态博客框架，今天就来教你永久免费的创建你的博客(除非Github改变政策)</strong></p>
+</blockquote>
+<ul>
+<li><strong>首先，注册一个邮箱</strong></li>
+</ul>
+<p>在国内想要好的体验的话，建议注册outlook<br><a href="https://account.microsoft.com/account/Account?mkt=zh-CN">链接</a><br>点击登陆，再点击创建一个用户，然后进行设置，如果创建完成后可以下载一个邮箱管理软件，也可以网页管理邮箱</p>
+<ul>
+<li><strong>注册Github，创建repository</strong></li>
+</ul>
+<blockquote>
+<p>提醒:在国内注册Github可能有点卡，如果太卡可以换个时间点，这个我也没办法  </p>
+</blockquote>
+<p>  点击<a href="https://github.com/">Github链接</a>然后在 Email address里填入自己注册的链接<br>再点击下面的紫色按钮，开始注册<br>注册完成登陆后<a href="https://github.com/new">点击这个链接</a><br>Repository name里填 “username.github.io”<br>username替换为你的用户名  </p>
+<blockquote>
+<p>注意！注意！注意！你的用户名是说你注册Github的用户名，例如：”liutsyyds.github.io”，而不是”你的用户名.github.io”，下文同样如此</p>
+</blockquote>
+<p>其他的不用管，点击Create repository<br>创建成功后，进行下一步</p>
+<ul>
+<li><strong>安装termux并进行配置</strong></li>
+</ul>
+<p><a href="https://f-droid.org/repo/com.termux_118.apk">下载链接</a><br>如果访问不了或太慢建议百度搜索一下<br>接着使用代码进行更新  </p>
+<blockquote>
+<p>如果运行过程中停顿并出现[Y&#x2F;n]选项，输入y并回车</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade &amp;&amp; apt install wget curl git vim </span><br></pre></td></tr></table></figure>
+<p>然后再安装proot-distro，通过proot-distro安装Debian，再登陆进去，而且以后进入Debian只需执行第三行代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install proot-distro -y</span><br><span class="line">proot-distro install debian-oldstable</span><br><span class="line">proot-distro login debian-oldstable</span><br></pre></td></tr></table></figure>
+<p>输入代码时可以三行一起输，也可以一行一行输。<br>进入Debian后输入  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install wget curl git vim <span class="built_in">sudo</span> -y &amp;&amp; curl -o- https://raw.gitmirror.com/nvm-sh/nvm/v0.38.0/install.sh | bash &amp;&amp;<span class="built_in">source</span> ~/.bashrc &amp;&amp; nvm install node</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>安装Hexo</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog    <span class="comment">#这是你博客的根目录</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>接着输入，期间一直回车就行了，遇到(y&#x2F;n)选项时输入y再回车</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你注册github的邮箱&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你注册github的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后输入<code>cd</code>  </p>
+<p>再输入<code>vi .ssh/id_rsa.pub</code>  </p>
+<p>复制其中的全部内容，然后打开<a href="https://github.com/settings/ssh/new">链接</a>粘贴到key里，然后点Add ssh key<br>接着<code>cd blog/</code>  </p>
+<p><code>vi _config.yml</code><br>找到文件最后一行的 deploy 替换以下代码</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的github用户名/你的github用户名.github.io.git,main</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：文件的排列必须和上面的代码一样，不然会报错</strong>  </p>
+</blockquote>
+<p>接着输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>然后打开<a href="https://github.com/settings/tokens">链接</a><br>点击 Generate new token<br>出现弹窗，选择下面的那个。<br>点击Expiration下面的小方块，选择最下面的选项<br>然后把能打的对勾都打上，点击Generate token，把生成的密钥保存上，一定要保存好。<br>接着回到termux，然后输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
+<p>出现username输入Github的用户名，出现password输入之前的token，如果没显示token不用慌，这是保护隐私的设置，输完后回车就行。</p>
+<p>最后稍等几分钟，在浏览器输入<br>你的github用户名.github.io<br>即可<br>如果想要创建新的文章，就输入<br><code>hexo new &quot;标题&quot;</code>  </p>
+<p>记得要在博客根目录执行</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>回到Hexo的怀抱</title>
     <url>/2024/09/15/imback/</url>
     <content><![CDATA[<blockquote>
@@ -355,6 +420,52 @@
       </tags>
   </entry>
   <entry>
+    <title>使用CFworkers路由加速网站</title>
+    <url>/2024/07/23/workers-nginx/</url>
+    <content><![CDATA[<blockquote>
+<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
+</blockquote>
+<ul>
+<li>创建 Workers</li>
+</ul>
+<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;www.example.com&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request); <span class="comment">// 如果没有匹配路径，则返回原始请求响应或者静态资源。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>粘贴上去后是13行, 如果有多余几行就把这几行删除</p>
+<p>其实可以将这个看成 Nginx 反代</p>
+<ul>
+<li>配置 Workers 路由</li>
+</ul>
+<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
+<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
+<p>点击添加就行了</p>
+<ul>
+<li>配置 DNS</li>
+</ul>
+<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
+<ul>
+<li>2024.7.25更新</li>
+</ul>
+<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
+<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
+<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
+<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>附影视网站: <a href="https://cms.lts.us.kg/">Liuts’ Movies</a> </p>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>CFworkers</tag>
+        <tag>cf优选</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CFblog添加Waline</title>
     <url>/2024/07/14/waline/</url>
     <content><![CDATA[<blockquote>
@@ -449,117 +560,6 @@
       <tags>
         <tag>waline</tag>
         <tag>vercel</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建hexo博客</title>
-    <url>/2024/04/14/hexoblog/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>&emsp;Hexo博客是一个优秀的静态博客框架，今天就来教你永久免费的创建你的博客(除非Github改变政策)</strong></p>
-</blockquote>
-<ul>
-<li><strong>首先，注册一个邮箱</strong></li>
-</ul>
-<p>在国内想要好的体验的话，建议注册outlook<br><a href="https://account.microsoft.com/account/Account?mkt=zh-CN">链接</a><br>点击登陆，再点击创建一个用户，然后进行设置，如果创建完成后可以下载一个邮箱管理软件，也可以网页管理邮箱</p>
-<ul>
-<li><strong>注册Github，创建repository</strong></li>
-</ul>
-<blockquote>
-<p>提醒:在国内注册Github可能有点卡，如果太卡可以换个时间点，这个我也没办法  </p>
-</blockquote>
-<p>  点击<a href="https://github.com/">Github链接</a>然后在 Email address里填入自己注册的链接<br>再点击下面的紫色按钮，开始注册<br>注册完成登陆后<a href="https://github.com/new">点击这个链接</a><br>Repository name里填 “username.github.io”<br>username替换为你的用户名  </p>
-<blockquote>
-<p>注意！注意！注意！你的用户名是说你注册Github的用户名，例如：”liutsyyds.github.io”，而不是”你的用户名.github.io”，下文同样如此</p>
-</blockquote>
-<p>其他的不用管，点击Create repository<br>创建成功后，进行下一步</p>
-<ul>
-<li><strong>安装termux并进行配置</strong></li>
-</ul>
-<p><a href="https://f-droid.org/repo/com.termux_118.apk">下载链接</a><br>如果访问不了或太慢建议百度搜索一下<br>接着使用代码进行更新  </p>
-<blockquote>
-<p>如果运行过程中停顿并出现[Y&#x2F;n]选项，输入y并回车</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade &amp;&amp; apt install wget curl git vim </span><br></pre></td></tr></table></figure>
-<p>然后再安装proot-distro，通过proot-distro安装Debian，再登陆进去，而且以后进入Debian只需执行第三行代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install proot-distro -y</span><br><span class="line">proot-distro install debian-oldstable</span><br><span class="line">proot-distro login debian-oldstable</span><br></pre></td></tr></table></figure>
-<p>输入代码时可以三行一起输，也可以一行一行输。<br>进入Debian后输入  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install wget curl git vim <span class="built_in">sudo</span> -y &amp;&amp; curl -o- https://raw.gitmirror.com/nvm-sh/nvm/v0.38.0/install.sh | bash &amp;&amp;<span class="built_in">source</span> ~/.bashrc &amp;&amp; nvm install node</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>安装Hexo</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog    <span class="comment">#这是你博客的根目录</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>接着输入，期间一直回车就行了，遇到(y&#x2F;n)选项时输入y再回车</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你注册github的邮箱&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你注册github的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后输入<code>cd</code>  </p>
-<p>再输入<code>vi .ssh/id_rsa.pub</code>  </p>
-<p>复制其中的全部内容，然后打开<a href="https://github.com/settings/ssh/new">链接</a>粘贴到key里，然后点Add ssh key<br>接着<code>cd blog/</code>  </p>
-<p><code>vi _config.yml</code><br>找到文件最后一行的 deploy 替换以下代码</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的github用户名/你的github用户名.github.io.git,main</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意：文件的排列必须和上面的代码一样，不然会报错</strong>  </p>
-</blockquote>
-<p>接着输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>然后打开<a href="https://github.com/settings/tokens">链接</a><br>点击 Generate new token<br>出现弹窗，选择下面的那个。<br>点击Expiration下面的小方块，选择最下面的选项<br>然后把能打的对勾都打上，点击Generate token，把生成的密钥保存上，一定要保存好。<br>接着回到termux，然后输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
-<p>出现username输入Github的用户名，出现password输入之前的token，如果没显示token不用慌，这是保护隐私的设置，输完后回车就行。</p>
-<p>最后稍等几分钟，在浏览器输入<br>你的github用户名.github.io<br>即可<br>如果想要创建新的文章，就输入<br><code>hexo new &quot;标题&quot;</code>  </p>
-<p>记得要在博客根目录执行</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用CFworkers路由加速网站</title>
-    <url>/2024/07/23/workers-nginx/</url>
-    <content><![CDATA[<blockquote>
-<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
-</blockquote>
-<ul>
-<li>创建 Workers</li>
-</ul>
-<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;www.example.com&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request); <span class="comment">// 如果没有匹配路径，则返回原始请求响应或者静态资源。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>粘贴上去后是13行, 如果有多余几行就把这几行删除</p>
-<p>其实可以将这个看成 Nginx 反代</p>
-<ul>
-<li>配置 Workers 路由</li>
-</ul>
-<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
-<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
-<p>点击添加就行了</p>
-<ul>
-<li>配置 DNS</li>
-</ul>
-<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
-<ul>
-<li>2024.7.25更新</li>
-</ul>
-<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
-<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
-<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
-<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>附影视网站: <a href="https://cms.lts.us.kg/">Liuts’ Movies</a> </p>
-]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>CFworkers</tag>
-        <tag>cf优选</tag>
       </tags>
   </entry>
 </search>
