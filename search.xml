@@ -56,7 +56,7 @@
       </tags>
   </entry>
   <entry>
-    <title>通过Cloudflare进行内网穿透</title>
+    <title>通过Cloudflare Tunnel进行内网穿透</title>
     <url>/2024/09/28/cloudflared/</url>
     <content><![CDATA[<blockquote>
 <p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
@@ -296,6 +296,103 @@
       </tags>
   </entry>
   <entry>
+    <title>CFblog添加Waline</title>
+    <url>/2024/07/14/waline/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教大家创建 CFblog, 但是没有评论功能, 这次教大家如何建使用Waline 开启评论功能</p>
+</blockquote>
+<ul>
+<li>注册 leancloud</li>
+</ul>
+<p>打开 <a href="https://console.leancloud.app/register">注册链接</a> 进行注册, 然后打开邮箱进行邮箱验证<br><img src="/img/waline/1.webp" alt="1"></p>
+<p>验证完成之后进行登陆, 点击创建应用,<br><img src="/img/waline/2.webp" alt="2"></p>
+<p>点击设置, 找到应用凭证, 把 AppID, AppKey 和 MasterKey 复制下来<br><img src="/img/waline/3.webp" alt="3"></p>
+<ul>
+<li>部署 Waline</li>
+</ul>
+<p>点击按钮进行搭建</p>
+<p><a href="https://vercel.com/import/project?template=https://github.com/walinejs/waline/tree/main/example"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a></p>
+<p>用 Github 登陆, 可能需要验证手机号</p>
+<p>输入名字后进行部署,等待几分钟,安装完毕后是这样<br><img src="/img/waline/4.webp" alt="4"></p>
+<ul>
+<li>设置变量</li>
+</ul>
+<p>到管理面板, 点击 Settings-&gt;Environment Variables</p>
+<p><img src="/img/waline/5.webp" alt="5"></p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>变量值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LEAN_ID</td>
+<td>你的 AppID</td>
+</tr>
+<tr>
+<td>LEAN_KEY</td>
+<td>你的 AppKey</td>
+</tr>
+<tr>
+<td>LEAN_MASTER_KEY</td>
+<td>你的 MasterKey</td>
+</tr>
+</tbody></table>
+<p><img src="/img/waline/6.webp" alt="6"></p>
+<p>点击 Save</p>
+<p>点击 Deployment-&gt;…-&gt;Redeploy</p>
+<p><img src="/img/waline/7.webp" alt="7"></p>
+<ul>
+<li>绑定域名</li>
+</ul>
+<p>Settings-&gt;Domains, 将以 <code>vercel.app</code> 为结尾的域名复制下来</p>
+<p>登陆 Cloudflare, 创建一个 workers, 把内容删除并粘贴下面的代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;xxx.vercel.app&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加 workers 路由,设置-&gt;触发器-&gt;添加路由</p>
+<p><img src="/img/waline/8.webp" alt="8"></p>
+<p>把路由添加为这样的形式 <code>xxx.example.com/*</code> 选择的区域必须是 example.com OK之后点击添加路由</p>
+<p>添加 DNS 记录,为 CNAME 名称是添加路由时的 xxx.example.com 目标是 cloudflare.182682.xyz 代理状态关闭, 保存</p>
+<p>会到 vercel 把自己设置的域名粘贴上去-&gt;add, 等一会就行了</p>
+<p>接着浏览器访问: https:&#x2F;&#x2F;[你的域名]&#x2F;ui&#x2F;register, 注册用户(第一个注册的用户是管理员)</p>
+<ul>
+<li>编辑 workers</li>
+</ul>
+<p>回到 Cloudflare 之前创建的 CFblog workers -&gt;编辑代码<br><img src="/img/waline/9.webp" alt="9"></p>
+<blockquote>
+<p>在右侧小部件区域,添加一个小部件 div , 名为&lt;最近评论&gt;</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;widgetOther&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;linkcat-0&quot;</span> <span class="attr">class</span>=<span class="string">&quot;widget widget_links&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">&quot;widget-title&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>最近评论<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline-recent&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在评论区加一个 div ,来显示评论</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;commentCode&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline&quot;</span>  <span class="attr">name</span>=<span class="string">&quot;waline&quot;</span> <span class="attr">class</span>=<span class="string">&quot;comments-area&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>头部加上样式,和Waline的js</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforHead&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">img</span> &#123;<span class="attribute">max-width</span>: <span class="number">100%</span>;&#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">li</span> &#123;<span class="attribute">border</span>: thick double <span class="number">#32a1ce</span>;&#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;//gcore.jsdelivr.net/npm/@waline/client/dist/Waline.min.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>底部加上Waline初始化代码,以及加载最近评论的代码</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforBody&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是初始化Waline的,visitor: true记得开启</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">new</span> <span class="title class_">Waline</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>:<span class="string">&#x27;#waline&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appId</span>: <span class="string">&#x27;eWrOzSzYP1Fm8QD96P0vKli-MdYXbMMI&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appKey</span>: <span class="string">&#x27;jMF98EwbmKvdGnDLamPwAk1&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">avatar</span>:<span class="string">&#x27;monsterid&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">recordIP</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">requiredFields</span>:[<span class="string">&#x27;nick&#x27;</span>],</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">visitor</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">//path:&quot;/&quot;,</span></span></span><br><span class="line"><span class="language-javascript">                <span class="attr">placeholder</span>:<span class="string">&quot;整两句...&quot;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是加载最近评论的</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="title class_">Waline</span>.<span class="property">Widget</span>.<span class="title class_">RecentComments</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>: <span class="string">&#x27;#waline-recent&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">count</span>: <span class="number">10</span></span></span><br><span class="line"><span class="language-javascript">              &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+<p>把代码中的AppID,AppKey,serverURL(serverURL两个都要改)修改成你自己的, 并粘贴到workers代码里, 再点击部署就可以了</p>
+<ul>
+<li>最后</li>
+</ul>
+<p>Waline 还可以在 Hexo 上使用, 你们自己研究一下, 就不出教程了</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>waline</tag>
+        <tag>vercel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TCL折腾过程</title>
     <url>/2024/09/15/tcladb/</url>
     <content><![CDATA[<blockquote>
@@ -463,103 +560,6 @@
       <tags>
         <tag>CFworkers</tag>
         <tag>cf优选</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CFblog添加Waline</title>
-    <url>/2024/07/14/waline/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教大家创建 CFblog, 但是没有评论功能, 这次教大家如何建使用Waline 开启评论功能</p>
-</blockquote>
-<ul>
-<li>注册 leancloud</li>
-</ul>
-<p>打开 <a href="https://console.leancloud.app/register">注册链接</a> 进行注册, 然后打开邮箱进行邮箱验证<br><img src="/img/waline/1.webp" alt="1"></p>
-<p>验证完成之后进行登陆, 点击创建应用,<br><img src="/img/waline/2.webp" alt="2"></p>
-<p>点击设置, 找到应用凭证, 把 AppID, AppKey 和 MasterKey 复制下来<br><img src="/img/waline/3.webp" alt="3"></p>
-<ul>
-<li>部署 Waline</li>
-</ul>
-<p>点击按钮进行搭建</p>
-<p><a href="https://vercel.com/import/project?template=https://github.com/walinejs/waline/tree/main/example"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a></p>
-<p>用 Github 登陆, 可能需要验证手机号</p>
-<p>输入名字后进行部署,等待几分钟,安装完毕后是这样<br><img src="/img/waline/4.webp" alt="4"></p>
-<ul>
-<li>设置变量</li>
-</ul>
-<p>到管理面板, 点击 Settings-&gt;Environment Variables</p>
-<p><img src="/img/waline/5.webp" alt="5"></p>
-<table>
-<thead>
-<tr>
-<th>变量名</th>
-<th>变量值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>LEAN_ID</td>
-<td>你的 AppID</td>
-</tr>
-<tr>
-<td>LEAN_KEY</td>
-<td>你的 AppKey</td>
-</tr>
-<tr>
-<td>LEAN_MASTER_KEY</td>
-<td>你的 MasterKey</td>
-</tr>
-</tbody></table>
-<p><img src="/img/waline/6.webp" alt="6"></p>
-<p>点击 Save</p>
-<p>点击 Deployment-&gt;…-&gt;Redeploy</p>
-<p><img src="/img/waline/7.webp" alt="7"></p>
-<ul>
-<li>绑定域名</li>
-</ul>
-<p>Settings-&gt;Domains, 将以 <code>vercel.app</code> 为结尾的域名复制下来</p>
-<p>登陆 Cloudflare, 创建一个 workers, 把内容删除并粘贴下面的代码</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;xxx.vercel.app&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>添加 workers 路由,设置-&gt;触发器-&gt;添加路由</p>
-<p><img src="/img/waline/8.webp" alt="8"></p>
-<p>把路由添加为这样的形式 <code>xxx.example.com/*</code> 选择的区域必须是 example.com OK之后点击添加路由</p>
-<p>添加 DNS 记录,为 CNAME 名称是添加路由时的 xxx.example.com 目标是 cloudflare.182682.xyz 代理状态关闭, 保存</p>
-<p>会到 vercel 把自己设置的域名粘贴上去-&gt;add, 等一会就行了</p>
-<p>接着浏览器访问: https:&#x2F;&#x2F;[你的域名]&#x2F;ui&#x2F;register, 注册用户(第一个注册的用户是管理员)</p>
-<ul>
-<li>编辑 workers</li>
-</ul>
-<p>回到 Cloudflare 之前创建的 CFblog workers -&gt;编辑代码<br><img src="/img/waline/9.webp" alt="9"></p>
-<blockquote>
-<p>在右侧小部件区域,添加一个小部件 div , 名为&lt;最近评论&gt;</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;widgetOther&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;linkcat-0&quot;</span> <span class="attr">class</span>=<span class="string">&quot;widget widget_links&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">&quot;widget-title&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>最近评论<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline-recent&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在评论区加一个 div ,来显示评论</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;commentCode&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline&quot;</span>  <span class="attr">name</span>=<span class="string">&quot;waline&quot;</span> <span class="attr">class</span>=<span class="string">&quot;comments-area&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>头部加上样式,和Waline的js</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforHead&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">img</span> &#123;<span class="attribute">max-width</span>: <span class="number">100%</span>;&#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">li</span> &#123;<span class="attribute">border</span>: thick double <span class="number">#32a1ce</span>;&#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;//gcore.jsdelivr.net/npm/@waline/client/dist/Waline.min.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>底部加上Waline初始化代码,以及加载最近评论的代码</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforBody&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是初始化Waline的,visitor: true记得开启</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">new</span> <span class="title class_">Waline</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>:<span class="string">&#x27;#waline&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appId</span>: <span class="string">&#x27;eWrOzSzYP1Fm8QD96P0vKli-MdYXbMMI&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appKey</span>: <span class="string">&#x27;jMF98EwbmKvdGnDLamPwAk1&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">avatar</span>:<span class="string">&#x27;monsterid&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">recordIP</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">requiredFields</span>:[<span class="string">&#x27;nick&#x27;</span>],</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">visitor</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">//path:&quot;/&quot;,</span></span></span><br><span class="line"><span class="language-javascript">                <span class="attr">placeholder</span>:<span class="string">&quot;整两句...&quot;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是加载最近评论的</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="title class_">Waline</span>.<span class="property">Widget</span>.<span class="title class_">RecentComments</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>: <span class="string">&#x27;#waline-recent&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">count</span>: <span class="number">10</span></span></span><br><span class="line"><span class="language-javascript">              &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-<p>把代码中的AppID,AppKey,serverURL(serverURL两个都要改)修改成你自己的, 并粘贴到workers代码里, 再点击部署就可以了</p>
-<ul>
-<li>最后</li>
-</ul>
-<p>Waline 还可以在 Hexo 上使用, 你们自己研究一下, 就不出教程了</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>waline</tag>
-        <tag>vercel</tag>
       </tags>
   </entry>
 </search>
