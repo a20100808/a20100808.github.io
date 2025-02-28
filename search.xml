@@ -51,8 +51,16 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>cloudflare</tag>
-        <tag>cfblog</tag>
+        <tag>Cloudflare Workers</tag>
+        <tag>创建个人博客</tag>
+        <tag>CFblog教程</tag>
+        <tag>免费域名</tag>
+        <tag>KV容器</tag>
+        <tag>Workers部署</tag>
+        <tag>博客搭建</tag>
+        <tag>Cloudflare区域ID</tag>
+        <tag>API令牌</tag>
+        <tag>稳定博客</tag>
       </tags>
   </entry>
   <entry>
@@ -111,15 +119,23 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>cloudflare</tag>
+        <tag>Cloudflare Tunnel</tag>
         <tag>内网穿透</tag>
+        <tag>Zero Trust</tag>
+        <tag>Cloudflared安装</tag>
+        <tag>免费服务</tag>
+        <tag>Termux教程</tag>
+        <tag>Argo Token</tag>
+        <tag>域名配置</tag>
+        <tag>HTTP服务</tag>
+        <tag>Screen命令</tag>
       </tags>
   </entry>
   <entry>
     <title>创建hexo博客</title>
     <url>/2024/04/14/hexoblog/</url>
     <content><![CDATA[<blockquote>
-<p><strong>&emsp;Hexo博客是一个优秀的静态博客框架，今天就来教你永久免费的创建你的博客(除非Github改变政策)</strong></p>
+<p>** Hexo博客是一个优秀的静态博客框架，今天就来教你永久免费的创建你的博客(除非Github改变政策)**</p>
 </blockquote>
 <ul>
 <li><strong>首先，注册一个邮箱</strong></li>
@@ -171,13 +187,22 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
 <p>出现username输入Github的用户名，出现password输入之前的token，如果没显示token不用慌，这是保护隐私的设置，输完后回车就行。</p>
 <p>最后稍等几分钟，在浏览器输入<br>你的github用户名.github.io<br>即可<br>如果想要创建新的文章，就输入<br><code>hexo new &quot;标题&quot;</code>  </p>
-<p>记得要在博客根目录执行</p>
+<p>记得要在博客根目录执行<br>&#96;&#96;&#96;</p>
 ]]></content>
       <categories>
         <category>教程</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>Hexo博客</tag>
+        <tag>GitHub Pages</tag>
+        <tag>静态博客</tag>
+        <tag>免费博客</tag>
+        <tag>Termux配置</tag>
+        <tag>Hexo安装</tag>
+        <tag>SSH密钥</tag>
+        <tag>博客部署</tag>
+        <tag>Node.js安装</tag>
+        <tag>创建文章</tag>
       </tags>
   </entry>
   <entry>
@@ -214,8 +239,16 @@
         <category>分享</category>
       </categories>
       <tags>
-        <tag>api</tag>
-        <tag>acg</tag>
+        <tag>随机图片API</tag>
+        <tag>二次元图片</tag>
+        <tag>ACG文化</tag>
+        <tag>图片接口</tag>
+        <tag>免费API</tag>
+        <tag>LoliAPI</tag>
+        <tag>动漫壁纸</tag>
+        <tag>双端适配</tag>
+        <tag>随机背景</tag>
+        <tag>开发资源</tag>
       </tags>
   </entry>
   <entry>
@@ -253,13 +286,22 @@
 <p>那么好了, 现在开始使用吧</p>
 <figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">![img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)](<span class="link">/</span>)</span><br></pre></td></tr></table></figure>
 <p>效果</p>
-<p><a href="/"><img src="/img/mdimghref/1.webp" alt="img"></a></p>
+<p><a href="/"><img src="/img/mdimghref/1.webp" alt="img"></a><br>&#96;&#96;&#96;</p>
 ]]></content>
       <categories>
         <category>水教程</category>
       </categories>
       <tags>
-        <tag>markdown</tag>
+        <tag>Markdown教程</tag>
+        <tag>图片超链接</tag>
+        <tag>Markdown语法</tag>
+        <tag>链接插入</tag>
+        <tag>图片插入</tag>
+        <tag>HTML转换</tag>
+        <tag>Markdown基础</tag>
+        <tag>超链接图片</tag>
+        <tag>图片描述</tag>
+        <tag>简单指南</tag>
       </tags>
   </entry>
   <entry>
@@ -286,15 +328,24 @@
 </ol>
 <p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
 <ul>
-<li>省流</li>
+<li>总结</li>
 </ul>
-<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)</p>
+<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)<br>&#96;&#96;&#96;</p>
 ]]></content>
       <categories>
         <category>水教程</category>
       </categories>
       <tags>
-        <tag>ssl</tag>
+        <tag>SSL证书</tag>
+        <tag>免费SSL</tag>
+        <tag>HTTPS配置</tag>
+        <tag>acme.sh教程</tag>
+        <tag>VPS域名</tag>
+        <tag>LetsEncrypt</tag>
+        <tag>SSL安装</tag>
+        <tag>主机平台SSL</tag>
+        <tag>域名解析</tag>
+        <tag>证书申请</tag>
       </tags>
   </entry>
   <entry>
@@ -351,14 +402,24 @@
 <ul>
 <li>总结</li>
 </ul>
-<p>TCL的限制实在太大了, 连ADB都限制, 只为了他那广告收益, 对于这种厂家, 我只能说<code>阿米诺斯</code></p>
+<p>TCL的限制实在太大了, 连ADB都限制, 只为了他那广告收益, 对于这种厂家, 我只能说真的出生</p>
+<pre><code>
+</code></pre>
 ]]></content>
       <categories>
         <category>折腾</category>
       </categories>
       <tags>
-        <tag>tcl</tag>
-        <tag>adb</tag>
+        <tag>TCL电视</tag>
+        <tag>ADB调试</tag>
+        <tag>软件卸载</tag>
+        <tag>应用安装</tag>
+        <tag>无线ADB</tag>
+        <tag>TCL限制</tag>
+        <tag>电视折腾</tag>
+        <tag>ADB命令</tag>
+        <tag>包名列表</tag>
+        <tag>安装验证</tag>
       </tags>
   </entry>
   <entry>
@@ -417,8 +478,16 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>typecho</tag>
         <tag>免费域名</tag>
+        <tag>博客搭建</tag>
+        <tag>Typecho博客</tag>
+        <tag>免费主机</tag>
+        <tag>PHP虚拟主机</tag>
+        <tag>Typecho安装</tag>
+        <tag>Joe主题</tag>
+        <tag>动态博客</tag>
+        <tag>域名绑定</tag>
+        <tag>博客美化</tag>
       </tags>
   </entry>
   <entry>
@@ -508,14 +577,22 @@
 <ul>
 <li>最后</li>
 </ul>
-<p>Waline 还可以在 Hexo 上使用, 你们自己研究一下, 就不出教程了</p>
+<p>Waline 还可以在 Hexo 上使用, 你们自己研究一下, 就不出教程了<br>&#96;&#96;&#96;</p>
 ]]></content>
       <categories>
         <category>教程</category>
       </categories>
       <tags>
-        <tag>waline</tag>
-        <tag>vercel</tag>
+        <tag>Cloudflare Workers</tag>
+        <tag>域名绑定</tag>
+        <tag>CFblog评论</tag>
+        <tag>Waline部署</tag>
+        <tag>Vercel搭建</tag>
+        <tag>LeanCloud注册</tag>
+        <tag>评论系统</tag>
+        <tag>第三方评论</tag>
+        <tag>最近评论</tag>
+        <tag>Waline配置</tag>
       </tags>
   </entry>
   <entry>
@@ -552,16 +629,21 @@
 <p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
 <p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
 <p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>附影视网站: <a href="https://cms.lts.us.kg/">Liuts’ Movies</a> </p>
-]]></content>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>分享</category>
       </categories>
       <tags>
-        <tag>CFworkers</tag>
-        <tag>cf优选</tag>
+        <tag>CFworkers路由</tag>
+        <tag>网站加速</tag>
+        <tag>Cloudflare代理</tag>
+        <tag>Workers配置</tag>
+        <tag>CNAME记录</tag>
+        <tag>反向代理</tag>
+        <tag>CF优选域名</tag>
+        <tag>域名重定向</tag>
+        <tag>Nginx反代</tag>
+        <tag>访问速度</tag>
       </tags>
   </entry>
 </search>
