@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="[&quot;zh-CN&quot;,&quot;en&quot;,&quot;default&quot;]" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>创建Typecho博客 | Liutsの博客</title><meta name="author" content="liuts"><meta name="copyright" content="liuts"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="使用免费主机和域名创建Typecho动态博客的详细教程。从主机选择到安装Typecho和Joe主题美化，简洁快速，适合专注写作的初学者。"><meta property="og:type" content="article"><meta property="og:title" content="创建Typecho博客"><meta property="og:url" content="https://blog.333375.xyz/2024/04/21/typechoblog/index.html"><meta property="og:site_name" content="Liutsの博客"><meta property="og:description" content="使用免费主机和域名创建Typecho动态博客的详细教程。从主机选择到安装Typecho和Joe主题美化，简洁快速，适合专注写作的初学者。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://blog.333375.xyz/img/typechoblog/cover.webp"><meta property="article:published_time" content="2024-04-21T04:32:01.000Z"><meta property="article:modified_time" content="2025-03-01T13:31:23.472Z"><meta property="article:author" content="liuts"><meta property="article:tag" content="免费域名"><meta property="article:tag" content="博客搭建"><meta property="article:tag" content="Typecho博客"><meta property="article:tag" content="免费主机"><meta property="article:tag" content="PHP虚拟主机"><meta property="article:tag" content="Typecho安装"><meta property="article:tag" content="Joe主题"><meta property="article:tag" content="动态博客"><meta property="article:tag" content="域名绑定"><meta property="article:tag" content="博客美化"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://blog.333375.xyz/img/typechoblog/cover.webp"><link rel="shortcut icon" href="/img/favicon.webp"><link rel="canonical" href="https://blog.333375.xyz/2024/04/21/typechoblog/index.html"><link rel="preconnect" href="https://s4.zstatic.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.5.1/css/all.min.css"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://s4.zstatic.net/ajax/libs/egjs-infinitegrid/4.11.1/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '创建Typecho博客',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2025-03-01 21:31:23'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/rss.xml" title="Liutsの博客" type="application/rss+xml"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">96</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i> <span>归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i> <span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i> <span>关于</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-list"></i> <span>带恶人</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/zgx/"><i class="fa-fw fa-solid fa-person"></i> <span>月母</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/typechoblog/cover.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Liutsの博客"><span class="site-name">Liutsの博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i> <span>搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i> <span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i> <span>归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i> <span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i> <span>关于</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa-solid fa-list"></i> <span>带恶人</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/zgx/"><i class="fa-fw fa-solid fa-person"></i> <span>月母</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">创建Typecho博客</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-21T04:32:01.000Z" title="发表于 2024-04-21 12:32:01">2024-04-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-01T13:31:23.472Z" title="更新于 2025-03-01 21:31:23">2025-03-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">717</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote><p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p></blockquote><ul><li>找博客主机</li></ul><p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p><p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p><ul><li>域名</li></ul><p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p><p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p><blockquote><p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p></blockquote><ul><li>搭建博客</li></ul><p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p><p>点击<a target="_blank" rel="noopener external nofollow noreferrer" href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p><p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录</p><table><thead><tr><th>名称</th><th>选择域名</th><th>记录类型</th><th>记录值</th></tr></thead><tbody><tr><td>blog</td><td>example.com</td><td>A</td><td>1.2.3.4</td></tr></tbody></table><p>完整域名就是 blog.example.com</p><p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p><ul><li>美化</li></ul><p>由于自带的主题太简陋，所以要换主题，首先打开<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p><ul><li>结尾</li></ul><p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者:</span> <span class="post-copyright-info"><a href="https://blog.333375.xyz">liuts</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接:</span> <span class="post-copyright-info"><a href="https://blog.333375.xyz/2024/04/21/typechoblog/">https://blog.333375.xyz/2024/04/21/typechoblog/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明:</span> <span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.333375.xyz" target="_blank">Liutsの博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/">免费域名</a><a class="post-meta__tags" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a><a class="post-meta__tags" href="/tags/Typecho%E5%8D%9A%E5%AE%A2/">Typecho博客</a><a class="post-meta__tags" href="/tags/%E5%85%8D%E8%B4%B9%E4%B8%BB%E6%9C%BA/">免费主机</a><a class="post-meta__tags" href="/tags/PHP%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/">PHP虚拟主机</a><a class="post-meta__tags" href="/tags/Typecho%E5%AE%89%E8%A3%85/">Typecho安装</a><a class="post-meta__tags" href="/tags/Joe%E4%B8%BB%E9%A2%98/">Joe主题</a><a class="post-meta__tags" href="/tags/%E5%8A%A8%E6%80%81%E5%8D%9A%E5%AE%A2/">动态博客</a><a class="post-meta__tags" href="/tags/%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9A/">域名绑定</a><a class="post-meta__tags" href="/tags/%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/">博客美化</a></div><div class="post_share"><div class="social-share" data-image="/img/typechoblog/cover.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/butterfly-extsrc/1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://s4.zstatic.net/ajax/libs/butterfly-extsrc/1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/02/ssl/" title="SSL申请"><img class="cover" src="/img/ssl/cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SSL申请</div></div></a></div><div class="next-post pull-right"><a href="/2024/04/14/hexoblog/" title="创建hexo博客"><img class="cover" src="/img/hexoblog/cover.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">创建hexo博客</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/06/06/cfblog/" title="创建CFblog"><img class="cover" src="/img/cfblog/cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-06</div><div class="title">创建CFblog</div></div></a></div><div><a href="/2024/07/14/waline/" title="CFblog添加Waline"><img class="cover" src="/img/waline/cover.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-14</div><div class="title">CFblog添加Waline</div></div></a></div></div></div><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i> <span>评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">liuts</div><div class="author-info__description">liuts的博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">96</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/couldflyer"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/couldflyer" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #4a7dbe;"></i></a><a class="social-icon" href="mailto:lts2233@hotmail.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"></div></div></main><footer id="footer" style="background-image: url('/img/typechoblog/cover.webp')"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By liuts</div><div class="framework-info"><span>框架</span> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题</span> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20240473" rel="external nofollow noreferrer" target="_blank">萌ICP备20240473号</a> <a href="/rss.xml" target="_blank">RSS订阅</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://s4.zstatic.net/ajax/libs/hexo-theme-butterfly/4.13.0/js/utils.min.js"></script><script src="https://s4.zstatic.net/ajax/libs/hexo-theme-butterfly/4.13.0/js/main.min.js"></script><script src="https://s4.zstatic.net/ajax/libs/instant.page/5.2.0/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://s4.zstatic.net/ajax/libs/pangu/4.0.7/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+
+  const initWaline = (Fn) => {
+    const waline = Fn(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.wdccc.cloudns.org',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+  }
+
+  const loadWaline = async () => {
+    if (initFn) initWaline(initFn)
+    else {
+      await getCSS('https://s4.zstatic.net/ajax/libs/waline/3.1.2/waline.min.css')
+      const { init } = await import('https://s4.zstatic.net/ajax/libs/waline/3.1.2/waline.min.js')
+      initFn = init || Waline.init
+      initWaline(initFn)
+      window.walineFn = initFn
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script id="click-heart" src="https://s4.zstatic.net/ajax/libs/butterfly-extsrc/1.1.3/click-heart.min.js" async="async" mobile="true"></script><script src="https://s4.zstatic.net/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i> <span>数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="https://s4.zstatic.net/ajax/libs/hexo-theme-butterfly/4.13.0/js/search/local-search.min.js"></script></div></div></body></html>
