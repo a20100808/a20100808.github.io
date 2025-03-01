@@ -1,6 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>创建CFblog</title>
+    <url>/2024/06/06/cfblog/</url>
+    <content><![CDATA[<blockquote>
+<p>在之前已经教了大家如何搭建博客，但是都有各自的缺点如hexo没有后台，typecho用免费主机不稳定经常跑路，今天教大家用Cloudflare搭建一个博客，相当稳定</p>
+</blockquote>
+<p>项目地址: <a href="https://github.com/gdtool/cloudflare-workers-blog">https://github.com/gdtool/cloudflare-workers-blog</a><br>作者: <a href="https://blog.gezhong.vip/">https://blog.gezhong.vip</a>  </p>
+<p>搭建教程</p>
+<ul>
+<li>注册cloudflare账号</li>
+</ul>
+<p>去官网<a href="https://www.cloudflare-cn.com/">https://www.cloudflare-cn.com</a> 点击登陆后进行注册就行，非常简单只需一个邮箱  </p>
+<ul>
+<li>申请免费域名</li>
+</ul>
+<p>这个域名是有要求的，需要添加上cloudflare的解析，也就是可以修改NS记录，而且如果是非顶级域的话还要看看在 <a href="https://publicsuffix.org/list/public_suffix_list.dat">https://publicsuffix.org/list/public_suffix_list.dat</a> 是否有这个后缀</p>
+<p>在我的文章 <a href="/2024/04/21/typechoblog">创建Typecho博客</a> 中有一些免费域名</p>
+<ul>
+<li>创建KV容器</li>
+</ul>
+<p>登陆控制台后把语言设置为中文，在左边栏目里，找到”workers和pages”，点击黑三角，点击KV，之后创建命名空间 输入名称后点击添加即可</p>
+<ul>
+<li>获取cf区域id和API token</li>
+</ul>
+<p>点击”网站”，点击你添加的域名，找到区域id，复制下来保存在记事本</p>
+<p>然后点击获取API令牌&gt;创建令牌&gt;自定义令牌&gt;输入名称<br>权限: <code>区域</code> <code>缓存清除</code> <code>清除</code><br>区域资源: <code>包括</code> <code>特定区域</code> <code>选择你的域名</code><br>继续以显示摘要&gt;创建令牌，复制下来，保存在一个地方</p>
+<ul>
+<li>创建workers</li>
+</ul>
+<p>在栏目里点击”workers和pages”，点击创建应用程序&gt;创建worker&gt;输入名称&gt;完成&gt;编辑代码</p>
+<p>删掉原来的代码，把<a href="https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js">https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js</a> 中的代码复制下来，粘贴到上面，将其中的一些东西自己修改，保存并部署</p>
+<ul>
+<li>设置变量</li>
+</ul>
+<p>回到项目&gt;设置&gt;变量&gt;KV空间绑定&gt;名称<code>CFBLOG</code> 空间选择自己刚创建的&gt;部署</p>
+<ul>
+<li>自定义域</li>
+</ul>
+<p>回到项目&gt;设置&gt;触发器&gt;添加自定义域&gt;输入域名&gt;创建，之后等待一下就行了</p>
+<ul>
+<li><p>写文章<br>访问 域名&#x2F;admin 输入你设置的用户名密码登陆，之后就可以写文章了</p>
+</li>
+<li><p>总结</p>
+</li>
+</ul>
+<p>过程有点麻烦，但是用起来方便稳定，就是主题不多，至于评论功能就在<del>水</del>一篇博客吧</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Cloudflare Workers</tag>
+        <tag>创建个人博客</tag>
+        <tag>CFblog教程</tag>
+        <tag>免费域名</tag>
+        <tag>KV容器</tag>
+        <tag>Workers部署</tag>
+        <tag>博客搭建</tag>
+        <tag>Cloudflare区域ID</tag>
+        <tag>API令牌</tag>
+        <tag>稳定博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建hexo博客</title>
+    <url>/2024/04/14/hexoblog/</url>
+    <content><![CDATA[<blockquote>
+<p>** Hexo博客是一个优秀的静态博客框架，今天就来教你永久免费的创建你的博客(除非Github改变政策)**</p>
+</blockquote>
+<ul>
+<li><strong>首先，注册一个邮箱</strong></li>
+</ul>
+<p>在国内想要好的体验的话，建议注册outlook<br><a href="https://account.microsoft.com/account/Account?mkt=zh-CN">链接</a><br>点击登陆，再点击创建一个用户，然后进行设置，如果创建完成后可以下载一个邮箱管理软件，也可以网页管理邮箱</p>
+<ul>
+<li><strong>注册Github，创建repository</strong></li>
+</ul>
+<blockquote>
+<p>提醒:在国内注册Github可能有点卡，如果太卡可以换个时间点，这个我也没办法  </p>
+</blockquote>
+<p>  点击<a href="https://github.com/">Github链接</a>然后在 Email address里填入自己注册的链接<br>再点击下面的紫色按钮，开始注册<br>注册完成登陆后<a href="https://github.com/new">点击这个链接</a><br>Repository name里填 “username.github.io”<br>username替换为你的用户名  </p>
+<blockquote>
+<p>注意！注意！注意！你的用户名是说你注册Github的用户名，例如：”liutsyyds.github.io”，而不是”你的用户名.github.io”，下文同样如此</p>
+</blockquote>
+<p>其他的不用管，点击Create repository<br>创建成功后，进行下一步</p>
+<ul>
+<li><strong>安装termux并进行配置</strong></li>
+</ul>
+<p><a href="https://f-droid.org/repo/com.termux_118.apk">下载链接</a><br>如果访问不了或太慢建议百度搜索一下<br>接着使用代码进行更新  </p>
+<blockquote>
+<p>如果运行过程中停顿并出现[Y&#x2F;n]选项，输入y并回车</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade &amp;&amp; apt install wget curl git vim </span><br></pre></td></tr></table></figure>
+<p>然后再安装proot-distro，通过proot-distro安装Debian，再登陆进去，而且以后进入Debian只需执行第三行代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install proot-distro -y</span><br><span class="line">proot-distro install debian-oldstable</span><br><span class="line">proot-distro login debian-oldstable</span><br></pre></td></tr></table></figure>
+<p>输入代码时可以三行一起输，也可以一行一行输。<br>进入Debian后输入  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install wget curl git vim <span class="built_in">sudo</span> -y &amp;&amp; curl -o- https://raw.gitmirror.com/nvm-sh/nvm/v0.38.0/install.sh | bash &amp;&amp;<span class="built_in">source</span> ~/.bashrc &amp;&amp; nvm install node</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>安装Hexo</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog    <span class="comment">#这是你博客的根目录</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>接着输入，期间一直回车就行了，遇到(y&#x2F;n)选项时输入y再回车</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你注册github的邮箱&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你注册github的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后输入<code>cd</code>  </p>
+<p>再输入<code>vi .ssh/id_rsa.pub</code>  </p>
+<p>复制其中的全部内容，然后打开<a href="https://github.com/settings/ssh/new">链接</a>粘贴到key里，然后点Add ssh key<br>接着<code>cd blog/</code>  </p>
+<p><code>vi _config.yml</code><br>找到文件最后一行的 deploy 替换以下代码</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的github用户名/你的github用户名.github.io.git,main</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：文件的排列必须和上面的代码一样，不然会报错</strong>  </p>
+</blockquote>
+<p>接着输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>然后打开<a href="https://github.com/settings/tokens">链接</a><br>点击 Generate new token<br>出现弹窗，选择下面的那个。<br>点击Expiration下面的小方块，选择最下面的选项<br>然后把能打的对勾都打上，点击Generate token，把生成的密钥保存上，一定要保存好。<br>接着回到termux，然后输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
+<p>出现username输入Github的用户名，出现password输入之前的token，如果没显示token不用慌，这是保护隐私的设置，输完后回车就行。</p>
+<p>最后稍等几分钟，在浏览器输入<br>你的github用户名.github.io<br>即可<br>如果想要创建新的文章，就输入<br><code>hexo new &quot;标题&quot;</code>  </p>
+<p>记得要在博客根目录执行<br>&#96;&#96;&#96;</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Hexo博客</tag>
+        <tag>GitHub Pages</tag>
+        <tag>静态博客</tag>
+        <tag>免费博客</tag>
+        <tag>Termux配置</tag>
+        <tag>Hexo安装</tag>
+        <tag>SSH密钥</tag>
+        <tag>博客部署</tag>
+        <tag>Node.js安装</tag>
+        <tag>创建文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通过Cloudflare Tunnel进行内网穿透</title>
+    <url>/2024/09/28/cloudflared/</url>
+    <content><![CDATA[<blockquote>
+<p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
+</blockquote>
+<ul>
+<li>准备</li>
+</ul>
+<p>首先你必须有一个Cloudflare的账号, 且账号上必须有一个域名</p>
+<ul>
+<li>创建隧道</li>
+</ul>
+<p>首先登陆账号, 进入主页</p>
+<p>点击 侧边栏&gt;Zero Trust&gt;Networks&gt;Tunnels, 点击Create a Tunnel, 选择Cloudflared, 点击next, 输入名字, 在这里根据你的操作系统的不同选择不同的安装方式, 并且Debian和Ubuntu的安装方式是同一个方式</p>
+<p>并且如果有其他脚本需要内网穿透(或argo)的话, 需要的是那一段Token</p>
+<p>就是去掉<code>sudo cloudflared service install</code>的那一段ey开头的东西</p>
+<p>注: 这一段Token我替换了其中的几个字符, 是无效的</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> cloudflared service install eyJhIjoiMzQ3OTVmZGJlMjg5MjY5NTk0YmQxMzlhYmIxNjdiMzciLwCJ0IjoiZTFlqjlkNGUkOGE4ZS00ZjUxLTk2MjUtNmVlNjE2qTU0MjU1xiwicyIIllUZzFaVEk1TURVdFpEazNaaTAwTnprd0xUaGlaVFl0TldVeVlURXpOelUyTVdReSJ9</span><br></pre></td></tr></table></figure>
+<p>继续点击next</p>
+<p>输入subdomain并选择domain</p>
+<p>service大部分为, type: <code>http</code>, URL: <code>localhost:端口</code></p>
+<p>再点击save tunnel即可</p>
+<p>等待一会, 如果状态变为 Healthy 就是正常了, 如果等待很久都不变, 就需要检查操作是否正确</p>
+<ul>
+<li>Termux使用</li>
+</ul>
+<p>这里专门把Termux提出来就是因为在官方的安装方法中安卓无法使用, 因为权限不足, root后的安卓设备除外</p>
+<p>首先安装下来后先输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">termux-change-repo</span><br></pre></td></tr></table></figure>
+<p>接着回车, 通过上下光标移动选择<code>Mirror in Chinese Mainland</code>, 再回车, 等待完成后就换源成功了</p>
+<p>接着输入来安装<code>Cloudflared</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install cloudflared -y</span><br></pre></td></tr></table></figure>
+
+<p>然后输入, <code>Argo_Token</code>为之前获取的Token</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
+<p>如果你不希望一直这样运行, 而无法操作可以使用<code>screen</code>命令</p>
+<p>首先来安装screen</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install screen -y</span><br></pre></td></tr></table></figure>
+<p>接着输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">screen cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
+
+<p>然后在英文输入法下键入快捷键<code>Ctrl+a+d</code>就行了</p>
+<ul>
+<li>其他</li>
+</ul>
+<p>如果你的系统很冷门</p>
+<p>只需在搜索引擎搜索<code>Cloudflared-系统名称</code>, 基本上都能搜索到</p>
+<p>将其下载下来后, 如果为压缩包就将其解压 <code>tar -zxvf cloudflared.zip</code></p>
+<p>接着输入<code>chmod +x Cloudflared_NAME</code> 名称自行替换</p>
+<p>然后在使用时需要执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./Cloudflared_NAME service install Argo_Token</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Cloudflare Tunnel</tag>
+        <tag>内网穿透</tag>
+        <tag>Zero Trust</tag>
+        <tag>Cloudflared安装</tag>
+        <tag>免费服务</tag>
+        <tag>Termux教程</tag>
+        <tag>Argo Token</tag>
+        <tag>域名配置</tag>
+        <tag>HTTP服务</tag>
+        <tag>Screen命令</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>回到Hexo的怀抱</title>
     <url>/2024/09/15/imback/</url>
     <content><![CDATA[<blockquote>
@@ -14,6 +219,134 @@
       <categories>
         <category>水</category>
       </categories>
+  </entry>
+  <entry>
+    <title>随机图片api</title>
+    <url>/2024/07/12/loliapi/</url>
+    <content><![CDATA[<blockquote>
+<p>一个随机图片API</p>
+</blockquote>
+<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
+<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
+<blockquote>
+<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
+</blockquote>
+<blockquote>
+<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>随机图片API</tag>
+        <tag>二次元图片</tag>
+        <tag>ACG文化</tag>
+        <tag>图片接口</tag>
+        <tag>免费API</tag>
+        <tag>LoliAPI</tag>
+        <tag>动漫壁纸</tag>
+        <tag>双端适配</tag>
+        <tag>随机背景</tag>
+        <tag>开发资源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown图片超链接</title>
+    <url>/2024/07/29/mdimghref/</url>
+    <content><![CDATA[<blockquote>
+<p>今天简简单单水一篇文章, 教大家如何用 <code>Markdown</code>实现图片超链接 <del>(太水了)</del></p>
+</blockquote>
+<ul>
+<li>了解图片和链接的使用</li>
+</ul>
+<p>首先要了解如何在 <code>Markdown</code> 中显示图片和链接  –这是基础</p>
+<p>链接的插入</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
+
+<p>图片的插入</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">![<span class="string">img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看出来, 图片和链接之间使用的差别很小只需一个 <code>!</code> 就可以区别它们, 但是记住要使用英文状态的 <code>!</code></p>
+<p>而其中用中括号 <code>[]</code> 包着的文字就是描述, 这个东西在链接状态就会显示出来比如这样 <a href="/img/mdimghref/1.webp">链接</a> 这个就是上面代码块里的链接</p>
+<p>如果是图片状态就不会<code>直接</code>显示描述, 而是会直接显示图片, 例如</p>
+<p><img src="/img/mdimghref/1.webp" alt="img"></p>
+<p>你甚至可以不用填写描述, 但是当图片显示错误的时候就会显示这个描述, 建议还是写上</p>
+<p>至于小括号的内容就必须是链接了, 而且显示图片的链接必须是纯图片链接, 就是后面必须加上 <code>.jpg</code> <code>.png</code> <code>.webp</code> 等后缀 (但是有些图床的图片没有后缀, 这个要靠自己辨别)</p>
+<ul>
+<li>了解图片超链接的逻辑</li>
+</ul>
+<p>这是 HTML 中的图片超链接</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://blog.333375.xyz/img/mdimghref/1.webp&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;img&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我大概讲解一下, 这个 <code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code> 就相当于Markdown中的链接, <code>[]()</code>, 这个href后的””里面就是链接, 而<code>&gt;&lt;</code>中间要添加描述, <code>&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;</code>, src后面添加图片链接, alt后面添加描述, 就大概是这样</p>
+<p>而从这个HTML代码可以看出, 是把图片添加到了链接的描述中, 这样就可以实现图片超链接</p>
+<ul>
+<li>正确使用</li>
+</ul>
+<p>那么好了, 现在开始使用吧</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">![img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)](<span class="link">/</span>)</span><br></pre></td></tr></table></figure>
+<p>效果</p>
+<p><a href="/"><img src="/img/mdimghref/1.webp" alt="img"></a><br>&#96;&#96;&#96;</p>
+]]></content>
+      <categories>
+        <category>水教程</category>
+      </categories>
+      <tags>
+        <tag>Markdown教程</tag>
+        <tag>图片超链接</tag>
+        <tag>Markdown语法</tag>
+        <tag>链接插入</tag>
+        <tag>图片插入</tag>
+        <tag>HTML转换</tag>
+        <tag>Markdown基础</tag>
+        <tag>超链接图片</tag>
+        <tag>图片描述</tag>
+        <tag>简单指南</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSL申请</title>
+    <url>/2024/05/02/ssl/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
+</blockquote>
+<ol>
+<li>acme.sh</li>
+</ol>
+<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
+<p>输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
+<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
+<p>之后在你的虚拟主机平台配置ssl</p>
+<p><del>2. cert.kinh.cc</del>  网站关闭</p>
+<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
+<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
+<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
+<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
+<ol start="3">
+<li>在主机平台申请</li>
+</ol>
+<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
+<ul>
+<li>总结</li>
+</ul>
+<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)<br>&#96;&#96;&#96;</p>
+]]></content>
+      <categories>
+        <category>水教程</category>
+      </categories>
+      <tags>
+        <tag>SSL证书</tag>
+        <tag>免费SSL</tag>
+        <tag>HTTPS配置</tag>
+        <tag>acme.sh教程</tag>
+        <tag>VPS域名</tag>
+        <tag>LetsEncrypt</tag>
+        <tag>SSL安装</tag>
+        <tag>主机平台SSL</tag>
+        <tag>域名解析</tag>
+        <tag>证书申请</tag>
+      </tags>
   </entry>
   <entry>
     <title>TCL折腾过程</title>
@@ -90,59 +423,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Markdown图片超链接</title>
-    <url>/2024/07/29/mdimghref/</url>
-    <content><![CDATA[<blockquote>
-<p>今天简简单单水一篇文章, 教大家如何用 <code>Markdown</code>实现图片超链接 <del>(太水了)</del></p>
-</blockquote>
-<ul>
-<li>了解图片和链接的使用</li>
-</ul>
-<p>首先要了解如何在 <code>Markdown</code> 中显示图片和链接  –这是基础</p>
-<p>链接的插入</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
-
-<p>图片的插入</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">![<span class="string">img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
-
-<p>从上面可以看出来, 图片和链接之间使用的差别很小只需一个 <code>!</code> 就可以区别它们, 但是记住要使用英文状态的 <code>!</code></p>
-<p>而其中用中括号 <code>[]</code> 包着的文字就是描述, 这个东西在链接状态就会显示出来比如这样 <a href="/img/mdimghref/1.webp">链接</a> 这个就是上面代码块里的链接</p>
-<p>如果是图片状态就不会<code>直接</code>显示描述, 而是会直接显示图片, 例如</p>
-<p><img src="/img/mdimghref/1.webp" alt="img"></p>
-<p>你甚至可以不用填写描述, 但是当图片显示错误的时候就会显示这个描述, 建议还是写上</p>
-<p>至于小括号的内容就必须是链接了, 而且显示图片的链接必须是纯图片链接, 就是后面必须加上 <code>.jpg</code> <code>.png</code> <code>.webp</code> 等后缀 (但是有些图床的图片没有后缀, 这个要靠自己辨别)</p>
-<ul>
-<li>了解图片超链接的逻辑</li>
-</ul>
-<p>这是 HTML 中的图片超链接</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://blog.333375.xyz/img/mdimghref/1.webp&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;img&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>我大概讲解一下, 这个 <code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code> 就相当于Markdown中的链接, <code>[]()</code>, 这个href后的””里面就是链接, 而<code>&gt;&lt;</code>中间要添加描述, <code>&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;</code>, src后面添加图片链接, alt后面添加描述, 就大概是这样</p>
-<p>而从这个HTML代码可以看出, 是把图片添加到了链接的描述中, 这样就可以实现图片超链接</p>
-<ul>
-<li>正确使用</li>
-</ul>
-<p>那么好了, 现在开始使用吧</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">![img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)](<span class="link">/</span>)</span><br></pre></td></tr></table></figure>
-<p>效果</p>
-<p><a href="/"><img src="/img/mdimghref/1.webp" alt="img"></a><br>&#96;&#96;&#96;</p>
-]]></content>
-      <categories>
-        <category>水教程</category>
-      </categories>
-      <tags>
-        <tag>Markdown教程</tag>
-        <tag>图片超链接</tag>
-        <tag>Markdown语法</tag>
-        <tag>链接插入</tag>
-        <tag>图片插入</tag>
-        <tag>HTML转换</tag>
-        <tag>Markdown基础</tag>
-        <tag>超链接图片</tag>
-        <tag>图片描述</tag>
-        <tag>简单指南</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>创建Typecho博客</title>
     <url>/2024/04/21/typechoblog/</url>
     <content><![CDATA[<blockquote>
@@ -198,11 +478,11 @@
         <category>教程</category>
       </categories>
       <tags>
+        <tag>免费域名</tag>
+        <tag>博客搭建</tag>
         <tag>Typecho博客</tag>
         <tag>免费主机</tag>
-        <tag>免费域名</tag>
         <tag>PHP虚拟主机</tag>
-        <tag>博客搭建</tag>
         <tag>Typecho安装</tag>
         <tag>Joe主题</tag>
         <tag>动态博客</tag>
@@ -303,12 +583,12 @@
         <category>教程</category>
       </categories>
       <tags>
+        <tag>Cloudflare Workers</tag>
         <tag>域名绑定</tag>
         <tag>CFblog评论</tag>
         <tag>Waline部署</tag>
         <tag>Vercel搭建</tag>
         <tag>LeanCloud注册</tag>
-        <tag>Cloudflare Workers</tag>
         <tag>评论系统</tag>
         <tag>第三方评论</tag>
         <tag>最近评论</tag>
@@ -364,286 +644,6 @@
         <tag>域名重定向</tag>
         <tag>Nginx反代</tag>
         <tag>访问速度</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSL申请</title>
-    <url>/2024/05/02/ssl/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
-</blockquote>
-<ol>
-<li>acme.sh</li>
-</ol>
-<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
-<p>输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
-<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
-<p>之后在你的虚拟主机平台配置ssl</p>
-<p><del>2. cert.kinh.cc</del>  网站关闭</p>
-<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
-<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
-<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
-<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
-<ol start="3">
-<li>在主机平台申请</li>
-</ol>
-<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
-<ul>
-<li>总结</li>
-</ul>
-<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)<br>&#96;&#96;&#96;</p>
-]]></content>
-      <categories>
-        <category>水教程</category>
-      </categories>
-      <tags>
-        <tag>SSL证书</tag>
-        <tag>免费SSL</tag>
-        <tag>HTTPS配置</tag>
-        <tag>acme.sh教程</tag>
-        <tag>VPS域名</tag>
-        <tag>LetsEncrypt</tag>
-        <tag>SSL安装</tag>
-        <tag>主机平台SSL</tag>
-        <tag>域名解析</tag>
-        <tag>证书申请</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>随机图片api</title>
-    <url>/2024/07/12/loliapi/</url>
-    <content><![CDATA[<blockquote>
-<p>一个随机图片API</p>
-</blockquote>
-<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
-<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
-<blockquote>
-<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
-</blockquote>
-<blockquote>
-<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>随机图片API</tag>
-        <tag>二次元图片</tag>
-        <tag>ACG文化</tag>
-        <tag>图片接口</tag>
-        <tag>免费API</tag>
-        <tag>LoliAPI</tag>
-        <tag>动漫壁纸</tag>
-        <tag>双端适配</tag>
-        <tag>随机背景</tag>
-        <tag>开发资源</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通过Cloudflare Tunnel进行内网穿透</title>
-    <url>/2024/09/28/cloudflared/</url>
-    <content><![CDATA[<blockquote>
-<p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
-</blockquote>
-<ul>
-<li>准备</li>
-</ul>
-<p>首先你必须有一个Cloudflare的账号, 且账号上必须有一个域名</p>
-<ul>
-<li>创建隧道</li>
-</ul>
-<p>首先登陆账号, 进入主页</p>
-<p>点击 侧边栏&gt;Zero Trust&gt;Networks&gt;Tunnels, 点击Create a Tunnel, 选择Cloudflared, 点击next, 输入名字, 在这里根据你的操作系统的不同选择不同的安装方式, 并且Debian和Ubuntu的安装方式是同一个方式</p>
-<p>并且如果有其他脚本需要内网穿透(或argo)的话, 需要的是那一段Token</p>
-<p>就是去掉<code>sudo cloudflared service install</code>的那一段ey开头的东西</p>
-<p>注: 这一段Token我替换了其中的几个字符, 是无效的</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> cloudflared service install eyJhIjoiMzQ3OTVmZGJlMjg5MjY5NTk0YmQxMzlhYmIxNjdiMzciLwCJ0IjoiZTFlqjlkNGUkOGE4ZS00ZjUxLTk2MjUtNmVlNjE2qTU0MjU1xiwicyIIllUZzFaVEk1TURVdFpEazNaaTAwTnprd0xUaGlaVFl0TldVeVlURXpOelUyTVdReSJ9</span><br></pre></td></tr></table></figure>
-<p>继续点击next</p>
-<p>输入subdomain并选择domain</p>
-<p>service大部分为, type: <code>http</code>, URL: <code>localhost:端口</code></p>
-<p>再点击save tunnel即可</p>
-<p>等待一会, 如果状态变为 Healthy 就是正常了, 如果等待很久都不变, 就需要检查操作是否正确</p>
-<ul>
-<li>Termux使用</li>
-</ul>
-<p>这里专门把Termux提出来就是因为在官方的安装方法中安卓无法使用, 因为权限不足, root后的安卓设备除外</p>
-<p>首先安装下来后先输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">termux-change-repo</span><br></pre></td></tr></table></figure>
-<p>接着回车, 通过上下光标移动选择<code>Mirror in Chinese Mainland</code>, 再回车, 等待完成后就换源成功了</p>
-<p>接着输入来安装<code>Cloudflared</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install cloudflared -y</span><br></pre></td></tr></table></figure>
-
-<p>然后输入, <code>Argo_Token</code>为之前获取的Token</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
-<p>如果你不希望一直这样运行, 而无法操作可以使用<code>screen</code>命令</p>
-<p>首先来安装screen</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install screen -y</span><br></pre></td></tr></table></figure>
-<p>接着输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">screen cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
-
-<p>然后在英文输入法下键入快捷键<code>Ctrl+a+d</code>就行了</p>
-<ul>
-<li>其他</li>
-</ul>
-<p>如果你的系统很冷门</p>
-<p>只需在搜索引擎搜索<code>Cloudflared-系统名称</code>, 基本上都能搜索到</p>
-<p>将其下载下来后, 如果为压缩包就将其解压 <code>tar -zxvf cloudflared.zip</code></p>
-<p>接着输入<code>chmod +x Cloudflared_NAME</code> 名称自行替换</p>
-<p>然后在使用时需要执行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./Cloudflared_NAME service install Argo_Token</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Cloudflare Tunnel</tag>
-        <tag>内网穿透</tag>
-        <tag>Zero Trust</tag>
-        <tag>Cloudflared安装</tag>
-        <tag>免费服务</tag>
-        <tag>Termux教程</tag>
-        <tag>Argo Token</tag>
-        <tag>域名配置</tag>
-        <tag>HTTP服务</tag>
-        <tag>Screen命令</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建hexo博客</title>
-    <url>/2024/04/14/hexoblog/</url>
-    <content><![CDATA[<blockquote>
-<p>** Hexo博客是一个优秀的静态博客框架，今天就来教你永久免费的创建你的博客(除非Github改变政策)**</p>
-</blockquote>
-<ul>
-<li><strong>首先，注册一个邮箱</strong></li>
-</ul>
-<p>在国内想要好的体验的话，建议注册outlook<br><a href="https://account.microsoft.com/account/Account?mkt=zh-CN">链接</a><br>点击登陆，再点击创建一个用户，然后进行设置，如果创建完成后可以下载一个邮箱管理软件，也可以网页管理邮箱</p>
-<ul>
-<li><strong>注册Github，创建repository</strong></li>
-</ul>
-<blockquote>
-<p>提醒:在国内注册Github可能有点卡，如果太卡可以换个时间点，这个我也没办法  </p>
-</blockquote>
-<p>  点击<a href="https://github.com/">Github链接</a>然后在 Email address里填入自己注册的链接<br>再点击下面的紫色按钮，开始注册<br>注册完成登陆后<a href="https://github.com/new">点击这个链接</a><br>Repository name里填 “username.github.io”<br>username替换为你的用户名  </p>
-<blockquote>
-<p>注意！注意！注意！你的用户名是说你注册Github的用户名，例如：”liutsyyds.github.io”，而不是”你的用户名.github.io”，下文同样如此</p>
-</blockquote>
-<p>其他的不用管，点击Create repository<br>创建成功后，进行下一步</p>
-<ul>
-<li><strong>安装termux并进行配置</strong></li>
-</ul>
-<p><a href="https://f-droid.org/repo/com.termux_118.apk">下载链接</a><br>如果访问不了或太慢建议百度搜索一下<br>接着使用代码进行更新  </p>
-<blockquote>
-<p>如果运行过程中停顿并出现[Y&#x2F;n]选项，输入y并回车</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade &amp;&amp; apt install wget curl git vim </span><br></pre></td></tr></table></figure>
-<p>然后再安装proot-distro，通过proot-distro安装Debian，再登陆进去，而且以后进入Debian只需执行第三行代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install proot-distro -y</span><br><span class="line">proot-distro install debian-oldstable</span><br><span class="line">proot-distro login debian-oldstable</span><br></pre></td></tr></table></figure>
-<p>输入代码时可以三行一起输，也可以一行一行输。<br>进入Debian后输入  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install wget curl git vim <span class="built_in">sudo</span> -y &amp;&amp; curl -o- https://raw.gitmirror.com/nvm-sh/nvm/v0.38.0/install.sh | bash &amp;&amp;<span class="built_in">source</span> ~/.bashrc &amp;&amp; nvm install node</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>安装Hexo</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog    <span class="comment">#这是你博客的根目录</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>接着输入，期间一直回车就行了，遇到(y&#x2F;n)选项时输入y再回车</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你注册github的邮箱&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你注册github的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后输入<code>cd</code>  </p>
-<p>再输入<code>vi .ssh/id_rsa.pub</code>  </p>
-<p>复制其中的全部内容，然后打开<a href="https://github.com/settings/ssh/new">链接</a>粘贴到key里，然后点Add ssh key<br>接着<code>cd blog/</code>  </p>
-<p><code>vi _config.yml</code><br>找到文件最后一行的 deploy 替换以下代码</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的github用户名/你的github用户名.github.io.git,main</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意：文件的排列必须和上面的代码一样，不然会报错</strong>  </p>
-</blockquote>
-<p>接着输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>然后打开<a href="https://github.com/settings/tokens">链接</a><br>点击 Generate new token<br>出现弹窗，选择下面的那个。<br>点击Expiration下面的小方块，选择最下面的选项<br>然后把能打的对勾都打上，点击Generate token，把生成的密钥保存上，一定要保存好。<br>接着回到termux，然后输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
-<p>出现username输入Github的用户名，出现password输入之前的token，如果没显示token不用慌，这是保护隐私的设置，输完后回车就行。</p>
-<p>最后稍等几分钟，在浏览器输入<br>你的github用户名.github.io<br>即可<br>如果想要创建新的文章，就输入<br><code>hexo new &quot;标题&quot;</code>  </p>
-<p>记得要在博客根目录执行<br>&#96;&#96;&#96;</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Hexo博客</tag>
-        <tag>GitHub Pages</tag>
-        <tag>静态博客</tag>
-        <tag>免费博客</tag>
-        <tag>Termux配置</tag>
-        <tag>Hexo安装</tag>
-        <tag>SSH密钥</tag>
-        <tag>博客部署</tag>
-        <tag>Node.js安装</tag>
-        <tag>创建文章</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建CFblog</title>
-    <url>/2024/06/06/cfblog/</url>
-    <content><![CDATA[<blockquote>
-<p>在之前已经教了大家如何搭建博客，但是都有各自的缺点如hexo没有后台，typecho用免费主机不稳定经常跑路，今天教大家用Cloudflare搭建一个博客，相当稳定</p>
-</blockquote>
-<p>项目地址: <a href="https://github.com/gdtool/cloudflare-workers-blog">https://github.com/gdtool/cloudflare-workers-blog</a><br>作者: <a href="https://blog.gezhong.vip/">https://blog.gezhong.vip</a>  </p>
-<p>搭建教程</p>
-<ul>
-<li>注册cloudflare账号</li>
-</ul>
-<p>去官网<a href="https://www.cloudflare-cn.com/">https://www.cloudflare-cn.com</a> 点击登陆后进行注册就行，非常简单只需一个邮箱  </p>
-<ul>
-<li>申请免费域名</li>
-</ul>
-<p>这个域名是有要求的，需要添加上cloudflare的解析，也就是可以修改NS记录，而且如果是非顶级域的话还要看看在 <a href="https://publicsuffix.org/list/public_suffix_list.dat">https://publicsuffix.org/list/public_suffix_list.dat</a> 是否有这个后缀</p>
-<p>在我的文章 <a href="/2024/04/21/typechoblog">创建Typecho博客</a> 中有一些免费域名</p>
-<ul>
-<li>创建KV容器</li>
-</ul>
-<p>登陆控制台后把语言设置为中文，在左边栏目里，找到”workers和pages”，点击黑三角，点击KV，之后创建命名空间 输入名称后点击添加即可</p>
-<ul>
-<li>获取cf区域id和API token</li>
-</ul>
-<p>点击”网站”，点击你添加的域名，找到区域id，复制下来保存在记事本</p>
-<p>然后点击获取API令牌&gt;创建令牌&gt;自定义令牌&gt;输入名称<br>权限: <code>区域</code> <code>缓存清除</code> <code>清除</code><br>区域资源: <code>包括</code> <code>特定区域</code> <code>选择你的域名</code><br>继续以显示摘要&gt;创建令牌，复制下来，保存在一个地方</p>
-<ul>
-<li>创建workers</li>
-</ul>
-<p>在栏目里点击”workers和pages”，点击创建应用程序&gt;创建worker&gt;输入名称&gt;完成&gt;编辑代码</p>
-<p>删掉原来的代码，把<a href="https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js">https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js</a> 中的代码复制下来，粘贴到上面，将其中的一些东西自己修改，保存并部署</p>
-<ul>
-<li>设置变量</li>
-</ul>
-<p>回到项目&gt;设置&gt;变量&gt;KV空间绑定&gt;名称<code>CFBLOG</code> 空间选择自己刚创建的&gt;部署</p>
-<ul>
-<li>自定义域</li>
-</ul>
-<p>回到项目&gt;设置&gt;触发器&gt;添加自定义域&gt;输入域名&gt;创建，之后等待一下就行了</p>
-<ul>
-<li><p>写文章<br>访问 域名&#x2F;admin 输入你设置的用户名密码登陆，之后就可以写文章了</p>
-</li>
-<li><p>总结</p>
-</li>
-</ul>
-<p>过程有点麻烦，但是用起来方便稳定，就是主题不多，至于评论功能就在<del>水</del>一篇博客吧</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>免费域名</tag>
-        <tag>博客搭建</tag>
-        <tag>Cloudflare Workers</tag>
-        <tag>创建个人博客</tag>
-        <tag>CFblog教程</tag>
-        <tag>KV容器</tag>
-        <tag>Workers部署</tag>
-        <tag>Cloudflare区域ID</tag>
-        <tag>API令牌</tag>
-        <tag>稳定博客</tag>
       </tags>
   </entry>
 </search>
