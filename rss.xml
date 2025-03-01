@@ -15,8 +15,47 @@
     <atom:link href="https://blog.333375.xyz/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>liuts的博客</description>
-    <pubDate>Fri, 28 Feb 2025 15:49:48 GMT</pubDate>
+    <pubDate>Sat, 01 Mar 2025 16:04:34 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>usevpn</title>
+      <link>https://blog.333375.xyz/2025/03/01/usevpn/</link>
+      <guid>https://blog.333375.xyz/2025/03/01/usevpn/</guid>
+      <pubDate>Sat, 01 Mar 2025 08:03:09 GMT</pubDate>
+      
+      <description>本文详细介绍了在国内“翻墙”的多种方法及其优缺点。从免费VPN软件到节点订阅，再到机场订阅和自建节点的各种形式，涵盖了翻墙的基本概念、使用工具（如NekoBox）的操作步骤，以及不同类型节点的特性（如纯净IP、低延迟、稳定性等）。同时，文章还提及了一些小众节点类型（如住宅IP节点、解锁节点）以及对“蝗虫流”滥用行为的批判。适合对翻墙技术感兴趣的用户参考，帮助选择适合自身需求的翻墙方式。</description>
+      
+      
+      
+      
+      <category domain="https://blog.333375.xyz/categories/%E5%88%86%E4%BA%AB/">分享</category>
+      
+      
+      <category domain="https://blog.333375.xyz/tags/%E7%BF%BB%E5%A2%99/">翻墙</category>
+      
+      <category domain="https://blog.333375.xyz/tags/VPN/">VPN</category>
+      
+      <category domain="https://blog.333375.xyz/tags/%E8%8A%82%E7%82%B9%E8%AE%A2%E9%98%85/">节点订阅</category>
+      
+      <category domain="https://blog.333375.xyz/tags/%E6%9C%BA%E5%9C%BA%E8%AE%A2%E9%98%85/">机场订阅</category>
+      
+      <category domain="https://blog.333375.xyz/tags/%E8%87%AA%E5%BB%BA%E8%8A%82%E7%82%B9/">自建节点</category>
+      
+      <category domain="https://blog.333375.xyz/tags/GFW/">GFW</category>
+      
+      <category domain="https://blog.333375.xyz/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/">网络工具</category>
+      
+      <category domain="https://blog.333375.xyz/tags/IP%E7%BA%AF%E5%87%80/">IP纯净</category>
+      
+      <category domain="https://blog.333375.xyz/tags/%E5%BB%B6%E8%BF%9F%E4%BC%98%E5%8C%96/">延迟优化</category>
+      
+      <category domain="https://blog.333375.xyz/tags/MJJ/">MJJ</category>
+      
+      
+      <comments>https://blog.333375.xyz/2025/03/01/usevpn/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>通过Cloudflare Tunnel进行内网穿透</title>
