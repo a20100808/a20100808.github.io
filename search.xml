@@ -64,148 +64,6 @@
       </tags>
   </entry>
   <entry>
-    <title>通过Cloudflare Tunnel进行内网穿透</title>
-    <url>/2024/09/28/cloudflared/</url>
-    <content><![CDATA[<blockquote>
-<p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
-</blockquote>
-<ul>
-<li>准备</li>
-</ul>
-<p>首先你必须有一个Cloudflare的账号, 且账号上必须有一个域名</p>
-<ul>
-<li>创建隧道</li>
-</ul>
-<p>首先登陆账号, 进入主页</p>
-<p>点击 侧边栏&gt;Zero Trust&gt;Networks&gt;Tunnels, 点击Create a Tunnel, 选择Cloudflared, 点击next, 输入名字, 在这里根据你的操作系统的不同选择不同的安装方式, 并且Debian和Ubuntu的安装方式是同一个方式</p>
-<p>并且如果有其他脚本需要内网穿透(或argo)的话, 需要的是那一段Token</p>
-<p>就是去掉<code>sudo cloudflared service install</code>的那一段ey开头的东西</p>
-<p>注: 这一段Token我替换了其中的几个字符, 是无效的</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> cloudflared service install eyJhIjoiMzQ3OTVmZGJlMjg5MjY5NTk0YmQxMzlhYmIxNjdiMzciLwCJ0IjoiZTFlqjlkNGUkOGE4ZS00ZjUxLTk2MjUtNmVlNjE2qTU0MjU1xiwicyIIllUZzFaVEk1TURVdFpEazNaaTAwTnprd0xUaGlaVFl0TldVeVlURXpOelUyTVdReSJ9</span><br></pre></td></tr></table></figure>
-<p>继续点击next</p>
-<p>输入subdomain并选择domain</p>
-<p>service大部分为, type: <code>http</code>, URL: <code>localhost:端口</code></p>
-<p>再点击save tunnel即可</p>
-<p>等待一会, 如果状态变为 Healthy 就是正常了, 如果等待很久都不变, 就需要检查操作是否正确</p>
-<ul>
-<li>Termux使用</li>
-</ul>
-<p>这里专门把Termux提出来就是因为在官方的安装方法中安卓无法使用, 因为权限不足, root后的安卓设备除外</p>
-<p>首先安装下来后先输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">termux-change-repo</span><br></pre></td></tr></table></figure>
-<p>接着回车, 通过上下光标移动选择<code>Mirror in Chinese Mainland</code>, 再回车, 等待完成后就换源成功了</p>
-<p>接着输入来安装<code>Cloudflared</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install cloudflared -y</span><br></pre></td></tr></table></figure>
-
-<p>然后输入, <code>Argo_Token</code>为之前获取的Token</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
-<p>如果你不希望一直这样运行, 而无法操作可以使用<code>screen</code>命令</p>
-<p>首先来安装screen</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install screen -y</span><br></pre></td></tr></table></figure>
-<p>接着输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">screen cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
-
-<p>然后在英文输入法下键入快捷键<code>Ctrl+a+d</code>就行了</p>
-<ul>
-<li>其他</li>
-</ul>
-<p>如果你的系统很冷门</p>
-<p>只需在搜索引擎搜索<code>Cloudflared-系统名称</code>, 基本上都能搜索到</p>
-<p>将其下载下来后, 如果为压缩包就将其解压 <code>tar -zxvf cloudflared.zip</code></p>
-<p>接着输入<code>chmod +x Cloudflared_NAME</code> 名称自行替换</p>
-<p>然后在使用时需要执行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./Cloudflared_NAME service install Argo_Token</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Cloudflare Tunnel</tag>
-        <tag>内网穿透</tag>
-        <tag>Zero Trust</tag>
-        <tag>Cloudflared安装</tag>
-        <tag>免费服务</tag>
-        <tag>Termux教程</tag>
-        <tag>Argo Token</tag>
-        <tag>域名配置</tag>
-        <tag>HTTP服务</tag>
-        <tag>Screen命令</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建hexo博客</title>
-    <url>/2024/04/14/hexoblog/</url>
-    <content><![CDATA[<blockquote>
-<p>** Hexo博客是一个优秀的静态博客框架，今天就来教你永久免费的创建你的博客(除非Github改变政策)**</p>
-</blockquote>
-<ul>
-<li><strong>首先，注册一个邮箱</strong></li>
-</ul>
-<p>在国内想要好的体验的话，建议注册outlook<br><a href="https://account.microsoft.com/account/Account?mkt=zh-CN">链接</a><br>点击登陆，再点击创建一个用户，然后进行设置，如果创建完成后可以下载一个邮箱管理软件，也可以网页管理邮箱</p>
-<ul>
-<li><strong>注册Github，创建repository</strong></li>
-</ul>
-<blockquote>
-<p>提醒:在国内注册Github可能有点卡，如果太卡可以换个时间点，这个我也没办法  </p>
-</blockquote>
-<p>  点击<a href="https://github.com/">Github链接</a>然后在 Email address里填入自己注册的链接<br>再点击下面的紫色按钮，开始注册<br>注册完成登陆后<a href="https://github.com/new">点击这个链接</a><br>Repository name里填 “username.github.io”<br>username替换为你的用户名  </p>
-<blockquote>
-<p>注意！注意！注意！你的用户名是说你注册Github的用户名，例如：”liutsyyds.github.io”，而不是”你的用户名.github.io”，下文同样如此</p>
-</blockquote>
-<p>其他的不用管，点击Create repository<br>创建成功后，进行下一步</p>
-<ul>
-<li><strong>安装termux并进行配置</strong></li>
-</ul>
-<p><a href="https://f-droid.org/repo/com.termux_118.apk">下载链接</a><br>如果访问不了或太慢建议百度搜索一下<br>接着使用代码进行更新  </p>
-<blockquote>
-<p>如果运行过程中停顿并出现[Y&#x2F;n]选项，输入y并回车</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade &amp;&amp; apt install wget curl git vim </span><br></pre></td></tr></table></figure>
-<p>然后再安装proot-distro，通过proot-distro安装Debian，再登陆进去，而且以后进入Debian只需执行第三行代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install proot-distro -y</span><br><span class="line">proot-distro install debian-oldstable</span><br><span class="line">proot-distro login debian-oldstable</span><br></pre></td></tr></table></figure>
-<p>输入代码时可以三行一起输，也可以一行一行输。<br>进入Debian后输入  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install wget curl git vim <span class="built_in">sudo</span> -y &amp;&amp; curl -o- https://raw.gitmirror.com/nvm-sh/nvm/v0.38.0/install.sh | bash &amp;&amp;<span class="built_in">source</span> ~/.bashrc &amp;&amp; nvm install node</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>安装Hexo</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog    <span class="comment">#这是你博客的根目录</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>接着输入，期间一直回车就行了，遇到(y&#x2F;n)选项时输入y再回车</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你注册github的邮箱&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你注册github的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后输入<code>cd</code>  </p>
-<p>再输入<code>vi .ssh/id_rsa.pub</code>  </p>
-<p>复制其中的全部内容，然后打开<a href="https://github.com/settings/ssh/new">链接</a>粘贴到key里，然后点Add ssh key<br>接着<code>cd blog/</code>  </p>
-<p><code>vi _config.yml</code><br>找到文件最后一行的 deploy 替换以下代码</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的github用户名/你的github用户名.github.io.git,main</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意：文件的排列必须和上面的代码一样，不然会报错</strong>  </p>
-</blockquote>
-<p>接着输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>然后打开<a href="https://github.com/settings/tokens">链接</a><br>点击 Generate new token<br>出现弹窗，选择下面的那个。<br>点击Expiration下面的小方块，选择最下面的选项<br>然后把能打的对勾都打上，点击Generate token，把生成的密钥保存上，一定要保存好。<br>接着回到termux，然后输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
-<p>出现username输入Github的用户名，出现password输入之前的token，如果没显示token不用慌，这是保护隐私的设置，输完后回车就行。</p>
-<p>最后稍等几分钟，在浏览器输入<br>你的github用户名.github.io<br>即可<br>如果想要创建新的文章，就输入<br><code>hexo new &quot;标题&quot;</code>  </p>
-<p>记得要在博客根目录执行<br>&#96;&#96;&#96;</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Hexo博客</tag>
-        <tag>GitHub Pages</tag>
-        <tag>静态博客</tag>
-        <tag>免费博客</tag>
-        <tag>Termux配置</tag>
-        <tag>Hexo安装</tag>
-        <tag>SSH密钥</tag>
-        <tag>博客部署</tag>
-        <tag>Node.js安装</tag>
-        <tag>创建文章</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>回到Hexo的怀抱</title>
     <url>/2024/09/15/imback/</url>
     <content><![CDATA[<blockquote>
@@ -219,6 +77,37 @@
       <categories>
         <category>水</category>
       </categories>
+  </entry>
+  <entry>
+    <title>随机图片api</title>
+    <url>/2024/07/12/loliapi/</url>
+    <content><![CDATA[<blockquote>
+<p>一个随机图片API</p>
+</blockquote>
+<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
+<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
+<blockquote>
+<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
+</blockquote>
+<blockquote>
+<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>随机图片API</tag>
+        <tag>二次元图片</tag>
+        <tag>ACG文化</tag>
+        <tag>图片接口</tag>
+        <tag>免费API</tag>
+        <tag>LoliAPI</tag>
+        <tag>动漫壁纸</tag>
+        <tag>双端适配</tag>
+        <tag>随机背景</tag>
+        <tag>开发资源</tag>
+      </tags>
   </entry>
   <entry>
     <title>Markdown图片超链接</title>
@@ -318,102 +207,71 @@
       </tags>
   </entry>
   <entry>
-    <title>随机图片api</title>
-    <url>/2024/07/12/loliapi/</url>
+    <title>通过Cloudflare Tunnel进行内网穿透</title>
+    <url>/2024/09/28/cloudflared/</url>
     <content><![CDATA[<blockquote>
-<p>一个随机图片API</p>
-</blockquote>
-<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
-<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
-<blockquote>
-<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
-</blockquote>
-<blockquote>
-<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>随机图片API</tag>
-        <tag>二次元图片</tag>
-        <tag>ACG文化</tag>
-        <tag>图片接口</tag>
-        <tag>免费API</tag>
-        <tag>LoliAPI</tag>
-        <tag>动漫壁纸</tag>
-        <tag>双端适配</tag>
-        <tag>随机背景</tag>
-        <tag>开发资源</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建Typecho博客</title>
-    <url>/2024/04/21/typechoblog/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
+<p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
 </blockquote>
 <ul>
-<li>找博客主机</li>
+<li>准备</li>
 </ul>
-<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
-<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
+<p>首先你必须有一个Cloudflare的账号, 且账号上必须有一个域名</p>
 <ul>
-<li>域名</li>
+<li>创建隧道</li>
 </ul>
-<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
-<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
-<blockquote>
-<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
-</blockquote>
+<p>首先登陆账号, 进入主页</p>
+<p>点击 侧边栏&gt;Zero Trust&gt;Networks&gt;Tunnels, 点击Create a Tunnel, 选择Cloudflared, 点击next, 输入名字, 在这里根据你的操作系统的不同选择不同的安装方式, 并且Debian和Ubuntu的安装方式是同一个方式</p>
+<p>并且如果有其他脚本需要内网穿透(或argo)的话, 需要的是那一段Token</p>
+<p>就是去掉<code>sudo cloudflared service install</code>的那一段ey开头的东西</p>
+<p>注: 这一段Token我替换了其中的几个字符, 是无效的</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> cloudflared service install eyJhIjoiMzQ3OTVmZGJlMjg5MjY5NTk0YmQxMzlhYmIxNjdiMzciLwCJ0IjoiZTFlqjlkNGUkOGE4ZS00ZjUxLTk2MjUtNmVlNjE2qTU0MjU1xiwicyIIllUZzFaVEk1TURVdFpEazNaaTAwTnprd0xUaGlaVFl0TldVeVlURXpOelUyTVdReSJ9</span><br></pre></td></tr></table></figure>
+<p>继续点击next</p>
+<p>输入subdomain并选择domain</p>
+<p>service大部分为, type: <code>http</code>, URL: <code>localhost:端口</code></p>
+<p>再点击save tunnel即可</p>
+<p>等待一会, 如果状态变为 Healthy 就是正常了, 如果等待很久都不变, 就需要检查操作是否正确</p>
 <ul>
-<li>搭建博客</li>
+<li>Termux使用</li>
 </ul>
-<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
-<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
-<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>选择域名</th>
-<th>记录类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>blog</td>
-<td>example.com</td>
-<td>A</td>
-<td>1.2.3.4</td>
-</tr>
-</tbody></table>
-<p>完整域名就是 blog.example.com</p>
-<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
+<p>这里专门把Termux提出来就是因为在官方的安装方法中安卓无法使用, 因为权限不足, root后的安卓设备除外</p>
+<p>首先安装下来后先输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">termux-change-repo</span><br></pre></td></tr></table></figure>
+<p>接着回车, 通过上下光标移动选择<code>Mirror in Chinese Mainland</code>, 再回车, 等待完成后就换源成功了</p>
+<p>接着输入来安装<code>Cloudflared</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install cloudflared -y</span><br></pre></td></tr></table></figure>
+
+<p>然后输入, <code>Argo_Token</code>为之前获取的Token</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
+<p>如果你不希望一直这样运行, 而无法操作可以使用<code>screen</code>命令</p>
+<p>首先来安装screen</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install screen -y</span><br></pre></td></tr></table></figure>
+<p>接着输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">screen cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
+
+<p>然后在英文输入法下键入快捷键<code>Ctrl+a+d</code>就行了</p>
 <ul>
-<li>美化</li>
+<li>其他</li>
 </ul>
-<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
-<ul>
-<li>结尾</li>
-</ul>
-<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
-]]></content>
+<p>如果你的系统很冷门</p>
+<p>只需在搜索引擎搜索<code>Cloudflared-系统名称</code>, 基本上都能搜索到</p>
+<p>将其下载下来后, 如果为压缩包就将其解压 <code>tar -zxvf cloudflared.zip</code></p>
+<p>接着输入<code>chmod +x Cloudflared_NAME</code> 名称自行替换</p>
+<p>然后在使用时需要执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./Cloudflared_NAME service install Argo_Token</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>教程</category>
       </categories>
       <tags>
-        <tag>免费域名</tag>
-        <tag>博客搭建</tag>
-        <tag>Typecho博客</tag>
-        <tag>免费主机</tag>
-        <tag>PHP虚拟主机</tag>
-        <tag>Typecho安装</tag>
-        <tag>Joe主题</tag>
-        <tag>动态博客</tag>
-        <tag>域名绑定</tag>
-        <tag>博客美化</tag>
+        <tag>Cloudflare Tunnel</tag>
+        <tag>内网穿透</tag>
+        <tag>Zero Trust</tag>
+        <tag>Cloudflared安装</tag>
+        <tag>免费服务</tag>
+        <tag>Termux教程</tag>
+        <tag>Argo Token</tag>
+        <tag>域名配置</tag>
+        <tag>HTTP服务</tag>
+        <tag>Screen命令</tag>
       </tags>
   </entry>
   <entry>
@@ -488,6 +346,148 @@
         <tag>ADB命令</tag>
         <tag>包名列表</tag>
         <tag>安装验证</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建hexo博客</title>
+    <url>/2024/04/14/hexoblog/</url>
+    <content><![CDATA[<blockquote>
+<p>** Hexo博客是一个优秀的静态博客框架，今天就来教你永久免费的创建你的博客(除非Github改变政策)**</p>
+</blockquote>
+<ul>
+<li><strong>首先，注册一个邮箱</strong></li>
+</ul>
+<p>在国内想要好的体验的话，建议注册outlook<br><a href="https://account.microsoft.com/account/Account?mkt=zh-CN">链接</a><br>点击登陆，再点击创建一个用户，然后进行设置，如果创建完成后可以下载一个邮箱管理软件，也可以网页管理邮箱</p>
+<ul>
+<li><strong>注册Github，创建repository</strong></li>
+</ul>
+<blockquote>
+<p>提醒:在国内注册Github可能有点卡，如果太卡可以换个时间点，这个我也没办法  </p>
+</blockquote>
+<p>  点击<a href="https://github.com/">Github链接</a>然后在 Email address里填入自己注册的链接<br>再点击下面的紫色按钮，开始注册<br>注册完成登陆后<a href="https://github.com/new">点击这个链接</a><br>Repository name里填 “username.github.io”<br>username替换为你的用户名  </p>
+<blockquote>
+<p>注意！注意！注意！你的用户名是说你注册Github的用户名，例如：”liutsyyds.github.io”，而不是”你的用户名.github.io”，下文同样如此</p>
+</blockquote>
+<p>其他的不用管，点击Create repository<br>创建成功后，进行下一步</p>
+<ul>
+<li><strong>安装termux并进行配置</strong></li>
+</ul>
+<p><a href="https://f-droid.org/repo/com.termux_118.apk">下载链接</a><br>如果访问不了或太慢建议百度搜索一下<br>接着使用代码进行更新  </p>
+<blockquote>
+<p>如果运行过程中停顿并出现[Y&#x2F;n]选项，输入y并回车</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade &amp;&amp; apt install wget curl git vim </span><br></pre></td></tr></table></figure>
+<p>然后再安装proot-distro，通过proot-distro安装Debian，再登陆进去，而且以后进入Debian只需执行第三行代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install proot-distro -y</span><br><span class="line">proot-distro install debian-oldstable</span><br><span class="line">proot-distro login debian-oldstable</span><br></pre></td></tr></table></figure>
+<p>输入代码时可以三行一起输，也可以一行一行输。<br>进入Debian后输入  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install wget curl git vim <span class="built_in">sudo</span> -y &amp;&amp; curl -o- https://raw.gitmirror.com/nvm-sh/nvm/v0.38.0/install.sh | bash &amp;&amp;<span class="built_in">source</span> ~/.bashrc &amp;&amp; nvm install node</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>安装Hexo</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog    <span class="comment">#这是你博客的根目录</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>接着输入，期间一直回车就行了，遇到(y&#x2F;n)选项时输入y再回车</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你注册github的邮箱&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你注册github的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后输入<code>cd</code>  </p>
+<p>再输入<code>vi .ssh/id_rsa.pub</code>  </p>
+<p>复制其中的全部内容，然后打开<a href="https://github.com/settings/ssh/new">链接</a>粘贴到key里，然后点Add ssh key<br>接着<code>cd blog/</code>  </p>
+<p><code>vi _config.yml</code><br>找到文件最后一行的 deploy 替换以下代码</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的github用户名/你的github用户名.github.io.git,main</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：文件的排列必须和上面的代码一样，不然会报错</strong>  </p>
+</blockquote>
+<p>接着输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>然后打开<a href="https://github.com/settings/tokens">链接</a><br>点击 Generate new token<br>出现弹窗，选择下面的那个。<br>点击Expiration下面的小方块，选择最下面的选项<br>然后把能打的对勾都打上，点击Generate token，把生成的密钥保存上，一定要保存好。<br>接着回到termux，然后输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
+<p>出现username输入Github的用户名，出现password输入之前的token，如果没显示token不用慌，这是保护隐私的设置，输完后回车就行。</p>
+<p>最后稍等几分钟，在浏览器输入<br>你的github用户名.github.io<br>即可<br>如果想要创建新的文章，就输入<br><code>hexo new &quot;标题&quot;</code>  </p>
+<p>记得要在博客根目录执行<br>&#96;&#96;&#96;</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Hexo博客</tag>
+        <tag>GitHub Pages</tag>
+        <tag>静态博客</tag>
+        <tag>免费博客</tag>
+        <tag>Termux配置</tag>
+        <tag>Hexo安装</tag>
+        <tag>SSH密钥</tag>
+        <tag>博客部署</tag>
+        <tag>Node.js安装</tag>
+        <tag>创建文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建Typecho博客</title>
+    <url>/2024/04/21/typechoblog/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
+</blockquote>
+<ul>
+<li>找博客主机</li>
+</ul>
+<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
+<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
+<ul>
+<li>域名</li>
+</ul>
+<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
+<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
+<blockquote>
+<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
+</blockquote>
+<ul>
+<li>搭建博客</li>
+</ul>
+<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
+<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
+<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>选择域名</th>
+<th>记录类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>blog</td>
+<td>example.com</td>
+<td>A</td>
+<td>1.2.3.4</td>
+</tr>
+</tbody></table>
+<p>完整域名就是 blog.example.com</p>
+<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
+<ul>
+<li>美化</li>
+</ul>
+<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
+<ul>
+<li>结尾</li>
+</ul>
+<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>免费域名</tag>
+        <tag>博客搭建</tag>
+        <tag>Typecho博客</tag>
+        <tag>免费主机</tag>
+        <tag>PHP虚拟主机</tag>
+        <tag>Typecho安装</tag>
+        <tag>Joe主题</tag>
+        <tag>动态博客</tag>
+        <tag>域名绑定</tag>
+        <tag>博客美化</tag>
       </tags>
   </entry>
   <entry>
@@ -568,6 +568,57 @@
         <tag>IP纯净</tag>
         <tag>延迟优化</tag>
         <tag>MJJ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用CFworkers路由加速网站</title>
+    <url>/2024/07/23/workers-nginx/</url>
+    <content><![CDATA[<blockquote>
+<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
+</blockquote>
+<ul>
+<li>创建 Workers</li>
+</ul>
+<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;www.example.com&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request); <span class="comment">// 如果没有匹配路径，则返回原始请求响应或者静态资源。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>粘贴上去后是13行, 如果有多余几行就把这几行删除</p>
+<p>其实可以将这个看成 Nginx 反代</p>
+<ul>
+<li>配置 Workers 路由</li>
+</ul>
+<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
+<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
+<p>点击添加就行了</p>
+<ul>
+<li>配置 DNS</li>
+</ul>
+<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
+<ul>
+<li>2024.7.25更新</li>
+</ul>
+<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
+<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
+<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
+<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>CFworkers路由</tag>
+        <tag>网站加速</tag>
+        <tag>Cloudflare代理</tag>
+        <tag>Workers配置</tag>
+        <tag>CNAME记录</tag>
+        <tag>反向代理</tag>
+        <tag>CF优选域名</tag>
+        <tag>域名重定向</tag>
+        <tag>Nginx反代</tag>
+        <tag>访问速度</tag>
       </tags>
   </entry>
   <entry>
@@ -673,57 +724,6 @@
         <tag>第三方评论</tag>
         <tag>最近评论</tag>
         <tag>Waline配置</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用CFworkers路由加速网站</title>
-    <url>/2024/07/23/workers-nginx/</url>
-    <content><![CDATA[<blockquote>
-<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
-</blockquote>
-<ul>
-<li>创建 Workers</li>
-</ul>
-<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;www.example.com&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request); <span class="comment">// 如果没有匹配路径，则返回原始请求响应或者静态资源。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>粘贴上去后是13行, 如果有多余几行就把这几行删除</p>
-<p>其实可以将这个看成 Nginx 反代</p>
-<ul>
-<li>配置 Workers 路由</li>
-</ul>
-<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
-<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
-<p>点击添加就行了</p>
-<ul>
-<li>配置 DNS</li>
-</ul>
-<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
-<ul>
-<li>2024.7.25更新</li>
-</ul>
-<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
-<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
-<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
-<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>CFworkers路由</tag>
-        <tag>网站加速</tag>
-        <tag>Cloudflare代理</tag>
-        <tag>Workers配置</tag>
-        <tag>CNAME记录</tag>
-        <tag>反向代理</tag>
-        <tag>CF优选域名</tag>
-        <tag>域名重定向</tag>
-        <tag>Nginx反代</tag>
-        <tag>访问速度</tag>
       </tags>
   </entry>
 </search>
