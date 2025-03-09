@@ -143,35 +143,82 @@
       </tags>
   </entry>
   <entry>
-    <title>随机图片api</title>
-    <url>/2024/07/12/loliapi/</url>
+    <title>创建CFblog</title>
+    <url>/2024/06/06/cfblog/</url>
     <content><![CDATA[<blockquote>
-<p>一个随机图片API</p>
+<p>在之前已经教了大家如何搭建博客，但是都有各自的缺点如hexo没有后台，typecho用免费主机不稳定经常跑路，今天教大家用Cloudflare搭建一个博客，相当稳定</p>
 </blockquote>
-<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
-<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
-<blockquote>
-<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
-</blockquote>
-<blockquote>
-<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
-</blockquote>
+<p>项目地址: <a href="https://github.com/gdtool/cloudflare-workers-blog">https://github.com/gdtool/cloudflare-workers-blog</a><br>作者: <a href="https://blog.gezhong.vip/">https://blog.gezhong.vip</a>  </p>
+<p>搭建教程</p>
+<ul>
+<li>注册cloudflare账号</li>
+</ul>
+<p>去官网<a href="https://www.cloudflare-cn.com/">https://www.cloudflare-cn.com</a> 点击登陆后进行注册就行，非常简单只需一个邮箱  </p>
+<ul>
+<li>申请免费域名</li>
+</ul>
+<p>这个域名是有要求的，需要添加上cloudflare的解析，也就是可以修改NS记录，而且如果是非顶级域的话还要看看在 <a href="https://publicsuffix.org/list/public_suffix_list.dat">https://publicsuffix.org/list/public_suffix_list.dat</a> 是否有这个后缀</p>
+<p>在我的文章 <a href="/2024/04/21/typechoblog">创建Typecho博客</a> 中有一些免费域名</p>
+<ul>
+<li>创建KV容器</li>
+</ul>
+<p>登陆控制台后把语言设置为中文，在左边栏目里，找到”workers和pages”，点击黑三角，点击KV，之后创建命名空间 输入名称后点击添加即可</p>
+<ul>
+<li>获取cf区域id和API token</li>
+</ul>
+<p>点击”网站”，点击你添加的域名，找到区域id，复制下来保存在记事本</p>
+<p>然后点击获取API令牌&gt;创建令牌&gt;自定义令牌&gt;输入名称<br>权限: <code>区域</code> <code>缓存清除</code> <code>清除</code><br>区域资源: <code>包括</code> <code>特定区域</code> <code>选择你的域名</code><br>继续以显示摘要&gt;创建令牌，复制下来，保存在一个地方</p>
+<ul>
+<li>创建workers</li>
+</ul>
+<p>在栏目里点击”workers和pages”，点击创建应用程序&gt;创建worker&gt;输入名称&gt;完成&gt;编辑代码</p>
+<p>删掉原来的代码，把<a href="https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js">https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js</a> 中的代码复制下来，粘贴到上面，将其中的一些东西自己修改，保存并部署</p>
+<ul>
+<li>设置变量</li>
+</ul>
+<p>回到项目&gt;设置&gt;变量&gt;KV空间绑定&gt;名称<code>CFBLOG</code> 空间选择自己刚创建的&gt;部署</p>
+<ul>
+<li>自定义域</li>
+</ul>
+<p>回到项目&gt;设置&gt;触发器&gt;添加自定义域&gt;输入域名&gt;创建，之后等待一下就行了</p>
+<ul>
+<li><p>写文章<br>访问 域名&#x2F;admin 输入你设置的用户名密码登陆，之后就可以写文章了</p>
+</li>
+<li><p>总结</p>
+</li>
+</ul>
+<p>过程有点麻烦，但是用起来方便稳定，就是主题不多，至于评论功能就在<del>水</del>一篇博客吧</p>
 ]]></content>
       <categories>
-        <category>分享</category>
+        <category>教程</category>
       </categories>
       <tags>
-        <tag>随机图片API</tag>
-        <tag>二次元图片</tag>
-        <tag>ACG文化</tag>
-        <tag>图片接口</tag>
-        <tag>免费API</tag>
-        <tag>LoliAPI</tag>
-        <tag>动漫壁纸</tag>
-        <tag>双端适配</tag>
-        <tag>随机背景</tag>
-        <tag>开发资源</tag>
+        <tag>Cloudflare Workers</tag>
+        <tag>创建个人博客</tag>
+        <tag>CFblog教程</tag>
+        <tag>免费域名</tag>
+        <tag>KV容器</tag>
+        <tag>Workers部署</tag>
+        <tag>博客搭建</tag>
+        <tag>Cloudflare区域ID</tag>
+        <tag>API令牌</tag>
+        <tag>稳定博客</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>回到Hexo的怀抱</title>
+    <url>/2024/09/15/imback/</url>
+    <content><![CDATA[<blockquote>
+<p><del>孩子们我回来了</del></p>
+</blockquote>
+<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
+<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
+<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
+<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
+]]></content>
+      <categories>
+        <category>水</category>
+      </categories>
   </entry>
   <entry>
     <title>SSL申请</title>
@@ -215,89 +262,6 @@
         <tag>主机平台SSL</tag>
         <tag>域名解析</tag>
         <tag>证书申请</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>回到Hexo的怀抱</title>
-    <url>/2024/09/15/imback/</url>
-    <content><![CDATA[<blockquote>
-<p><del>孩子们我回来了</del></p>
-</blockquote>
-<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
-<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
-<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
-<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
-]]></content>
-      <categories>
-        <category>水</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>创建Typecho博客</title>
-    <url>/2024/04/21/typechoblog/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
-</blockquote>
-<ul>
-<li>找博客主机</li>
-</ul>
-<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
-<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
-<ul>
-<li>域名</li>
-</ul>
-<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
-<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
-<blockquote>
-<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
-</blockquote>
-<ul>
-<li>搭建博客</li>
-</ul>
-<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
-<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
-<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>选择域名</th>
-<th>记录类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>blog</td>
-<td>example.com</td>
-<td>A</td>
-<td>1.2.3.4</td>
-</tr>
-</tbody></table>
-<p>完整域名就是 blog.example.com</p>
-<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
-<ul>
-<li>美化</li>
-</ul>
-<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
-<ul>
-<li>结尾</li>
-</ul>
-<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Typecho博客</tag>
-        <tag>免费主机</tag>
-        <tag>免费域名</tag>
-        <tag>PHP虚拟主机</tag>
-        <tag>博客搭建</tag>
-        <tag>Typecho安装</tag>
-        <tag>Joe主题</tag>
-        <tag>动态博客</tag>
-        <tag>域名绑定</tag>
-        <tag>博客美化</tag>
       </tags>
   </entry>
   <entry>
@@ -378,143 +342,6 @@
         <tag>IP纯净</tag>
         <tag>延迟优化</tag>
         <tag>MJJ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TCL折腾过程</title>
-    <url>/2024/09/15/tcladb/</url>
-    <content><![CDATA[<blockquote>
-<p>本文是自己家TCL折腾的过程, 其中一些问题到现在我也不知道如何解决, 如果有解决办法希望可以在评论区告诉我</p>
-</blockquote>
-<ul>
-<li>起因</li>
-</ul>
-<p>其实我老早之前就想要折腾TCL了, 因为这些自带软件没有一点用, 我想要把他们卸载,  我当时是用悟空遥控器来卸载和安装软件的, 但是由于权限不够, 所以软件卸载是失败的, 所以也就放弃了, 毕竟我家电视配置很小, 软件多了很容易卡爆</p>
-<p>但是我在一次B站之旅中刷到了B站UP <code>晨钟酱</code> 看着他折腾各种设备, 而其中大部分安装软件都是依靠ADB, 所以我就试试TCL可不可以打开无线ADB来卸载软件</p>
-<ul>
-<li>过程</li>
-</ul>
-<p>首先我找到了开启ADB的办法: 进入设置 &gt; 关于本机 &gt; 本机信息, 接着在遥控器上摁 上-下-左-右 即可看到ADB选项, 开启即可</p>
-<p>然后必须重启, 不然无法连接ADB</p>
-<p>然后就是连接 ADB 了, 安卓的话就用 <code>甲壳虫ADB助手</code> 即可, 电脑的话直接下载 <code>SDK Platform Tools</code> 就行</p>
-<p>在命令行连接的话使用以下命令, ip需更换为电视的IP, 一般在网络信息中</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb connect <span class="number">192.168</span>.<span class="number">1.100</span></span><br></pre></td></tr></table></figure>
-<p>接着电视上会弹出是否允许ADB调试, 始终允许即可<br>然后输入</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell</span><br></pre></td></tr></table></figure>
-<p>即可进入shell界面</p>
-<p>然后在shell界面分别输入命令来打开安装权限</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">setprop persist.tcl.debug.installapk <span class="number">1</span></span><br><span class="line">setprop persist.tcl.installapk.enable <span class="number">1</span></span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装应用</li>
-</ul>
-<p>在 adb connect 之后直接输入就可以安装软件, 不要进入shell面板</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb install /example/apk.apk</span><br></pre></td></tr></table></figure>
-<p>但是由于TCL的限制, 无法安装第三方桌面, 所以除非ROOT, 不然是无法替换桌面的, 而且就算替换桌面也不能删除 T-UI 桌面, 会一直卡在开机界面, 所以想想就算了</p>
-<ul>
-<li>卸载应用</li>
-</ul>
-<p>这也是我一开始折腾的目的<br>首先输入 <code>adb shell</code> 进入shell, 列出包名</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm list packages</span><br></pre></td></tr></table></figure>
-<p>然后输入卸载命令</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> 包名</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>常见需卸载软件</p>
-</blockquote>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># TCL 智慧家居</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.convergehome</span><br><span class="line"></span><br><span class="line"><span class="comment"># T 惠购</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tshop</span><br><span class="line"></span><br><span class="line"><span class="comment"># T2 游戏中心</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.gamecenter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 艺生活</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.appreciate.art</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全民 K 歌</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffkaraoke</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮播</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tliveplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 雷鸟教育</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffeducation</span><br></pre></td></tr></table></figure>
-<ul>
-<li>常见保错</li>
-</ul>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">-Failure [INSTALL_FAILED_VERIFICATION_FAILURE: Package Verification Result]</span><br></pre></td></tr></table></figure>
-<p>这种就是安装包校验失败, 输入以下命令禁用验证即可</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell settings put global verifier_verify_adb_installs <span class="number">0</span></span><br><span class="line">adb shell settings put global package_verifier_enable <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES: disable install launcher app not signature by tcl]</span><br></pre></td></tr></table></figure>
-<p>这就是我之前说的TCL禁止安装第三方桌面, 这个没办法解决, 而且如果这个应用的安装包有一点像桌面都无法安装</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>TCL的限制实在太大了, 连ADB都限制, 只为了他那广告收益, 对于这种厂家, 我只能说真的出生</p>
-<pre><code>
-</code></pre>
-]]></content>
-      <categories>
-        <category>折腾</category>
-      </categories>
-      <tags>
-        <tag>TCL电视</tag>
-        <tag>ADB调试</tag>
-        <tag>软件卸载</tag>
-        <tag>应用安装</tag>
-        <tag>无线ADB</tag>
-        <tag>TCL限制</tag>
-        <tag>电视折腾</tag>
-        <tag>ADB命令</tag>
-        <tag>包名列表</tag>
-        <tag>安装验证</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建CFblog</title>
-    <url>/2024/06/06/cfblog/</url>
-    <content><![CDATA[<blockquote>
-<p>在之前已经教了大家如何搭建博客，但是都有各自的缺点如hexo没有后台，typecho用免费主机不稳定经常跑路，今天教大家用Cloudflare搭建一个博客，相当稳定</p>
-</blockquote>
-<p>项目地址: <a href="https://github.com/gdtool/cloudflare-workers-blog">https://github.com/gdtool/cloudflare-workers-blog</a><br>作者: <a href="https://blog.gezhong.vip/">https://blog.gezhong.vip</a>  </p>
-<p>搭建教程</p>
-<ul>
-<li>注册cloudflare账号</li>
-</ul>
-<p>去官网<a href="https://www.cloudflare-cn.com/">https://www.cloudflare-cn.com</a> 点击登陆后进行注册就行，非常简单只需一个邮箱  </p>
-<ul>
-<li>申请免费域名</li>
-</ul>
-<p>这个域名是有要求的，需要添加上cloudflare的解析，也就是可以修改NS记录，而且如果是非顶级域的话还要看看在 <a href="https://publicsuffix.org/list/public_suffix_list.dat">https://publicsuffix.org/list/public_suffix_list.dat</a> 是否有这个后缀</p>
-<p>在我的文章 <a href="/2024/04/21/typechoblog">创建Typecho博客</a> 中有一些免费域名</p>
-<ul>
-<li>创建KV容器</li>
-</ul>
-<p>登陆控制台后把语言设置为中文，在左边栏目里，找到”workers和pages”，点击黑三角，点击KV，之后创建命名空间 输入名称后点击添加即可</p>
-<ul>
-<li>获取cf区域id和API token</li>
-</ul>
-<p>点击”网站”，点击你添加的域名，找到区域id，复制下来保存在记事本</p>
-<p>然后点击获取API令牌&gt;创建令牌&gt;自定义令牌&gt;输入名称<br>权限: <code>区域</code> <code>缓存清除</code> <code>清除</code><br>区域资源: <code>包括</code> <code>特定区域</code> <code>选择你的域名</code><br>继续以显示摘要&gt;创建令牌，复制下来，保存在一个地方</p>
-<ul>
-<li>创建workers</li>
-</ul>
-<p>在栏目里点击”workers和pages”，点击创建应用程序&gt;创建worker&gt;输入名称&gt;完成&gt;编辑代码</p>
-<p>删掉原来的代码，把<a href="https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js">https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js</a> 中的代码复制下来，粘贴到上面，将其中的一些东西自己修改，保存并部署</p>
-<ul>
-<li>设置变量</li>
-</ul>
-<p>回到项目&gt;设置&gt;变量&gt;KV空间绑定&gt;名称<code>CFBLOG</code> 空间选择自己刚创建的&gt;部署</p>
-<ul>
-<li>自定义域</li>
-</ul>
-<p>回到项目&gt;设置&gt;触发器&gt;添加自定义域&gt;输入域名&gt;创建，之后等待一下就行了</p>
-<ul>
-<li><p>写文章<br>访问 域名&#x2F;admin 输入你设置的用户名密码登陆，之后就可以写文章了</p>
-</li>
-<li><p>总结</p>
-</li>
-</ul>
-<p>过程有点麻烦，但是用起来方便稳定，就是主题不多，至于评论功能就在<del>水</del>一篇博客吧</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>免费域名</tag>
-        <tag>博客搭建</tag>
-        <tag>Cloudflare Workers</tag>
-        <tag>创建个人博客</tag>
-        <tag>CFblog教程</tag>
-        <tag>KV容器</tag>
-        <tag>Workers部署</tag>
-        <tag>Cloudflare区域ID</tag>
-        <tag>API令牌</tag>
-        <tag>稳定博客</tag>
       </tags>
   </entry>
   <entry>
@@ -610,7 +437,6 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>域名绑定</tag>
         <tag>Cloudflare Workers</tag>
         <tag>CFblog评论</tag>
         <tag>Waline部署</tag>
@@ -619,6 +445,7 @@
         <tag>评论系统</tag>
         <tag>第三方评论</tag>
         <tag>最近评论</tag>
+        <tag>域名绑定</tag>
         <tag>Waline配置</tag>
       </tags>
   </entry>
@@ -674,6 +501,80 @@
       </tags>
   </entry>
   <entry>
+    <title>TCL折腾过程</title>
+    <url>/2024/09/15/tcladb/</url>
+    <content><![CDATA[<blockquote>
+<p>本文是自己家TCL折腾的过程, 其中一些问题到现在我也不知道如何解决, 如果有解决办法希望可以在评论区告诉我</p>
+</blockquote>
+<ul>
+<li>起因</li>
+</ul>
+<p>其实我老早之前就想要折腾TCL了, 因为这些自带软件没有一点用, 我想要把他们卸载,  我当时是用悟空遥控器来卸载和安装软件的, 但是由于权限不够, 所以软件卸载是失败的, 所以也就放弃了, 毕竟我家电视配置很小, 软件多了很容易卡爆</p>
+<p>但是我在一次B站之旅中刷到了B站UP <code>晨钟酱</code> 看着他折腾各种设备, 而其中大部分安装软件都是依靠ADB, 所以我就试试TCL可不可以打开无线ADB来卸载软件</p>
+<ul>
+<li>过程</li>
+</ul>
+<p>首先我找到了开启ADB的办法: 进入设置 &gt; 关于本机 &gt; 本机信息, 接着在遥控器上摁 上-下-左-右 即可看到ADB选项, 开启即可</p>
+<p>然后必须重启, 不然无法连接ADB</p>
+<p>然后就是连接 ADB 了, 安卓的话就用 <code>甲壳虫ADB助手</code> 即可, 电脑的话直接下载 <code>SDK Platform Tools</code> 就行</p>
+<p>在命令行连接的话使用以下命令, ip需更换为电视的IP, 一般在网络信息中</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb connect <span class="number">192.168</span>.<span class="number">1.100</span></span><br></pre></td></tr></table></figure>
+<p>接着电视上会弹出是否允许ADB调试, 始终允许即可<br>然后输入</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell</span><br></pre></td></tr></table></figure>
+<p>即可进入shell界面</p>
+<p>然后在shell界面分别输入命令来打开安装权限</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">setprop persist.tcl.debug.installapk <span class="number">1</span></span><br><span class="line">setprop persist.tcl.installapk.enable <span class="number">1</span></span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装应用</li>
+</ul>
+<p>在 adb connect 之后直接输入就可以安装软件, 不要进入shell面板</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb install /example/apk.apk</span><br></pre></td></tr></table></figure>
+<p>但是由于TCL的限制, 无法安装第三方桌面, 所以除非ROOT, 不然是无法替换桌面的, 而且就算替换桌面也不能删除 T-UI 桌面, 会一直卡在开机界面, 所以想想就算了</p>
+<ul>
+<li>卸载应用</li>
+</ul>
+<p>这也是我一开始折腾的目的<br>首先输入 <code>adb shell</code> 进入shell, 列出包名</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm list packages</span><br></pre></td></tr></table></figure>
+<p>然后输入卸载命令</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> 包名</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>常见需卸载软件</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># TCL 智慧家居</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.convergehome</span><br><span class="line"></span><br><span class="line"><span class="comment"># T 惠购</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tshop</span><br><span class="line"></span><br><span class="line"><span class="comment"># T2 游戏中心</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.gamecenter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 艺生活</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.appreciate.art</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全民 K 歌</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffkaraoke</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮播</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tliveplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 雷鸟教育</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffeducation</span><br></pre></td></tr></table></figure>
+<ul>
+<li>常见保错</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">-Failure [INSTALL_FAILED_VERIFICATION_FAILURE: Package Verification Result]</span><br></pre></td></tr></table></figure>
+<p>这种就是安装包校验失败, 输入以下命令禁用验证即可</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell settings put global verifier_verify_adb_installs <span class="number">0</span></span><br><span class="line">adb shell settings put global package_verifier_enable <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES: disable install launcher app not signature by tcl]</span><br></pre></td></tr></table></figure>
+<p>这就是我之前说的TCL禁止安装第三方桌面, 这个没办法解决, 而且如果这个应用的安装包有一点像桌面都无法安装</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>TCL的限制实在太大了, 连ADB都限制, 只为了他那广告收益, 对于这种厂家, 我只能说真的出生</p>
+<pre><code>
+</code></pre>
+]]></content>
+      <categories>
+        <category>折腾</category>
+      </categories>
+      <tags>
+        <tag>TCL电视</tag>
+        <tag>ADB调试</tag>
+        <tag>软件卸载</tag>
+        <tag>应用安装</tag>
+        <tag>无线ADB</tag>
+        <tag>TCL限制</tag>
+        <tag>电视折腾</tag>
+        <tag>ADB命令</tag>
+        <tag>包名列表</tag>
+        <tag>安装验证</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Markdown图片超链接</title>
     <url>/2024/07/29/mdimghref/</url>
     <content><![CDATA[<blockquote>
@@ -724,6 +625,105 @@
         <tag>超链接图片</tag>
         <tag>图片描述</tag>
         <tag>简单指南</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随机图片api</title>
+    <url>/2024/07/12/loliapi/</url>
+    <content><![CDATA[<blockquote>
+<p>一个随机图片API</p>
+</blockquote>
+<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
+<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
+<blockquote>
+<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
+</blockquote>
+<blockquote>
+<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>随机图片API</tag>
+        <tag>二次元图片</tag>
+        <tag>ACG文化</tag>
+        <tag>图片接口</tag>
+        <tag>免费API</tag>
+        <tag>LoliAPI</tag>
+        <tag>动漫壁纸</tag>
+        <tag>双端适配</tag>
+        <tag>随机背景</tag>
+        <tag>开发资源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建Typecho博客</title>
+    <url>/2024/04/21/typechoblog/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
+</blockquote>
+<ul>
+<li>找博客主机</li>
+</ul>
+<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
+<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
+<ul>
+<li>域名</li>
+</ul>
+<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
+<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
+<blockquote>
+<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
+</blockquote>
+<ul>
+<li>搭建博客</li>
+</ul>
+<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
+<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
+<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>选择域名</th>
+<th>记录类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>blog</td>
+<td>example.com</td>
+<td>A</td>
+<td>1.2.3.4</td>
+</tr>
+</tbody></table>
+<p>完整域名就是 blog.example.com</p>
+<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
+<ul>
+<li>美化</li>
+</ul>
+<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
+<ul>
+<li>结尾</li>
+</ul>
+<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>免费域名</tag>
+        <tag>博客搭建</tag>
+        <tag>域名绑定</tag>
+        <tag>Typecho博客</tag>
+        <tag>免费主机</tag>
+        <tag>PHP虚拟主机</tag>
+        <tag>Typecho安装</tag>
+        <tag>Joe主题</tag>
+        <tag>动态博客</tag>
+        <tag>博客美化</tag>
       </tags>
   </entry>
 </search>
