@@ -246,8 +246,6 @@
       <category domain="https://blog.333375.xyz/categories/%E6%95%99%E7%A8%8B/">教程</category>
       
       
-      <category domain="https://blog.333375.xyz/tags/Cloudflare-Workers/">Cloudflare Workers</category>
-      
       <category domain="https://blog.333375.xyz/tags/%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9A/">域名绑定</category>
       
       <category domain="https://blog.333375.xyz/tags/CFblog%E8%AF%84%E8%AE%BA/">CFblog评论</category>
@@ -257,6 +255,8 @@
       <category domain="https://blog.333375.xyz/tags/Vercel%E6%90%AD%E5%BB%BA/">Vercel搭建</category>
       
       <category domain="https://blog.333375.xyz/tags/LeanCloud%E6%B3%A8%E5%86%8C/">LeanCloud注册</category>
+      
+      <category domain="https://blog.333375.xyz/tags/Cloudflare-Workers/">Cloudflare Workers</category>
       
       <category domain="https://blog.333375.xyz/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/">评论系统</category>
       
@@ -324,19 +324,19 @@
       <category domain="https://blog.333375.xyz/categories/%E6%95%99%E7%A8%8B/">教程</category>
       
       
+      <category domain="https://blog.333375.xyz/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/">免费域名</category>
+      
+      <category domain="https://blog.333375.xyz/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</category>
+      
       <category domain="https://blog.333375.xyz/tags/Cloudflare-Workers/">Cloudflare Workers</category>
       
       <category domain="https://blog.333375.xyz/tags/%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">创建个人博客</category>
       
       <category domain="https://blog.333375.xyz/tags/CFblog%E6%95%99%E7%A8%8B/">CFblog教程</category>
       
-      <category domain="https://blog.333375.xyz/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/">免费域名</category>
-      
       <category domain="https://blog.333375.xyz/tags/KV%E5%AE%B9%E5%99%A8/">KV容器</category>
       
       <category domain="https://blog.333375.xyz/tags/Workers%E9%83%A8%E7%BD%B2/">Workers部署</category>
-      
-      <category domain="https://blog.333375.xyz/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</category>
       
       <category domain="https://blog.333375.xyz/tags/Cloudflare%E5%8C%BA%E5%9F%9FID/">Cloudflare区域ID</category>
       
@@ -402,15 +402,15 @@
       <category domain="https://blog.333375.xyz/categories/%E6%95%99%E7%A8%8B/">教程</category>
       
       
-      <category domain="https://blog.333375.xyz/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/">免费域名</category>
-      
-      <category domain="https://blog.333375.xyz/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</category>
-      
       <category domain="https://blog.333375.xyz/tags/Typecho%E5%8D%9A%E5%AE%A2/">Typecho博客</category>
       
       <category domain="https://blog.333375.xyz/tags/%E5%85%8D%E8%B4%B9%E4%B8%BB%E6%9C%BA/">免费主机</category>
       
+      <category domain="https://blog.333375.xyz/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/">免费域名</category>
+      
       <category domain="https://blog.333375.xyz/tags/PHP%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/">PHP虚拟主机</category>
+      
+      <category domain="https://blog.333375.xyz/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</category>
       
       <category domain="https://blog.333375.xyz/tags/Typecho%E5%AE%89%E8%A3%85/">Typecho安装</category>
       

@@ -1,69 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>创建CFblog</title>
-    <url>/2024/06/06/cfblog/</url>
-    <content><![CDATA[<blockquote>
-<p>在之前已经教了大家如何搭建博客，但是都有各自的缺点如hexo没有后台，typecho用免费主机不稳定经常跑路，今天教大家用Cloudflare搭建一个博客，相当稳定</p>
-</blockquote>
-<p>项目地址: <a href="https://github.com/gdtool/cloudflare-workers-blog">https://github.com/gdtool/cloudflare-workers-blog</a><br>作者: <a href="https://blog.gezhong.vip/">https://blog.gezhong.vip</a>  </p>
-<p>搭建教程</p>
-<ul>
-<li>注册cloudflare账号</li>
-</ul>
-<p>去官网<a href="https://www.cloudflare-cn.com/">https://www.cloudflare-cn.com</a> 点击登陆后进行注册就行，非常简单只需一个邮箱  </p>
-<ul>
-<li>申请免费域名</li>
-</ul>
-<p>这个域名是有要求的，需要添加上cloudflare的解析，也就是可以修改NS记录，而且如果是非顶级域的话还要看看在 <a href="https://publicsuffix.org/list/public_suffix_list.dat">https://publicsuffix.org/list/public_suffix_list.dat</a> 是否有这个后缀</p>
-<p>在我的文章 <a href="/2024/04/21/typechoblog">创建Typecho博客</a> 中有一些免费域名</p>
-<ul>
-<li>创建KV容器</li>
-</ul>
-<p>登陆控制台后把语言设置为中文，在左边栏目里，找到”workers和pages”，点击黑三角，点击KV，之后创建命名空间 输入名称后点击添加即可</p>
-<ul>
-<li>获取cf区域id和API token</li>
-</ul>
-<p>点击”网站”，点击你添加的域名，找到区域id，复制下来保存在记事本</p>
-<p>然后点击获取API令牌&gt;创建令牌&gt;自定义令牌&gt;输入名称<br>权限: <code>区域</code> <code>缓存清除</code> <code>清除</code><br>区域资源: <code>包括</code> <code>特定区域</code> <code>选择你的域名</code><br>继续以显示摘要&gt;创建令牌，复制下来，保存在一个地方</p>
-<ul>
-<li>创建workers</li>
-</ul>
-<p>在栏目里点击”workers和pages”，点击创建应用程序&gt;创建worker&gt;输入名称&gt;完成&gt;编辑代码</p>
-<p>删掉原来的代码，把<a href="https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js">https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js</a> 中的代码复制下来，粘贴到上面，将其中的一些东西自己修改，保存并部署</p>
-<ul>
-<li>设置变量</li>
-</ul>
-<p>回到项目&gt;设置&gt;变量&gt;KV空间绑定&gt;名称<code>CFBLOG</code> 空间选择自己刚创建的&gt;部署</p>
-<ul>
-<li>自定义域</li>
-</ul>
-<p>回到项目&gt;设置&gt;触发器&gt;添加自定义域&gt;输入域名&gt;创建，之后等待一下就行了</p>
-<ul>
-<li><p>写文章<br>访问 域名&#x2F;admin 输入你设置的用户名密码登陆，之后就可以写文章了</p>
-</li>
-<li><p>总结</p>
-</li>
-</ul>
-<p>过程有点麻烦，但是用起来方便稳定，就是主题不多，至于评论功能就在<del>水</del>一篇博客吧</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Cloudflare Workers</tag>
-        <tag>创建个人博客</tag>
-        <tag>CFblog教程</tag>
-        <tag>免费域名</tag>
-        <tag>KV容器</tag>
-        <tag>Workers部署</tag>
-        <tag>博客搭建</tag>
-        <tag>Cloudflare区域ID</tag>
-        <tag>API令牌</tag>
-        <tag>稳定博客</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>创建hexo博客</title>
     <url>/2024/04/14/hexoblog/</url>
     <content><![CDATA[<blockquote>
@@ -138,21 +75,6 @@
       </tags>
   </entry>
   <entry>
-    <title>回到Hexo的怀抱</title>
-    <url>/2024/09/15/imback/</url>
-    <content><![CDATA[<blockquote>
-<p><del>孩子们我回来了</del></p>
-</blockquote>
-<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
-<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
-<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
-<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
-]]></content>
-      <categories>
-        <category>水</category>
-      </categories>
-  </entry>
-  <entry>
     <title>通过Cloudflare Tunnel进行内网穿透</title>
     <url>/2024/09/28/cloudflared/</url>
     <content><![CDATA[<blockquote>
@@ -221,102 +143,71 @@
       </tags>
   </entry>
   <entry>
-    <title>随机图片api</title>
-    <url>/2024/07/12/loliapi/</url>
+    <title>回到Hexo的怀抱</title>
+    <url>/2024/09/15/imback/</url>
     <content><![CDATA[<blockquote>
-<p>一个随机图片API</p>
+<p><del>孩子们我回来了</del></p>
 </blockquote>
-<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
-<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
-<blockquote>
-<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
-</blockquote>
-<blockquote>
-<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
-</blockquote>
+<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
+<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
+<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
+<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
 ]]></content>
       <categories>
-        <category>分享</category>
+        <category>水</category>
       </categories>
-      <tags>
-        <tag>随机图片API</tag>
-        <tag>二次元图片</tag>
-        <tag>ACG文化</tag>
-        <tag>图片接口</tag>
-        <tag>免费API</tag>
-        <tag>LoliAPI</tag>
-        <tag>动漫壁纸</tag>
-        <tag>双端适配</tag>
-        <tag>随机背景</tag>
-        <tag>开发资源</tag>
-      </tags>
   </entry>
   <entry>
-    <title>创建Typecho博客</title>
-    <url>/2024/04/21/typechoblog/</url>
+    <title>Markdown图片超链接</title>
+    <url>/2024/07/29/mdimghref/</url>
     <content><![CDATA[<blockquote>
-<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
+<p>今天简简单单水一篇文章, 教大家如何用 <code>Markdown</code>实现图片超链接 <del>(太水了)</del></p>
 </blockquote>
 <ul>
-<li>找博客主机</li>
+<li>了解图片和链接的使用</li>
 </ul>
-<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
-<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
+<p>首先要了解如何在 <code>Markdown</code> 中显示图片和链接  –这是基础</p>
+<p>链接的插入</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
+
+<p>图片的插入</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">![<span class="string">img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看出来, 图片和链接之间使用的差别很小只需一个 <code>!</code> 就可以区别它们, 但是记住要使用英文状态的 <code>!</code></p>
+<p>而其中用中括号 <code>[]</code> 包着的文字就是描述, 这个东西在链接状态就会显示出来比如这样 <a href="/img/mdimghref/1.webp">链接</a> 这个就是上面代码块里的链接</p>
+<p>如果是图片状态就不会<code>直接</code>显示描述, 而是会直接显示图片, 例如</p>
+<p><img src="/img/mdimghref/1.webp" alt="img"></p>
+<p>你甚至可以不用填写描述, 但是当图片显示错误的时候就会显示这个描述, 建议还是写上</p>
+<p>至于小括号的内容就必须是链接了, 而且显示图片的链接必须是纯图片链接, 就是后面必须加上 <code>.jpg</code> <code>.png</code> <code>.webp</code> 等后缀 (但是有些图床的图片没有后缀, 这个要靠自己辨别)</p>
 <ul>
-<li>域名</li>
+<li>了解图片超链接的逻辑</li>
 </ul>
-<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
-<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
-<blockquote>
-<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
-</blockquote>
+<p>这是 HTML 中的图片超链接</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://blog.333375.xyz/img/mdimghref/1.webp&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;img&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我大概讲解一下, 这个 <code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code> 就相当于Markdown中的链接, <code>[]()</code>, 这个href后的””里面就是链接, 而<code>&gt;&lt;</code>中间要添加描述, <code>&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;</code>, src后面添加图片链接, alt后面添加描述, 就大概是这样</p>
+<p>而从这个HTML代码可以看出, 是把图片添加到了链接的描述中, 这样就可以实现图片超链接</p>
 <ul>
-<li>搭建博客</li>
+<li>正确使用</li>
 </ul>
-<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
-<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
-<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>选择域名</th>
-<th>记录类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>blog</td>
-<td>example.com</td>
-<td>A</td>
-<td>1.2.3.4</td>
-</tr>
-</tbody></table>
-<p>完整域名就是 blog.example.com</p>
-<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
-<ul>
-<li>美化</li>
-</ul>
-<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
-<ul>
-<li>结尾</li>
-</ul>
-<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
+<p>那么好了, 现在开始使用吧</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">![img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)](<span class="link">/</span>)</span><br></pre></td></tr></table></figure>
+<p>效果</p>
+<p><a href="/"><img src="/img/mdimghref/1.webp" alt="img"></a><br>&#96;&#96;&#96;</p>
 ]]></content>
       <categories>
-        <category>教程</category>
+        <category>水教程</category>
       </categories>
       <tags>
-        <tag>免费域名</tag>
-        <tag>博客搭建</tag>
-        <tag>Typecho博客</tag>
-        <tag>免费主机</tag>
-        <tag>PHP虚拟主机</tag>
-        <tag>Typecho安装</tag>
-        <tag>Joe主题</tag>
-        <tag>动态博客</tag>
-        <tag>域名绑定</tag>
-        <tag>博客美化</tag>
+        <tag>Markdown教程</tag>
+        <tag>图片超链接</tag>
+        <tag>Markdown语法</tag>
+        <tag>链接插入</tag>
+        <tag>图片插入</tag>
+        <tag>HTML转换</tag>
+        <tag>Markdown基础</tag>
+        <tag>超链接图片</tag>
+        <tag>图片描述</tag>
+        <tag>简单指南</tag>
       </tags>
   </entry>
   <entry>
@@ -391,6 +282,74 @@
         <tag>ADB命令</tag>
         <tag>包名列表</tag>
         <tag>安装验证</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建Typecho博客</title>
+    <url>/2024/04/21/typechoblog/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
+</blockquote>
+<ul>
+<li>找博客主机</li>
+</ul>
+<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
+<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
+<ul>
+<li>域名</li>
+</ul>
+<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
+<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
+<blockquote>
+<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
+</blockquote>
+<ul>
+<li>搭建博客</li>
+</ul>
+<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
+<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
+<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>选择域名</th>
+<th>记录类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>blog</td>
+<td>example.com</td>
+<td>A</td>
+<td>1.2.3.4</td>
+</tr>
+</tbody></table>
+<p>完整域名就是 blog.example.com</p>
+<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
+<ul>
+<li>美化</li>
+</ul>
+<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
+<ul>
+<li>结尾</li>
+</ul>
+<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Typecho博客</tag>
+        <tag>免费主机</tag>
+        <tag>免费域名</tag>
+        <tag>PHP虚拟主机</tag>
+        <tag>博客搭建</tag>
+        <tag>Typecho安装</tag>
+        <tag>Joe主题</tag>
+        <tag>动态博客</tag>
+        <tag>域名绑定</tag>
+        <tag>博客美化</tag>
       </tags>
   </entry>
   <entry>
@@ -486,16 +445,96 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Cloudflare Workers</tag>
         <tag>域名绑定</tag>
         <tag>CFblog评论</tag>
         <tag>Waline部署</tag>
         <tag>Vercel搭建</tag>
         <tag>LeanCloud注册</tag>
+        <tag>Cloudflare Workers</tag>
         <tag>评论系统</tag>
         <tag>第三方评论</tag>
         <tag>最近评论</tag>
         <tag>Waline配置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>翻墙方式汇总</title>
+    <url>/2025/03/01/usevpn/</url>
+    <content><![CDATA[<blockquote>
+<p>今天为大家浅谈一下翻墙的常见的方式, 以及它们各自的特性, 优缺点等</p>
+</blockquote>
+<ul>
+<li>什么是翻墙</li>
+</ul>
+<p>翻墙就是在国内使用特殊手段绕过<code>GFW</code>(长城防火墙)的封锁访问通常在国内无法访问的网站, 无法使用的软件等, 如Youtube, ChatGPT</p>
+<ul>
+<li>免费VPN软件</li>
+</ul>
+<p>这一类翻墙通常是最容易接触到的, 也通常是萌新翻墙的选择</p>
+<p>而且在网络上有很多的<code>VPN软件破解版</code>, 所以使用成本几乎没有, 但是由于使用人数过多, 所以有时体验会很差</p>
+<p>在此不过多赘述了, 感兴趣的可以自己去搜索一下</p>
+<ul>
+<li>节点订阅</li>
+</ul>
+<p>这一类翻墙方式通常相比VPN软件更加便捷, 但是由于节点订阅通常是在网络上搜寻的节点, 所以可用性会比较差, 可以多订阅几个链接来解决</p>
+<p><code>https://skr.daozhang.site/clash</code></p>
+<p><code>https://cfkr.freeargo.eu.org/0bb601ac-ebc9-46bf-a126-eb4647b07690</code></p>
+<p>可以在网络上搜索更多的订阅</p>
+<ul>
+<li>使用方法</li>
+</ul>
+<p>下载 <a href="https://ghfast.top/https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/download/1.3.7/NekoBox-1.3.7-arm64-v8a.apk">Nokebox</a></p>
+<p>点击左上角菜单-&gt;分组-&gt;右上角-&gt;分组类型:订阅-&gt;将订阅链接粘贴进去-&gt;完成</p>
+<p>回到订阅-&gt;右上角-&gt;连接测试-&gt;url test</p>
+<p>等待测试完成即可使用</p>
+<ul>
+<li>机场订阅</li>
+</ul>
+<p>相对于免费节点来说, 机场拥有很高的稳定度和可用性, 当然这里指的是付费机场, 免费机场和免费订阅坐一桌去</p>
+<p>机场也分有高端机场和低端机场</p>
+<p><code>高端机场</code>通常比较贵, 以我之前的观察大概就是小几十块一个月500G流量, 流量每月重置, 年订阅更便宜一些, 但是相比于低端机场节点很多, 延迟更低更稳定, 通常是用<code>IEPL专线</code>或<code>国内中转</code></p>
+<p><code>低端机场</code>的定价就比较有差别, 但通常以经济实惠为主, 一些比较大的机场节点也比较多, 且比较稳定, 就是延迟速度没那么好, 不过对于一般用户绝对够了</p>
+<p>在选择机场时一定要<code>选择比较大的机场</code>, 且评价不要过低, 以免机场跑路导致不必要的损失</p>
+<ul>
+<li>自建节点</li>
+</ul>
+<p>这个分类比较大, 我来一个一个说</p>
+<p>首先就是<code>纯自建节点</code>, 就是使用一个便宜的普通VPS, 搭建一个<code>vmess+ws</code>（不推荐容易被GFW拦截）或<code>vless+vision+reality</code>节点, 这种节点相较于机场只有一个优点, 就是IP纯净</p>
+<p>机场由于使用人数过多, 无法保证其他人没有使用节点干坏事, 但是机场每个节点的IP都是固定的, VPN软件和免费订阅也是一个道理, 所以导致IP被判定为风险IP, 而对于注册国外账号来说IP纯净是很重要的, 不然会导致账号被<code>风控</code></p>
+<p>接着就是<code>优化线路</code>VPS搭建的节点, 这些线路一般叫<code>CN2 GIA</code>,<code>CMI</code>,<code>AS9929</code>等等, 这种机器搭建的节点延迟更低更稳定, 并且一般不会限速, 除非你被<code>QOS</code>了(机场为了防止被刷流量会限速)</p>
+<p>然后就是<code>中转节点</code>, 就是使用国内的国际线路机器帮你连接节点, 你连接国内机器使用</p>
+<p>还有<code>专线节点</code>和中转节点一个道理, 但是这个延迟更低更稳定, 通常最多只有几十ms的延迟, 但是由于过于昂贵通常都是合租, 注意不要被骗</p>
+<p><code>CDN节点</code>, 一般就是纯自建节点套上CDN, 套上CDN后延迟会更低且不会被GFW拦截</p>
+<p><code>解锁节点</code>, 顾名思义就是解锁了正常节点无法访问的网站, 例如Netflix, 而且通常这类节点都会套上CDN或使用中转来获得更低的延迟</p>
+<p><code>住宅IP节点</code>, 这种节点非常小众, 一般没有住宅IP的VPS, 大部分都是<code>socks</code>节点, 且被GFW拦截了, 只能通过链式代理来连接, 这种IP极其纯净, 搭配指纹浏览器, 拿来注册账号十分好用</p>
+<p>最后还有一种小众的节点就是其他人分享的自建节点, 这种对于我们这些穷逼来说非常好用</p>
+<ul>
+<li>蝗虫流节点</li>
+</ul>
+<p>我在这里只是介绍一下, 从小标题就可以看出我对这种蝗虫行为的极其抵制, 这种就是极致的<code>滥用</code></p>
+<p>首先在网上找到一个免费的docker服务, 接着打开Github项目<a href="https://github.com/mjjonone/mjj">mjj</a> 根据教程即可白嫖</p>
+<p>这种搭建的节点可用性极差, 并且会浪费公共资源导致服务提供商损失大量CPU资源, 简直就是蝗虫, 连蝗虫也不如, 简直就是臭煞笔</p>
+<ul>
+<li>总结</li>
+</ul>
+<blockquote>
+<p>追求速度买机场<br>追求纯净用自建<br>追求免费用订阅<br>没有父母当蝗虫</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>翻墙</tag>
+        <tag>VPN</tag>
+        <tag>节点订阅</tag>
+        <tag>机场订阅</tag>
+        <tag>自建节点</tag>
+        <tag>GFW</tag>
+        <tag>网络工具</tag>
+        <tag>IP纯净</tag>
+        <tag>延迟优化</tag>
+        <tag>MJJ</tag>
       </tags>
   </entry>
   <entry>
@@ -594,136 +633,97 @@
       </tags>
   </entry>
   <entry>
-    <title>Markdown图片超链接</title>
-    <url>/2024/07/29/mdimghref/</url>
+    <title>创建CFblog</title>
+    <url>/2024/06/06/cfblog/</url>
     <content><![CDATA[<blockquote>
-<p>今天简简单单水一篇文章, 教大家如何用 <code>Markdown</code>实现图片超链接 <del>(太水了)</del></p>
+<p>在之前已经教了大家如何搭建博客，但是都有各自的缺点如hexo没有后台，typecho用免费主机不稳定经常跑路，今天教大家用Cloudflare搭建一个博客，相当稳定</p>
 </blockquote>
+<p>项目地址: <a href="https://github.com/gdtool/cloudflare-workers-blog">https://github.com/gdtool/cloudflare-workers-blog</a><br>作者: <a href="https://blog.gezhong.vip/">https://blog.gezhong.vip</a>  </p>
+<p>搭建教程</p>
 <ul>
-<li>了解图片和链接的使用</li>
+<li>注册cloudflare账号</li>
 </ul>
-<p>首先要了解如何在 <code>Markdown</code> 中显示图片和链接  –这是基础</p>
-<p>链接的插入</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
-
-<p>图片的插入</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">![<span class="string">img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
-
-<p>从上面可以看出来, 图片和链接之间使用的差别很小只需一个 <code>!</code> 就可以区别它们, 但是记住要使用英文状态的 <code>!</code></p>
-<p>而其中用中括号 <code>[]</code> 包着的文字就是描述, 这个东西在链接状态就会显示出来比如这样 <a href="/img/mdimghref/1.webp">链接</a> 这个就是上面代码块里的链接</p>
-<p>如果是图片状态就不会<code>直接</code>显示描述, 而是会直接显示图片, 例如</p>
-<p><img src="/img/mdimghref/1.webp" alt="img"></p>
-<p>你甚至可以不用填写描述, 但是当图片显示错误的时候就会显示这个描述, 建议还是写上</p>
-<p>至于小括号的内容就必须是链接了, 而且显示图片的链接必须是纯图片链接, 就是后面必须加上 <code>.jpg</code> <code>.png</code> <code>.webp</code> 等后缀 (但是有些图床的图片没有后缀, 这个要靠自己辨别)</p>
+<p>去官网<a href="https://www.cloudflare-cn.com/">https://www.cloudflare-cn.com</a> 点击登陆后进行注册就行，非常简单只需一个邮箱  </p>
 <ul>
-<li>了解图片超链接的逻辑</li>
+<li>申请免费域名</li>
 </ul>
-<p>这是 HTML 中的图片超链接</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://blog.333375.xyz/img/mdimghref/1.webp&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;img&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>我大概讲解一下, 这个 <code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code> 就相当于Markdown中的链接, <code>[]()</code>, 这个href后的””里面就是链接, 而<code>&gt;&lt;</code>中间要添加描述, <code>&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;</code>, src后面添加图片链接, alt后面添加描述, 就大概是这样</p>
-<p>而从这个HTML代码可以看出, 是把图片添加到了链接的描述中, 这样就可以实现图片超链接</p>
+<p>这个域名是有要求的，需要添加上cloudflare的解析，也就是可以修改NS记录，而且如果是非顶级域的话还要看看在 <a href="https://publicsuffix.org/list/public_suffix_list.dat">https://publicsuffix.org/list/public_suffix_list.dat</a> 是否有这个后缀</p>
+<p>在我的文章 <a href="/2024/04/21/typechoblog">创建Typecho博客</a> 中有一些免费域名</p>
 <ul>
-<li>正确使用</li>
+<li>创建KV容器</li>
 </ul>
-<p>那么好了, 现在开始使用吧</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">![img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)](<span class="link">/</span>)</span><br></pre></td></tr></table></figure>
-<p>效果</p>
-<p><a href="/"><img src="/img/mdimghref/1.webp" alt="img"></a><br>&#96;&#96;&#96;</p>
+<p>登陆控制台后把语言设置为中文，在左边栏目里，找到”workers和pages”，点击黑三角，点击KV，之后创建命名空间 输入名称后点击添加即可</p>
+<ul>
+<li>获取cf区域id和API token</li>
+</ul>
+<p>点击”网站”，点击你添加的域名，找到区域id，复制下来保存在记事本</p>
+<p>然后点击获取API令牌&gt;创建令牌&gt;自定义令牌&gt;输入名称<br>权限: <code>区域</code> <code>缓存清除</code> <code>清除</code><br>区域资源: <code>包括</code> <code>特定区域</code> <code>选择你的域名</code><br>继续以显示摘要&gt;创建令牌，复制下来，保存在一个地方</p>
+<ul>
+<li>创建workers</li>
+</ul>
+<p>在栏目里点击”workers和pages”，点击创建应用程序&gt;创建worker&gt;输入名称&gt;完成&gt;编辑代码</p>
+<p>删掉原来的代码，把<a href="https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js">https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js</a> 中的代码复制下来，粘贴到上面，将其中的一些东西自己修改，保存并部署</p>
+<ul>
+<li>设置变量</li>
+</ul>
+<p>回到项目&gt;设置&gt;变量&gt;KV空间绑定&gt;名称<code>CFBLOG</code> 空间选择自己刚创建的&gt;部署</p>
+<ul>
+<li>自定义域</li>
+</ul>
+<p>回到项目&gt;设置&gt;触发器&gt;添加自定义域&gt;输入域名&gt;创建，之后等待一下就行了</p>
+<ul>
+<li><p>写文章<br>访问 域名&#x2F;admin 输入你设置的用户名密码登陆，之后就可以写文章了</p>
+</li>
+<li><p>总结</p>
+</li>
+</ul>
+<p>过程有点麻烦，但是用起来方便稳定，就是主题不多，至于评论功能就在<del>水</del>一篇博客吧</p>
 ]]></content>
       <categories>
-        <category>水教程</category>
+        <category>教程</category>
       </categories>
       <tags>
-        <tag>Markdown教程</tag>
-        <tag>图片超链接</tag>
-        <tag>Markdown语法</tag>
-        <tag>链接插入</tag>
-        <tag>图片插入</tag>
-        <tag>HTML转换</tag>
-        <tag>Markdown基础</tag>
-        <tag>超链接图片</tag>
-        <tag>图片描述</tag>
-        <tag>简单指南</tag>
+        <tag>免费域名</tag>
+        <tag>博客搭建</tag>
+        <tag>Cloudflare Workers</tag>
+        <tag>创建个人博客</tag>
+        <tag>CFblog教程</tag>
+        <tag>KV容器</tag>
+        <tag>Workers部署</tag>
+        <tag>Cloudflare区域ID</tag>
+        <tag>API令牌</tag>
+        <tag>稳定博客</tag>
       </tags>
   </entry>
   <entry>
-    <title>翻墙方式汇总</title>
-    <url>/2025/03/01/usevpn/</url>
+    <title>随机图片api</title>
+    <url>/2024/07/12/loliapi/</url>
     <content><![CDATA[<blockquote>
-<p>今天为大家浅谈一下翻墙的常见的方式, 以及它们各自的特性, 优缺点等</p>
+<p>一个随机图片API</p>
 </blockquote>
-<ul>
-<li>什么是翻墙</li>
-</ul>
-<p>翻墙就是在国内使用特殊手段绕过<code>GFW</code>(长城防火墙)的封锁访问通常在国内无法访问的网站, 无法使用的软件等, 如Youtube, ChatGPT</p>
-<ul>
-<li>免费VPN软件</li>
-</ul>
-<p>这一类翻墙通常是最容易接触到的, 也通常是萌新翻墙的选择</p>
-<p>而且在网络上有很多的<code>VPN软件破解版</code>, 所以使用成本几乎没有, 但是由于使用人数过多, 所以有时体验会很差</p>
-<p>在此不过多赘述了, 感兴趣的可以自己去搜索一下</p>
-<ul>
-<li>节点订阅</li>
-</ul>
-<p>这一类翻墙方式通常相比VPN软件更加便捷, 但是由于节点订阅通常是在网络上搜寻的节点, 所以可用性会比较差, 可以多订阅几个链接来解决</p>
-<p><code>https://skr.daozhang.site/clash</code></p>
-<p><code>https://cfkr.freeargo.eu.org/0bb601ac-ebc9-46bf-a126-eb4647b07690</code></p>
-<p>可以在网络上搜索更多的订阅</p>
-<ul>
-<li>使用方法</li>
-</ul>
-<p>下载 <a href="https://ghfast.top/https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/download/1.3.7/NekoBox-1.3.7-arm64-v8a.apk">Nokebox</a></p>
-<p>点击左上角菜单-&gt;分组-&gt;右上角-&gt;分组类型:订阅-&gt;将订阅链接粘贴进去-&gt;完成</p>
-<p>回到订阅-&gt;右上角-&gt;连接测试-&gt;url test</p>
-<p>等待测试完成即可使用</p>
-<ul>
-<li>机场订阅</li>
-</ul>
-<p>相对于免费节点来说, 机场拥有很高的稳定度和可用性, 当然这里指的是付费机场, 免费机场和免费订阅坐一桌去</p>
-<p>机场也分有高端机场和低端机场</p>
-<p><code>高端机场</code>通常比较贵, 以我之前的观察大概就是小几十块一个月500G流量, 流量每月重置, 年订阅更便宜一些, 但是相比于低端机场节点很多, 延迟更低更稳定, 通常是用<code>IEPL专线</code>或<code>国内中转</code></p>
-<p><code>低端机场</code>的定价就比较有差别, 但通常以经济实惠为主, 一些比较大的机场节点也比较多, 且比较稳定, 就是延迟速度没那么好, 不过对于一般用户绝对够了</p>
-<p>在选择机场时一定要<code>选择比较大的机场</code>, 且评价不要过低, 以免机场跑路导致不必要的损失</p>
-<ul>
-<li>自建节点</li>
-</ul>
-<p>这个分类比较大, 我来一个一个说</p>
-<p>首先就是<code>纯自建节点</code>, 就是使用一个便宜的普通VPS, 搭建一个<code>vmess+ws</code>（不推荐容易被GFW拦截）或<code>vless+vision+reality</code>节点, 这种节点相较于机场只有一个优点, 就是IP纯净</p>
-<p>机场由于使用人数过多, 无法保证其他人没有使用节点干坏事, 但是机场每个节点的IP都是固定的, VPN软件和免费订阅也是一个道理, 所以导致IP被判定为风险IP, 而对于注册国外账号来说IP纯净是很重要的, 不然会导致账号被<code>风控</code></p>
-<p>接着就是<code>优化线路</code>VPS搭建的节点, 这些线路一般叫<code>CN2 GIA</code>,<code>CMI</code>,<code>AS9929</code>等等, 这种机器搭建的节点延迟更低更稳定, 并且一般不会限速, 除非你被<code>QOS</code>了(机场为了防止被刷流量会限速)</p>
-<p>然后就是<code>中转节点</code>, 就是使用国内的国际线路机器帮你连接节点, 你连接国内机器使用</p>
-<p>还有<code>专线节点</code>和中转节点一个道理, 但是这个延迟更低更稳定, 通常最多只有几十ms的延迟, 但是由于过于昂贵通常都是合租, 注意不要被骗</p>
-<p><code>CDN节点</code>, 一般就是纯自建节点套上CDN, 套上CDN后延迟会更低且不会被GFW拦截</p>
-<p><code>解锁节点</code>, 顾名思义就是解锁了正常节点无法访问的网站, 例如Netflix, 而且通常这类节点都会套上CDN或使用中转来获得更低的延迟</p>
-<p><code>住宅IP节点</code>, 这种节点非常小众, 一般没有住宅IP的VPS, 大部分都是<code>socks</code>节点, 且被GFW拦截了, 只能通过链式代理来连接, 这种IP极其纯净, 搭配指纹浏览器, 拿来注册账号十分好用</p>
-<p>最后还有一种小众的节点就是其他人分享的自建节点, 这种对于我们这些穷逼来说非常好用</p>
-<ul>
-<li>蝗虫流节点</li>
-</ul>
-<p>我在这里只是介绍一下, 从小标题就可以看出我对这种蝗虫行为的极其抵制, 这种就是极致的<code>滥用</code></p>
-<p>首先在网上找到一个免费的docker服务, 接着打开Github项目<a href="https://github.com/mjjonone/mjj">mjj</a> 根据教程即可白嫖</p>
-<p>这种搭建的节点可用性极差, 并且会浪费公共资源导致服务提供商损失大量CPU资源, 简直就是蝗虫, 连蝗虫也不如, 简直就是臭煞笔</p>
-<ul>
-<li>总结</li>
-</ul>
+<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
+<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
 <blockquote>
-<p>追求速度买机场<br>追求纯净用自建<br>追求免费用订阅<br>没有父母当蝗虫</p>
+<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
+</blockquote>
+<blockquote>
+<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>分享</category>
       </categories>
       <tags>
-        <tag>翻墙</tag>
-        <tag>VPN</tag>
-        <tag>节点订阅</tag>
-        <tag>机场订阅</tag>
-        <tag>自建节点</tag>
-        <tag>GFW</tag>
-        <tag>网络工具</tag>
-        <tag>IP纯净</tag>
-        <tag>延迟优化</tag>
-        <tag>MJJ</tag>
+        <tag>随机图片API</tag>
+        <tag>二次元图片</tag>
+        <tag>ACG文化</tag>
+        <tag>图片接口</tag>
+        <tag>免费API</tag>
+        <tag>LoliAPI</tag>
+        <tag>动漫壁纸</tag>
+        <tag>双端适配</tag>
+        <tag>随机背景</tag>
+        <tag>开发资源</tag>
       </tags>
   </entry>
 </search>
