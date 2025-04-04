@@ -1,3 +1,4 @@
 User-agent: *
+Allow: /sitemap.xml
 Disallow: /zgx/
 Sitemap: https://blog.333375.xyz/sitemap.xml
