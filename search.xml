@@ -61,19 +61,117 @@
       </tags>
   </entry>
   <entry>
-    <title>回到Hexo的怀抱</title>
-    <url>/2024/09/15/imback/</url>
+    <title>通过Cloudflare Tunnel进行内网穿透</title>
+    <url>/2024/09/28/cloudflared/</url>
     <content><![CDATA[<blockquote>
-<p><del>孩子们我回来了</del></p>
+<p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
 </blockquote>
-<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
-<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
-<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
-<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
+<ul>
+<li>准备</li>
+</ul>
+<p>首先你必须有一个Cloudflare的账号, 且账号上必须有一个域名</p>
+<ul>
+<li>创建隧道</li>
+</ul>
+<p>首先登陆账号, 进入主页</p>
+<p>点击 侧边栏&gt;Zero Trust&gt;Networks&gt;Tunnels, 点击Create a Tunnel, 选择Cloudflared, 点击next, 输入名字, 在这里根据你的操作系统的不同选择不同的安装方式, 并且Debian和Ubuntu的安装方式是同一个方式</p>
+<p>并且如果有其他脚本需要内网穿透(或argo)的话, 需要的是那一段Token</p>
+<p>就是去掉<code>sudo cloudflared service install</code>的那一段ey开头的东西</p>
+<p>注: 这一段Token我替换了其中的几个字符, 是无效的</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> cloudflared service install eyJhIjoiMzQ3OTVmZGJlMjg5MjY5NTk0YmQxMzlhYmIxNjdiMzciLwCJ0IjoiZTFlqjlkNGUkOGE4ZS00ZjUxLTk2MjUtNmVlNjE2qTU0MjU1xiwicyIIllUZzFaVEk1TURVdFpEazNaaTAwTnprd0xUaGlaVFl0TldVeVlURXpOelUyTVdReSJ9</span><br></pre></td></tr></table></figure>
+<p>继续点击next</p>
+<p>输入subdomain并选择domain</p>
+<p>service大部分为, type: <code>http</code>, URL: <code>localhost:端口</code></p>
+<p>再点击save tunnel即可</p>
+<p>等待一会, 如果状态变为 Healthy 就是正常了, 如果等待很久都不变, 就需要检查操作是否正确</p>
+<ul>
+<li>Termux使用</li>
+</ul>
+<p>这里专门把Termux提出来就是因为在官方的安装方法中安卓无法使用, 因为权限不足, root后的安卓设备除外</p>
+<p>首先安装下来后先输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">termux-change-repo</span><br></pre></td></tr></table></figure>
+<p>接着回车, 通过上下光标移动选择<code>Mirror in Chinese Mainland</code>, 再回车, 等待完成后就换源成功了</p>
+<p>接着输入来安装<code>Cloudflared</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install cloudflared -y</span><br></pre></td></tr></table></figure>
+
+<p>然后输入, <code>Argo_Token</code>为之前获取的Token</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
+<p>如果你不希望一直这样运行, 而无法操作可以使用<code>screen</code>命令</p>
+<p>首先来安装screen</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install screen -y</span><br></pre></td></tr></table></figure>
+<p>接着输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">screen cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
+
+<p>然后在英文输入法下键入快捷键<code>Ctrl+a+d</code>就行了</p>
+<ul>
+<li>其他</li>
+</ul>
+<p>如果你的系统很冷门</p>
+<p>只需在搜索引擎搜索<code>Cloudflared-系统名称</code>, 基本上都能搜索到</p>
+<p>将其下载下来后, 如果为压缩包就将其解压 <code>tar -zxvf cloudflared.zip</code></p>
+<p>接着输入<code>chmod +x Cloudflared_NAME</code> 名称自行替换</p>
+<p>然后在使用时需要执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./Cloudflared_NAME service install Argo_Token</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Cloudflare Tunnel</tag>
+        <tag>内网穿透</tag>
+        <tag>Zero Trust</tag>
+        <tag>免费服务</tag>
+        <tag>Termux</tag>
+        <tag>Argo Token</tag>
+        <tag>域名配置</tag>
+        <tag>HTTP服务</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用fofa寻找免费节点</title>
+    <url>/2025/03/15/fofaclash/</url>
+    <content><![CDATA[<blockquote>
+<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
+</blockquote>
+<blockquote>
+<p>声明: 本文章发布仅供技术交流</p>
+</blockquote>
+<ul>
+<li>fofa搜索</li>
+</ul>
+<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
+<p>接着搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
+<ul>
+<li>打开网页Clash</li>
+</ul>
+<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
+<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
+<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
+<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
+<p>将<code>允许来自局域网的连接</code>选项打开</p>
+<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
+<ul>
+<li>打开代理软件</li>
+</ul>
+<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
+<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
 ]]></content>
       <categories>
-        <category>水</category>
+        <category>教程</category>
       </categories>
+      <tags>
+        <tag>FOFA搜索</tag>
+        <tag>免费Clash节点</tag>
+        <tag>代理教程</tag>
+        <tag>技术交流</tag>
+        <tag>代理软件</tag>
+      </tags>
   </entry>
   <entry>
     <title>创建hexo博客</title>
@@ -140,11 +238,54 @@
         <category>教程</category>
       </categories>
       <tags>
+        <tag>Termux</tag>
         <tag>Hexo博客</tag>
         <tag>GitHub Pages</tag>
         <tag>免费博客</tag>
-        <tag>Termux</tag>
         <tag>Node.js安装</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>回到Hexo的怀抱</title>
+    <url>/2024/09/15/imback/</url>
+    <content><![CDATA[<blockquote>
+<p><del>孩子们我回来了</del></p>
+</blockquote>
+<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
+<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
+<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
+<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
+]]></content>
+      <categories>
+        <category>水</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>随机图片api</title>
+    <url>/2024/07/12/loliapi/</url>
+    <content><![CDATA[<blockquote>
+<p>一个随机图片API</p>
+</blockquote>
+<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
+<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
+<blockquote>
+<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
+</blockquote>
+<blockquote>
+<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>随机图片API</tag>
+        <tag>二次元图片</tag>
+        <tag>免费API</tag>
+        <tag>LoliAPI</tag>
+        <tag>动漫壁纸</tag>
+        <tag>双端适配</tag>
+        <tag>随机背景</tag>
       </tags>
   </entry>
   <entry>
@@ -311,6 +452,45 @@
         <tag>免费图床</tag>
         <tag>Telegram机器人</tag>
         <tag>国内优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSL申请</title>
+    <url>/2024/05/02/ssl/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
+</blockquote>
+<ol>
+<li>acme.sh</li>
+</ol>
+<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
+<p>输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
+<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
+<p>之后在你的虚拟主机平台配置ssl</p>
+<p><del>2. cert.kinh.cc</del>  网站关闭</p>
+<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
+<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
+<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
+<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
+<ol start="3">
+<li>在主机平台申请</li>
+</ol>
+<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
+<ul>
+<li>总结</li>
+</ul>
+<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)<br>&#96;&#96;&#96;</p>
+]]></content>
+      <categories>
+        <category>水教程</category>
+      </categories>
+      <tags>
+        <tag>免费SSL</tag>
+        <tag>acme.sh</tag>
+        <tag>LetsEncrypt</tag>
+        <tag>域名解析</tag>
+        <tag>证书申请</tag>
       </tags>
   </entry>
   <entry>
@@ -528,6 +708,52 @@
       </tags>
   </entry>
   <entry>
+    <title>使用CFworkers路由加速网站</title>
+    <url>/2024/07/23/workers-nginx/</url>
+    <content><![CDATA[<blockquote>
+<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
+</blockquote>
+<ul>
+<li>创建 Workers</li>
+</ul>
+<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">if</span> (url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>)) &#123;</span><br><span class="line">      url.<span class="property">hostname</span> = <span class="string">&#x27;xxx.vercel.app&#x27;</span>  <span class="comment">//修改为自己的网站</span></span><br><span class="line">      <span class="keyword">let</span> new_request = <span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> env.<span class="property">ASSETS</span>.<span class="title function_">fetch</span>(request);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>粘贴上去后是11行, 如果有多余几行就把这几行删除</p>
+<p>其实可以将这个看成 Nginx 反代</p>
+<ul>
+<li>配置 Workers 路由</li>
+</ul>
+<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
+<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
+<p>点击添加就行了</p>
+<ul>
+<li>配置 DNS</li>
+</ul>
+<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
+<ul>
+<li>2024.7.25更新</li>
+</ul>
+<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
+<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
+<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
+<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>CFworkers路由</tag>
+        <tag>Cloudflare代理</tag>
+        <tag>Workers配置</tag>
+        <tag>CF优选域名</tag>
+        <tag>Nginx反代</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CFblog添加Waline</title>
     <url>/2024/07/14/waline/</url>
     <content><![CDATA[<blockquote>
@@ -626,232 +852,6 @@
         <tag>Waline部署</tag>
         <tag>LeanCloud注册</tag>
         <tag>第三方评论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用CFworkers路由加速网站</title>
-    <url>/2024/07/23/workers-nginx/</url>
-    <content><![CDATA[<blockquote>
-<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
-</blockquote>
-<ul>
-<li>创建 Workers</li>
-</ul>
-<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">if</span> (url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>)) &#123;</span><br><span class="line">      url.<span class="property">hostname</span> = <span class="string">&#x27;xxx.vercel.app&#x27;</span>  <span class="comment">//修改为自己的网站</span></span><br><span class="line">      <span class="keyword">let</span> new_request = <span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> env.<span class="property">ASSETS</span>.<span class="title function_">fetch</span>(request);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>粘贴上去后是11行, 如果有多余几行就把这几行删除</p>
-<p>其实可以将这个看成 Nginx 反代</p>
-<ul>
-<li>配置 Workers 路由</li>
-</ul>
-<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
-<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
-<p>点击添加就行了</p>
-<ul>
-<li>配置 DNS</li>
-</ul>
-<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
-<ul>
-<li>2024.7.25更新</li>
-</ul>
-<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
-<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
-<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
-<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>CFworkers路由</tag>
-        <tag>Cloudflare代理</tag>
-        <tag>Workers配置</tag>
-        <tag>CF优选域名</tag>
-        <tag>Nginx反代</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>随机图片api</title>
-    <url>/2024/07/12/loliapi/</url>
-    <content><![CDATA[<blockquote>
-<p>一个随机图片API</p>
-</blockquote>
-<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
-<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
-<blockquote>
-<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
-</blockquote>
-<blockquote>
-<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>随机图片API</tag>
-        <tag>二次元图片</tag>
-        <tag>免费API</tag>
-        <tag>LoliAPI</tag>
-        <tag>动漫壁纸</tag>
-        <tag>双端适配</tag>
-        <tag>随机背景</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSL申请</title>
-    <url>/2024/05/02/ssl/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
-</blockquote>
-<ol>
-<li>acme.sh</li>
-</ol>
-<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
-<p>输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
-<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
-<p>之后在你的虚拟主机平台配置ssl</p>
-<p><del>2. cert.kinh.cc</del>  网站关闭</p>
-<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
-<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
-<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
-<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
-<ol start="3">
-<li>在主机平台申请</li>
-</ol>
-<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
-<ul>
-<li>总结</li>
-</ul>
-<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)<br>&#96;&#96;&#96;</p>
-]]></content>
-      <categories>
-        <category>水教程</category>
-      </categories>
-      <tags>
-        <tag>免费SSL</tag>
-        <tag>acme.sh</tag>
-        <tag>LetsEncrypt</tag>
-        <tag>域名解析</tag>
-        <tag>证书申请</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用fofa寻找免费节点</title>
-    <url>/2025/03/15/fofaclash/</url>
-    <content><![CDATA[<blockquote>
-<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
-</blockquote>
-<blockquote>
-<p>声明: 本文章发布仅供技术交流</p>
-</blockquote>
-<ul>
-<li>fofa搜索</li>
-</ul>
-<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
-<p>接着搜索</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
-
-<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
-<ul>
-<li>打开网页Clash</li>
-</ul>
-<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
-<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
-<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
-<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
-<p>将<code>允许来自局域网的连接</code>选项打开</p>
-<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
-<ul>
-<li>打开代理软件</li>
-</ul>
-<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
-<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>FOFA搜索</tag>
-        <tag>免费Clash节点</tag>
-        <tag>代理教程</tag>
-        <tag>技术交流</tag>
-        <tag>代理软件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通过Cloudflare Tunnel进行内网穿透</title>
-    <url>/2024/09/28/cloudflared/</url>
-    <content><![CDATA[<blockquote>
-<p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
-</blockquote>
-<ul>
-<li>准备</li>
-</ul>
-<p>首先你必须有一个Cloudflare的账号, 且账号上必须有一个域名</p>
-<ul>
-<li>创建隧道</li>
-</ul>
-<p>首先登陆账号, 进入主页</p>
-<p>点击 侧边栏&gt;Zero Trust&gt;Networks&gt;Tunnels, 点击Create a Tunnel, 选择Cloudflared, 点击next, 输入名字, 在这里根据你的操作系统的不同选择不同的安装方式, 并且Debian和Ubuntu的安装方式是同一个方式</p>
-<p>并且如果有其他脚本需要内网穿透(或argo)的话, 需要的是那一段Token</p>
-<p>就是去掉<code>sudo cloudflared service install</code>的那一段ey开头的东西</p>
-<p>注: 这一段Token我替换了其中的几个字符, 是无效的</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> cloudflared service install eyJhIjoiMzQ3OTVmZGJlMjg5MjY5NTk0YmQxMzlhYmIxNjdiMzciLwCJ0IjoiZTFlqjlkNGUkOGE4ZS00ZjUxLTk2MjUtNmVlNjE2qTU0MjU1xiwicyIIllUZzFaVEk1TURVdFpEazNaaTAwTnprd0xUaGlaVFl0TldVeVlURXpOelUyTVdReSJ9</span><br></pre></td></tr></table></figure>
-<p>继续点击next</p>
-<p>输入subdomain并选择domain</p>
-<p>service大部分为, type: <code>http</code>, URL: <code>localhost:端口</code></p>
-<p>再点击save tunnel即可</p>
-<p>等待一会, 如果状态变为 Healthy 就是正常了, 如果等待很久都不变, 就需要检查操作是否正确</p>
-<ul>
-<li>Termux使用</li>
-</ul>
-<p>这里专门把Termux提出来就是因为在官方的安装方法中安卓无法使用, 因为权限不足, root后的安卓设备除外</p>
-<p>首先安装下来后先输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">termux-change-repo</span><br></pre></td></tr></table></figure>
-<p>接着回车, 通过上下光标移动选择<code>Mirror in Chinese Mainland</code>, 再回车, 等待完成后就换源成功了</p>
-<p>接着输入来安装<code>Cloudflared</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install cloudflared -y</span><br></pre></td></tr></table></figure>
-
-<p>然后输入, <code>Argo_Token</code>为之前获取的Token</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
-<p>如果你不希望一直这样运行, 而无法操作可以使用<code>screen</code>命令</p>
-<p>首先来安装screen</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install screen -y</span><br></pre></td></tr></table></figure>
-<p>接着输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">screen cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
-
-<p>然后在英文输入法下键入快捷键<code>Ctrl+a+d</code>就行了</p>
-<ul>
-<li>其他</li>
-</ul>
-<p>如果你的系统很冷门</p>
-<p>只需在搜索引擎搜索<code>Cloudflared-系统名称</code>, 基本上都能搜索到</p>
-<p>将其下载下来后, 如果为压缩包就将其解压 <code>tar -zxvf cloudflared.zip</code></p>
-<p>接着输入<code>chmod +x Cloudflared_NAME</code> 名称自行替换</p>
-<p>然后在使用时需要执行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./Cloudflared_NAME service install Argo_Token</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Termux</tag>
-        <tag>Cloudflare Tunnel</tag>
-        <tag>内网穿透</tag>
-        <tag>Zero Trust</tag>
-        <tag>免费服务</tag>
-        <tag>Argo Token</tag>
-        <tag>域名配置</tag>
-        <tag>HTTP服务</tag>
       </tags>
   </entry>
 </search>
