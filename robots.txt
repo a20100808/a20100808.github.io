@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /zgx/
+Sitemap: https://blog.333375.xyz/sitemap.xml
