@@ -1,66 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>创建CFblog</title>
-    <url>/2024/06/06/cfblog/</url>
-    <content><![CDATA[<blockquote>
-<p>在之前已经教了大家如何搭建博客，但是都有各自的缺点如hexo没有后台，typecho用免费主机不稳定经常跑路，今天教大家用Cloudflare搭建一个博客，相当稳定</p>
-</blockquote>
-<p>项目地址: <a href="https://github.com/gdtool/cloudflare-workers-blog">https://github.com/gdtool/cloudflare-workers-blog</a><br>作者: <a href="https://blog.gezhong.vip/">https://blog.gezhong.vip</a>  </p>
-<p>搭建教程</p>
-<ul>
-<li>注册cloudflare账号</li>
-</ul>
-<p>去官网<a href="https://www.cloudflare-cn.com/">https://www.cloudflare-cn.com</a> 点击登陆后进行注册就行，非常简单只需一个邮箱  </p>
-<ul>
-<li>申请免费域名</li>
-</ul>
-<p>这个域名是有要求的，需要添加上cloudflare的解析，也就是可以修改NS记录，而且如果是非顶级域的话还要看看在 <a href="https://publicsuffix.org/list/public_suffix_list.dat">https://publicsuffix.org/list/public_suffix_list.dat</a> 是否有这个后缀</p>
-<p>在我的文章 <a href="/2024/04/21/typechoblog">创建Typecho博客</a> 中有一些免费域名</p>
-<ul>
-<li>创建KV容器</li>
-</ul>
-<p>登陆控制台后把语言设置为中文，在左边栏目里，找到”workers和pages”，点击黑三角，点击KV，之后创建命名空间 输入名称后点击添加即可</p>
-<ul>
-<li>获取cf区域id和API token</li>
-</ul>
-<p>点击”网站”，点击你添加的域名，找到区域id，复制下来保存在记事本</p>
-<p>然后点击获取API令牌&gt;创建令牌&gt;自定义令牌&gt;输入名称<br>权限: <code>区域</code> <code>缓存清除</code> <code>清除</code><br>区域资源: <code>包括</code> <code>特定区域</code> <code>选择你的域名</code><br>继续以显示摘要&gt;创建令牌，复制下来，保存在一个地方</p>
-<ul>
-<li>创建workers</li>
-</ul>
-<p>在栏目里点击”workers和pages”，点击创建应用程序&gt;创建worker&gt;输入名称&gt;完成&gt;编辑代码</p>
-<p>删掉原来的代码，把<a href="https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js">https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js</a> 中的代码复制下来，粘贴到上面，将其中的一些东西自己修改，保存并部署</p>
-<ul>
-<li>设置变量</li>
-</ul>
-<p>回到项目&gt;设置&gt;变量&gt;KV空间绑定&gt;名称<code>CFBLOG</code> 空间选择自己刚创建的&gt;部署</p>
-<ul>
-<li>自定义域</li>
-</ul>
-<p>回到项目&gt;设置&gt;触发器&gt;添加自定义域&gt;输入域名&gt;创建，之后等待一下就行了</p>
-<ul>
-<li><p>写文章<br>访问 域名&#x2F;admin 输入你设置的用户名密码登陆，之后就可以写文章了</p>
-</li>
-<li><p>总结</p>
-</li>
-</ul>
-<p>过程有点麻烦，但是用起来方便稳定，就是主题不多，至于评论功能就在<del>水</del>一篇博客吧</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Cloudflare Workers</tag>
-        <tag>CFblog</tag>
-        <tag>免费域名</tag>
-        <tag>KV容器</tag>
-        <tag>博客搭建</tag>
-        <tag>Cloudflare</tag>
-        <tag>API令牌</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>通过Cloudflare Tunnel进行内网穿透</title>
     <url>/2024/09/28/cloudflared/</url>
     <content><![CDATA[<blockquote>
@@ -124,53 +64,6 @@
         <tag>Argo Token</tag>
         <tag>域名配置</tag>
         <tag>HTTP服务</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用fofa寻找免费节点</title>
-    <url>/2025/03/15/fofaclash/</url>
-    <content><![CDATA[<blockquote>
-<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
-</blockquote>
-<blockquote>
-<p>声明: 本文章发布仅供技术交流</p>
-</blockquote>
-<ul>
-<li>fofa搜索</li>
-</ul>
-<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
-<p>接着搜索</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
-
-<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
-<ul>
-<li>打开网页Clash</li>
-</ul>
-<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
-<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
-<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
-<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
-<p>将<code>允许来自局域网的连接</code>选项打开</p>
-<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
-<ul>
-<li>打开代理软件</li>
-</ul>
-<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
-<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>FOFA搜索</tag>
-        <tag>免费Clash节点</tag>
-        <tag>代理教程</tag>
-        <tag>技术交流</tag>
-        <tag>代理软件</tag>
       </tags>
   </entry>
   <entry>
@@ -337,6 +230,45 @@
       </tags>
   </entry>
   <entry>
+    <title>SSL申请</title>
+    <url>/2024/05/02/ssl/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
+</blockquote>
+<ol>
+<li>acme.sh</li>
+</ol>
+<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
+<p>输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
+<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
+<p>之后在你的虚拟主机平台配置ssl</p>
+<p><del>2. cert.kinh.cc</del>  网站关闭</p>
+<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
+<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
+<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
+<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
+<ol start="3">
+<li>在主机平台申请</li>
+</ol>
+<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
+<ul>
+<li>总结</li>
+</ul>
+<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)<br>&#96;&#96;&#96;</p>
+]]></content>
+      <categories>
+        <category>水教程</category>
+      </categories>
+      <tags>
+        <tag>免费SSL</tag>
+        <tag>acme.sh</tag>
+        <tag>LetsEncrypt</tag>
+        <tag>域名解析</tag>
+        <tag>证书申请</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用Cloudflare Pages搭建图床</title>
     <url>/2025/03/30/picturepages/</url>
     <content><![CDATA[<blockquote>
@@ -455,45 +387,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SSL申请</title>
-    <url>/2024/05/02/ssl/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
-</blockquote>
-<ol>
-<li>acme.sh</li>
-</ol>
-<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
-<p>输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
-<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
-<p>之后在你的虚拟主机平台配置ssl</p>
-<p><del>2. cert.kinh.cc</del>  网站关闭</p>
-<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
-<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
-<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
-<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
-<ol start="3">
-<li>在主机平台申请</li>
-</ol>
-<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
-<ul>
-<li>总结</li>
-</ul>
-<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)<br>&#96;&#96;&#96;</p>
-]]></content>
-      <categories>
-        <category>水教程</category>
-      </categories>
-      <tags>
-        <tag>免费SSL</tag>
-        <tag>acme.sh</tag>
-        <tag>LetsEncrypt</tag>
-        <tag>域名解析</tag>
-        <tag>证书申请</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>TCL折腾过程</title>
     <url>/2024/09/15/tcladb/</url>
     <content><![CDATA[<blockquote>
@@ -561,6 +454,71 @@
         <tag>TCL限制</tag>
         <tag>ADB命令</tag>
         <tag>包名列表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建Typecho博客</title>
+    <url>/2024/04/21/typechoblog/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
+</blockquote>
+<ul>
+<li>找博客主机</li>
+</ul>
+<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
+<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
+<ul>
+<li>域名</li>
+</ul>
+<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
+<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
+<blockquote>
+<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
+</blockquote>
+<ul>
+<li>搭建博客</li>
+</ul>
+<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
+<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
+<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>选择域名</th>
+<th>记录类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>blog</td>
+<td>example.com</td>
+<td>A</td>
+<td>1.2.3.4</td>
+</tr>
+</tbody></table>
+<p>完整域名就是 blog.example.com</p>
+<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
+<ul>
+<li>美化</li>
+</ul>
+<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
+<ul>
+<li>结尾</li>
+</ul>
+<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Typecho博客</tag>
+        <tag>免费主机</tag>
+        <tag>免费域名</tag>
+        <tag>博客搭建</tag>
+        <tag>Joe主题</tag>
+        <tag>动态博客</tag>
+        <tag>域名绑定</tag>
       </tags>
   </entry>
   <entry>
@@ -735,77 +693,12 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Cloudflare Workers</tag>
+        <tag>域名绑定</tag>
         <tag>CFblog</tag>
         <tag>Waline部署</tag>
         <tag>LeanCloud注册</tag>
+        <tag>Cloudflare Workers</tag>
         <tag>第三方评论</tag>
-        <tag>域名绑定</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建Typecho博客</title>
-    <url>/2024/04/21/typechoblog/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
-</blockquote>
-<ul>
-<li>找博客主机</li>
-</ul>
-<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
-<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
-<ul>
-<li>域名</li>
-</ul>
-<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
-<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
-<blockquote>
-<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
-</blockquote>
-<ul>
-<li>搭建博客</li>
-</ul>
-<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
-<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
-<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>选择域名</th>
-<th>记录类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>blog</td>
-<td>example.com</td>
-<td>A</td>
-<td>1.2.3.4</td>
-</tr>
-</tbody></table>
-<p>完整域名就是 blog.example.com</p>
-<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
-<ul>
-<li>美化</li>
-</ul>
-<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
-<ul>
-<li>结尾</li>
-</ul>
-<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>免费域名</tag>
-        <tag>博客搭建</tag>
-        <tag>域名绑定</tag>
-        <tag>Typecho博客</tag>
-        <tag>免费主机</tag>
-        <tag>Joe主题</tag>
-        <tag>动态博客</tag>
       </tags>
   </entry>
   <entry>
@@ -852,6 +745,161 @@
         <tag>Workers配置</tag>
         <tag>CF优选域名</tag>
         <tag>Nginx反代</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用1Panel面板搭建网站</title>
+    <url>/2025/04/18/1panelhalo/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教过大家如何免费创建博客, 但是作为一个站长, 总是很担心免费服务器的稳定性问题, 所以今天教大家使用建站VPS和1Panel面板搭建网站</p>
+</blockquote>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>一个Linux服务器(配置要求至少1H2G), Cloudfalre账号, 一个域名(解析到服务器ip)</p>
+<h3 id="安装1Panel面板"><a href="#安装1Panel面板" class="headerlink" title="安装1Panel面板"></a>安装1Panel面板</h3><ul>
+<li><p>Debain&#x2F;Ubuntu系统安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh &amp;&amp; bash quick_start.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CentOS系统</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh &amp;&amp; sh quick_start.sh</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>等待下载完毕, 开始安装, 选择中文简体, 选择安装目录&#x2F;opt, 回车安装</p>
+<p>如果显示Docker安装失败输入换源命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash &lt;(curl -sSL https://linuxmirrors.cn/docker.sh)</span><br></pre></td></tr></table></figure>
+
+<p>接着重新输入安装命令, 进行安装</p>
+<p>之后设置端口、安全入口、用户名、密码, 然后访问<code>ip:端口/安全入口</code>, 登陆完成后即可</p>
+<h2 id="拓展1Panel面板应用商店-可选"><a href="#拓展1Panel面板应用商店-可选" class="headerlink" title="拓展1Panel面板应用商店(可选)"></a>拓展1Panel面板应用商店(可选)</h2><p>在命令行输入拓展命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -P /opt/1panel/resource/apps/local https://github.com/okxlin/appstore/archive/refs/heads/localApps.zip</span><br><span class="line">unzip -o -d /opt/1panel/resource/apps/local/ /opt/1panel/resource/apps/local/localApps.zip</span><br><span class="line"><span class="built_in">cp</span> -rf /opt/1panel/resource/apps/local/appstore-localApps/apps/* /opt/1panel/resource/apps/local/</span><br><span class="line"><span class="built_in">rm</span> -rf /opt/1panel/resource/apps/local/appstore-localApps</span><br><span class="line"><span class="built_in">rm</span> -rf /opt/1panel/resource/apps/local/localApps.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装网站"><a href="#安装网站" class="headerlink" title="安装网站"></a>安装网站</h2><p>首先安装OpenResty和MySQL, 在应用商店找到这两个应用, 点击安装点击确认即可</p>
+<p>安装完成后, 在应用商店找到Halo(仅为示例, 可以选择其他网站应用安装), 点击安装(无需打开外部端口访问)</p>
+<p>进入<code>网站</code>页面, 点击创建-&gt;一键部署-&gt;选择已装应用:Halo, 主域名填入解析到服务器的域名, 点击确认即可安装成功</p>
+<h2 id="配置SSL"><a href="#配置SSL" class="headerlink" title="配置SSL"></a>配置SSL</h2><p>进入<code>证书</code>页面, 首先创建Acme账号</p>
+<p>点击申请证书, 域名从网站选择, 验证方式为HTTP验证, 点击确认申请</p>
+<p>回到<code>网站</code>页面, 点击配置网站-&gt;https, 开启https, 选择自己的Acme账户, 选择刚申请的证书, 点击保存</p>
+<h2 id="配置Halo"><a href="#配置Halo" class="headerlink" title="配置Halo"></a>配置Halo</h2><p>站点标题随意, 输入自己的邮箱用户名, 用户名只能小写, 输入密码</p>
+<p>接着输入用户名密码登陆</p>
+<p>接着就可以写文章发布了, 可以去Halo应用商店更改主题</p>
+<ul>
+<li>示例网站: <a href="https://meng.liudn.pp.ua/">Halo</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>域名解析</tag>
+        <tag>1Panel</tag>
+        <tag>VPS建站</tag>
+        <tag>Halo博客</tag>
+        <tag>SSL配置</tag>
+        <tag>网站搭建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建CFblog</title>
+    <url>/2024/06/06/cfblog/</url>
+    <content><![CDATA[<blockquote>
+<p>在之前已经教了大家如何搭建博客，但是都有各自的缺点如hexo没有后台，typecho用免费主机不稳定经常跑路，今天教大家用Cloudflare搭建一个博客，相当稳定</p>
+</blockquote>
+<p>项目地址: <a href="https://github.com/gdtool/cloudflare-workers-blog">https://github.com/gdtool/cloudflare-workers-blog</a><br>作者: <a href="https://blog.gezhong.vip/">https://blog.gezhong.vip</a>  </p>
+<p>搭建教程</p>
+<ul>
+<li>注册cloudflare账号</li>
+</ul>
+<p>去官网<a href="https://www.cloudflare-cn.com/">https://www.cloudflare-cn.com</a> 点击登陆后进行注册就行，非常简单只需一个邮箱  </p>
+<ul>
+<li>申请免费域名</li>
+</ul>
+<p>这个域名是有要求的，需要添加上cloudflare的解析，也就是可以修改NS记录，而且如果是非顶级域的话还要看看在 <a href="https://publicsuffix.org/list/public_suffix_list.dat">https://publicsuffix.org/list/public_suffix_list.dat</a> 是否有这个后缀</p>
+<p>在我的文章 <a href="/2024/04/21/typechoblog">创建Typecho博客</a> 中有一些免费域名</p>
+<ul>
+<li>创建KV容器</li>
+</ul>
+<p>登陆控制台后把语言设置为中文，在左边栏目里，找到”workers和pages”，点击黑三角，点击KV，之后创建命名空间 输入名称后点击添加即可</p>
+<ul>
+<li>获取cf区域id和API token</li>
+</ul>
+<p>点击”网站”，点击你添加的域名，找到区域id，复制下来保存在记事本</p>
+<p>然后点击获取API令牌&gt;创建令牌&gt;自定义令牌&gt;输入名称<br>权限: <code>区域</code> <code>缓存清除</code> <code>清除</code><br>区域资源: <code>包括</code> <code>特定区域</code> <code>选择你的域名</code><br>继续以显示摘要&gt;创建令牌，复制下来，保存在一个地方</p>
+<ul>
+<li>创建workers</li>
+</ul>
+<p>在栏目里点击”workers和pages”，点击创建应用程序&gt;创建worker&gt;输入名称&gt;完成&gt;编辑代码</p>
+<p>删掉原来的代码，把<a href="https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js">https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js</a> 中的代码复制下来，粘贴到上面，将其中的一些东西自己修改，保存并部署</p>
+<ul>
+<li>设置变量</li>
+</ul>
+<p>回到项目&gt;设置&gt;变量&gt;KV空间绑定&gt;名称<code>CFBLOG</code> 空间选择自己刚创建的&gt;部署</p>
+<ul>
+<li>自定义域</li>
+</ul>
+<p>回到项目&gt;设置&gt;触发器&gt;添加自定义域&gt;输入域名&gt;创建，之后等待一下就行了</p>
+<ul>
+<li><p>写文章<br>访问 域名&#x2F;admin 输入你设置的用户名密码登陆，之后就可以写文章了</p>
+</li>
+<li><p>总结</p>
+</li>
+</ul>
+<p>过程有点麻烦，但是用起来方便稳定，就是主题不多，至于评论功能就在<del>水</del>一篇博客吧</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>免费域名</tag>
+        <tag>博客搭建</tag>
+        <tag>CFblog</tag>
+        <tag>Cloudflare Workers</tag>
+        <tag>KV容器</tag>
+        <tag>Cloudflare</tag>
+        <tag>API令牌</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用fofa寻找免费节点</title>
+    <url>/2025/03/15/fofaclash/</url>
+    <content><![CDATA[<blockquote>
+<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
+</blockquote>
+<blockquote>
+<p>声明: 本文章发布仅供技术交流</p>
+</blockquote>
+<ul>
+<li>fofa搜索</li>
+</ul>
+<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
+<p>接着搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
+<ul>
+<li>打开网页Clash</li>
+</ul>
+<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
+<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
+<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
+<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
+<p>将<code>允许来自局域网的连接</code>选项打开</p>
+<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
+<ul>
+<li>打开代理软件</li>
+</ul>
+<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
+<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>FOFA搜索</tag>
+        <tag>免费Clash节点</tag>
+        <tag>代理教程</tag>
+        <tag>技术交流</tag>
+        <tag>代理软件</tag>
       </tags>
   </entry>
 </search>
