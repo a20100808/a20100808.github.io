@@ -15,8 +15,33 @@
     <atom:link href="https://blog.333375.xyz/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>liuts的技术分享博客</description>
-    <pubDate>Sat, 19 Apr 2025 04:07:05 GMT</pubDate>
+    <pubDate>Wed, 30 Apr 2025 18:17:39 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>通过脚本一键生成CF优选域名</title>
+      <link>https://blog.333375.xyz/2025/04/30/cfyxip/</link>
+      <guid>https://blog.333375.xyz/2025/04/30/cfyxip/</guid>
+      <pubDate>Wed, 30 Apr 2025 09:46:34 GMT</pubDate>
+      
+      <description>本文详细讲解如何通过自定义 Shell 脚本与 Cloudflare API，结合 CloudflareST 工具，实现域名解析的自动优化。</description>
+      
+      
+      
+      
+      <category domain="https://blog.333375.xyz/categories/%E6%95%99%E7%A8%8B/">教程</category>
+      
+      
+      <category domain="https://blog.333375.xyz/tags/CloudflareST/">CloudflareST</category>
+      
+      <category domain="https://blog.333375.xyz/tags/Cloudflare%E4%BC%98%E9%80%89ip/">Cloudflare优选ip</category>
+      
+      <category domain="https://blog.333375.xyz/tags/shell%E8%84%9A%E6%9C%AC/">shell脚本</category>
+      
+      
+      <comments>https://blog.333375.xyz/2025/04/30/cfyxip/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>使用1Panel面板搭建网站</title>
