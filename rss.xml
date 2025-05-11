@@ -15,7 +15,7 @@
     <atom:link href="https://blog.333375.xyz/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>liuts的技术分享博客</description>
-    <pubDate>Fri, 02 May 2025 11:27:16 GMT</pubDate>
+    <pubDate>Sat, 10 May 2025 13:53:30 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -323,7 +323,7 @@
       
       
       
-      <category domain="https://blog.333375.xyz/categories/%E6%95%99%E7%A8%8B/">教程</category>
+      <category domain="https://blog.333375.xyz/categories/%E5%9B%BE%E6%96%87%E6%95%99%E7%A8%8B/">图文教程</category>
       
       
       <category domain="https://blog.333375.xyz/tags/Cloudflare-Workers/">Cloudflare Workers</category>
