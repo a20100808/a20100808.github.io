@@ -1,0 +1,45 @@
+# 工作流程名称
+name: Deploy Static Site to Firebase Hosting
+
+# 工作流程触发条件
+# 当代码被推送到 main 分支时触发 (这个分支是 hexo-deployer-git 推送的分支)
+on:
+  push:
+    branches:
+      - main # <-- **重要：** 将这里的 'main' 替换为 hexo-deployer-git 实际推送的分支名称！
+
+# 定义一个或多个作业 (jobs)
+jobs:
+  deploy:
+    # 作业名称
+    name: Deploy to Firebase
+
+    # 作业运行的环境
+    runs-on: ubuntu-latest # 使用最新的 Ubuntu 运行环境
+
+    # 作业执行的步骤
+    steps:
+      # 步骤1: 检出代码
+      # 使用 checkout Action 获取你的静态网站文件 (这些文件就是 hexo-deployer-git 推送过来的)
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 步骤2: 设置 Node.js 环境 (Firebase CLI 需要 Node.js)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16.x' # Firebase CLI 需要 Node.js 环境，选择一个合适的版本
+
+      # 步骤3: 安装 Firebase CLI
+      # 使用官方提供的 setup Action 安装 Firebase CLI
+      - name: Setup Firebase CLI
+        uses: firebase/setup-firebase-cli@v2 # 使用官方的 Firebase CLI Setup Action
+
+      # 步骤4: 部署到 Firebase Hosting
+      # 使用 Firebase CLI 部署当前仓库 (也就是 .) 的内容
+      # --only hosting: 只部署 Hosting
+      # --token: 使用之前保存在 GitHub Secrets 中的令牌进行认证
+      # --project: 指定你的 Firebase 项目 ID
+      # cwd: 指定执行 firebase deploy 的目录。"." 表示在当前工作目录 (仓库根目录) 执行
+      - name: Deploy to Firebase Hosting
+        run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }} --project mine-6d310 # <-- **重要：** 确保这里的项目 ID 正确
