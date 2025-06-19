@@ -182,6 +182,66 @@
       </tags>
   </entry>
   <entry>
+    <title>创建CFblog</title>
+    <url>/2024/06/06/cfblog/</url>
+    <content><![CDATA[<blockquote>
+<p>在之前已经教了大家如何搭建博客，但是都有各自的缺点如hexo没有后台，typecho用免费主机不稳定经常跑路，今天教大家用Cloudflare搭建一个博客，相当稳定</p>
+</blockquote>
+<p>项目地址: <a href="https://github.com/gdtool/cloudflare-workers-blog">https://github.com/gdtool/cloudflare-workers-blog</a><br>作者: <a href="https://blog.gezhong.vip/">https://blog.gezhong.vip</a>  </p>
+<p>搭建教程</p>
+<ul>
+<li>注册cloudflare账号</li>
+</ul>
+<p>去官网<a href="https://www.cloudflare-cn.com/">https://www.cloudflare-cn.com</a> 点击登陆后进行注册就行，非常简单只需一个邮箱  </p>
+<ul>
+<li>申请免费域名</li>
+</ul>
+<p>这个域名是有要求的，需要添加上cloudflare的解析，也就是可以修改NS记录，而且如果是非顶级域的话还要看看在 <a href="https://publicsuffix.org/list/public_suffix_list.dat">https://publicsuffix.org/list/public_suffix_list.dat</a> 是否有这个后缀</p>
+<p>在我的文章 <a href="/2024/04/21/typechoblog">创建Typecho博客</a> 中有一些免费域名</p>
+<ul>
+<li>创建KV容器</li>
+</ul>
+<p>登陆控制台后把语言设置为中文，在左边栏目里，找到”workers和pages”，点击黑三角，点击KV，之后创建命名空间 输入名称后点击添加即可</p>
+<ul>
+<li>获取cf区域id和API token</li>
+</ul>
+<p>点击”网站”，点击你添加的域名，找到区域id，复制下来保存在记事本</p>
+<p>然后点击获取API令牌&gt;创建令牌&gt;自定义令牌&gt;输入名称<br>权限: <code>区域</code> <code>缓存清除</code> <code>清除</code><br>区域资源: <code>包括</code> <code>特定区域</code> <code>选择你的域名</code><br>继续以显示摘要&gt;创建令牌，复制下来，保存在一个地方</p>
+<ul>
+<li>创建workers</li>
+</ul>
+<p>在栏目里点击”workers和pages”，点击创建应用程序&gt;创建worker&gt;输入名称&gt;完成&gt;编辑代码</p>
+<p>删掉原来的代码，把<a href="https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js">https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js</a> 中的代码复制下来，粘贴到上面，将其中的一些东西自己修改，保存并部署</p>
+<ul>
+<li>设置变量</li>
+</ul>
+<p>回到项目&gt;设置&gt;变量&gt;KV空间绑定&gt;名称<code>CFBLOG</code> 空间选择自己刚创建的&gt;部署</p>
+<ul>
+<li>自定义域</li>
+</ul>
+<p>回到项目&gt;设置&gt;触发器&gt;添加自定义域&gt;输入域名&gt;创建，之后等待一下就行了</p>
+<ul>
+<li><p>写文章<br>访问 域名&#x2F;admin 输入你设置的用户名密码登陆，之后就可以写文章了</p>
+</li>
+<li><p>总结</p>
+</li>
+</ul>
+<p>过程有点麻烦，但是用起来方便稳定，就是主题不多，至于评论功能就在<del>水</del>一篇博客吧</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Cloudflare</tag>
+        <tag>Cloudflare Workers</tag>
+        <tag>CFblog</tag>
+        <tag>免费域名</tag>
+        <tag>KV容器</tag>
+        <tag>博客搭建</tag>
+        <tag>API令牌</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>通过脚本一键生成CF优选域名</title>
     <url>/2025/04/30/cfyxip/</url>
     <content><![CDATA[<blockquote>
@@ -288,53 +348,6 @@
       </tags>
   </entry>
   <entry>
-    <title>利用fofa寻找免费节点</title>
-    <url>/2025/03/15/fofaclash/</url>
-    <content><![CDATA[<blockquote>
-<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
-</blockquote>
-<blockquote>
-<p>声明: 本文章发布仅供技术交流</p>
-</blockquote>
-<ul>
-<li>fofa搜索</li>
-</ul>
-<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
-<p>接着搜索</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
-
-<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
-<ul>
-<li>打开网页Clash</li>
-</ul>
-<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
-<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
-<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
-<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
-<p>将<code>允许来自局域网的连接</code>选项打开</p>
-<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
-<ul>
-<li>打开代理软件</li>
-</ul>
-<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
-<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>FOFA搜索</tag>
-        <tag>免费Clash节点</tag>
-        <tag>代理教程</tag>
-        <tag>技术交流</tag>
-        <tag>代理软件</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>创建hexo博客</title>
     <url>/2024/04/14/hexoblog/</url>
     <content><![CDATA[<blockquote>
@@ -407,19 +420,51 @@
       </tags>
   </entry>
   <entry>
-    <title>回到Hexo的怀抱</title>
-    <url>/2024/09/15/imback/</url>
+    <title>利用fofa寻找免费节点</title>
+    <url>/2025/03/15/fofaclash/</url>
     <content><![CDATA[<blockquote>
-<p><del>孩子们我回来了</del></p>
+<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
 </blockquote>
-<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
-<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
-<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
-<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
+<blockquote>
+<p>声明: 本文章发布仅供技术交流</p>
+</blockquote>
+<ul>
+<li>fofa搜索</li>
+</ul>
+<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
+<p>接着搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
+<ul>
+<li>打开网页Clash</li>
+</ul>
+<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
+<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
+<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
+<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
+<p>将<code>允许来自局域网的连接</code>选项打开</p>
+<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
+<ul>
+<li>打开代理软件</li>
+</ul>
+<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
+<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
 ]]></content>
       <categories>
-        <category>水</category>
+        <category>教程</category>
       </categories>
+      <tags>
+        <tag>FOFA搜索</tag>
+        <tag>免费Clash节点</tag>
+        <tag>代理教程</tag>
+        <tag>技术交流</tag>
+        <tag>代理软件</tag>
+      </tags>
   </entry>
   <entry>
     <title>随机图片api</title>
@@ -450,42 +495,51 @@
       </tags>
   </entry>
   <entry>
-    <title>SSL申请</title>
-    <url>/2024/05/02/ssl/</url>
+    <title>Markdown图片超链接</title>
+    <url>/2024/07/29/mdimghref/</url>
     <content><![CDATA[<blockquote>
-<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
+<p>今天简简单单水一篇文章, 教大家如何用 <code>Markdown</code>实现图片超链接 <del>(太水了)</del></p>
 </blockquote>
-<ol>
-<li>acme.sh</li>
-</ol>
-<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
-<p>输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
-<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
-<p>之后在你的虚拟主机平台配置ssl</p>
-<p><del>2. cert.kinh.cc</del>  网站关闭</p>
-<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
-<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
-<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
-<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
-<ol start="3">
-<li>在主机平台申请</li>
-</ol>
-<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
 <ul>
-<li>总结</li>
+<li>了解图片和链接的使用</li>
 </ul>
-<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)</p>
+<p>首先要了解如何在 <code>Markdown</code> 中显示图片和链接  –这是基础</p>
+<p>链接的插入</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
+
+<p>图片的插入</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">![<span class="string">img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看出来, 图片和链接之间使用的差别很小只需一个 <code>!</code> 就可以区别它们, 但是记住要使用英文状态的 <code>!</code></p>
+<p>而其中用中括号 <code>[]</code> 包着的文字就是描述, 这个东西在链接状态就会显示出来比如这样 <a href="/img/mdimghref/1.webp">链接</a> 这个就是上面代码块里的链接</p>
+<p>如果是图片状态就不会<code>直接</code>显示描述, 而是会直接显示图片, 例如</p>
+<p><img src="https://r2.lts.dpdns.org/img/mdimghref/1.webp" alt="img"></p>
+<p>你甚至可以不用填写描述, 但是当图片显示错误的时候就会显示这个描述, 建议还是写上</p>
+<p>至于小括号的内容就必须是链接了, 而且显示图片的链接必须是纯图片链接, 就是后面必须加上 <code>.jpg</code> <code>.png</code> <code>.webp</code> 等后缀 (但是有些图床的图片没有后缀, 这个要靠自己辨别)</p>
+<ul>
+<li>了解图片超链接的逻辑</li>
+</ul>
+<p>这是 HTML 中的图片超链接</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://blog.333375.xyz/img/mdimghref/1.webp&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;img&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我大概讲解一下, 这个 <code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code> 就相当于Markdown中的链接, <code>[]()</code>, 这个href后的””里面就是链接, 而<code>&gt;&lt;</code>中间要添加描述, <code>&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;</code>, src后面添加图片链接, alt后面添加描述, 就大概是这样</p>
+<p>而从这个HTML代码可以看出, 是把图片添加到了链接的描述中, 这样就可以实现图片超链接</p>
+<ul>
+<li>正确使用</li>
+</ul>
+<p>那么好了, 现在开始使用吧</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">![img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)](<span class="link">https://blog.333375.xyz</span>)</span><br></pre></td></tr></table></figure>
+<p>效果</p>
+<p><a href="/"><img src="https://r2.lts.dpdns.org/img/mdimghref/1.webp" alt="img"></a></p>
 ]]></content>
       <categories>
         <category>水教程</category>
       </categories>
       <tags>
-        <tag>域名解析</tag>
-        <tag>免费SSL</tag>
-        <tag>acme.sh</tag>
-        <tag>LetsEncrypt</tag>
-        <tag>证书申请</tag>
+        <tag>Markdown教程</tag>
+        <tag>图片超链接</tag>
+        <tag>链接插入</tag>
+        <tag>图片插入</tag>
+        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -607,6 +661,113 @@
       </tags>
   </entry>
   <entry>
+    <title>SSL申请</title>
+    <url>/2024/05/02/ssl/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
+</blockquote>
+<ol>
+<li>acme.sh</li>
+</ol>
+<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
+<p>输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
+<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
+<p>之后在你的虚拟主机平台配置ssl</p>
+<p><del>2. cert.kinh.cc</del>  网站关闭</p>
+<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
+<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
+<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
+<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
+<ol start="3">
+<li>在主机平台申请</li>
+</ol>
+<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
+<ul>
+<li>总结</li>
+</ul>
+<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)</p>
+]]></content>
+      <categories>
+        <category>水教程</category>
+      </categories>
+      <tags>
+        <tag>域名解析</tag>
+        <tag>免费SSL</tag>
+        <tag>acme.sh</tag>
+        <tag>LetsEncrypt</tag>
+        <tag>证书申请</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TCL折腾过程</title>
+    <url>/2024/09/15/tcladb/</url>
+    <content><![CDATA[<blockquote>
+<p>本文是自己家TCL折腾的过程, 其中一些问题到现在我也不知道如何解决, 如果有解决办法希望可以在评论区告诉我</p>
+</blockquote>
+<ul>
+<li>起因</li>
+</ul>
+<p>其实我老早之前就想要折腾TCL了, 因为这些自带软件没有一点用, 我想要把他们卸载,  我当时是用悟空遥控器来卸载和安装软件的, 但是由于权限不够, 所以软件卸载是失败的, 所以也就放弃了, 毕竟我家电视配置很小, 软件多了很容易卡爆</p>
+<p>但是我在一次B站之旅中刷到了B站UP <code>晨钟酱</code> 看着他折腾各种设备, 而其中大部分安装软件都是依靠ADB, 所以我就试试TCL可不可以打开无线ADB来卸载软件</p>
+<ul>
+<li>过程</li>
+</ul>
+<p>首先我找到了开启ADB的办法: 进入设置 &gt; 关于本机 &gt; 本机信息, 接着在遥控器上摁 上-下-左-右 即可看到ADB选项, 开启即可</p>
+<p>然后必须重启, 不然无法连接ADB</p>
+<p>然后就是连接 ADB 了, 安卓的话就用 <code>甲壳虫ADB助手</code> 即可, 电脑的话直接下载 <code>SDK Platform Tools</code> 就行</p>
+<p>在命令行连接的话使用以下命令, ip需更换为电视的IP, 一般在网络信息中</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb connect <span class="number">192.168</span>.<span class="number">1.100</span></span><br></pre></td></tr></table></figure>
+<p>接着电视上会弹出是否允许ADB调试, 始终允许即可<br>然后输入</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell</span><br></pre></td></tr></table></figure>
+<p>即可进入shell界面</p>
+<p>然后在shell界面分别输入命令来打开安装权限</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">setprop persist.tcl.debug.installapk <span class="number">1</span></span><br><span class="line">setprop persist.tcl.installapk.enable <span class="number">1</span></span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装应用</li>
+</ul>
+<p>在 adb connect 之后直接输入就可以安装软件, 不要进入shell面板</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb install /example/apk.apk</span><br></pre></td></tr></table></figure>
+<p>但是由于TCL的限制, 无法安装第三方桌面, 所以除非ROOT, 不然是无法替换桌面的, 而且就算替换桌面也不能删除 T-UI 桌面, 会一直卡在开机界面, 所以想想就算了</p>
+<ul>
+<li>卸载应用</li>
+</ul>
+<p>这也是我一开始折腾的目的<br>首先输入 <code>adb shell</code> 进入shell, 列出包名</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm list packages</span><br></pre></td></tr></table></figure>
+<p>然后输入卸载命令</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> 包名</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>常见需卸载软件</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># TCL 智慧家居</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.convergehome</span><br><span class="line"></span><br><span class="line"><span class="comment"># T 惠购</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tshop</span><br><span class="line"></span><br><span class="line"><span class="comment"># T2 游戏中心</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.gamecenter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 艺生活</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.appreciate.art</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全民 K 歌</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffkaraoke</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮播</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tliveplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 雷鸟教育</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffeducation</span><br></pre></td></tr></table></figure>
+<ul>
+<li>常见保错</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">-Failure [INSTALL_FAILED_VERIFICATION_FAILURE: Package Verification Result]</span><br></pre></td></tr></table></figure>
+<p>这种就是安装包校验失败, 输入以下命令禁用验证即可</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell settings put global verifier_verify_adb_installs <span class="number">0</span></span><br><span class="line">adb shell settings put global package_verifier_enable <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES: disable install launcher app not signature by tcl]</span><br></pre></td></tr></table></figure>
+<p>这就是我之前说的TCL禁止安装第三方桌面, 这个没办法解决, 而且如果这个应用的安装包有一点像桌面都无法安装</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>TCL的限制实在太大了, 连ADB都限制, 只为了他那广告收益, 对于这种厂家, 我只能说真的出生</p>
+]]></content>
+      <categories>
+        <category>折腾</category>
+      </categories>
+      <tags>
+        <tag>TCL电视</tag>
+        <tag>ADB调试</tag>
+        <tag>无线ADB</tag>
+        <tag>TCL限制</tag>
+        <tag>ADB命令</tag>
+        <tag>包名列表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>创建Typecho博客</title>
     <url>/2024/04/21/typechoblog/</url>
     <content><![CDATA[<blockquote>
@@ -662,10 +823,10 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Typecho博客</tag>
-        <tag>免费主机</tag>
         <tag>免费域名</tag>
         <tag>博客搭建</tag>
+        <tag>Typecho博客</tag>
+        <tag>免费主机</tag>
         <tag>Joe主题</tag>
         <tag>动态博客</tag>
         <tag>域名绑定</tag>
@@ -748,126 +909,6 @@
         <tag>网络工具</tag>
         <tag>IP纯净</tag>
         <tag>MJJ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建CFblog</title>
-    <url>/2024/06/06/cfblog/</url>
-    <content><![CDATA[<blockquote>
-<p>在之前已经教了大家如何搭建博客，但是都有各自的缺点如hexo没有后台，typecho用免费主机不稳定经常跑路，今天教大家用Cloudflare搭建一个博客，相当稳定</p>
-</blockquote>
-<p>项目地址: <a href="https://github.com/gdtool/cloudflare-workers-blog">https://github.com/gdtool/cloudflare-workers-blog</a><br>作者: <a href="https://blog.gezhong.vip/">https://blog.gezhong.vip</a>  </p>
-<p>搭建教程</p>
-<ul>
-<li>注册cloudflare账号</li>
-</ul>
-<p>去官网<a href="https://www.cloudflare-cn.com/">https://www.cloudflare-cn.com</a> 点击登陆后进行注册就行，非常简单只需一个邮箱  </p>
-<ul>
-<li>申请免费域名</li>
-</ul>
-<p>这个域名是有要求的，需要添加上cloudflare的解析，也就是可以修改NS记录，而且如果是非顶级域的话还要看看在 <a href="https://publicsuffix.org/list/public_suffix_list.dat">https://publicsuffix.org/list/public_suffix_list.dat</a> 是否有这个后缀</p>
-<p>在我的文章 <a href="/2024/04/21/typechoblog">创建Typecho博客</a> 中有一些免费域名</p>
-<ul>
-<li>创建KV容器</li>
-</ul>
-<p>登陆控制台后把语言设置为中文，在左边栏目里，找到”workers和pages”，点击黑三角，点击KV，之后创建命名空间 输入名称后点击添加即可</p>
-<ul>
-<li>获取cf区域id和API token</li>
-</ul>
-<p>点击”网站”，点击你添加的域名，找到区域id，复制下来保存在记事本</p>
-<p>然后点击获取API令牌&gt;创建令牌&gt;自定义令牌&gt;输入名称<br>权限: <code>区域</code> <code>缓存清除</code> <code>清除</code><br>区域资源: <code>包括</code> <code>特定区域</code> <code>选择你的域名</code><br>继续以显示摘要&gt;创建令牌，复制下来，保存在一个地方</p>
-<ul>
-<li>创建workers</li>
-</ul>
-<p>在栏目里点击”workers和pages”，点击创建应用程序&gt;创建worker&gt;输入名称&gt;完成&gt;编辑代码</p>
-<p>删掉原来的代码，把<a href="https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js">https://raw.githubusercontent.com/gdtool/cloudflare-workers-blog/master/index.js</a> 中的代码复制下来，粘贴到上面，将其中的一些东西自己修改，保存并部署</p>
-<ul>
-<li>设置变量</li>
-</ul>
-<p>回到项目&gt;设置&gt;变量&gt;KV空间绑定&gt;名称<code>CFBLOG</code> 空间选择自己刚创建的&gt;部署</p>
-<ul>
-<li>自定义域</li>
-</ul>
-<p>回到项目&gt;设置&gt;触发器&gt;添加自定义域&gt;输入域名&gt;创建，之后等待一下就行了</p>
-<ul>
-<li><p>写文章<br>访问 域名&#x2F;admin 输入你设置的用户名密码登陆，之后就可以写文章了</p>
-</li>
-<li><p>总结</p>
-</li>
-</ul>
-<p>过程有点麻烦，但是用起来方便稳定，就是主题不多，至于评论功能就在<del>水</del>一篇博客吧</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Cloudflare</tag>
-        <tag>免费域名</tag>
-        <tag>博客搭建</tag>
-        <tag>Cloudflare Workers</tag>
-        <tag>CFblog</tag>
-        <tag>KV容器</tag>
-        <tag>API令牌</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Claw Run创建Webssh</title>
-    <url>/2025/06/15/webssh/</url>
-    <content><![CDATA[<blockquote>
-<p>利用Claw Run免费容器创建Webssh, 从而使用浏览器管理自己的VPS, 并且该Webssh支持文件管理<br>项目地址: <a href="https://github.com/hochenggang/managi-backend">hochenggang&#x2F;managi-backend</a></p>
-</blockquote>
-<h2 id="创建Claw-Run账号"><a href="#创建Claw-Run账号" class="headerlink" title="创建Claw Run账号"></a>创建Claw Run账号</h2><p>访问 <a href="https://run.claw.cloud/">https://run.claw.cloud</a> 注册</p>
-<blockquote>
-<p>使用180天以上的Github账号进行注册，每月赠送5刀余额</p>
-</blockquote>
-<h2 id="部署过程"><a href="#部署过程" class="headerlink" title="部署过程"></a>部署过程</h2><p>使用Github登陆, 进入首页选择<code>App Launchpad</code>，点击<code>Create App</code>按钮开始创建应用。</p>
-<p><img src="https://r2.lts.dpdns.org/img/webssh/1.webp" alt="1"></p>
-<p><img src="https://r2.lts.dpdns.org/img/webssh/2.webp" alt="2"></p>
-<p>名称随便填写, Image选择<code>Public</code>, Image Name填写<code>hochenggang/managi:0.5.0</code></p>
-<p>容器配置选择<code>Fixed</code> <code>0.1CPU</code> <code>128M</code>, 这样每个月费用仅有0.6刀, 剩余余额还可以部署其他项目</p>
-<p>网络端口修改为18001, <code>Public Access</code>打开, 可以点击<code>Custom Domain</code>来自定义域名, 推荐使用 <a href="https://zoneabc.net/register?invite=f316817b5eb8406dba388869b0767963">Zoneabc</a> 的免费域名（有AFF, 介意勿点）</p>
-<p>注册一个账号, 然后重新返回主页, 输入自己想要注册的域名</p>
-<table>
-<thead>
-<tr>
-<th>域名位数</th>
-<th>价格</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>4位域名</td>
-<td>30积分</td>
-</tr>
-<tr>
-<td>5位域名</td>
-<td>20积分</td>
-</tr>
-<tr>
-<td>6位域名</td>
-<td>10积分</td>
-</tr>
-<tr>
-<td>7位及以上域名</td>
-<td>免费</td>
-</tr>
-</tbody></table>
-<p>接着进入管理域名的页面, 添加DNS记录, 类型选择CNAME, 内容填入Claw Run提供的免费域名, TTL为60秒, 点击添加</p>
-<p><img src="https://r2.lts.dpdns.org/img/webssh/3.webp" alt="3"></p>
-<p>如果对域名没有要求的也可以直接使用Claw Run提供的免费域名</p>
-<p><img src="https://r2.lts.dpdns.org/img/webssh/4.webp" alt="4"></p>
-<p>确认没有问题后点击Deploy Application部署</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在设置完域名如果访问失败, 就耐心等待一会, 因为Claw Run本身相应比较慢, 并且不支持IPV6（我到时候研究一下能否使用Warp支持IPV6）</p>
-<p>示例网站: <a href="https://lts-webssh.zabc.net/">https://lts-webssh.zabc.net</a></p>
-]]></content>
-      <categories>
-        <category>图文教程</category>
-      </categories>
-      <tags>
-        <tag>免费域名</tag>
-        <tag>Claw Run</tag>
-        <tag>Webssh</tag>
-        <tag>Zoneabc</tag>
-        <tag>免费容器</tag>
       </tags>
   </entry>
   <entry>
@@ -963,12 +1004,87 @@
         <category>图文教程</category>
       </categories>
       <tags>
-        <tag>域名绑定</tag>
         <tag>Cloudflare Workers</tag>
         <tag>CFblog</tag>
+        <tag>域名绑定</tag>
         <tag>Waline部署</tag>
         <tag>LeanCloud注册</tag>
         <tag>第三方评论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>回到Hexo的怀抱</title>
+    <url>/2024/09/15/imback/</url>
+    <content><![CDATA[<blockquote>
+<p><del>孩子们我回来了</del></p>
+</blockquote>
+<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
+<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
+<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
+<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
+]]></content>
+      <categories>
+        <category>水</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>使用Claw Run创建Webssh</title>
+    <url>/2025/06/15/webssh/</url>
+    <content><![CDATA[<blockquote>
+<p>利用Claw Run免费容器创建Webssh, 从而使用浏览器管理自己的VPS, 并且该Webssh支持文件管理<br>项目地址: <a href="https://github.com/hochenggang/managi-backend">hochenggang&#x2F;managi-backend</a></p>
+</blockquote>
+<h2 id="创建Claw-Run账号"><a href="#创建Claw-Run账号" class="headerlink" title="创建Claw Run账号"></a>创建Claw Run账号</h2><p>访问 <a href="https://run.claw.cloud/">https://run.claw.cloud</a> 注册</p>
+<blockquote>
+<p>使用180天以上的Github账号进行注册，每月赠送5刀余额</p>
+</blockquote>
+<h2 id="部署过程"><a href="#部署过程" class="headerlink" title="部署过程"></a>部署过程</h2><p>使用Github登陆, 进入首页选择<code>App Launchpad</code>，点击<code>Create App</code>按钮开始创建应用。</p>
+<p><img src="https://r2.lts.dpdns.org/img/webssh/1.webp" alt="1"></p>
+<p><img src="https://r2.lts.dpdns.org/img/webssh/2.webp" alt="2"></p>
+<p>名称随便填写, Image选择<code>Public</code>, Image Name填写<code>hochenggang/managi:0.5.0</code></p>
+<p>容器配置选择<code>Fixed</code> <code>0.1CPU</code> <code>128M</code>, 这样每个月费用仅有0.6刀, 剩余余额还可以部署其他项目</p>
+<p>网络端口修改为18001, <code>Public Access</code>打开, 可以点击<code>Custom Domain</code>来自定义域名, 推荐使用 <a href="https://zoneabc.net/register?invite=f316817b5eb8406dba388869b0767963">Zoneabc</a> 的免费域名（有AFF, 介意勿点）</p>
+<p>注册一个账号, 然后重新返回主页, 输入自己想要注册的域名</p>
+<table>
+<thead>
+<tr>
+<th>域名位数</th>
+<th>价格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4位域名</td>
+<td>30积分</td>
+</tr>
+<tr>
+<td>5位域名</td>
+<td>20积分</td>
+</tr>
+<tr>
+<td>6位域名</td>
+<td>10积分</td>
+</tr>
+<tr>
+<td>7位及以上域名</td>
+<td>免费</td>
+</tr>
+</tbody></table>
+<p>接着进入管理域名的页面, 添加DNS记录, 类型选择CNAME, 内容填入Claw Run提供的免费域名, TTL为60秒, 点击添加</p>
+<p><img src="https://r2.lts.dpdns.org/img/webssh/3.webp" alt="3"></p>
+<p>如果对域名没有要求的也可以直接使用Claw Run提供的免费域名</p>
+<p><img src="https://r2.lts.dpdns.org/img/webssh/4.webp" alt="4"></p>
+<p>确认没有问题后点击Deploy Application部署</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在设置完域名如果访问失败, 就耐心等待一会, 因为Claw Run本身相应比较慢, 并且不支持IPV6（我到时候研究一下能否使用Warp支持IPV6）</p>
+<p>示例网站: <a href="https://lts-webssh.zabc.net/">https://lts-webssh.zabc.net</a></p>
+]]></content>
+      <categories>
+        <category>图文教程</category>
+      </categories>
+      <tags>
+        <tag>免费域名</tag>
+        <tag>Claw Run</tag>
+        <tag>Webssh</tag>
+        <tag>Zoneabc</tag>
+        <tag>免费容器</tag>
       </tags>
   </entry>
   <entry>
@@ -1015,122 +1131,6 @@
         <tag>Workers配置</tag>
         <tag>CF优选域名</tag>
         <tag>Nginx反代</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TCL折腾过程</title>
-    <url>/2024/09/15/tcladb/</url>
-    <content><![CDATA[<blockquote>
-<p>本文是自己家TCL折腾的过程, 其中一些问题到现在我也不知道如何解决, 如果有解决办法希望可以在评论区告诉我</p>
-</blockquote>
-<ul>
-<li>起因</li>
-</ul>
-<p>其实我老早之前就想要折腾TCL了, 因为这些自带软件没有一点用, 我想要把他们卸载,  我当时是用悟空遥控器来卸载和安装软件的, 但是由于权限不够, 所以软件卸载是失败的, 所以也就放弃了, 毕竟我家电视配置很小, 软件多了很容易卡爆</p>
-<p>但是我在一次B站之旅中刷到了B站UP <code>晨钟酱</code> 看着他折腾各种设备, 而其中大部分安装软件都是依靠ADB, 所以我就试试TCL可不可以打开无线ADB来卸载软件</p>
-<ul>
-<li>过程</li>
-</ul>
-<p>首先我找到了开启ADB的办法: 进入设置 &gt; 关于本机 &gt; 本机信息, 接着在遥控器上摁 上-下-左-右 即可看到ADB选项, 开启即可</p>
-<p>然后必须重启, 不然无法连接ADB</p>
-<p>然后就是连接 ADB 了, 安卓的话就用 <code>甲壳虫ADB助手</code> 即可, 电脑的话直接下载 <code>SDK Platform Tools</code> 就行</p>
-<p>在命令行连接的话使用以下命令, ip需更换为电视的IP, 一般在网络信息中</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb connect <span class="number">192.168</span>.<span class="number">1.100</span></span><br></pre></td></tr></table></figure>
-<p>接着电视上会弹出是否允许ADB调试, 始终允许即可<br>然后输入</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell</span><br></pre></td></tr></table></figure>
-<p>即可进入shell界面</p>
-<p>然后在shell界面分别输入命令来打开安装权限</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">setprop persist.tcl.debug.installapk <span class="number">1</span></span><br><span class="line">setprop persist.tcl.installapk.enable <span class="number">1</span></span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装应用</li>
-</ul>
-<p>在 adb connect 之后直接输入就可以安装软件, 不要进入shell面板</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb install /example/apk.apk</span><br></pre></td></tr></table></figure>
-<p>但是由于TCL的限制, 无法安装第三方桌面, 所以除非ROOT, 不然是无法替换桌面的, 而且就算替换桌面也不能删除 T-UI 桌面, 会一直卡在开机界面, 所以想想就算了</p>
-<ul>
-<li>卸载应用</li>
-</ul>
-<p>这也是我一开始折腾的目的<br>首先输入 <code>adb shell</code> 进入shell, 列出包名</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm list packages</span><br></pre></td></tr></table></figure>
-<p>然后输入卸载命令</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> 包名</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>常见需卸载软件</p>
-</blockquote>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># TCL 智慧家居</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.convergehome</span><br><span class="line"></span><br><span class="line"><span class="comment"># T 惠购</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tshop</span><br><span class="line"></span><br><span class="line"><span class="comment"># T2 游戏中心</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.gamecenter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 艺生活</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.appreciate.art</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全民 K 歌</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffkaraoke</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮播</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tliveplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 雷鸟教育</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffeducation</span><br></pre></td></tr></table></figure>
-<ul>
-<li>常见保错</li>
-</ul>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">-Failure [INSTALL_FAILED_VERIFICATION_FAILURE: Package Verification Result]</span><br></pre></td></tr></table></figure>
-<p>这种就是安装包校验失败, 输入以下命令禁用验证即可</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell settings put global verifier_verify_adb_installs <span class="number">0</span></span><br><span class="line">adb shell settings put global package_verifier_enable <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES: disable install launcher app not signature by tcl]</span><br></pre></td></tr></table></figure>
-<p>这就是我之前说的TCL禁止安装第三方桌面, 这个没办法解决, 而且如果这个应用的安装包有一点像桌面都无法安装</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>TCL的限制实在太大了, 连ADB都限制, 只为了他那广告收益, 对于这种厂家, 我只能说真的出生</p>
-]]></content>
-      <categories>
-        <category>折腾</category>
-      </categories>
-      <tags>
-        <tag>TCL电视</tag>
-        <tag>ADB调试</tag>
-        <tag>无线ADB</tag>
-        <tag>TCL限制</tag>
-        <tag>ADB命令</tag>
-        <tag>包名列表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Markdown图片超链接</title>
-    <url>/2024/07/29/mdimghref/</url>
-    <content><![CDATA[<blockquote>
-<p>今天简简单单水一篇文章, 教大家如何用 <code>Markdown</code>实现图片超链接 <del>(太水了)</del></p>
-</blockquote>
-<ul>
-<li>了解图片和链接的使用</li>
-</ul>
-<p>首先要了解如何在 <code>Markdown</code> 中显示图片和链接  –这是基础</p>
-<p>链接的插入</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
-
-<p>图片的插入</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">![<span class="string">img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
-
-<p>从上面可以看出来, 图片和链接之间使用的差别很小只需一个 <code>!</code> 就可以区别它们, 但是记住要使用英文状态的 <code>!</code></p>
-<p>而其中用中括号 <code>[]</code> 包着的文字就是描述, 这个东西在链接状态就会显示出来比如这样 <a href="/img/mdimghref/1.webp">链接</a> 这个就是上面代码块里的链接</p>
-<p>如果是图片状态就不会<code>直接</code>显示描述, 而是会直接显示图片, 例如</p>
-<p><img src="https://r2.lts.dpdns.org/img/mdimghref/1.webp" alt="img"></p>
-<p>你甚至可以不用填写描述, 但是当图片显示错误的时候就会显示这个描述, 建议还是写上</p>
-<p>至于小括号的内容就必须是链接了, 而且显示图片的链接必须是纯图片链接, 就是后面必须加上 <code>.jpg</code> <code>.png</code> <code>.webp</code> 等后缀 (但是有些图床的图片没有后缀, 这个要靠自己辨别)</p>
-<ul>
-<li>了解图片超链接的逻辑</li>
-</ul>
-<p>这是 HTML 中的图片超链接</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://blog.333375.xyz/img/mdimghref/1.webp&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;img&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>我大概讲解一下, 这个 <code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code> 就相当于Markdown中的链接, <code>[]()</code>, 这个href后的””里面就是链接, 而<code>&gt;&lt;</code>中间要添加描述, <code>&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;</code>, src后面添加图片链接, alt后面添加描述, 就大概是这样</p>
-<p>而从这个HTML代码可以看出, 是把图片添加到了链接的描述中, 这样就可以实现图片超链接</p>
-<ul>
-<li>正确使用</li>
-</ul>
-<p>那么好了, 现在开始使用吧</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">![img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)](<span class="link">https://blog.333375.xyz</span>)</span><br></pre></td></tr></table></figure>
-<p>效果</p>
-<p><a href="/"><img src="https://r2.lts.dpdns.org/img/mdimghref/1.webp" alt="img"></a></p>
-]]></content>
-      <categories>
-        <category>水教程</category>
-      </categories>
-      <tags>
-        <tag>Markdown教程</tag>
-        <tag>图片超链接</tag>
-        <tag>链接插入</tag>
-        <tag>图片插入</tag>
-        <tag>HTML</tag>
       </tags>
   </entry>
 </search>
