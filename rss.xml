@@ -239,8 +239,6 @@
       <category domain="https://blog.333375.xyz/categories/%E6%95%99%E7%A8%8B/">教程</category>
       
       
-      <category domain="https://blog.333375.xyz/tags/Termux/">Termux</category>
-      
       <category domain="https://blog.333375.xyz/tags/Cloudflare-Tunnel/">Cloudflare Tunnel</category>
       
       <category domain="https://blog.333375.xyz/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</category>
@@ -248,6 +246,8 @@
       <category domain="https://blog.333375.xyz/tags/Zero-Trust/">Zero Trust</category>
       
       <category domain="https://blog.333375.xyz/tags/%E5%85%8D%E8%B4%B9%E6%9C%8D%E5%8A%A1/">免费服务</category>
+      
+      <category domain="https://blog.333375.xyz/tags/Termux/">Termux</category>
       
       <category domain="https://blog.333375.xyz/tags/Argo-Token/">Argo Token</category>
       
@@ -541,13 +541,13 @@
       <category domain="https://blog.333375.xyz/categories/%E6%95%99%E7%A8%8B/">教程</category>
       
       
+      <category domain="https://blog.333375.xyz/tags/Termux/">Termux</category>
+      
       <category domain="https://blog.333375.xyz/tags/Hexo%E5%8D%9A%E5%AE%A2/">Hexo博客</category>
       
       <category domain="https://blog.333375.xyz/tags/GitHub-Pages/">GitHub Pages</category>
       
       <category domain="https://blog.333375.xyz/tags/%E5%85%8D%E8%B4%B9%E5%8D%9A%E5%AE%A2/">免费博客</category>
-      
-      <category domain="https://blog.333375.xyz/tags/Termux/">Termux</category>
       
       <category domain="https://blog.333375.xyz/tags/Node-js%E5%AE%89%E8%A3%85/">Node.js安装</category>
       
