@@ -28,12 +28,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '16.x' # Firebase CLI 需要 Node.js 环境，选择一个合适的版本
+          node-version: '20' # Firebase CLI 需要 Node.js 环境，选择一个合适的版本
 
       # 步骤3: 安装 Firebase CLI
       # 使用官方提供的 setup Action 安装 Firebase CLI
       - name: Setup Firebase CLI
-        uses: firebase/setup-firebase-cli@v2 # 使用官方的 Firebase CLI Setup Action
+        run: npm install -g firebase-tools # 使用官方的 Firebase CLI Setup Action
 
       # 步骤4: 部署到 Firebase Hosting
       # 使用 Firebase CLI 部署当前仓库 (也就是 .) 的内容
