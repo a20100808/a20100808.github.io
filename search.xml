@@ -282,72 +282,6 @@
       </tags>
   </entry>
   <entry>
-    <title>通过Cloudflare Tunnel进行内网穿透</title>
-    <url>/2024/09/28/cloudflared/</url>
-    <content><![CDATA[<blockquote>
-<p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
-</blockquote>
-<ul>
-<li>准备</li>
-</ul>
-<p>首先你必须有一个Cloudflare的账号, 且账号上必须有一个域名</p>
-<ul>
-<li>创建隧道</li>
-</ul>
-<p>首先登陆账号, 进入主页</p>
-<p>点击 侧边栏&gt;Zero Trust&gt;Networks&gt;Tunnels, 点击Create a Tunnel, 选择Cloudflared, 点击next, 输入名字, 在这里根据你的操作系统的不同选择不同的安装方式, 并且Debian和Ubuntu的安装方式是同一个方式</p>
-<p>并且如果有其他脚本需要内网穿透(或argo)的话, 需要的是那一段Token</p>
-<p>就是去掉<code>sudo cloudflared service install</code>的那一段ey开头的东西</p>
-<p>注: 这一段Token我替换了其中的几个字符, 是无效的</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> cloudflared service install eyJhIjoiMzQ3OTVmZGJlMjg5MjY5NTk0YmQxMzlhYmIxNjdiMzciLwCJ0IjoiZTFlqjlkNGUkOGE4ZS00ZjUxLTk2MjUtNmVlNjE2qTU0MjU1xiwicyIIllUZzFaVEk1TURVdFpEazNaaTAwTnprd0xUaGlaVFl0TldVeVlURXpOelUyTVdReSJ9</span><br></pre></td></tr></table></figure>
-<p>继续点击next</p>
-<p>输入subdomain并选择domain</p>
-<p>service大部分为, type: <code>http</code>, URL: <code>localhost:端口</code></p>
-<p>再点击save tunnel即可</p>
-<p>等待一会, 如果状态变为 Healthy 就是正常了, 如果等待很久都不变, 就需要检查操作是否正确</p>
-<ul>
-<li>Termux使用</li>
-</ul>
-<p>这里专门把Termux提出来就是因为在官方的安装方法中安卓无法使用, 因为权限不足, root后的安卓设备除外</p>
-<p>首先安装下来后先输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">termux-change-repo</span><br></pre></td></tr></table></figure>
-<p>接着回车, 通过上下光标移动选择<code>Mirror in Chinese Mainland</code>, 再回车, 等待完成后就换源成功了</p>
-<p>接着输入来安装<code>Cloudflared</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install cloudflared -y</span><br></pre></td></tr></table></figure>
-
-<p>然后输入, <code>Argo_Token</code>为之前获取的Token</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
-<p>如果你不希望一直这样运行, 而无法操作可以使用<code>screen</code>命令</p>
-<p>首先来安装screen</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install screen -y</span><br></pre></td></tr></table></figure>
-<p>接着输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">screen cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
-
-<p>然后在英文输入法下键入快捷键<code>Ctrl+a+d</code>就行了</p>
-<ul>
-<li>其他</li>
-</ul>
-<p>如果你的系统很冷门</p>
-<p>只需在搜索引擎搜索<code>Cloudflared-系统名称</code>, 基本上都能搜索到</p>
-<p>将其下载下来后, 如果为压缩包就将其解压 <code>tar -zxvf cloudflared.zip</code></p>
-<p>接着输入<code>chmod +x Cloudflared_NAME</code> 名称自行替换</p>
-<p>然后在使用时需要执行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./Cloudflared_NAME service install Argo_Token</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Cloudflare Tunnel</tag>
-        <tag>内网穿透</tag>
-        <tag>Zero Trust</tag>
-        <tag>免费服务</tag>
-        <tag>Termux</tag>
-        <tag>Argo Token</tag>
-        <tag>域名配置</tag>
-        <tag>HTTP服务</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>创建hexo博客</title>
     <url>/2024/04/14/hexoblog/</url>
     <content><![CDATA[<blockquote>
@@ -412,58 +346,77 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Termux</tag>
         <tag>Hexo博客</tag>
         <tag>GitHub Pages</tag>
         <tag>免费博客</tag>
+        <tag>Termux</tag>
         <tag>Node.js安装</tag>
       </tags>
   </entry>
   <entry>
-    <title>利用fofa寻找免费节点</title>
-    <url>/2025/03/15/fofaclash/</url>
+    <title>通过Cloudflare Tunnel进行内网穿透</title>
+    <url>/2024/09/28/cloudflared/</url>
     <content><![CDATA[<blockquote>
-<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
-</blockquote>
-<blockquote>
-<p>声明: 本文章发布仅供技术交流</p>
+<p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
 </blockquote>
 <ul>
-<li>fofa搜索</li>
+<li>准备</li>
 </ul>
-<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
-<p>接着搜索</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
+<p>首先你必须有一个Cloudflare的账号, 且账号上必须有一个域名</p>
+<ul>
+<li>创建隧道</li>
+</ul>
+<p>首先登陆账号, 进入主页</p>
+<p>点击 侧边栏&gt;Zero Trust&gt;Networks&gt;Tunnels, 点击Create a Tunnel, 选择Cloudflared, 点击next, 输入名字, 在这里根据你的操作系统的不同选择不同的安装方式, 并且Debian和Ubuntu的安装方式是同一个方式</p>
+<p>并且如果有其他脚本需要内网穿透(或argo)的话, 需要的是那一段Token</p>
+<p>就是去掉<code>sudo cloudflared service install</code>的那一段ey开头的东西</p>
+<p>注: 这一段Token我替换了其中的几个字符, 是无效的</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> cloudflared service install eyJhIjoiMzQ3OTVmZGJlMjg5MjY5NTk0YmQxMzlhYmIxNjdiMzciLwCJ0IjoiZTFlqjlkNGUkOGE4ZS00ZjUxLTk2MjUtNmVlNjE2qTU0MjU1xiwicyIIllUZzFaVEk1TURVdFpEazNaaTAwTnprd0xUaGlaVFl0TldVeVlURXpOelUyTVdReSJ9</span><br></pre></td></tr></table></figure>
+<p>继续点击next</p>
+<p>输入subdomain并选择domain</p>
+<p>service大部分为, type: <code>http</code>, URL: <code>localhost:端口</code></p>
+<p>再点击save tunnel即可</p>
+<p>等待一会, 如果状态变为 Healthy 就是正常了, 如果等待很久都不变, 就需要检查操作是否正确</p>
+<ul>
+<li>Termux使用</li>
+</ul>
+<p>这里专门把Termux提出来就是因为在官方的安装方法中安卓无法使用, 因为权限不足, root后的安卓设备除外</p>
+<p>首先安装下来后先输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">termux-change-repo</span><br></pre></td></tr></table></figure>
+<p>接着回车, 通过上下光标移动选择<code>Mirror in Chinese Mainland</code>, 再回车, 等待完成后就换源成功了</p>
+<p>接着输入来安装<code>Cloudflared</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install cloudflared -y</span><br></pre></td></tr></table></figure>
 
-<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
+<p>然后输入, <code>Argo_Token</code>为之前获取的Token</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
+<p>如果你不希望一直这样运行, 而无法操作可以使用<code>screen</code>命令</p>
+<p>首先来安装screen</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install screen -y</span><br></pre></td></tr></table></figure>
+<p>接着输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">screen cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
+
+<p>然后在英文输入法下键入快捷键<code>Ctrl+a+d</code>就行了</p>
 <ul>
-<li>打开网页Clash</li>
+<li>其他</li>
 </ul>
-<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
-<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
-<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
-<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
-<p>将<code>允许来自局域网的连接</code>选项打开</p>
-<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
-<ul>
-<li>打开代理软件</li>
-</ul>
-<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
-<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
-]]></content>
+<p>如果你的系统很冷门</p>
+<p>只需在搜索引擎搜索<code>Cloudflared-系统名称</code>, 基本上都能搜索到</p>
+<p>将其下载下来后, 如果为压缩包就将其解压 <code>tar -zxvf cloudflared.zip</code></p>
+<p>接着输入<code>chmod +x Cloudflared_NAME</code> 名称自行替换</p>
+<p>然后在使用时需要执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./Cloudflared_NAME service install Argo_Token</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>教程</category>
       </categories>
       <tags>
-        <tag>FOFA搜索</tag>
-        <tag>免费Clash节点</tag>
-        <tag>代理教程</tag>
-        <tag>技术交流</tag>
-        <tag>代理软件</tag>
+        <tag>Termux</tag>
+        <tag>Cloudflare Tunnel</tag>
+        <tag>内网穿透</tag>
+        <tag>Zero Trust</tag>
+        <tag>免费服务</tag>
+        <tag>Argo Token</tag>
+        <tag>域名配置</tag>
+        <tag>HTTP服务</tag>
       </tags>
   </entry>
   <entry>
@@ -540,231 +493,6 @@
         <tag>链接插入</tag>
         <tag>图片插入</tag>
         <tag>HTML</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Cloudflare Pages搭建图床</title>
-    <url>/2025/03/30/picturepages/</url>
-    <content><![CDATA[<blockquote>
-<p>今天教大家使用<code>Cloudflare Pages</code>搭建图床并使用<code>华为云</code>的分流解析加速网站</p>
-</blockquote>
-<ul>
-<li>准备</li>
-</ul>
-<p>需要一个域名, 可以修改或添加NS记录即可, 还有Cloudflare账号, Github账号, 华为云账号, Telegram账号</p>
-<ul>
-<li>注册华为云</li>
-</ul>
-<p>打开全局代理进入网站 (如果不开代理注册需实名) <a href="https://console-intl.huaweicloud.com/dns">华为云国际版-云解析服务 DNS</a></p>
-<p>接着就是和正常注册一样, 在验证手机号时点击<code>Skip</code>跳过即可</p>
-<p>看到完善信息时表示注册完成, 选择<code>暂不完善</code></p>
-<ul>
-<li>搭建图床</li>
-</ul>
-<p>进入Github仓库 <a href="https://github.com/x-dr/telegraph-Image">telegraph-Image</a> 点击<code>Use this template</code>创建库, 名字随意, 选择<code>Private</code>, 之后点击创建</p>
-<p>在Cloudfalre创建Pages, 选择<code>连接到Git</code>, 选择自己创建的库, 点击开始设置</p>
-<p><code>框架预设</code>选择<code>Next.js</code> 点击保存并部署</p>
-<p>创建D1数据库, 然后执行sql命令创建表（在控制台输入框粘贴下面语句执行即可）</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> tgimglog;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> tgimglog (</span><br><span class="line">	`id` <span class="type">integer</span> <span class="keyword">PRIMARY KEY</span> <span class="keyword">NOT NULL</span>,</span><br><span class="line">    `url` text,</span><br><span class="line">    `referer` text,</span><br><span class="line">	`ip` <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">	`<span class="type">time</span>` <span class="type">DATE</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> imginfo;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> imginfo (</span><br><span class="line">	`id` <span class="type">integer</span> <span class="keyword">PRIMARY KEY</span> <span class="keyword">NOT NULL</span>,</span><br><span class="line">    `url` text,</span><br><span class="line">    `referer` text,</span><br><span class="line">	`ip` <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">	`rating` text,</span><br><span class="line">	`total` <span class="type">integer</span>,</span><br><span class="line">	`<span class="type">time</span>` <span class="type">DATE</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>设置-&gt;绑定-&gt;D1数据库, 变量名称为<code>IMG</code>,数据库选择之前创建的,点击保存</p>
-<p>之后点击设置-&gt;变量与机密, 点击添加, 根据下表设置变量</p>
-<table>
-<thead>
-<tr>
-<th>变量名称</th>
-<th>值</th>
-<th>type</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>PROXYALLIMG</td>
-<td>反向代理所有图片（默认为false）</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>BASIC_USER</td>
-<td>后台管理页面登录用户名称</td>
-<td>string</td>
-</tr>
-<tr>
-<td>BASIC_PASS</td>
-<td>后台管理页面登录用户密码</td>
-<td>string</td>
-</tr>
-<tr>
-<td>ENABLE_AUTH_API</td>
-<td>是否开启tg channel访客验证 （默认为false）</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>REGULAR_PASS</td>
-<td>&lt;普通用户 （tg channel访客验证）&gt;</td>
-<td>string</td>
-</tr>
-<tr>
-<td>REGULAR_PASS</td>
-<td>&lt;普通用户密码&gt;</td>
-<td>string</td>
-</tr>
-<tr>
-<td>RATINGAPI</td>
-<td>&lt;<a href="https://github.com/x-dr/nsfwjs-api">自建的鉴黄api</a> &gt;</td>
-<td>string</td>
-</tr>
-<tr>
-<td>CUSTOM_DOMAIN</td>
-<td><a href="https://your-custom-domain.com/">https://your-custom-domain.com</a> (自定义加速域名)</td>
-<td>string</td>
-</tr>
-<tr>
-<td>TG_BOT_TOKEN</td>
-<td>123468:AAxxxGKrn5 (从 <a href="https://t.me/BotFather">@BotFather</a>)</td>
-<td>string</td>
-</tr>
-<tr>
-<td>TG_CHAT_ID</td>
-<td>-1234567 (频道的ID,TG Bot要是该频道或群组的管理员)</td>
-<td>string</td>
-</tr>
-</tbody></table>
-<p>在Telegram打开<code>@Botfather</code>机器人创建一个机器人, 复制token并将机器人添加到自己创建的频道, 设置管理员权限</p>
-<p>获取ID机器人 <code>@VersaToolsBot</code></p>
-<p><code>TG_CHAT_ID</code>为目标对话的唯一标ID或目标频道的用户名（eg: <code>@channelusername</code>），当目标对话为个人或私有频道是只能是ID,当为公开频道或群组是可以为目标频道的用户名（eg: <code>@channelusername</code>)</p>
-<p>设置兼容性标志，前往后台依次点击设置-&gt;函数-&gt;兼容性标志-&gt;配置生产兼容性标志 填写 <code>nodejs_compat</code></p>
-<p>然后回到部署, 选择重试部署即可</p>
-<ul>
-<li>Pages加速</li>
-</ul>
-<p>找到域名的NS修改页面, 将想要的自定义Pages域名的NS修改为华为云的NS</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ns1.huaweicloud-dns.com.</span><br><span class="line">ns1.huaweicloud-dns.cn.</span><br><span class="line">ns1.huaweicloud-dns.net.</span><br><span class="line">ns1.huaweicloud-dns.org.</span><br></pre></td></tr></table></figure>
-
-<p>然后在华为云点击<code>Public Zones</code>, 点击Create添加, 在其中输入自己自定义的Pages域名, 然后点击OK即可</p>
-<p>点击自定义域-&gt;设置自定义域, 填入自定义域名</p>
-<p>添加解析线路类型选择中国大陆, 记录值为<code>cloudflare.182682.xyz</code>, 添加选择境外解析, 记录值为你的<code>Pages.dev</code>域名, 耐心等待即可完成</p>
-<ul>
-<li>图床预览</li>
-</ul>
-<p><a href="https://img.liuts.paba.se/">Liutsの图床</a></p>
-<blockquote>
-<p>补充: R2和58img无法使用, 建议使用TG_Channel</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Cloudflare图床</tag>
-        <tag>华为云解析</tag>
-        <tag>免费图床</tag>
-        <tag>Telegram机器人</tag>
-        <tag>国内优化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSL申请</title>
-    <url>/2024/05/02/ssl/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
-</blockquote>
-<ol>
-<li>acme.sh</li>
-</ol>
-<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
-<p>输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
-<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
-<p>之后在你的虚拟主机平台配置ssl</p>
-<p><del>2. cert.kinh.cc</del>  网站关闭</p>
-<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
-<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
-<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
-<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
-<ol start="3">
-<li>在主机平台申请</li>
-</ol>
-<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
-<ul>
-<li>总结</li>
-</ul>
-<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)</p>
-]]></content>
-      <categories>
-        <category>水教程</category>
-      </categories>
-      <tags>
-        <tag>域名解析</tag>
-        <tag>免费SSL</tag>
-        <tag>acme.sh</tag>
-        <tag>LetsEncrypt</tag>
-        <tag>证书申请</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TCL折腾过程</title>
-    <url>/2024/09/15/tcladb/</url>
-    <content><![CDATA[<blockquote>
-<p>本文是自己家TCL折腾的过程, 其中一些问题到现在我也不知道如何解决, 如果有解决办法希望可以在评论区告诉我</p>
-</blockquote>
-<ul>
-<li>起因</li>
-</ul>
-<p>其实我老早之前就想要折腾TCL了, 因为这些自带软件没有一点用, 我想要把他们卸载,  我当时是用悟空遥控器来卸载和安装软件的, 但是由于权限不够, 所以软件卸载是失败的, 所以也就放弃了, 毕竟我家电视配置很小, 软件多了很容易卡爆</p>
-<p>但是我在一次B站之旅中刷到了B站UP <code>晨钟酱</code> 看着他折腾各种设备, 而其中大部分安装软件都是依靠ADB, 所以我就试试TCL可不可以打开无线ADB来卸载软件</p>
-<ul>
-<li>过程</li>
-</ul>
-<p>首先我找到了开启ADB的办法: 进入设置 &gt; 关于本机 &gt; 本机信息, 接着在遥控器上摁 上-下-左-右 即可看到ADB选项, 开启即可</p>
-<p>然后必须重启, 不然无法连接ADB</p>
-<p>然后就是连接 ADB 了, 安卓的话就用 <code>甲壳虫ADB助手</code> 即可, 电脑的话直接下载 <code>SDK Platform Tools</code> 就行</p>
-<p>在命令行连接的话使用以下命令, ip需更换为电视的IP, 一般在网络信息中</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb connect <span class="number">192.168</span>.<span class="number">1.100</span></span><br></pre></td></tr></table></figure>
-<p>接着电视上会弹出是否允许ADB调试, 始终允许即可<br>然后输入</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell</span><br></pre></td></tr></table></figure>
-<p>即可进入shell界面</p>
-<p>然后在shell界面分别输入命令来打开安装权限</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">setprop persist.tcl.debug.installapk <span class="number">1</span></span><br><span class="line">setprop persist.tcl.installapk.enable <span class="number">1</span></span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装应用</li>
-</ul>
-<p>在 adb connect 之后直接输入就可以安装软件, 不要进入shell面板</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb install /example/apk.apk</span><br></pre></td></tr></table></figure>
-<p>但是由于TCL的限制, 无法安装第三方桌面, 所以除非ROOT, 不然是无法替换桌面的, 而且就算替换桌面也不能删除 T-UI 桌面, 会一直卡在开机界面, 所以想想就算了</p>
-<ul>
-<li>卸载应用</li>
-</ul>
-<p>这也是我一开始折腾的目的<br>首先输入 <code>adb shell</code> 进入shell, 列出包名</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm list packages</span><br></pre></td></tr></table></figure>
-<p>然后输入卸载命令</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> 包名</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>常见需卸载软件</p>
-</blockquote>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># TCL 智慧家居</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.convergehome</span><br><span class="line"></span><br><span class="line"><span class="comment"># T 惠购</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tshop</span><br><span class="line"></span><br><span class="line"><span class="comment"># T2 游戏中心</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.gamecenter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 艺生活</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.appreciate.art</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全民 K 歌</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffkaraoke</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮播</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tliveplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 雷鸟教育</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffeducation</span><br></pre></td></tr></table></figure>
-<ul>
-<li>常见保错</li>
-</ul>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">-Failure [INSTALL_FAILED_VERIFICATION_FAILURE: Package Verification Result]</span><br></pre></td></tr></table></figure>
-<p>这种就是安装包校验失败, 输入以下命令禁用验证即可</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell settings put global verifier_verify_adb_installs <span class="number">0</span></span><br><span class="line">adb shell settings put global package_verifier_enable <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES: disable install launcher app not signature by tcl]</span><br></pre></td></tr></table></figure>
-<p>这就是我之前说的TCL禁止安装第三方桌面, 这个没办法解决, 而且如果这个应用的安装包有一点像桌面都无法安装</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>TCL的限制实在太大了, 连ADB都限制, 只为了他那广告收益, 对于这种厂家, 我只能说真的出生</p>
-]]></content>
-      <categories>
-        <category>折腾</category>
-      </categories>
-      <tags>
-        <tag>TCL电视</tag>
-        <tag>ADB调试</tag>
-        <tag>无线ADB</tag>
-        <tag>TCL限制</tag>
-        <tag>ADB命令</tag>
-        <tag>包名列表</tag>
       </tags>
   </entry>
   <entry>
@@ -912,122 +640,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CFblog添加Waline</title>
-    <url>/2024/07/14/waline/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教大家创建 CFblog, 但是没有评论功能, 这次教大家如何建使用Waline 开启评论功能</p>
-</blockquote>
-<ul>
-<li>注册 leancloud</li>
-</ul>
-<p>打开 <a href="https://console.leancloud.app/register">注册链接</a> 进行注册, 然后打开邮箱进行邮箱验证<br><img src="https://r2.lts.dpdns.org/img/waline/1.webp" alt="1"></p>
-<p>验证完成之后进行登陆, 点击创建应用,<br><img src="https://r2.lts.dpdns.org/img/waline/2.webp" alt="2"></p>
-<p>点击设置, 找到应用凭证, 把 AppID, AppKey 和 MasterKey 复制下来<br><img src="https://r2.lts.dpdns.org/img/waline/3.webp" alt="3"></p>
-<ul>
-<li>部署 Waline</li>
-</ul>
-<p>点击按钮进行搭建</p>
-<p><a href="https://vercel.com/import/project?template=https://github.com/walinejs/waline/tree/main/example"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a></p>
-<p>用 Github 登陆, 可能需要验证手机号</p>
-<p>输入名字后进行部署,等待几分钟,安装完毕后是这样<br><img src="https://r2.lts.dpdns.org/img/waline/4.webp" alt="4"></p>
-<ul>
-<li>设置变量</li>
-</ul>
-<p>到管理面板, 点击 Settings-&gt;Environment Variables</p>
-<p><img src="https://r2.lts.dpdns.org/img/waline/5.webp" alt="5"></p>
-<table>
-<thead>
-<tr>
-<th>变量名</th>
-<th>变量值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>LEAN_ID</td>
-<td>你的 AppID</td>
-</tr>
-<tr>
-<td>LEAN_KEY</td>
-<td>你的 AppKey</td>
-</tr>
-<tr>
-<td>LEAN_MASTER_KEY</td>
-<td>你的 MasterKey</td>
-</tr>
-</tbody></table>
-<p><img src="https://r2.lts.dpdns.org/img/waline/6.webp" alt="6"></p>
-<p>点击 Save</p>
-<p>点击 Deployment-&gt;…-&gt;Redeploy</p>
-<p><img src="https://r2.lts.dpdns.org/img/waline/7.webp" alt="7"></p>
-<ul>
-<li>绑定域名</li>
-</ul>
-<p>Settings-&gt;Domains, 将以 <code>vercel.app</code> 为结尾的域名复制下来</p>
-<p>登陆 Cloudflare, 创建一个 workers, 把内容删除并粘贴下面的代码</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;xxx.vercel.app&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>添加 workers 路由,设置-&gt;触发器-&gt;添加路由</p>
-<p><img src="https://r2.lts.dpdns.org/img/waline/8.webp" alt="8"></p>
-<p>把路由添加为这样的形式 <code>xxx.example.com/*</code> 选择的区域必须是 example.com OK之后点击添加路由</p>
-<p>添加 DNS 记录,为 CNAME 名称是添加路由时的 xxx.example.com 目标是 cloudflare.182682.xyz 代理状态关闭, 保存</p>
-<p>会到 vercel 把自己设置的域名粘贴上去-&gt;add, 等一会就行了</p>
-<p>接着浏览器访问: https:&#x2F;&#x2F;[你的域名]&#x2F;ui&#x2F;register, 注册用户(第一个注册的用户是管理员)</p>
-<ul>
-<li>编辑 workers</li>
-</ul>
-<p>回到 Cloudflare 之前创建的 CFblog workers -&gt;编辑代码<br><img src="https://r2.lts.dpdns.org/img/waline/9.webp" alt="9"></p>
-<blockquote>
-<p>在右侧小部件区域,添加一个小部件 div , 名为&lt;最近评论&gt;</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;widgetOther&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;linkcat-0&quot;</span> <span class="attr">class</span>=<span class="string">&quot;widget widget_links&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">&quot;widget-title&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>最近评论<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline-recent&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在评论区加一个 div ,来显示评论</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;commentCode&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline&quot;</span>  <span class="attr">name</span>=<span class="string">&quot;waline&quot;</span> <span class="attr">class</span>=<span class="string">&quot;comments-area&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>头部加上样式,和Waline的js</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforHead&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">img</span> &#123;<span class="attribute">max-width</span>: <span class="number">100%</span>;&#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">li</span> &#123;<span class="attribute">border</span>: thick double <span class="number">#32a1ce</span>;&#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;//gcore.jsdelivr.net/npm/@waline/client/dist/Waline.min.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>底部加上Waline初始化代码,以及加载最近评论的代码</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforBody&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是初始化Waline的,visitor: true记得开启</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">new</span> <span class="title class_">Waline</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>:<span class="string">&#x27;#waline&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appId</span>: <span class="string">&#x27;eWrOzSzYP1Fm8QD96P0vKli-MdYXbMMI&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appKey</span>: <span class="string">&#x27;jMF98EwbmKvdGnDLamPwAk1&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">avatar</span>:<span class="string">&#x27;monsterid&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">recordIP</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">requiredFields</span>:[<span class="string">&#x27;nick&#x27;</span>],</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">visitor</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">//path:&quot;/&quot;,</span></span></span><br><span class="line"><span class="language-javascript">                <span class="attr">placeholder</span>:<span class="string">&quot;整两句...&quot;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是加载最近评论的</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="title class_">Waline</span>.<span class="property">Widget</span>.<span class="title class_">RecentComments</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>: <span class="string">&#x27;#waline-recent&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">count</span>: <span class="number">10</span></span></span><br><span class="line"><span class="language-javascript">              &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-<p>把代码中的AppID,AppKey,serverURL(serverURL两个都要改)修改成你自己的, 并粘贴到workers代码里, 再点击部署就可以了</p>
-<ul>
-<li>最后</li>
-</ul>
-<p>Waline 还可以在 Hexo 上使用, 你们自己研究一下, 就不出教程了</p>
-]]></content>
-      <categories>
-        <category>图文教程</category>
-      </categories>
-      <tags>
-        <tag>Cloudflare Workers</tag>
-        <tag>CFblog</tag>
-        <tag>域名绑定</tag>
-        <tag>Waline部署</tag>
-        <tag>LeanCloud注册</tag>
-        <tag>第三方评论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>回到Hexo的怀抱</title>
-    <url>/2024/09/15/imback/</url>
-    <content><![CDATA[<blockquote>
-<p><del>孩子们我回来了</del></p>
-</blockquote>
-<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
-<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
-<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
-<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
-]]></content>
-      <categories>
-        <category>水</category>
-      </categories>
-  </entry>
-  <entry>
     <title>使用Claw Run创建Webssh</title>
     <url>/2025/06/15/webssh/</url>
     <content><![CDATA[<blockquote>
@@ -1131,6 +743,394 @@
         <tag>Workers配置</tag>
         <tag>CF优选域名</tag>
         <tag>Nginx反代</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>回到Hexo的怀抱</title>
+    <url>/2024/09/15/imback/</url>
+    <content><![CDATA[<blockquote>
+<p><del>孩子们我回来了</del></p>
+</blockquote>
+<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
+<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
+<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
+<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
+]]></content>
+      <categories>
+        <category>水</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>CFblog添加Waline</title>
+    <url>/2024/07/14/waline/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教大家创建 CFblog, 但是没有评论功能, 这次教大家如何建使用Waline 开启评论功能</p>
+</blockquote>
+<ul>
+<li>注册 leancloud</li>
+</ul>
+<p>打开 <a href="https://console.leancloud.app/register">注册链接</a> 进行注册, 然后打开邮箱进行邮箱验证<br><img src="https://r2.lts.dpdns.org/img/waline/1.webp" alt="1"></p>
+<p>验证完成之后进行登陆, 点击创建应用,<br><img src="https://r2.lts.dpdns.org/img/waline/2.webp" alt="2"></p>
+<p>点击设置, 找到应用凭证, 把 AppID, AppKey 和 MasterKey 复制下来<br><img src="https://r2.lts.dpdns.org/img/waline/3.webp" alt="3"></p>
+<ul>
+<li>部署 Waline</li>
+</ul>
+<p>点击按钮进行搭建</p>
+<p><a href="https://vercel.com/import/project?template=https://github.com/walinejs/waline/tree/main/example"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a></p>
+<p>用 Github 登陆, 可能需要验证手机号</p>
+<p>输入名字后进行部署,等待几分钟,安装完毕后是这样<br><img src="https://r2.lts.dpdns.org/img/waline/4.webp" alt="4"></p>
+<ul>
+<li>设置变量</li>
+</ul>
+<p>到管理面板, 点击 Settings-&gt;Environment Variables</p>
+<p><img src="https://r2.lts.dpdns.org/img/waline/5.webp" alt="5"></p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>变量值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LEAN_ID</td>
+<td>你的 AppID</td>
+</tr>
+<tr>
+<td>LEAN_KEY</td>
+<td>你的 AppKey</td>
+</tr>
+<tr>
+<td>LEAN_MASTER_KEY</td>
+<td>你的 MasterKey</td>
+</tr>
+</tbody></table>
+<p><img src="https://r2.lts.dpdns.org/img/waline/6.webp" alt="6"></p>
+<p>点击 Save</p>
+<p>点击 Deployment-&gt;…-&gt;Redeploy</p>
+<p><img src="https://r2.lts.dpdns.org/img/waline/7.webp" alt="7"></p>
+<ul>
+<li>绑定域名</li>
+</ul>
+<p>Settings-&gt;Domains, 将以 <code>vercel.app</code> 为结尾的域名复制下来</p>
+<p>登陆 Cloudflare, 创建一个 workers, 把内容删除并粘贴下面的代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;xxx.vercel.app&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加 workers 路由,设置-&gt;触发器-&gt;添加路由</p>
+<p><img src="https://r2.lts.dpdns.org/img/waline/8.webp" alt="8"></p>
+<p>把路由添加为这样的形式 <code>xxx.example.com/*</code> 选择的区域必须是 example.com OK之后点击添加路由</p>
+<p>添加 DNS 记录,为 CNAME 名称是添加路由时的 xxx.example.com 目标是 cloudflare.182682.xyz 代理状态关闭, 保存</p>
+<p>会到 vercel 把自己设置的域名粘贴上去-&gt;add, 等一会就行了</p>
+<p>接着浏览器访问: https:&#x2F;&#x2F;[你的域名]&#x2F;ui&#x2F;register, 注册用户(第一个注册的用户是管理员)</p>
+<ul>
+<li>编辑 workers</li>
+</ul>
+<p>回到 Cloudflare 之前创建的 CFblog workers -&gt;编辑代码<br><img src="https://r2.lts.dpdns.org/img/waline/9.webp" alt="9"></p>
+<blockquote>
+<p>在右侧小部件区域,添加一个小部件 div , 名为&lt;最近评论&gt;</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;widgetOther&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;linkcat-0&quot;</span> <span class="attr">class</span>=<span class="string">&quot;widget widget_links&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">&quot;widget-title&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>最近评论<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline-recent&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在评论区加一个 div ,来显示评论</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;commentCode&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline&quot;</span>  <span class="attr">name</span>=<span class="string">&quot;waline&quot;</span> <span class="attr">class</span>=<span class="string">&quot;comments-area&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>头部加上样式,和Waline的js</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforHead&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">img</span> &#123;<span class="attribute">max-width</span>: <span class="number">100%</span>;&#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">li</span> &#123;<span class="attribute">border</span>: thick double <span class="number">#32a1ce</span>;&#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;//gcore.jsdelivr.net/npm/@waline/client/dist/Waline.min.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>底部加上Waline初始化代码,以及加载最近评论的代码</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforBody&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是初始化Waline的,visitor: true记得开启</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">new</span> <span class="title class_">Waline</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>:<span class="string">&#x27;#waline&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appId</span>: <span class="string">&#x27;eWrOzSzYP1Fm8QD96P0vKli-MdYXbMMI&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appKey</span>: <span class="string">&#x27;jMF98EwbmKvdGnDLamPwAk1&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">avatar</span>:<span class="string">&#x27;monsterid&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">recordIP</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">requiredFields</span>:[<span class="string">&#x27;nick&#x27;</span>],</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">visitor</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">//path:&quot;/&quot;,</span></span></span><br><span class="line"><span class="language-javascript">                <span class="attr">placeholder</span>:<span class="string">&quot;整两句...&quot;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是加载最近评论的</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="title class_">Waline</span>.<span class="property">Widget</span>.<span class="title class_">RecentComments</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>: <span class="string">&#x27;#waline-recent&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">count</span>: <span class="number">10</span></span></span><br><span class="line"><span class="language-javascript">              &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+<p>把代码中的AppID,AppKey,serverURL(serverURL两个都要改)修改成你自己的, 并粘贴到workers代码里, 再点击部署就可以了</p>
+<ul>
+<li>最后</li>
+</ul>
+<p>Waline 还可以在 Hexo 上使用, 你们自己研究一下, 就不出教程了</p>
+]]></content>
+      <categories>
+        <category>图文教程</category>
+      </categories>
+      <tags>
+        <tag>Cloudflare Workers</tag>
+        <tag>CFblog</tag>
+        <tag>域名绑定</tag>
+        <tag>Waline部署</tag>
+        <tag>LeanCloud注册</tag>
+        <tag>第三方评论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSL申请</title>
+    <url>/2024/05/02/ssl/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
+</blockquote>
+<ol>
+<li>acme.sh</li>
+</ol>
+<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
+<p>输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
+<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
+<p>之后在你的虚拟主机平台配置ssl</p>
+<p><del>2. cert.kinh.cc</del>  网站关闭</p>
+<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
+<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
+<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
+<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
+<ol start="3">
+<li>在主机平台申请</li>
+</ol>
+<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
+<ul>
+<li>总结</li>
+</ul>
+<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)</p>
+]]></content>
+      <categories>
+        <category>水教程</category>
+      </categories>
+      <tags>
+        <tag>域名解析</tag>
+        <tag>免费SSL</tag>
+        <tag>acme.sh</tag>
+        <tag>LetsEncrypt</tag>
+        <tag>证书申请</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TCL折腾过程</title>
+    <url>/2024/09/15/tcladb/</url>
+    <content><![CDATA[<blockquote>
+<p>本文是自己家TCL折腾的过程, 其中一些问题到现在我也不知道如何解决, 如果有解决办法希望可以在评论区告诉我</p>
+</blockquote>
+<ul>
+<li>起因</li>
+</ul>
+<p>其实我老早之前就想要折腾TCL了, 因为这些自带软件没有一点用, 我想要把他们卸载,  我当时是用悟空遥控器来卸载和安装软件的, 但是由于权限不够, 所以软件卸载是失败的, 所以也就放弃了, 毕竟我家电视配置很小, 软件多了很容易卡爆</p>
+<p>但是我在一次B站之旅中刷到了B站UP <code>晨钟酱</code> 看着他折腾各种设备, 而其中大部分安装软件都是依靠ADB, 所以我就试试TCL可不可以打开无线ADB来卸载软件</p>
+<ul>
+<li>过程</li>
+</ul>
+<p>首先我找到了开启ADB的办法: 进入设置 &gt; 关于本机 &gt; 本机信息, 接着在遥控器上摁 上-下-左-右 即可看到ADB选项, 开启即可</p>
+<p>然后必须重启, 不然无法连接ADB</p>
+<p>然后就是连接 ADB 了, 安卓的话就用 <code>甲壳虫ADB助手</code> 即可, 电脑的话直接下载 <code>SDK Platform Tools</code> 就行</p>
+<p>在命令行连接的话使用以下命令, ip需更换为电视的IP, 一般在网络信息中</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb connect <span class="number">192.168</span>.<span class="number">1.100</span></span><br></pre></td></tr></table></figure>
+<p>接着电视上会弹出是否允许ADB调试, 始终允许即可<br>然后输入</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell</span><br></pre></td></tr></table></figure>
+<p>即可进入shell界面</p>
+<p>然后在shell界面分别输入命令来打开安装权限</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">setprop persist.tcl.debug.installapk <span class="number">1</span></span><br><span class="line">setprop persist.tcl.installapk.enable <span class="number">1</span></span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装应用</li>
+</ul>
+<p>在 adb connect 之后直接输入就可以安装软件, 不要进入shell面板</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb install /example/apk.apk</span><br></pre></td></tr></table></figure>
+<p>但是由于TCL的限制, 无法安装第三方桌面, 所以除非ROOT, 不然是无法替换桌面的, 而且就算替换桌面也不能删除 T-UI 桌面, 会一直卡在开机界面, 所以想想就算了</p>
+<ul>
+<li>卸载应用</li>
+</ul>
+<p>这也是我一开始折腾的目的<br>首先输入 <code>adb shell</code> 进入shell, 列出包名</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm list packages</span><br></pre></td></tr></table></figure>
+<p>然后输入卸载命令</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> 包名</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>常见需卸载软件</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># TCL 智慧家居</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.convergehome</span><br><span class="line"></span><br><span class="line"><span class="comment"># T 惠购</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tshop</span><br><span class="line"></span><br><span class="line"><span class="comment"># T2 游戏中心</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.gamecenter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 艺生活</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.appreciate.art</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全民 K 歌</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffkaraoke</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮播</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.tliveplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 雷鸟教育</span></span><br><span class="line">pm uninstall <span class="literal">--user</span> <span class="number">0</span> com.tcl.ffeducation</span><br></pre></td></tr></table></figure>
+<ul>
+<li>常见保错</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">-Failure [INSTALL_FAILED_VERIFICATION_FAILURE: Package Verification Result]</span><br></pre></td></tr></table></figure>
+<p>这种就是安装包校验失败, 输入以下命令禁用验证即可</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell settings put global verifier_verify_adb_installs <span class="number">0</span></span><br><span class="line">adb shell settings put global package_verifier_enable <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES: disable install launcher app not signature by tcl]</span><br></pre></td></tr></table></figure>
+<p>这就是我之前说的TCL禁止安装第三方桌面, 这个没办法解决, 而且如果这个应用的安装包有一点像桌面都无法安装</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>TCL的限制实在太大了, 连ADB都限制, 只为了他那广告收益, 对于这种厂家, 我只能说真的出生</p>
+]]></content>
+      <categories>
+        <category>折腾</category>
+      </categories>
+      <tags>
+        <tag>TCL电视</tag>
+        <tag>ADB调试</tag>
+        <tag>无线ADB</tag>
+        <tag>TCL限制</tag>
+        <tag>ADB命令</tag>
+        <tag>包名列表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用fofa寻找免费节点</title>
+    <url>/2025/03/15/fofaclash/</url>
+    <content><![CDATA[<blockquote>
+<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
+</blockquote>
+<blockquote>
+<p>声明: 本文章发布仅供技术交流</p>
+</blockquote>
+<ul>
+<li>fofa搜索</li>
+</ul>
+<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
+<p>接着搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
+<ul>
+<li>打开网页Clash</li>
+</ul>
+<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
+<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
+<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
+<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
+<p>将<code>允许来自局域网的连接</code>选项打开</p>
+<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
+<ul>
+<li>打开代理软件</li>
+</ul>
+<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
+<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>FOFA搜索</tag>
+        <tag>免费Clash节点</tag>
+        <tag>代理教程</tag>
+        <tag>技术交流</tag>
+        <tag>代理软件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Cloudflare Pages搭建图床</title>
+    <url>/2025/03/30/picturepages/</url>
+    <content><![CDATA[<blockquote>
+<p>今天教大家使用<code>Cloudflare Pages</code>搭建图床并使用<code>华为云</code>的分流解析加速网站</p>
+</blockquote>
+<ul>
+<li>准备</li>
+</ul>
+<p>需要一个域名, 可以修改或添加NS记录即可, 还有Cloudflare账号, Github账号, 华为云账号, Telegram账号</p>
+<ul>
+<li>注册华为云</li>
+</ul>
+<p>打开全局代理进入网站 (如果不开代理注册需实名) <a href="https://console-intl.huaweicloud.com/dns">华为云国际版-云解析服务 DNS</a></p>
+<p>接着就是和正常注册一样, 在验证手机号时点击<code>Skip</code>跳过即可</p>
+<p>看到完善信息时表示注册完成, 选择<code>暂不完善</code></p>
+<ul>
+<li>搭建图床</li>
+</ul>
+<p>进入Github仓库 <a href="https://github.com/x-dr/telegraph-Image">telegraph-Image</a> 点击<code>Use this template</code>创建库, 名字随意, 选择<code>Private</code>, 之后点击创建</p>
+<p>在Cloudfalre创建Pages, 选择<code>连接到Git</code>, 选择自己创建的库, 点击开始设置</p>
+<p><code>框架预设</code>选择<code>Next.js</code> 点击保存并部署</p>
+<p>创建D1数据库, 然后执行sql命令创建表（在控制台输入框粘贴下面语句执行即可）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> tgimglog;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> tgimglog (</span><br><span class="line">	`id` <span class="type">integer</span> <span class="keyword">PRIMARY KEY</span> <span class="keyword">NOT NULL</span>,</span><br><span class="line">    `url` text,</span><br><span class="line">    `referer` text,</span><br><span class="line">	`ip` <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">	`<span class="type">time</span>` <span class="type">DATE</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> imginfo;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> imginfo (</span><br><span class="line">	`id` <span class="type">integer</span> <span class="keyword">PRIMARY KEY</span> <span class="keyword">NOT NULL</span>,</span><br><span class="line">    `url` text,</span><br><span class="line">    `referer` text,</span><br><span class="line">	`ip` <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">	`rating` text,</span><br><span class="line">	`total` <span class="type">integer</span>,</span><br><span class="line">	`<span class="type">time</span>` <span class="type">DATE</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>设置-&gt;绑定-&gt;D1数据库, 变量名称为<code>IMG</code>,数据库选择之前创建的,点击保存</p>
+<p>之后点击设置-&gt;变量与机密, 点击添加, 根据下表设置变量</p>
+<table>
+<thead>
+<tr>
+<th>变量名称</th>
+<th>值</th>
+<th>type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PROXYALLIMG</td>
+<td>反向代理所有图片（默认为false）</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>BASIC_USER</td>
+<td>后台管理页面登录用户名称</td>
+<td>string</td>
+</tr>
+<tr>
+<td>BASIC_PASS</td>
+<td>后台管理页面登录用户密码</td>
+<td>string</td>
+</tr>
+<tr>
+<td>ENABLE_AUTH_API</td>
+<td>是否开启tg channel访客验证 （默认为false）</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>REGULAR_PASS</td>
+<td>&lt;普通用户 （tg channel访客验证）&gt;</td>
+<td>string</td>
+</tr>
+<tr>
+<td>REGULAR_PASS</td>
+<td>&lt;普通用户密码&gt;</td>
+<td>string</td>
+</tr>
+<tr>
+<td>RATINGAPI</td>
+<td>&lt;<a href="https://github.com/x-dr/nsfwjs-api">自建的鉴黄api</a> &gt;</td>
+<td>string</td>
+</tr>
+<tr>
+<td>CUSTOM_DOMAIN</td>
+<td><a href="https://your-custom-domain.com/">https://your-custom-domain.com</a> (自定义加速域名)</td>
+<td>string</td>
+</tr>
+<tr>
+<td>TG_BOT_TOKEN</td>
+<td>123468:AAxxxGKrn5 (从 <a href="https://t.me/BotFather">@BotFather</a>)</td>
+<td>string</td>
+</tr>
+<tr>
+<td>TG_CHAT_ID</td>
+<td>-1234567 (频道的ID,TG Bot要是该频道或群组的管理员)</td>
+<td>string</td>
+</tr>
+</tbody></table>
+<p>在Telegram打开<code>@Botfather</code>机器人创建一个机器人, 复制token并将机器人添加到自己创建的频道, 设置管理员权限</p>
+<p>获取ID机器人 <code>@VersaToolsBot</code></p>
+<p><code>TG_CHAT_ID</code>为目标对话的唯一标ID或目标频道的用户名（eg: <code>@channelusername</code>），当目标对话为个人或私有频道是只能是ID,当为公开频道或群组是可以为目标频道的用户名（eg: <code>@channelusername</code>)</p>
+<p>设置兼容性标志，前往后台依次点击设置-&gt;函数-&gt;兼容性标志-&gt;配置生产兼容性标志 填写 <code>nodejs_compat</code></p>
+<p>然后回到部署, 选择重试部署即可</p>
+<ul>
+<li>Pages加速</li>
+</ul>
+<p>找到域名的NS修改页面, 将想要的自定义Pages域名的NS修改为华为云的NS</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ns1.huaweicloud-dns.com.</span><br><span class="line">ns1.huaweicloud-dns.cn.</span><br><span class="line">ns1.huaweicloud-dns.net.</span><br><span class="line">ns1.huaweicloud-dns.org.</span><br></pre></td></tr></table></figure>
+
+<p>然后在华为云点击<code>Public Zones</code>, 点击Create添加, 在其中输入自己自定义的Pages域名, 然后点击OK即可</p>
+<p>点击自定义域-&gt;设置自定义域, 填入自定义域名</p>
+<p>添加解析线路类型选择中国大陆, 记录值为<code>cloudflare.182682.xyz</code>, 添加选择境外解析, 记录值为你的<code>Pages.dev</code>域名, 耐心等待即可完成</p>
+<ul>
+<li>图床预览</li>
+</ul>
+<p><a href="https://img.liuts.paba.se/">Liutsの图床</a></p>
+<blockquote>
+<p>补充: R2和58img无法使用, 建议使用TG_Channel</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Cloudflare图床</tag>
+        <tag>华为云解析</tag>
+        <tag>免费图床</tag>
+        <tag>Telegram机器人</tag>
+        <tag>国内优化</tag>
       </tags>
   </entry>
 </search>
