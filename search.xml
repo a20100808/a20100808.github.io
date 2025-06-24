@@ -467,6 +467,80 @@
       </tags>
   </entry>
   <entry>
+    <title>使用Github Pages搭建个人主页</title>
+    <url>/2025/06/24/homepage/</url>
+    <content><![CDATA[<blockquote>
+<p>我用AI写的个人主页, 在我看来挺好看的</p>
+</blockquote>
+<p>预览: <a href="https://home.333375.xyz/">https://home.333375.xyz/</a></p>
+<table>
+<thead>
+<tr>
+<th>桌面端</th>
+<th>手机端</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://www.nodeimage.com/i/8512/yiTtosnw3WNR5WfIsc0qA78GNtrctOYy.png" alt="yiTtosnw3WNR5WfIsc0qA78GNtrctOYy.webp"></td>
+<td><img src="https://www.nodeimage.com/i/8512/gdW3PLnM3WNR5WiIsc0qzAqscR2aRtxw.png" alt="gdW3PLnM3WNR5WiIsc0qzAqscR2aRtxw.webp"></td>
+</tr>
+</tbody></table>
+<h2 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h2><p>访问仓库 <a href="https://github.com/couldflyer/homepage">https://github.com/couldflyer/homepage</a></p>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>点击Fork本仓库-&gt;Create Fork</p>
+<p><img src="https://www.nodeimage.com/i/8512/5i33xOnw3WNR5WgDsc0q15blZ4FMDpVw.png" alt="5i33xOnw3WNR5WgDsc0q15blZ4FMDpVw.webp"></p>
+<p>然后修改<code>app.js</code></p>
+<p><img src="https://www.nodeimage.com/i/8512/zPLWrIn63WNR5WlHsc0q7grvldNP9jYt.png" alt="zPLWrIn63WNR5WlHsc0q7grvldNP9jYt.webp"></p>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name</td>
+<td>你的名字</td>
+</tr>
+<tr>
+<td>title</td>
+<td>名字下的副标题</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td>头像</td>
+</tr>
+<tr>
+<td>websites</td>
+<td>你的网站,可以添加多个</td>
+</tr>
+<tr>
+<td>bio</td>
+<td>自我介绍</td>
+</tr>
+<tr>
+<td>social</td>
+<td>联系方式, 仅支持email和github</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>如果你的更改没有作用, 可能是CDN缓存了JS文件, 需要去CDN处清理缓存</p>
+</blockquote>
+<p>更改完成后上传即可</p>
+<h3 id="创建Github-Pages"><a href="#创建Github-Pages" class="headerlink" title="创建Github Pages"></a>创建Github Pages</h3><p>来到Settings-&gt;Pages,Branch选择main然后点击save</p>
+<p><img src="https://www.nodeimage.com/i/8512/ZV4WfSnQ3WNR5XcFsc0qzgwhOZIlQe9g.png" alt="ZV4WfSnQ3WNR5XcFsc0qzgwhOZIlQe9g.webp"></p>
+<p>自定义域名, 通过Custom domain, 里面填入你的域名点击save, 然后设置A记录, 记录内容为<code>185.199.108.133</code></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>喜欢可以给项目点点star, 虽然是AI写的</p>
+]]></content>
+      <categories>
+        <category>图文教程</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>Github Pages</tag>
+        <tag>个人主页</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>回到Hexo的怀抱</title>
     <url>/2024/09/15/imback/</url>
     <content><![CDATA[<blockquote>
@@ -1028,52 +1102,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用CFworkers路由加速网站</title>
-    <url>/2024/07/23/workers-nginx/</url>
-    <content><![CDATA[<blockquote>
-<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
-</blockquote>
-<ul>
-<li>创建 Workers</li>
-</ul>
-<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">if</span> (url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>)) &#123;</span><br><span class="line">      url.<span class="property">hostname</span> = <span class="string">&#x27;xxx.vercel.app&#x27;</span>  <span class="comment">//修改为自己的网站</span></span><br><span class="line">      <span class="keyword">let</span> new_request = <span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> env.<span class="property">ASSETS</span>.<span class="title function_">fetch</span>(request);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>粘贴上去后是11行, 如果有多余几行就把这几行删除</p>
-<p>其实可以将这个看成 Nginx 反代</p>
-<ul>
-<li>配置 Workers 路由</li>
-</ul>
-<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
-<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
-<p>点击添加就行了</p>
-<ul>
-<li>配置 DNS</li>
-</ul>
-<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
-<ul>
-<li>2024.7.25更新</li>
-</ul>
-<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
-<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
-<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
-<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>CFworkers路由</tag>
-        <tag>Cloudflare代理</tag>
-        <tag>Workers配置</tag>
-        <tag>CF优选域名</tag>
-        <tag>Nginx反代</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Claw Run创建Webssh</title>
     <url>/2025/06/15/webssh/</url>
     <content><![CDATA[<blockquote>
@@ -1121,6 +1149,7 @@
 <p>确认没有问题后点击Deploy Application部署</p>
 <h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在设置完域名如果访问失败, 就耐心等待一会, 因为Claw Run本身相应比较慢, 并且不支持IPV6（我到时候研究一下能否使用Warp支持IPV6）</p>
 <p>示例网站: <a href="https://lts-webssh.zabc.net/">https://lts-webssh.zabc.net</a></p>
+<p>6.24更新: Claw是容器没法开TUN, 所以没法套warp, 可以使用koyeb搭建</p>
 ]]></content>
       <categories>
         <category>图文教程</category>
@@ -1131,6 +1160,52 @@
         <tag>Webssh</tag>
         <tag>Zoneabc</tag>
         <tag>免费容器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用CFworkers路由加速网站</title>
+    <url>/2024/07/23/workers-nginx/</url>
+    <content><![CDATA[<blockquote>
+<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
+</blockquote>
+<ul>
+<li>创建 Workers</li>
+</ul>
+<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">if</span> (url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>)) &#123;</span><br><span class="line">      url.<span class="property">hostname</span> = <span class="string">&#x27;xxx.vercel.app&#x27;</span>  <span class="comment">//修改为自己的网站</span></span><br><span class="line">      <span class="keyword">let</span> new_request = <span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> env.<span class="property">ASSETS</span>.<span class="title function_">fetch</span>(request);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>粘贴上去后是11行, 如果有多余几行就把这几行删除</p>
+<p>其实可以将这个看成 Nginx 反代</p>
+<ul>
+<li>配置 Workers 路由</li>
+</ul>
+<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
+<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
+<p>点击添加就行了</p>
+<ul>
+<li>配置 DNS</li>
+</ul>
+<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
+<ul>
+<li>2024.7.25更新</li>
+</ul>
+<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
+<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
+<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
+<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>CFworkers路由</tag>
+        <tag>Cloudflare代理</tag>
+        <tag>Workers配置</tag>
+        <tag>CF优选域名</tag>
+        <tag>Nginx反代</tag>
       </tags>
   </entry>
 </search>
