@@ -1,54 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>使用1Panel面板搭建网站</title>
-    <url>/2025/04/18/1panelhalo/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教过大家如何免费创建博客, 但是作为一个站长, 总是很担心免费服务器的稳定性问题, 所以今天教大家使用建站VPS和1Panel面板搭建网站</p>
-</blockquote>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>一个Linux服务器(配置要求至少1H2G), Cloudfalre账号, 一个域名(解析到服务器ip)</p>
-<h2 id="安装1Panel面板"><a href="#安装1Panel面板" class="headerlink" title="安装1Panel面板"></a>安装1Panel面板</h2><ul>
-<li><p>Debain&#x2F;Ubuntu系统安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh &amp;&amp; bash quick_start.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>CentOS系统</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh &amp;&amp; sh quick_start.sh</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>等待下载完毕, 开始安装, 选择中文简体, 选择安装目录&#x2F;opt, 回车安装</p>
-<p>如果显示Docker安装失败输入换源命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash &lt;(curl -sSL https://linuxmirrors.cn/docker.sh)</span><br></pre></td></tr></table></figure>
-
-<p>接着重新输入安装命令, 进行安装</p>
-<p>之后设置端口、安全入口、用户名、密码, 然后访问<code>ip:端口/安全入口</code>, 登陆完成后即可</p>
-<h2 id="拓展1Panel面板应用商店-可选"><a href="#拓展1Panel面板应用商店-可选" class="headerlink" title="拓展1Panel面板应用商店(可选)"></a>拓展1Panel面板应用商店(可选)</h2><p>在命令行输入拓展命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -P /opt/1panel/resource/apps/local https://github.com/okxlin/appstore/archive/refs/heads/localApps.zip</span><br><span class="line">unzip -o -d /opt/1panel/resource/apps/local/ /opt/1panel/resource/apps/local/localApps.zip</span><br><span class="line"><span class="built_in">cp</span> -rf /opt/1panel/resource/apps/local/appstore-localApps/apps/* /opt/1panel/resource/apps/local/</span><br><span class="line"><span class="built_in">rm</span> -rf /opt/1panel/resource/apps/local/appstore-localApps</span><br><span class="line"><span class="built_in">rm</span> -rf /opt/1panel/resource/apps/local/localApps.zip</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装网站"><a href="#安装网站" class="headerlink" title="安装网站"></a>安装网站</h2><p>首先安装OpenResty和MySQL, 在应用商店找到这两个应用, 点击安装点击确认即可</p>
-<p>安装完成后, 在应用商店找到Halo(仅为示例, 可以选择其他网站应用安装), 点击安装(无需打开外部端口访问)</p>
-<p>进入<code>网站</code>页面, 点击创建-&gt;一键部署-&gt;选择已装应用:Halo, 主域名填入解析到服务器的域名, 点击确认即可安装成功</p>
-<h2 id="配置SSL"><a href="#配置SSL" class="headerlink" title="配置SSL"></a>配置SSL</h2><p>进入<code>证书</code>页面, 首先创建Acme账号</p>
-<p>点击申请证书, 域名从网站选择, 验证方式为HTTP验证, 点击确认申请</p>
-<p>回到<code>网站</code>页面, 点击配置网站-&gt;https, 开启https, 选择自己的Acme账户, 选择刚申请的证书, 点击保存</p>
-<h2 id="配置Halo"><a href="#配置Halo" class="headerlink" title="配置Halo"></a>配置Halo</h2><p>站点标题随意, 输入自己的邮箱用户名, 用户名只能小写, 输入密码</p>
-<p>接着输入用户名密码登陆</p>
-<p>接着就可以写文章发布了, 可以去Halo应用商店更改主题</p>
-<ul>
-<li>示例网站: <a href="https://meng.liudn.pp.ua/">Halo</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>1Panel</tag>
-        <tag>VPS建站</tag>
-        <tag>Halo博客</tag>
-        <tag>SSL配置</tag>
-        <tag>网站搭建</tag>
-        <tag>域名解析</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>无需信用卡使用B2+CF Pages创建私有图床</title>
     <url>/2025/05/23/b2bucket/</url>
     <content><![CDATA[<blockquote>
@@ -182,6 +134,54 @@
       </tags>
   </entry>
   <entry>
+    <title>使用1Panel面板搭建网站</title>
+    <url>/2025/04/18/1panelhalo/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教过大家如何免费创建博客, 但是作为一个站长, 总是很担心免费服务器的稳定性问题, 所以今天教大家使用建站VPS和1Panel面板搭建网站</p>
+</blockquote>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>一个Linux服务器(配置要求至少1H2G), Cloudfalre账号, 一个域名(解析到服务器ip)</p>
+<h2 id="安装1Panel面板"><a href="#安装1Panel面板" class="headerlink" title="安装1Panel面板"></a>安装1Panel面板</h2><ul>
+<li><p>Debain&#x2F;Ubuntu系统安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh &amp;&amp; bash quick_start.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CentOS系统</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh &amp;&amp; sh quick_start.sh</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>等待下载完毕, 开始安装, 选择中文简体, 选择安装目录&#x2F;opt, 回车安装</p>
+<p>如果显示Docker安装失败输入换源命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash &lt;(curl -sSL https://linuxmirrors.cn/docker.sh)</span><br></pre></td></tr></table></figure>
+
+<p>接着重新输入安装命令, 进行安装</p>
+<p>之后设置端口、安全入口、用户名、密码, 然后访问<code>ip:端口/安全入口</code>, 登陆完成后即可</p>
+<h2 id="拓展1Panel面板应用商店-可选"><a href="#拓展1Panel面板应用商店-可选" class="headerlink" title="拓展1Panel面板应用商店(可选)"></a>拓展1Panel面板应用商店(可选)</h2><p>在命令行输入拓展命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -P /opt/1panel/resource/apps/local https://github.com/okxlin/appstore/archive/refs/heads/localApps.zip</span><br><span class="line">unzip -o -d /opt/1panel/resource/apps/local/ /opt/1panel/resource/apps/local/localApps.zip</span><br><span class="line"><span class="built_in">cp</span> -rf /opt/1panel/resource/apps/local/appstore-localApps/apps/* /opt/1panel/resource/apps/local/</span><br><span class="line"><span class="built_in">rm</span> -rf /opt/1panel/resource/apps/local/appstore-localApps</span><br><span class="line"><span class="built_in">rm</span> -rf /opt/1panel/resource/apps/local/localApps.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装网站"><a href="#安装网站" class="headerlink" title="安装网站"></a>安装网站</h2><p>首先安装OpenResty和MySQL, 在应用商店找到这两个应用, 点击安装点击确认即可</p>
+<p>安装完成后, 在应用商店找到Halo(仅为示例, 可以选择其他网站应用安装), 点击安装(无需打开外部端口访问)</p>
+<p>进入<code>网站</code>页面, 点击创建-&gt;一键部署-&gt;选择已装应用:Halo, 主域名填入解析到服务器的域名, 点击确认即可安装成功</p>
+<h2 id="配置SSL"><a href="#配置SSL" class="headerlink" title="配置SSL"></a>配置SSL</h2><p>进入<code>证书</code>页面, 首先创建Acme账号</p>
+<p>点击申请证书, 域名从网站选择, 验证方式为HTTP验证, 点击确认申请</p>
+<p>回到<code>网站</code>页面, 点击配置网站-&gt;https, 开启https, 选择自己的Acme账户, 选择刚申请的证书, 点击保存</p>
+<h2 id="配置Halo"><a href="#配置Halo" class="headerlink" title="配置Halo"></a>配置Halo</h2><p>站点标题随意, 输入自己的邮箱用户名, 用户名只能小写, 输入密码</p>
+<p>接着输入用户名密码登陆</p>
+<p>接着就可以写文章发布了, 可以去Halo应用商店更改主题</p>
+<ul>
+<li>示例网站: <a href="https://meng.liudn.pp.ua/">Halo</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>1Panel</tag>
+        <tag>VPS建站</tag>
+        <tag>Halo博客</tag>
+        <tag>SSL配置</tag>
+        <tag>网站搭建</tag>
+        <tag>域名解析</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>创建CFblog</title>
     <url>/2024/06/06/cfblog/</url>
     <content><![CDATA[<blockquote>
@@ -239,46 +239,6 @@
         <tag>KV容器</tag>
         <tag>博客搭建</tag>
         <tag>API令牌</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通过脚本一键生成CF优选域名</title>
-    <url>/2025/04/30/cfyxip/</url>
-    <content><![CDATA[<blockquote>
-<p>由于一时半会还没法更新, 所以<del>水一篇</del>, 本文教大家如何使用脚本一键生成自己的优选域名</p>
-</blockquote>
-<h2 id="准备部分"><a href="#准备部分" class="headerlink" title="准备部分"></a>准备部分</h2><p>一个Linux命令行, 一个Cloudflare账户, 一个解析在Cloudflare上的域名</p>
-<h2 id="创建Cloudflare-API-Token"><a href="#创建Cloudflare-API-Token" class="headerlink" title="创建Cloudflare API Token"></a>创建Cloudflare API Token</h2><blockquote>
-<p>本段内容由ChatGPT生成</p>
-</blockquote>
-<p>访问 Cloudflare官网: <a href="https://www.cloudflare.com/">https://www.cloudflare.com</a> 并登录您的账户。</p>
-<p>点击右上角的账户头像，选择My Profile（我的个人资料）。</p>
-<p>在左侧菜单中选择API Tokens（API 令牌）。</p>
-<p>点击Create Token（创建令牌）。</p>
-<p>在Custom Token（自定义令牌）部分，选择Get Started（开始）。</p>
-<p>Permissions（权限）：选择Zone:DNS:Edit。</p>
-<p>Zone Resources（区域资源）：选择All Zones（所有区域）或指定的域名。</p>
-<p>点击Create Token（创建令牌）。</p>
-<p>复制生成的API Token并妥善保存</p>
-<h2 id="使用脚本"><a href="#使用脚本" class="headerlink" title="使用脚本"></a>使用脚本</h2><p>创建一个目录, 或在主目录中使用脚本</p>
-<p>创建一个<code>cfip.sh</code></p>
-<p>编辑脚本内容</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置部分</span></span><br><span class="line">ZONE_ID=&quot;&quot;          # 替换为你的ZoneID, 在域名详情界面获取</span><br><span class="line">API_TOKEN=&quot;&quot;      # 替换为你的API Token</span><br><span class="line">RECORD_NAME=&quot;&quot;    # 替换为你想更新的子域名</span><br><span class="line">TTL=60                         # DNS TTL (以秒为单位)</span><br><span class="line">PROXIED=false</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">欢迎界面</span></span><br><span class="line">function show_welcome() &#123;</span><br><span class="line">    echo &quot;###############################################&quot;</span><br><span class="line">    echo &quot;#                                             #&quot;</span><br><span class="line">    echo &quot;#       欢迎使用Cloudflare官方IP优选工具      #&quot;</span><br><span class="line">    echo &quot;#             Blog: blog.33375.xyz            #&quot;</span><br><span class="line">    echo &quot;#         Telegram: https://t.me/liutsx       #&quot;</span><br><span class="line">    echo &quot;#                                             #&quot;</span><br><span class="line">    echo &quot;###############################################&quot;</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">显示欢迎界面</span></span><br><span class="line">show_welcome</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否存在 CloudflareST 文件，如果存在则跳过安装依赖</span></span><br><span class="line">if [ ! -f &quot;./CloudflareST&quot; ]; then</span><br><span class="line">    # 自动安装依赖</span><br><span class="line">    ARCH=$(uname -m)</span><br><span class="line">    case $ARCH in</span><br><span class="line">        x86_64)</span><br><span class="line">            echo &quot;正在下载适用于amd64架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_amd64.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        i386)</span><br><span class="line">            echo &quot;正在下载适用于386架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_386.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        aarch64)</span><br><span class="line">            echo &quot;正在下载适用于arm64架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_arm64.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            echo &quot;不支持此架构的自动安装依赖，请访问 https://github.com/XIU2/CloudflareSpeedTest/releases 下载所需的文件。&quot;</span><br><span class="line">            exit 1</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line"></span><br><span class="line">    # 解压下载的文件</span><br><span class="line">    tar -xzvf CloudflareST_linux_*.tar.gz</span><br><span class="line">    rm CloudflareST_linux_*.tar.gz ip.txt ipv6.txt cfst_hosts.sh 使用+错误+反馈说明.txt</span><br><span class="line">    chmod +x CloudflareST</span><br><span class="line">else</span><br><span class="line">    echo &quot;CloudflareST 文件已存在，跳过依赖安装。&quot;</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否已下载过 Cloudflare IP 列表</span></span><br><span class="line">if [ ! -f &quot;ip.txt&quot; ]; then</span><br><span class="line">    echo &quot;下载 Cloudflare IP 列表...&quot;</span><br><span class="line">    curl -s https://www.cloudflare.com/ips-v4 -o ip.txt</span><br><span class="line">else</span><br><span class="line">    echo &quot;Cloudflare IP 列表已存在，跳过下载。&quot;</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤1：运行CloudflareST，获取最快的5个IP</span></span><br><span class="line">echo &quot;运行CloudflareST以找到最佳IP...&quot;</span><br><span class="line">./CloudflareST -f ip.txt -tl 200 -dn 15</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取前5个有效的IP</span></span><br><span class="line">TOP_5_IPS=$(head -n 20 result.csv | awk -F, &#x27;&#123;print $1&#125;&#x27; | grep -E &#x27;^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$&#x27; | head -n 5)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否找到了至少1个有效IP</span></span><br><span class="line">if [ -z &quot;$TOP_5_IPS&quot; ]; then</span><br><span class="line">    echo &quot;在CloudflareST结果中没有找到有效的IP。退出程序...&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤2：获取并删除所有A记录</span></span><br><span class="line">echo &quot;获取并删除现有的A记录...&quot;</span><br><span class="line">RECORDS=$(curl -s -X GET &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records?type=A&amp;name=$&#123;RECORD_NAME&#125;&quot; \</span><br><span class="line">     -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">     -H &quot;Content-Type: application/json&quot; | jq -r &#x27;.result[].id&#x27;)</span><br><span class="line"></span><br><span class="line">for RECORD_ID in $RECORDS; do</span><br><span class="line">    DELETE_RESPONSE=$(curl -s -X DELETE &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records/$&#123;RECORD_ID&#125;&quot; \</span><br><span class="line">         -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">         -H &quot;Content-Type: application/json&quot;)</span><br><span class="line">    if echo &quot;$DELETE_RESPONSE&quot; | grep -q &#x27;&quot;success&quot;:true&#x27;; then</span><br><span class="line">        echo &quot;已删除ID为 $&#123;RECORD_ID&#125; 的A记录&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;删除ID为 $&#123;RECORD_ID&#125; 的A记录失败&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤3：将结果中的5个IP解析到Cloudflare</span></span><br><span class="line">echo &quot;将前5个IP添加为A记录到Cloudflare...&quot;</span><br><span class="line"></span><br><span class="line">for IP in $TOP_5_IPS; do</span><br><span class="line">    ADD_RESPONSE=$(curl -s -X POST &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records&quot; \</span><br><span class="line">         -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">         -H &quot;Content-Type: application/json&quot; \</span><br><span class="line">         --data &quot;&#123;\&quot;type\&quot;:\&quot;A\&quot;,\&quot;name\&quot;:\&quot;$&#123;RECORD_NAME&#125;\&quot;,\&quot;content\&quot;:\&quot;$&#123;IP&#125;\&quot;,\&quot;ttl\&quot;:$&#123;TTL&#125;,\&quot;proxied\&quot;:$&#123;PROXIED&#125;&#125;&quot;)</span><br><span class="line">    if echo &quot;$ADD_RESPONSE&quot; | grep -q &#x27;&quot;success&quot;:true&#x27;; then</span><br><span class="line">        echo &quot;成功添加IP: $&#123;IP&#125; 的A记录&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;添加IP: $&#123;IP&#125; 的A记录失败&quot;</span><br><span class="line">        echo &quot;响应: $ADD_RESPONSE&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo &quot;所有操作已完成。&quot;</span><br></pre></td></tr></table></figure>
-
-<p>保存之后, 输入<code>bash cfip.sh</code>, 之后就可以愉快的使用了(不要开代理, 不要使用国外服务器执行)</p>
-<p>如果你有国内的服务器之类的, 可以在服务器运行脚本并使用<code>Corntab</code>定时运行脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">30 3 * * * /root/your-path/cfip.sh</span><br></pre></td></tr></table></figure>
-
-<p>每天早晨3点30运行脚本(记得把路径修改为自己的)</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过CloudfalreST项目生成优选IP, 接着使用Cloudflare的API修改DNS解析</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>CloudflareST</tag>
-        <tag>Cloudflare优选ip</tag>
-        <tag>shell脚本</tag>
       </tags>
   </entry>
   <entry>
@@ -345,6 +305,53 @@
         <tag>Argo Token</tag>
         <tag>域名配置</tag>
         <tag>HTTP服务</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用fofa寻找免费节点</title>
+    <url>/2025/03/15/fofaclash/</url>
+    <content><![CDATA[<blockquote>
+<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
+</blockquote>
+<blockquote>
+<p>声明: 本文章发布仅供技术交流</p>
+</blockquote>
+<ul>
+<li>fofa搜索</li>
+</ul>
+<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
+<p>接着搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
+<ul>
+<li>打开网页Clash</li>
+</ul>
+<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
+<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
+<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
+<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
+<p>将<code>允许来自局域网的连接</code>选项打开</p>
+<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
+<ul>
+<li>打开代理软件</li>
+</ul>
+<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
+<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>FOFA搜索</tag>
+        <tag>免费Clash节点</tag>
+        <tag>代理教程</tag>
+        <tag>技术交流</tag>
+        <tag>代理软件</tag>
       </tags>
   </entry>
   <entry>
@@ -417,53 +424,6 @@
         <tag>GitHub Pages</tag>
         <tag>免费博客</tag>
         <tag>Node.js安装</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用fofa寻找免费节点</title>
-    <url>/2025/03/15/fofaclash/</url>
-    <content><![CDATA[<blockquote>
-<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
-</blockquote>
-<blockquote>
-<p>声明: 本文章发布仅供技术交流</p>
-</blockquote>
-<ul>
-<li>fofa搜索</li>
-</ul>
-<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
-<p>接着搜索</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
-
-<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
-<ul>
-<li>打开网页Clash</li>
-</ul>
-<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
-<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
-<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
-<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
-<p>将<code>允许来自局域网的连接</code>选项打开</p>
-<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
-<ul>
-<li>打开代理软件</li>
-</ul>
-<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
-<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>FOFA搜索</tag>
-        <tag>免费Clash节点</tag>
-        <tag>代理教程</tag>
-        <tag>技术交流</tag>
-        <tag>代理软件</tag>
       </tags>
   </entry>
   <entry>
@@ -613,6 +573,113 @@
       </tags>
   </entry>
   <entry>
+    <title>SSL申请</title>
+    <url>/2024/05/02/ssl/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
+</blockquote>
+<ol>
+<li>acme.sh</li>
+</ol>
+<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
+<p>输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
+<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
+<p>之后在你的虚拟主机平台配置ssl</p>
+<p><del>2. cert.kinh.cc</del>  网站关闭</p>
+<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
+<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
+<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
+<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
+<ol start="3">
+<li>在主机平台申请</li>
+</ol>
+<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
+<ul>
+<li>总结</li>
+</ul>
+<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)</p>
+]]></content>
+      <categories>
+        <category>水教程</category>
+      </categories>
+      <tags>
+        <tag>域名解析</tag>
+        <tag>免费SSL</tag>
+        <tag>acme.sh</tag>
+        <tag>LetsEncrypt</tag>
+        <tag>证书申请</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随机图片api</title>
+    <url>/2024/07/12/loliapi/</url>
+    <content><![CDATA[<blockquote>
+<p>一个随机图片API</p>
+</blockquote>
+<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
+<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
+<blockquote>
+<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
+</blockquote>
+<blockquote>
+<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>随机图片API</tag>
+        <tag>二次元图片</tag>
+        <tag>免费API</tag>
+        <tag>LoliAPI</tag>
+        <tag>动漫壁纸</tag>
+        <tag>双端适配</tag>
+        <tag>随机背景</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通过脚本一键生成CF优选域名</title>
+    <url>/2025/04/30/cfyxip/</url>
+    <content><![CDATA[<blockquote>
+<p>由于一时半会还没法更新, 所以<del>水一篇</del>, 本文教大家如何使用脚本一键生成自己的优选域名</p>
+</blockquote>
+<h2 id="准备部分"><a href="#准备部分" class="headerlink" title="准备部分"></a>准备部分</h2><p>一个Linux命令行, 一个Cloudflare账户, 一个解析在Cloudflare上的域名</p>
+<h2 id="创建Cloudflare-API-Token"><a href="#创建Cloudflare-API-Token" class="headerlink" title="创建Cloudflare API Token"></a>创建Cloudflare API Token</h2><blockquote>
+<p>本段内容由ChatGPT生成</p>
+</blockquote>
+<p>访问 Cloudflare官网: <a href="https://www.cloudflare.com/">https://www.cloudflare.com</a> 并登录您的账户。</p>
+<p>点击右上角的账户头像，选择My Profile（我的个人资料）。</p>
+<p>在左侧菜单中选择API Tokens（API 令牌）。</p>
+<p>点击Create Token（创建令牌）。</p>
+<p>在Custom Token（自定义令牌）部分，选择Get Started（开始）。</p>
+<p>Permissions（权限）：选择Zone:DNS:Edit。</p>
+<p>Zone Resources（区域资源）：选择All Zones（所有区域）或指定的域名。</p>
+<p>点击Create Token（创建令牌）。</p>
+<p>复制生成的API Token并妥善保存</p>
+<h2 id="使用脚本"><a href="#使用脚本" class="headerlink" title="使用脚本"></a>使用脚本</h2><p>创建一个目录, 或在主目录中使用脚本</p>
+<p>创建一个<code>cfip.sh</code></p>
+<p>编辑脚本内容</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置部分</span></span><br><span class="line">ZONE_ID=&quot;&quot;          # 替换为你的ZoneID, 在域名详情界面获取</span><br><span class="line">API_TOKEN=&quot;&quot;      # 替换为你的API Token</span><br><span class="line">RECORD_NAME=&quot;&quot;    # 替换为你想更新的子域名</span><br><span class="line">TTL=60                         # DNS TTL (以秒为单位)</span><br><span class="line">PROXIED=false</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">欢迎界面</span></span><br><span class="line">function show_welcome() &#123;</span><br><span class="line">    echo &quot;###############################################&quot;</span><br><span class="line">    echo &quot;#                                             #&quot;</span><br><span class="line">    echo &quot;#       欢迎使用Cloudflare官方IP优选工具      #&quot;</span><br><span class="line">    echo &quot;#             Blog: blog.33375.xyz            #&quot;</span><br><span class="line">    echo &quot;#         Telegram: https://t.me/liutsx       #&quot;</span><br><span class="line">    echo &quot;#                                             #&quot;</span><br><span class="line">    echo &quot;###############################################&quot;</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">显示欢迎界面</span></span><br><span class="line">show_welcome</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否存在 CloudflareST 文件，如果存在则跳过安装依赖</span></span><br><span class="line">if [ ! -f &quot;./CloudflareST&quot; ]; then</span><br><span class="line">    # 自动安装依赖</span><br><span class="line">    ARCH=$(uname -m)</span><br><span class="line">    case $ARCH in</span><br><span class="line">        x86_64)</span><br><span class="line">            echo &quot;正在下载适用于amd64架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_amd64.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        i386)</span><br><span class="line">            echo &quot;正在下载适用于386架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_386.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        aarch64)</span><br><span class="line">            echo &quot;正在下载适用于arm64架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_arm64.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            echo &quot;不支持此架构的自动安装依赖，请访问 https://github.com/XIU2/CloudflareSpeedTest/releases 下载所需的文件。&quot;</span><br><span class="line">            exit 1</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line"></span><br><span class="line">    # 解压下载的文件</span><br><span class="line">    tar -xzvf CloudflareST_linux_*.tar.gz</span><br><span class="line">    rm CloudflareST_linux_*.tar.gz ip.txt ipv6.txt cfst_hosts.sh 使用+错误+反馈说明.txt</span><br><span class="line">    chmod +x CloudflareST</span><br><span class="line">else</span><br><span class="line">    echo &quot;CloudflareST 文件已存在，跳过依赖安装。&quot;</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否已下载过 Cloudflare IP 列表</span></span><br><span class="line">if [ ! -f &quot;ip.txt&quot; ]; then</span><br><span class="line">    echo &quot;下载 Cloudflare IP 列表...&quot;</span><br><span class="line">    curl -s https://www.cloudflare.com/ips-v4 -o ip.txt</span><br><span class="line">else</span><br><span class="line">    echo &quot;Cloudflare IP 列表已存在，跳过下载。&quot;</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤1：运行CloudflareST，获取最快的5个IP</span></span><br><span class="line">echo &quot;运行CloudflareST以找到最佳IP...&quot;</span><br><span class="line">./CloudflareST -f ip.txt -tl 200 -dn 15</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取前5个有效的IP</span></span><br><span class="line">TOP_5_IPS=$(head -n 20 result.csv | awk -F, &#x27;&#123;print $1&#125;&#x27; | grep -E &#x27;^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$&#x27; | head -n 5)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否找到了至少1个有效IP</span></span><br><span class="line">if [ -z &quot;$TOP_5_IPS&quot; ]; then</span><br><span class="line">    echo &quot;在CloudflareST结果中没有找到有效的IP。退出程序...&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤2：获取并删除所有A记录</span></span><br><span class="line">echo &quot;获取并删除现有的A记录...&quot;</span><br><span class="line">RECORDS=$(curl -s -X GET &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records?type=A&amp;name=$&#123;RECORD_NAME&#125;&quot; \</span><br><span class="line">     -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">     -H &quot;Content-Type: application/json&quot; | jq -r &#x27;.result[].id&#x27;)</span><br><span class="line"></span><br><span class="line">for RECORD_ID in $RECORDS; do</span><br><span class="line">    DELETE_RESPONSE=$(curl -s -X DELETE &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records/$&#123;RECORD_ID&#125;&quot; \</span><br><span class="line">         -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">         -H &quot;Content-Type: application/json&quot;)</span><br><span class="line">    if echo &quot;$DELETE_RESPONSE&quot; | grep -q &#x27;&quot;success&quot;:true&#x27;; then</span><br><span class="line">        echo &quot;已删除ID为 $&#123;RECORD_ID&#125; 的A记录&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;删除ID为 $&#123;RECORD_ID&#125; 的A记录失败&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤3：将结果中的5个IP解析到Cloudflare</span></span><br><span class="line">echo &quot;将前5个IP添加为A记录到Cloudflare...&quot;</span><br><span class="line"></span><br><span class="line">for IP in $TOP_5_IPS; do</span><br><span class="line">    ADD_RESPONSE=$(curl -s -X POST &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records&quot; \</span><br><span class="line">         -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">         -H &quot;Content-Type: application/json&quot; \</span><br><span class="line">         --data &quot;&#123;\&quot;type\&quot;:\&quot;A\&quot;,\&quot;name\&quot;:\&quot;$&#123;RECORD_NAME&#125;\&quot;,\&quot;content\&quot;:\&quot;$&#123;IP&#125;\&quot;,\&quot;ttl\&quot;:$&#123;TTL&#125;,\&quot;proxied\&quot;:$&#123;PROXIED&#125;&#125;&quot;)</span><br><span class="line">    if echo &quot;$ADD_RESPONSE&quot; | grep -q &#x27;&quot;success&quot;:true&#x27;; then</span><br><span class="line">        echo &quot;成功添加IP: $&#123;IP&#125; 的A记录&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;添加IP: $&#123;IP&#125; 的A记录失败&quot;</span><br><span class="line">        echo &quot;响应: $ADD_RESPONSE&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo &quot;所有操作已完成。&quot;</span><br></pre></td></tr></table></figure>
+
+<p>保存之后, 输入<code>bash cfip.sh</code>, 之后就可以愉快的使用了(不要开代理, 不要使用国外服务器执行)</p>
+<p>如果你有国内的服务器之类的, 可以在服务器运行脚本并使用<code>Corntab</code>定时运行脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">30 3 * * * /root/your-path/cfip.sh</span><br></pre></td></tr></table></figure>
+
+<p>每天早晨3点30运行脚本(记得把路径修改为自己的)</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过CloudfalreST项目生成优选IP, 接着使用Cloudflare的API修改DNS解析</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>CloudflareST</tag>
+        <tag>Cloudflare优选ip</tag>
+        <tag>shell脚本</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TCL折腾过程</title>
     <url>/2024/09/15/tcladb/</url>
     <content><![CDATA[<blockquote>
@@ -678,110 +745,6 @@
         <tag>TCL限制</tag>
         <tag>ADB命令</tag>
         <tag>包名列表</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSL申请</title>
-    <url>/2024/05/02/ssl/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
-</blockquote>
-<ol>
-<li>acme.sh</li>
-</ol>
-<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
-<p>输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
-<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
-<p>之后在你的虚拟主机平台配置ssl</p>
-<p><del>2. cert.kinh.cc</del>  网站关闭</p>
-<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
-<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
-<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
-<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
-<ol start="3">
-<li>在主机平台申请</li>
-</ol>
-<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
-<ul>
-<li>总结</li>
-</ul>
-<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)</p>
-]]></content>
-      <categories>
-        <category>水教程</category>
-      </categories>
-      <tags>
-        <tag>域名解析</tag>
-        <tag>免费SSL</tag>
-        <tag>acme.sh</tag>
-        <tag>LetsEncrypt</tag>
-        <tag>证书申请</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建Typecho博客</title>
-    <url>/2024/04/21/typechoblog/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
-</blockquote>
-<ul>
-<li>找博客主机</li>
-</ul>
-<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
-<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
-<ul>
-<li>域名</li>
-</ul>
-<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
-<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
-<blockquote>
-<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
-</blockquote>
-<ul>
-<li>搭建博客</li>
-</ul>
-<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
-<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
-<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>选择域名</th>
-<th>记录类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>blog</td>
-<td>example.com</td>
-<td>A</td>
-<td>1.2.3.4</td>
-</tr>
-</tbody></table>
-<p>完整域名就是 blog.example.com</p>
-<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
-<ul>
-<li>美化</li>
-</ul>
-<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
-<ul>
-<li>结尾</li>
-</ul>
-<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>免费域名</tag>
-        <tag>博客搭建</tag>
-        <tag>Typecho博客</tag>
-        <tag>免费主机</tag>
-        <tag>Joe主题</tag>
-        <tag>动态博客</tag>
-        <tag>域名绑定</tag>
       </tags>
   </entry>
   <entry>
@@ -861,242 +824,6 @@
         <tag>网络工具</tag>
         <tag>IP纯净</tag>
         <tag>MJJ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CFblog添加Waline</title>
-    <url>/2024/07/14/waline/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教大家创建 CFblog, 但是没有评论功能, 这次教大家如何建使用Waline 开启评论功能</p>
-</blockquote>
-<ul>
-<li>注册 leancloud</li>
-</ul>
-<p>打开 <a href="https://console.leancloud.app/register">注册链接</a> 进行注册, 然后打开邮箱进行邮箱验证<br><img src="https://r2.lts.dpdns.org/img/waline/1.webp" alt="1"></p>
-<p>验证完成之后进行登陆, 点击创建应用,<br><img src="https://r2.lts.dpdns.org/img/waline/2.webp" alt="2"></p>
-<p>点击设置, 找到应用凭证, 把 AppID, AppKey 和 MasterKey 复制下来<br><img src="https://r2.lts.dpdns.org/img/waline/3.webp" alt="3"></p>
-<ul>
-<li>部署 Waline</li>
-</ul>
-<p>点击按钮进行搭建</p>
-<p><a href="https://vercel.com/import/project?template=https://github.com/walinejs/waline/tree/main/example"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a></p>
-<p>用 Github 登陆, 可能需要验证手机号</p>
-<p>输入名字后进行部署,等待几分钟,安装完毕后是这样<br><img src="https://r2.lts.dpdns.org/img/waline/4.webp" alt="4"></p>
-<ul>
-<li>设置变量</li>
-</ul>
-<p>到管理面板, 点击 Settings-&gt;Environment Variables</p>
-<p><img src="https://r2.lts.dpdns.org/img/waline/5.webp" alt="5"></p>
-<table>
-<thead>
-<tr>
-<th>变量名</th>
-<th>变量值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>LEAN_ID</td>
-<td>你的 AppID</td>
-</tr>
-<tr>
-<td>LEAN_KEY</td>
-<td>你的 AppKey</td>
-</tr>
-<tr>
-<td>LEAN_MASTER_KEY</td>
-<td>你的 MasterKey</td>
-</tr>
-</tbody></table>
-<p><img src="https://r2.lts.dpdns.org/img/waline/6.webp" alt="6"></p>
-<p>点击 Save</p>
-<p>点击 Deployment-&gt;…-&gt;Redeploy</p>
-<p><img src="https://r2.lts.dpdns.org/img/waline/7.webp" alt="7"></p>
-<ul>
-<li>绑定域名</li>
-</ul>
-<p>Settings-&gt;Domains, 将以 <code>vercel.app</code> 为结尾的域名复制下来</p>
-<p>登陆 Cloudflare, 创建一个 workers, 把内容删除并粘贴下面的代码</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;xxx.vercel.app&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>添加 workers 路由,设置-&gt;触发器-&gt;添加路由</p>
-<p><img src="https://r2.lts.dpdns.org/img/waline/8.webp" alt="8"></p>
-<p>把路由添加为这样的形式 <code>xxx.example.com/*</code> 选择的区域必须是 example.com OK之后点击添加路由</p>
-<p>添加 DNS 记录,为 CNAME 名称是添加路由时的 xxx.example.com 目标是 cloudflare.182682.xyz 代理状态关闭, 保存</p>
-<p>会到 vercel 把自己设置的域名粘贴上去-&gt;add, 等一会就行了</p>
-<p>接着浏览器访问: https:&#x2F;&#x2F;[你的域名]&#x2F;ui&#x2F;register, 注册用户(第一个注册的用户是管理员)</p>
-<ul>
-<li>编辑 workers</li>
-</ul>
-<p>回到 Cloudflare 之前创建的 CFblog workers -&gt;编辑代码<br><img src="https://r2.lts.dpdns.org/img/waline/9.webp" alt="9"></p>
-<blockquote>
-<p>在右侧小部件区域,添加一个小部件 div , 名为&lt;最近评论&gt;</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;widgetOther&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;linkcat-0&quot;</span> <span class="attr">class</span>=<span class="string">&quot;widget widget_links&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">&quot;widget-title&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>最近评论<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline-recent&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在评论区加一个 div ,来显示评论</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;commentCode&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline&quot;</span>  <span class="attr">name</span>=<span class="string">&quot;waline&quot;</span> <span class="attr">class</span>=<span class="string">&quot;comments-area&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>头部加上样式,和Waline的js</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforHead&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">img</span> &#123;<span class="attribute">max-width</span>: <span class="number">100%</span>;&#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">li</span> &#123;<span class="attribute">border</span>: thick double <span class="number">#32a1ce</span>;&#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;//gcore.jsdelivr.net/npm/@waline/client/dist/Waline.min.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>底部加上Waline初始化代码,以及加载最近评论的代码</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforBody&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是初始化Waline的,visitor: true记得开启</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">new</span> <span class="title class_">Waline</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>:<span class="string">&#x27;#waline&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appId</span>: <span class="string">&#x27;eWrOzSzYP1Fm8QD96P0vKli-MdYXbMMI&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appKey</span>: <span class="string">&#x27;jMF98EwbmKvdGnDLamPwAk1&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">avatar</span>:<span class="string">&#x27;monsterid&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">recordIP</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">requiredFields</span>:[<span class="string">&#x27;nick&#x27;</span>],</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">visitor</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">//path:&quot;/&quot;,</span></span></span><br><span class="line"><span class="language-javascript">                <span class="attr">placeholder</span>:<span class="string">&quot;整两句...&quot;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是加载最近评论的</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="title class_">Waline</span>.<span class="property">Widget</span>.<span class="title class_">RecentComments</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>: <span class="string">&#x27;#waline-recent&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">count</span>: <span class="number">10</span></span></span><br><span class="line"><span class="language-javascript">              &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-<p>把代码中的AppID,AppKey,serverURL(serverURL两个都要改)修改成你自己的, 并粘贴到workers代码里, 再点击部署就可以了</p>
-<ul>
-<li>最后</li>
-</ul>
-<p>Waline 还可以在 Hexo 上使用, 你们自己研究一下, 就不出教程了</p>
-]]></content>
-      <categories>
-        <category>图文教程</category>
-      </categories>
-      <tags>
-        <tag>Cloudflare Workers</tag>
-        <tag>CFblog</tag>
-        <tag>域名绑定</tag>
-        <tag>Waline部署</tag>
-        <tag>LeanCloud注册</tag>
-        <tag>第三方评论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Claw Run创建Webssh</title>
-    <url>/2025/06/15/webssh/</url>
-    <content><![CDATA[<blockquote>
-<p>利用Claw Run免费容器创建Webssh, 从而使用浏览器管理自己的VPS, 并且该Webssh支持文件管理<br>项目地址: <a href="https://github.com/hochenggang/managi-backend">hochenggang&#x2F;managi-backend</a></p>
-</blockquote>
-<h2 id="创建Claw-Run账号"><a href="#创建Claw-Run账号" class="headerlink" title="创建Claw Run账号"></a>创建Claw Run账号</h2><p>访问 <a href="https://run.claw.cloud/">https://run.claw.cloud</a> 注册</p>
-<blockquote>
-<p>使用180天以上的Github账号进行注册，每月赠送5刀余额</p>
-</blockquote>
-<h2 id="部署过程"><a href="#部署过程" class="headerlink" title="部署过程"></a>部署过程</h2><p>使用Github登陆, 进入首页选择<code>App Launchpad</code>，点击<code>Create App</code>按钮开始创建应用。</p>
-<p><img src="https://r2.lts.dpdns.org/img/webssh/1.webp" alt="1"></p>
-<p><img src="https://r2.lts.dpdns.org/img/webssh/2.webp" alt="2"></p>
-<p>名称随便填写, Image选择<code>Public</code>, Image Name填写<code>hochenggang/managi:0.5.0</code></p>
-<p>容器配置选择<code>Fixed</code> <code>0.1CPU</code> <code>128M</code>, 这样每个月费用仅有0.6刀, 剩余余额还可以部署其他项目</p>
-<p>网络端口修改为18001, <code>Public Access</code>打开, 可以点击<code>Custom Domain</code>来自定义域名, 推荐使用 <a href="https://zoneabc.net/register?invite=f316817b5eb8406dba388869b0767963">Zoneabc</a> 的免费域名（有AFF, 介意勿点）</p>
-<p>注册一个账号, 然后重新返回主页, 输入自己想要注册的域名</p>
-<table>
-<thead>
-<tr>
-<th>域名位数</th>
-<th>价格</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>4位域名</td>
-<td>30积分</td>
-</tr>
-<tr>
-<td>5位域名</td>
-<td>20积分</td>
-</tr>
-<tr>
-<td>6位域名</td>
-<td>10积分</td>
-</tr>
-<tr>
-<td>7位及以上域名</td>
-<td>免费</td>
-</tr>
-</tbody></table>
-<p>接着进入管理域名的页面, 添加DNS记录, 类型选择CNAME, 内容填入Claw Run提供的免费域名, TTL为60秒, 点击添加</p>
-<p><img src="https://r2.lts.dpdns.org/img/webssh/3.webp" alt="3"></p>
-<p>如果对域名没有要求的也可以直接使用Claw Run提供的免费域名</p>
-<p><img src="https://r2.lts.dpdns.org/img/webssh/4.webp" alt="4"></p>
-<p>确认没有问题后点击Deploy Application部署</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在设置完域名如果访问失败, 就耐心等待一会, 因为Claw Run本身相应比较慢, 并且不支持IPV6（我到时候研究一下能否使用Warp支持IPV6）</p>
-<p>示例网站: <a href="https://lts-webssh.zabc.net/">https://lts-webssh.zabc.net</a></p>
-<p>6.24更新: Claw是容器没法开TUN, 所以没法套warp, 可以使用koyeb搭建</p>
-]]></content>
-      <categories>
-        <category>图文教程</category>
-      </categories>
-      <tags>
-        <tag>免费域名</tag>
-        <tag>Claw Run</tag>
-        <tag>Webssh</tag>
-        <tag>Zoneabc</tag>
-        <tag>免费容器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用CFworkers路由加速网站</title>
-    <url>/2024/07/23/workers-nginx/</url>
-    <content><![CDATA[<blockquote>
-<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
-</blockquote>
-<ul>
-<li>创建 Workers</li>
-</ul>
-<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">if</span> (url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>)) &#123;</span><br><span class="line">      url.<span class="property">hostname</span> = <span class="string">&#x27;xxx.vercel.app&#x27;</span>  <span class="comment">//修改为自己的网站</span></span><br><span class="line">      <span class="keyword">let</span> new_request = <span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> env.<span class="property">ASSETS</span>.<span class="title function_">fetch</span>(request);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>粘贴上去后是11行, 如果有多余几行就把这几行删除</p>
-<p>其实可以将这个看成 Nginx 反代</p>
-<ul>
-<li>配置 Workers 路由</li>
-</ul>
-<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
-<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
-<p>点击添加就行了</p>
-<ul>
-<li>配置 DNS</li>
-</ul>
-<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
-<ul>
-<li>2024.7.25更新</li>
-</ul>
-<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
-<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
-<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
-<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>CFworkers路由</tag>
-        <tag>Cloudflare代理</tag>
-        <tag>Workers配置</tag>
-        <tag>CF优选域名</tag>
-        <tag>Nginx反代</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>随机图片api</title>
-    <url>/2024/07/12/loliapi/</url>
-    <content><![CDATA[<blockquote>
-<p>一个随机图片API</p>
-</blockquote>
-<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
-<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
-<blockquote>
-<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
-</blockquote>
-<blockquote>
-<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>随机图片API</tag>
-        <tag>二次元图片</tag>
-        <tag>免费API</tag>
-        <tag>LoliAPI</tag>
-        <tag>动漫壁纸</tag>
-        <tag>双端适配</tag>
-        <tag>随机背景</tag>
       </tags>
   </entry>
   <entry>
@@ -1215,6 +942,279 @@
         <tag>免费图床</tag>
         <tag>Telegram机器人</tag>
         <tag>国内优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CFblog添加Waline</title>
+    <url>/2024/07/14/waline/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教大家创建 CFblog, 但是没有评论功能, 这次教大家如何建使用Waline 开启评论功能</p>
+</blockquote>
+<ul>
+<li>注册 leancloud</li>
+</ul>
+<p>打开 <a href="https://console.leancloud.app/register">注册链接</a> 进行注册, 然后打开邮箱进行邮箱验证<br><img src="https://r2.lts.dpdns.org/img/waline/1.webp" alt="1"></p>
+<p>验证完成之后进行登陆, 点击创建应用,<br><img src="https://r2.lts.dpdns.org/img/waline/2.webp" alt="2"></p>
+<p>点击设置, 找到应用凭证, 把 AppID, AppKey 和 MasterKey 复制下来<br><img src="https://r2.lts.dpdns.org/img/waline/3.webp" alt="3"></p>
+<ul>
+<li>部署 Waline</li>
+</ul>
+<p>点击按钮进行搭建</p>
+<p><a href="https://vercel.com/import/project?template=https://github.com/walinejs/waline/tree/main/example"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a></p>
+<p>用 Github 登陆, 可能需要验证手机号</p>
+<p>输入名字后进行部署,等待几分钟,安装完毕后是这样<br><img src="https://r2.lts.dpdns.org/img/waline/4.webp" alt="4"></p>
+<ul>
+<li>设置变量</li>
+</ul>
+<p>到管理面板, 点击 Settings-&gt;Environment Variables</p>
+<p><img src="https://r2.lts.dpdns.org/img/waline/5.webp" alt="5"></p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>变量值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LEAN_ID</td>
+<td>你的 AppID</td>
+</tr>
+<tr>
+<td>LEAN_KEY</td>
+<td>你的 AppKey</td>
+</tr>
+<tr>
+<td>LEAN_MASTER_KEY</td>
+<td>你的 MasterKey</td>
+</tr>
+</tbody></table>
+<p><img src="https://r2.lts.dpdns.org/img/waline/6.webp" alt="6"></p>
+<p>点击 Save</p>
+<p>点击 Deployment-&gt;…-&gt;Redeploy</p>
+<p><img src="https://r2.lts.dpdns.org/img/waline/7.webp" alt="7"></p>
+<ul>
+<li>绑定域名</li>
+</ul>
+<p>Settings-&gt;Domains, 将以 <code>vercel.app</code> 为结尾的域名复制下来</p>
+<p>登陆 Cloudflare, 创建一个 workers, 把内容删除并粘贴下面的代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;xxx.vercel.app&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加 workers 路由,设置-&gt;触发器-&gt;添加路由</p>
+<p><img src="https://r2.lts.dpdns.org/img/waline/8.webp" alt="8"></p>
+<p>把路由添加为这样的形式 <code>xxx.example.com/*</code> 选择的区域必须是 example.com OK之后点击添加路由</p>
+<p>添加 DNS 记录,为 CNAME 名称是添加路由时的 xxx.example.com 目标是 cloudflare.182682.xyz 代理状态关闭, 保存</p>
+<p>会到 vercel 把自己设置的域名粘贴上去-&gt;add, 等一会就行了</p>
+<p>接着浏览器访问: https:&#x2F;&#x2F;[你的域名]&#x2F;ui&#x2F;register, 注册用户(第一个注册的用户是管理员)</p>
+<ul>
+<li>编辑 workers</li>
+</ul>
+<p>回到 Cloudflare 之前创建的 CFblog workers -&gt;编辑代码<br><img src="https://r2.lts.dpdns.org/img/waline/9.webp" alt="9"></p>
+<blockquote>
+<p>在右侧小部件区域,添加一个小部件 div , 名为&lt;最近评论&gt;</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;widgetOther&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;linkcat-0&quot;</span> <span class="attr">class</span>=<span class="string">&quot;widget widget_links&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">&quot;widget-title&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>最近评论<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline-recent&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在评论区加一个 div ,来显示评论</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;commentCode&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline&quot;</span>  <span class="attr">name</span>=<span class="string">&quot;waline&quot;</span> <span class="attr">class</span>=<span class="string">&quot;comments-area&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>头部加上样式,和Waline的js</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforHead&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">img</span> &#123;<span class="attribute">max-width</span>: <span class="number">100%</span>;&#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">li</span> &#123;<span class="attribute">border</span>: thick double <span class="number">#32a1ce</span>;&#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;//gcore.jsdelivr.net/npm/@waline/client/dist/Waline.min.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>底部加上Waline初始化代码,以及加载最近评论的代码</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforBody&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是初始化Waline的,visitor: true记得开启</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">new</span> <span class="title class_">Waline</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>:<span class="string">&#x27;#waline&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appId</span>: <span class="string">&#x27;eWrOzSzYP1Fm8QD96P0vKli-MdYXbMMI&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appKey</span>: <span class="string">&#x27;jMF98EwbmKvdGnDLamPwAk1&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">avatar</span>:<span class="string">&#x27;monsterid&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">recordIP</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">requiredFields</span>:[<span class="string">&#x27;nick&#x27;</span>],</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">visitor</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">//path:&quot;/&quot;,</span></span></span><br><span class="line"><span class="language-javascript">                <span class="attr">placeholder</span>:<span class="string">&quot;整两句...&quot;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是加载最近评论的</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="title class_">Waline</span>.<span class="property">Widget</span>.<span class="title class_">RecentComments</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>: <span class="string">&#x27;#waline-recent&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">count</span>: <span class="number">10</span></span></span><br><span class="line"><span class="language-javascript">              &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+<p>把代码中的AppID,AppKey,serverURL(serverURL两个都要改)修改成你自己的, 并粘贴到workers代码里, 再点击部署就可以了</p>
+<ul>
+<li>最后</li>
+</ul>
+<p>Waline 还可以在 Hexo 上使用, 你们自己研究一下, 就不出教程了</p>
+]]></content>
+      <categories>
+        <category>图文教程</category>
+      </categories>
+      <tags>
+        <tag>Cloudflare Workers</tag>
+        <tag>CFblog</tag>
+        <tag>Waline部署</tag>
+        <tag>LeanCloud注册</tag>
+        <tag>第三方评论</tag>
+        <tag>域名绑定</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建Typecho博客</title>
+    <url>/2024/04/21/typechoblog/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
+</blockquote>
+<ul>
+<li>找博客主机</li>
+</ul>
+<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
+<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
+<ul>
+<li>域名</li>
+</ul>
+<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
+<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
+<blockquote>
+<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
+</blockquote>
+<ul>
+<li>搭建博客</li>
+</ul>
+<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
+<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
+<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>选择域名</th>
+<th>记录类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>blog</td>
+<td>example.com</td>
+<td>A</td>
+<td>1.2.3.4</td>
+</tr>
+</tbody></table>
+<p>完整域名就是 blog.example.com</p>
+<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
+<ul>
+<li>美化</li>
+</ul>
+<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
+<ul>
+<li>结尾</li>
+</ul>
+<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>免费域名</tag>
+        <tag>博客搭建</tag>
+        <tag>域名绑定</tag>
+        <tag>Typecho博客</tag>
+        <tag>免费主机</tag>
+        <tag>Joe主题</tag>
+        <tag>动态博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Claw Run创建Webssh</title>
+    <url>/2025/06/15/webssh/</url>
+    <content><![CDATA[<blockquote>
+<p>利用Claw Run免费容器创建Webssh, 从而使用浏览器管理自己的VPS, 并且该Webssh支持文件管理<br>项目地址: <a href="https://github.com/hochenggang/managi-backend">hochenggang&#x2F;managi-backend</a></p>
+</blockquote>
+<h2 id="创建Claw-Run账号"><a href="#创建Claw-Run账号" class="headerlink" title="创建Claw Run账号"></a>创建Claw Run账号</h2><p>访问 <a href="https://run.claw.cloud/">https://run.claw.cloud</a> 注册</p>
+<blockquote>
+<p>使用180天以上的Github账号进行注册，每月赠送5刀余额</p>
+</blockquote>
+<h2 id="部署过程"><a href="#部署过程" class="headerlink" title="部署过程"></a>部署过程</h2><p>使用Github登陆, 进入首页选择<code>App Launchpad</code>，点击<code>Create App</code>按钮开始创建应用。</p>
+<p><img src="https://r2.lts.dpdns.org/img/webssh/1.webp" alt="1"></p>
+<p><img src="https://r2.lts.dpdns.org/img/webssh/2.webp" alt="2"></p>
+<p>名称随便填写, Image选择<code>Public</code>, Image Name填写<code>hochenggang/managi:0.5.0</code></p>
+<p>容器配置选择<code>Fixed</code> <code>0.1CPU</code> <code>128M</code>, 这样每个月费用仅有0.6刀, 剩余余额还可以部署其他项目</p>
+<p>网络端口修改为18001, <code>Public Access</code>打开, 可以点击<code>Custom Domain</code>来自定义域名, 推荐使用 <a href="https://zoneabc.net/register?invite=f316817b5eb8406dba388869b0767963">Zoneabc</a> 的免费域名（有AFF, 介意勿点）</p>
+<p>注册一个账号, 然后重新返回主页, 输入自己想要注册的域名</p>
+<table>
+<thead>
+<tr>
+<th>域名位数</th>
+<th>价格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4位域名</td>
+<td>30积分</td>
+</tr>
+<tr>
+<td>5位域名</td>
+<td>20积分</td>
+</tr>
+<tr>
+<td>6位域名</td>
+<td>10积分</td>
+</tr>
+<tr>
+<td>7位及以上域名</td>
+<td>免费</td>
+</tr>
+</tbody></table>
+<p>接着进入管理域名的页面, 添加DNS记录, 类型选择CNAME, 内容填入Claw Run提供的免费域名, TTL为60秒, 点击添加</p>
+<p><img src="https://r2.lts.dpdns.org/img/webssh/3.webp" alt="3"></p>
+<p>如果对域名没有要求的也可以直接使用Claw Run提供的免费域名</p>
+<p><img src="https://r2.lts.dpdns.org/img/webssh/4.webp" alt="4"></p>
+<p>确认没有问题后点击Deploy Application部署</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在设置完域名如果访问失败, 就耐心等待一会, 因为Claw Run本身相应比较慢, 并且不支持IPV6（我到时候研究一下能否使用Warp支持IPV6）</p>
+<p>示例网站: <a href="https://lts-webssh.zabc.net/">https://lts-webssh.zabc.net</a></p>
+<p>6.24更新: Claw是容器没法开TUN, 所以没法套warp, 可以使用koyeb搭建</p>
+]]></content>
+      <categories>
+        <category>图文教程</category>
+      </categories>
+      <tags>
+        <tag>免费域名</tag>
+        <tag>Claw Run</tag>
+        <tag>Webssh</tag>
+        <tag>Zoneabc</tag>
+        <tag>免费容器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用CFworkers路由加速网站</title>
+    <url>/2024/07/23/workers-nginx/</url>
+    <content><![CDATA[<blockquote>
+<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
+</blockquote>
+<ul>
+<li>创建 Workers</li>
+</ul>
+<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">if</span> (url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>)) &#123;</span><br><span class="line">      url.<span class="property">hostname</span> = <span class="string">&#x27;xxx.vercel.app&#x27;</span>  <span class="comment">//修改为自己的网站</span></span><br><span class="line">      <span class="keyword">let</span> new_request = <span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> env.<span class="property">ASSETS</span>.<span class="title function_">fetch</span>(request);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>粘贴上去后是11行, 如果有多余几行就把这几行删除</p>
+<p>其实可以将这个看成 Nginx 反代</p>
+<ul>
+<li>配置 Workers 路由</li>
+</ul>
+<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
+<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
+<p>点击添加就行了</p>
+<ul>
+<li>配置 DNS</li>
+</ul>
+<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
+<ul>
+<li>2024.7.25更新</li>
+</ul>
+<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
+<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
+<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
+<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>CFworkers路由</tag>
+        <tag>Cloudflare代理</tag>
+        <tag>Workers配置</tag>
+        <tag>CF优选域名</tag>
+        <tag>Nginx反代</tag>
       </tags>
   </entry>
 </search>
