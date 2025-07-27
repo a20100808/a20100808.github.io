@@ -221,6 +221,112 @@
       </tags>
   </entry>
   <entry>
+    <title>通过Cloudflare Tunnel进行内网穿透</title>
+    <url>/2024/09/28/cloudflared/</url>
+    <content><![CDATA[<blockquote>
+<p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
+</blockquote>
+<ul>
+<li>准备</li>
+</ul>
+<p>首先你必须有一个Cloudflare的账号, 且账号上必须有一个域名</p>
+<ul>
+<li>创建隧道</li>
+</ul>
+<p>首先登陆账号, 进入主页</p>
+<p>点击 侧边栏&gt;Zero Trust&gt;Networks&gt;Tunnels, 点击Create a Tunnel, 选择Cloudflared, 点击next, 输入名字, 在这里根据你的操作系统的不同选择不同的安装方式, 并且Debian和Ubuntu的安装方式是同一个方式</p>
+<p>并且如果有其他脚本需要内网穿透(或argo)的话, 需要的是那一段Token</p>
+<p>就是去掉<code>sudo cloudflared service install</code>的那一段ey开头的东西</p>
+<p>注: 这一段Token我替换了其中的几个字符, 是无效的</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> cloudflared service install eyJhIjoiMzQ3OTVmZGJlMjg5MjY5NTk0YmQxMzlhYmIxNjdiMzciLwCJ0IjoiZTFlqjlkNGUkOGE4ZS00ZjUxLTk2MjUtNmVlNjE2qTU0MjU1xiwicyIIllUZzFaVEk1TURVdFpEazNaaTAwTnprd0xUaGlaVFl0TldVeVlURXpOelUyTVdReSJ9</span><br></pre></td></tr></table></figure>
+<p>继续点击next</p>
+<p>输入subdomain并选择domain</p>
+<p>service大部分为, type: <code>http</code>, URL: <code>localhost:端口</code></p>
+<p>再点击save tunnel即可</p>
+<p>等待一会, 如果状态变为 Healthy 就是正常了, 如果等待很久都不变, 就需要检查操作是否正确</p>
+<ul>
+<li>Termux使用</li>
+</ul>
+<p>这里专门把Termux提出来就是因为在官方的安装方法中安卓无法使用, 因为权限不足, root后的安卓设备除外</p>
+<p>首先安装下来后先输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">termux-change-repo</span><br></pre></td></tr></table></figure>
+<p>接着回车, 通过上下光标移动选择<code>Mirror in Chinese Mainland</code>, 再回车, 等待完成后就换源成功了</p>
+<p>接着输入来安装<code>Cloudflared</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install cloudflared -y</span><br></pre></td></tr></table></figure>
+
+<p>然后输入, <code>Argo_Token</code>为之前获取的Token</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
+<p>如果你不希望一直这样运行, 而无法操作可以使用<code>screen</code>命令</p>
+<p>首先来安装screen</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install screen -y</span><br></pre></td></tr></table></figure>
+<p>接着输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">screen cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
+
+<p>然后在英文输入法下键入快捷键<code>Ctrl+a+d</code>就行了</p>
+<ul>
+<li>其他</li>
+</ul>
+<p>如果你的系统很冷门</p>
+<p>只需在搜索引擎搜索<code>Cloudflared-系统名称</code>, 基本上都能搜索到</p>
+<p>将其下载下来后, 如果为压缩包就将其解压 <code>tar -zxvf cloudflared.zip</code></p>
+<p>接着输入<code>chmod +x Cloudflared_NAME</code> 名称自行替换</p>
+<p>然后在使用时需要执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./Cloudflared_NAME service install Argo_Token</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Cloudflare Tunnel</tag>
+        <tag>内网穿透</tag>
+        <tag>Zero Trust</tag>
+        <tag>免费服务</tag>
+        <tag>Termux</tag>
+        <tag>Argo Token</tag>
+        <tag>域名配置</tag>
+        <tag>HTTP服务</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通过脚本一键生成CF优选域名</title>
+    <url>/2025/04/30/cfyxip/</url>
+    <content><![CDATA[<blockquote>
+<p>由于一时半会还没法更新, 所以<del>水一篇</del>, 本文教大家如何使用脚本一键生成自己的优选域名</p>
+</blockquote>
+<h2 id="准备部分"><a href="#准备部分" class="headerlink" title="准备部分"></a>准备部分</h2><p>一个Linux命令行, 一个Cloudflare账户, 一个解析在Cloudflare上的域名</p>
+<h2 id="创建Cloudflare-API-Token"><a href="#创建Cloudflare-API-Token" class="headerlink" title="创建Cloudflare API Token"></a>创建Cloudflare API Token</h2><blockquote>
+<p>本段内容由ChatGPT生成</p>
+</blockquote>
+<p>访问 Cloudflare官网: <a href="https://www.cloudflare.com/">https://www.cloudflare.com</a> 并登录您的账户。</p>
+<p>点击右上角的账户头像，选择My Profile（我的个人资料）。</p>
+<p>在左侧菜单中选择API Tokens（API 令牌）。</p>
+<p>点击Create Token（创建令牌）。</p>
+<p>在Custom Token（自定义令牌）部分，选择Get Started（开始）。</p>
+<p>Permissions（权限）：选择Zone:DNS:Edit。</p>
+<p>Zone Resources（区域资源）：选择All Zones（所有区域）或指定的域名。</p>
+<p>点击Create Token（创建令牌）。</p>
+<p>复制生成的API Token并妥善保存</p>
+<h2 id="使用脚本"><a href="#使用脚本" class="headerlink" title="使用脚本"></a>使用脚本</h2><p>创建一个目录, 或在主目录中使用脚本</p>
+<p>创建一个<code>cfip.sh</code></p>
+<p>编辑脚本内容</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置部分</span></span><br><span class="line">ZONE_ID=&quot;&quot;          # 替换为你的ZoneID, 在域名详情界面获取</span><br><span class="line">API_TOKEN=&quot;&quot;      # 替换为你的API Token</span><br><span class="line">RECORD_NAME=&quot;&quot;    # 替换为你想更新的子域名</span><br><span class="line">TTL=60                         # DNS TTL (以秒为单位)</span><br><span class="line">PROXIED=false</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">欢迎界面</span></span><br><span class="line">function show_welcome() &#123;</span><br><span class="line">    echo &quot;###############################################&quot;</span><br><span class="line">    echo &quot;#                                             #&quot;</span><br><span class="line">    echo &quot;#       欢迎使用Cloudflare官方IP优选工具      #&quot;</span><br><span class="line">    echo &quot;#             Blog: blog.33375.xyz            #&quot;</span><br><span class="line">    echo &quot;#         Telegram: https://t.me/liutsx       #&quot;</span><br><span class="line">    echo &quot;#                                             #&quot;</span><br><span class="line">    echo &quot;###############################################&quot;</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">显示欢迎界面</span></span><br><span class="line">show_welcome</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否存在 CloudflareST 文件，如果存在则跳过安装依赖</span></span><br><span class="line">if [ ! -f &quot;./CloudflareST&quot; ]; then</span><br><span class="line">    # 自动安装依赖</span><br><span class="line">    ARCH=$(uname -m)</span><br><span class="line">    case $ARCH in</span><br><span class="line">        x86_64)</span><br><span class="line">            echo &quot;正在下载适用于amd64架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_amd64.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        i386)</span><br><span class="line">            echo &quot;正在下载适用于386架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_386.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        aarch64)</span><br><span class="line">            echo &quot;正在下载适用于arm64架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_arm64.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            echo &quot;不支持此架构的自动安装依赖，请访问 https://github.com/XIU2/CloudflareSpeedTest/releases 下载所需的文件。&quot;</span><br><span class="line">            exit 1</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line"></span><br><span class="line">    # 解压下载的文件</span><br><span class="line">    tar -xzvf CloudflareST_linux_*.tar.gz</span><br><span class="line">    rm CloudflareST_linux_*.tar.gz ip.txt ipv6.txt cfst_hosts.sh 使用+错误+反馈说明.txt</span><br><span class="line">    chmod +x CloudflareST</span><br><span class="line">else</span><br><span class="line">    echo &quot;CloudflareST 文件已存在，跳过依赖安装。&quot;</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否已下载过 Cloudflare IP 列表</span></span><br><span class="line">if [ ! -f &quot;ip.txt&quot; ]; then</span><br><span class="line">    echo &quot;下载 Cloudflare IP 列表...&quot;</span><br><span class="line">    curl -s https://www.cloudflare.com/ips-v4 -o ip.txt</span><br><span class="line">else</span><br><span class="line">    echo &quot;Cloudflare IP 列表已存在，跳过下载。&quot;</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤1：运行CloudflareST，获取最快的5个IP</span></span><br><span class="line">echo &quot;运行CloudflareST以找到最佳IP...&quot;</span><br><span class="line">./CloudflareST -f ip.txt -tl 200 -dn 15</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取前5个有效的IP</span></span><br><span class="line">TOP_5_IPS=$(head -n 20 result.csv | awk -F, &#x27;&#123;print $1&#125;&#x27; | grep -E &#x27;^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$&#x27; | head -n 5)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否找到了至少1个有效IP</span></span><br><span class="line">if [ -z &quot;$TOP_5_IPS&quot; ]; then</span><br><span class="line">    echo &quot;在CloudflareST结果中没有找到有效的IP。退出程序...&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤2：获取并删除所有A记录</span></span><br><span class="line">echo &quot;获取并删除现有的A记录...&quot;</span><br><span class="line">RECORDS=$(curl -s -X GET &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records?type=A&amp;name=$&#123;RECORD_NAME&#125;&quot; \</span><br><span class="line">     -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">     -H &quot;Content-Type: application/json&quot; | jq -r &#x27;.result[].id&#x27;)</span><br><span class="line"></span><br><span class="line">for RECORD_ID in $RECORDS; do</span><br><span class="line">    DELETE_RESPONSE=$(curl -s -X DELETE &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records/$&#123;RECORD_ID&#125;&quot; \</span><br><span class="line">         -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">         -H &quot;Content-Type: application/json&quot;)</span><br><span class="line">    if echo &quot;$DELETE_RESPONSE&quot; | grep -q &#x27;&quot;success&quot;:true&#x27;; then</span><br><span class="line">        echo &quot;已删除ID为 $&#123;RECORD_ID&#125; 的A记录&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;删除ID为 $&#123;RECORD_ID&#125; 的A记录失败&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤3：将结果中的5个IP解析到Cloudflare</span></span><br><span class="line">echo &quot;将前5个IP添加为A记录到Cloudflare...&quot;</span><br><span class="line"></span><br><span class="line">for IP in $TOP_5_IPS; do</span><br><span class="line">    ADD_RESPONSE=$(curl -s -X POST &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records&quot; \</span><br><span class="line">         -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">         -H &quot;Content-Type: application/json&quot; \</span><br><span class="line">         --data &quot;&#123;\&quot;type\&quot;:\&quot;A\&quot;,\&quot;name\&quot;:\&quot;$&#123;RECORD_NAME&#125;\&quot;,\&quot;content\&quot;:\&quot;$&#123;IP&#125;\&quot;,\&quot;ttl\&quot;:$&#123;TTL&#125;,\&quot;proxied\&quot;:$&#123;PROXIED&#125;&#125;&quot;)</span><br><span class="line">    if echo &quot;$ADD_RESPONSE&quot; | grep -q &#x27;&quot;success&quot;:true&#x27;; then</span><br><span class="line">        echo &quot;成功添加IP: $&#123;IP&#125; 的A记录&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;添加IP: $&#123;IP&#125; 的A记录失败&quot;</span><br><span class="line">        echo &quot;响应: $ADD_RESPONSE&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo &quot;所有操作已完成。&quot;</span><br></pre></td></tr></table></figure>
+
+<p>保存之后, 输入<code>bash cfip.sh</code>, 之后就可以愉快的使用了(不要开代理, 不要使用国外服务器执行)</p>
+<p>如果你有国内的服务器之类的, 可以在服务器运行脚本并使用<code>Corntab</code>定时运行脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">30 3 * * * /root/your-path/cfip.sh</span><br></pre></td></tr></table></figure>
+
+<p>每天早晨3点30运行脚本(记得把路径修改为自己的)</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过CloudfalreST项目生成优选IP, 接着使用Cloudflare的API修改DNS解析</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>CloudflareST</tag>
+        <tag>Cloudflare优选ip</tag>
+        <tag>shell脚本</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>创建CFblog</title>
     <url>/2024/06/06/cfblog/</url>
     <content><![CDATA[<blockquote>
@@ -281,43 +387,170 @@
       </tags>
   </entry>
   <entry>
-    <title>通过脚本一键生成CF优选域名</title>
-    <url>/2025/04/30/cfyxip/</url>
+    <title>利用fofa寻找免费节点</title>
+    <url>/2025/03/15/fofaclash/</url>
     <content><![CDATA[<blockquote>
-<p>由于一时半会还没法更新, 所以<del>水一篇</del>, 本文教大家如何使用脚本一键生成自己的优选域名</p>
+<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
 </blockquote>
-<h2 id="准备部分"><a href="#准备部分" class="headerlink" title="准备部分"></a>准备部分</h2><p>一个Linux命令行, 一个Cloudflare账户, 一个解析在Cloudflare上的域名</p>
-<h2 id="创建Cloudflare-API-Token"><a href="#创建Cloudflare-API-Token" class="headerlink" title="创建Cloudflare API Token"></a>创建Cloudflare API Token</h2><blockquote>
-<p>本段内容由ChatGPT生成</p>
+<blockquote>
+<p>声明: 本文章发布仅供技术交流</p>
 </blockquote>
-<p>访问 Cloudflare官网: <a href="https://www.cloudflare.com/">https://www.cloudflare.com</a> 并登录您的账户。</p>
-<p>点击右上角的账户头像，选择My Profile（我的个人资料）。</p>
-<p>在左侧菜单中选择API Tokens（API 令牌）。</p>
-<p>点击Create Token（创建令牌）。</p>
-<p>在Custom Token（自定义令牌）部分，选择Get Started（开始）。</p>
-<p>Permissions（权限）：选择Zone:DNS:Edit。</p>
-<p>Zone Resources（区域资源）：选择All Zones（所有区域）或指定的域名。</p>
-<p>点击Create Token（创建令牌）。</p>
-<p>复制生成的API Token并妥善保存</p>
-<h2 id="使用脚本"><a href="#使用脚本" class="headerlink" title="使用脚本"></a>使用脚本</h2><p>创建一个目录, 或在主目录中使用脚本</p>
-<p>创建一个<code>cfip.sh</code></p>
-<p>编辑脚本内容</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置部分</span></span><br><span class="line">ZONE_ID=&quot;&quot;          # 替换为你的ZoneID, 在域名详情界面获取</span><br><span class="line">API_TOKEN=&quot;&quot;      # 替换为你的API Token</span><br><span class="line">RECORD_NAME=&quot;&quot;    # 替换为你想更新的子域名</span><br><span class="line">TTL=60                         # DNS TTL (以秒为单位)</span><br><span class="line">PROXIED=false</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">欢迎界面</span></span><br><span class="line">function show_welcome() &#123;</span><br><span class="line">    echo &quot;###############################################&quot;</span><br><span class="line">    echo &quot;#                                             #&quot;</span><br><span class="line">    echo &quot;#       欢迎使用Cloudflare官方IP优选工具      #&quot;</span><br><span class="line">    echo &quot;#             Blog: blog.33375.xyz            #&quot;</span><br><span class="line">    echo &quot;#         Telegram: https://t.me/liutsx       #&quot;</span><br><span class="line">    echo &quot;#                                             #&quot;</span><br><span class="line">    echo &quot;###############################################&quot;</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">显示欢迎界面</span></span><br><span class="line">show_welcome</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否存在 CloudflareST 文件，如果存在则跳过安装依赖</span></span><br><span class="line">if [ ! -f &quot;./CloudflareST&quot; ]; then</span><br><span class="line">    # 自动安装依赖</span><br><span class="line">    ARCH=$(uname -m)</span><br><span class="line">    case $ARCH in</span><br><span class="line">        x86_64)</span><br><span class="line">            echo &quot;正在下载适用于amd64架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_amd64.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        i386)</span><br><span class="line">            echo &quot;正在下载适用于386架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_386.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        aarch64)</span><br><span class="line">            echo &quot;正在下载适用于arm64架构的依赖...&quot;</span><br><span class="line">            wget -N https://ghfast.top/https://github.com/XIU2/CloudflareSpeedTest/releases/download/v2.2.5/CloudflareST_linux_arm64.tar.gz</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            echo &quot;不支持此架构的自动安装依赖，请访问 https://github.com/XIU2/CloudflareSpeedTest/releases 下载所需的文件。&quot;</span><br><span class="line">            exit 1</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line"></span><br><span class="line">    # 解压下载的文件</span><br><span class="line">    tar -xzvf CloudflareST_linux_*.tar.gz</span><br><span class="line">    rm CloudflareST_linux_*.tar.gz ip.txt ipv6.txt cfst_hosts.sh 使用+错误+反馈说明.txt</span><br><span class="line">    chmod +x CloudflareST</span><br><span class="line">else</span><br><span class="line">    echo &quot;CloudflareST 文件已存在，跳过依赖安装。&quot;</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否已下载过 Cloudflare IP 列表</span></span><br><span class="line">if [ ! -f &quot;ip.txt&quot; ]; then</span><br><span class="line">    echo &quot;下载 Cloudflare IP 列表...&quot;</span><br><span class="line">    curl -s https://www.cloudflare.com/ips-v4 -o ip.txt</span><br><span class="line">else</span><br><span class="line">    echo &quot;Cloudflare IP 列表已存在，跳过下载。&quot;</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤1：运行CloudflareST，获取最快的5个IP</span></span><br><span class="line">echo &quot;运行CloudflareST以找到最佳IP...&quot;</span><br><span class="line">./CloudflareST -f ip.txt -tl 200 -dn 15</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取前5个有效的IP</span></span><br><span class="line">TOP_5_IPS=$(head -n 20 result.csv | awk -F, &#x27;&#123;print $1&#125;&#x27; | grep -E &#x27;^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$&#x27; | head -n 5)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否找到了至少1个有效IP</span></span><br><span class="line">if [ -z &quot;$TOP_5_IPS&quot; ]; then</span><br><span class="line">    echo &quot;在CloudflareST结果中没有找到有效的IP。退出程序...&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤2：获取并删除所有A记录</span></span><br><span class="line">echo &quot;获取并删除现有的A记录...&quot;</span><br><span class="line">RECORDS=$(curl -s -X GET &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records?type=A&amp;name=$&#123;RECORD_NAME&#125;&quot; \</span><br><span class="line">     -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">     -H &quot;Content-Type: application/json&quot; | jq -r &#x27;.result[].id&#x27;)</span><br><span class="line"></span><br><span class="line">for RECORD_ID in $RECORDS; do</span><br><span class="line">    DELETE_RESPONSE=$(curl -s -X DELETE &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records/$&#123;RECORD_ID&#125;&quot; \</span><br><span class="line">         -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">         -H &quot;Content-Type: application/json&quot;)</span><br><span class="line">    if echo &quot;$DELETE_RESPONSE&quot; | grep -q &#x27;&quot;success&quot;:true&#x27;; then</span><br><span class="line">        echo &quot;已删除ID为 $&#123;RECORD_ID&#125; 的A记录&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;删除ID为 $&#123;RECORD_ID&#125; 的A记录失败&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">步骤3：将结果中的5个IP解析到Cloudflare</span></span><br><span class="line">echo &quot;将前5个IP添加为A记录到Cloudflare...&quot;</span><br><span class="line"></span><br><span class="line">for IP in $TOP_5_IPS; do</span><br><span class="line">    ADD_RESPONSE=$(curl -s -X POST &quot;https://api.cloudflare.com/client/v4/zones/$&#123;ZONE_ID&#125;/dns_records&quot; \</span><br><span class="line">         -H &quot;Authorization: Bearer $&#123;API_TOKEN&#125;&quot; \</span><br><span class="line">         -H &quot;Content-Type: application/json&quot; \</span><br><span class="line">         --data &quot;&#123;\&quot;type\&quot;:\&quot;A\&quot;,\&quot;name\&quot;:\&quot;$&#123;RECORD_NAME&#125;\&quot;,\&quot;content\&quot;:\&quot;$&#123;IP&#125;\&quot;,\&quot;ttl\&quot;:$&#123;TTL&#125;,\&quot;proxied\&quot;:$&#123;PROXIED&#125;&#125;&quot;)</span><br><span class="line">    if echo &quot;$ADD_RESPONSE&quot; | grep -q &#x27;&quot;success&quot;:true&#x27;; then</span><br><span class="line">        echo &quot;成功添加IP: $&#123;IP&#125; 的A记录&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;添加IP: $&#123;IP&#125; 的A记录失败&quot;</span><br><span class="line">        echo &quot;响应: $ADD_RESPONSE&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo &quot;所有操作已完成。&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>fofa搜索</li>
+</ul>
+<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
+<p>接着搜索</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
 
-<p>保存之后, 输入<code>bash cfip.sh</code>, 之后就可以愉快的使用了(不要开代理, 不要使用国外服务器执行)</p>
-<p>如果你有国内的服务器之类的, 可以在服务器运行脚本并使用<code>Corntab</code>定时运行脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">30 3 * * * /root/your-path/cfip.sh</span><br></pre></td></tr></table></figure>
-
-<p>每天早晨3点30运行脚本(记得把路径修改为自己的)</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过CloudfalreST项目生成优选IP, 接着使用Cloudflare的API修改DNS解析</p>
+<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
+<ul>
+<li>打开网页Clash</li>
+</ul>
+<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
+<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
+<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
+<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
+<p>将<code>允许来自局域网的连接</code>选项打开</p>
+<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
+<ul>
+<li>打开代理软件</li>
+</ul>
+<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
+<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
 ]]></content>
       <categories>
         <category>教程</category>
       </categories>
       <tags>
-        <tag>CloudflareST</tag>
-        <tag>Cloudflare优选ip</tag>
-        <tag>shell脚本</tag>
+        <tag>FOFA搜索</tag>
+        <tag>免费Clash节点</tag>
+        <tag>代理教程</tag>
+        <tag>技术交流</tag>
+        <tag>代理软件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建hexo博客</title>
+    <url>/2024/04/14/hexoblog/</url>
+    <content><![CDATA[<blockquote>
+<p>Hexo博客是一个优秀的静态博客框架，今天就来教你永久免费的创建你的博客(除非Github改变政策)</p>
+</blockquote>
+<ul>
+<li><strong>首先，注册一个邮箱</strong></li>
+</ul>
+<p>在国内想要好的体验的话，建议注册outlook<br><a href="https://account.microsoft.com/account/Account?mkt=zh-CN">链接</a><br>点击登陆，再点击创建一个用户，然后进行设置，如果创建完成后可以下载一个邮箱管理软件，也可以网页管理邮箱</p>
+<ul>
+<li><strong>注册Github，创建repository</strong></li>
+</ul>
+<blockquote>
+<p>提醒:在国内注册Github可能有点卡，如果太卡可以换个时间点，这个我也没办法(可以开代理)</p>
+</blockquote>
+<p>点击<a href="https://github.com/">Github链接</a>然后在 Email address里填入自己注册的链接, 再点击下面的紫色按钮，开始注册</p>
+<p>注册完成登陆后<a href="https://github.com/new">点击这个链接</a></p>
+<p>Repository name里填<code>username.github.io</code>, username替换为你的用户名</p>
+<blockquote>
+<p>注意！注意！注意！你的用户名是说你注册Github的用户名，例如：<code>liutsyyds.github.io</code>，而不是<code>你的用户名.github.io</code>，下文同样如此</p>
+</blockquote>
+<p>其他的不用管，点击Create repository<br>创建成功后，进行下一步</p>
+<ul>
+<li><strong>安装termux并进行配置</strong></li>
+</ul>
+<p><a href="https://f-droid.org/repo/com.termux_118.apk">下载链接</a><br>如果访问不了或太慢建议百度搜索一下<br>接着使用代码进行更新  </p>
+<blockquote>
+<p>如果运行过程中停顿并出现[Y&#x2F;n]选项，输入y并回车</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade &amp;&amp; apt install wget curl git vim </span><br></pre></td></tr></table></figure>
+<p>然后再安装proot-distro，通过proot-distro安装Debian，再登陆进去，而且以后进入Debian只需执行第三行代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install proot-distro -y</span><br><span class="line">proot-distro install debian-oldstable</span><br><span class="line">proot-distro login debian-oldstable</span><br></pre></td></tr></table></figure>
+<p>输入代码时可以三行一起输，也可以一行一行输。<br>进入Debian后输入  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install wget curl git vim <span class="built_in">sudo</span> -y &amp;&amp; curl -o- https://raw.gitmirror.com/nvm-sh/nvm/v0.38.0/install.sh | bash &amp;&amp;<span class="built_in">source</span> ~/.bashrc &amp;&amp; nvm install node</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>安装Hexo</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog    <span class="comment">#这是你博客的根目录</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>接着输入，期间一直回车就行了，遇到(y&#x2F;n)选项时输入y再回车</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你注册github的邮箱&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你注册github的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后输入<code>cd</code>  </p>
+<p>再输入<code>vi .ssh/id_rsa.pub</code>  </p>
+<p>复制其中的全部内容，然后打开<a href="https://github.com/settings/ssh/new">链接</a>粘贴到key里，然后点Add ssh key<br>接着<code>cd blog/</code>  </p>
+<p><code>vi _config.yml</code><br>找到文件最后一行的 deploy 替换以下代码</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的github用户名/你的github用户名.github.io.git,main</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：文件的排列必须和上面的代码一样，不然会报错</strong>  </p>
+</blockquote>
+<p>接着输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>然后打开<a href="https://github.com/settings/tokens">链接</a><br>点击 Generate new token<br>出现弹窗，选择下面的那个。<br>点击Expiration下面的小方块，选择最下面的选项<br>然后把能打的对勾都打上，点击Generate token，把生成的密钥保存上，一定要保存好。<br>接着回到termux，然后输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
+<p>出现username输入Github的用户名，出现password输入之前的token，如果没显示token不用慌，这是保护隐私的设置，输完后回车就行。</p>
+<p>最后稍等几分钟，在浏览器输入<code>你的github用户名.github.io</code></p>
+<p>如果想要创建新的文章，就输入 <code>hexo new &quot;标题&quot;</code>  </p>
+<p>记得要在博客根目录执行</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Termux</tag>
+        <tag>Hexo博客</tag>
+        <tag>GitHub Pages</tag>
+        <tag>免费博客</tag>
+        <tag>Node.js安装</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown图片超链接</title>
+    <url>/2024/07/29/mdimghref/</url>
+    <content><![CDATA[<blockquote>
+<p>今天简简单单水一篇文章, 教大家如何用 <code>Markdown</code>实现图片超链接 <del>(太水了)</del></p>
+</blockquote>
+<ul>
+<li>了解图片和链接的使用</li>
+</ul>
+<p>首先要了解如何在 <code>Markdown</code> 中显示图片和链接  –这是基础</p>
+<p>链接的插入</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
+
+<p>图片的插入</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">![<span class="string">img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看出来, 图片和链接之间使用的差别很小只需一个 <code>!</code> 就可以区别它们, 但是记住要使用英文状态的 <code>!</code></p>
+<p>而其中用中括号 <code>[]</code> 包着的文字就是描述, 这个东西在链接状态就会显示出来比如这样 <a href="/img/mdimghref/1.webp">链接</a> 这个就是上面代码块里的链接</p>
+<p>如果是图片状态就不会<code>直接</code>显示描述, 而是会直接显示图片, 例如</p>
+<p><img src="https://b2.333375.xyz/img/mdimghref/1.webp" alt="img"></p>
+<p>你甚至可以不用填写描述, 但是当图片显示错误的时候就会显示这个描述, 建议还是写上</p>
+<p>至于小括号的内容就必须是链接了, 而且显示图片的链接必须是纯图片链接, 就是后面必须加上 <code>.jpg</code> <code>.png</code> <code>.webp</code> 等后缀 (但是有些图床的图片没有后缀, 这个要靠自己辨别)</p>
+<ul>
+<li>了解图片超链接的逻辑</li>
+</ul>
+<p>这是 HTML 中的图片超链接</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://blog.333375.xyz/img/mdimghref/1.webp&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;img&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我大概讲解一下, 这个 <code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code> 就相当于Markdown中的链接, <code>[]()</code>, 这个href后的””里面就是链接, 而<code>&gt;&lt;</code>中间要添加描述, <code>&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;</code>, src后面添加图片链接, alt后面添加描述, 就大概是这样</p>
+<p>而从这个HTML代码可以看出, 是把图片添加到了链接的描述中, 这样就可以实现图片超链接</p>
+<ul>
+<li>正确使用</li>
+</ul>
+<p>那么好了, 现在开始使用吧</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">![img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)](<span class="link">https://blog.333375.xyz</span>)</span><br></pre></td></tr></table></figure>
+<p>效果</p>
+<p><a href="/"><img src="https://b2.333375.xyz/img/mdimghref/1.webp" alt="img"></a></p>
+]]></content>
+      <categories>
+        <category>水教程</category>
+      </categories>
+      <tags>
+        <tag>Markdown教程</tag>
+        <tag>图片超链接</tag>
+        <tag>链接插入</tag>
+        <tag>图片插入</tag>
+        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -404,75 +637,315 @@
       </tags>
   </entry>
   <entry>
-    <title>创建hexo博客</title>
-    <url>/2024/04/14/hexoblog/</url>
+    <title>随机图片api</title>
+    <url>/2024/07/12/loliapi/</url>
     <content><![CDATA[<blockquote>
-<p>Hexo博客是一个优秀的静态博客框架，今天就来教你永久免费的创建你的博客(除非Github改变政策)</p>
+<p>一个随机图片API</p>
+</blockquote>
+<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
+<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
+<blockquote>
+<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
+</blockquote>
+<blockquote>
+<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>随机图片API</tag>
+        <tag>二次元图片</tag>
+        <tag>免费API</tag>
+        <tag>LoliAPI</tag>
+        <tag>动漫壁纸</tag>
+        <tag>双端适配</tag>
+        <tag>随机背景</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSL申请</title>
+    <url>/2024/05/02/ssl/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
+</blockquote>
+<ol>
+<li>acme.sh</li>
+</ol>
+<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
+<p>输入代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
+<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
+<p>之后在你的虚拟主机平台配置ssl</p>
+<p><del>2. cert.kinh.cc</del>  网站关闭</p>
+<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
+<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
+<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
+<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
+<ol start="3">
+<li>在主机平台申请</li>
+</ol>
+<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
+<ul>
+<li>总结</li>
+</ul>
+<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)</p>
+]]></content>
+      <categories>
+        <category>水教程</category>
+      </categories>
+      <tags>
+        <tag>域名解析</tag>
+        <tag>免费SSL</tag>
+        <tag>acme.sh</tag>
+        <tag>LetsEncrypt</tag>
+        <tag>证书申请</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建Typecho博客</title>
+    <url>/2024/04/21/typechoblog/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
 </blockquote>
 <ul>
-<li><strong>首先，注册一个邮箱</strong></li>
+<li>找博客主机</li>
 </ul>
-<p>在国内想要好的体验的话，建议注册outlook<br><a href="https://account.microsoft.com/account/Account?mkt=zh-CN">链接</a><br>点击登陆，再点击创建一个用户，然后进行设置，如果创建完成后可以下载一个邮箱管理软件，也可以网页管理邮箱</p>
+<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
+<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
 <ul>
-<li><strong>注册Github，创建repository</strong></li>
+<li>域名</li>
 </ul>
+<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
+<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
 <blockquote>
-<p>提醒:在国内注册Github可能有点卡，如果太卡可以换个时间点，这个我也没办法(可以开代理)</p>
+<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
 </blockquote>
-<p>点击<a href="https://github.com/">Github链接</a>然后在 Email address里填入自己注册的链接, 再点击下面的紫色按钮，开始注册</p>
-<p>注册完成登陆后<a href="https://github.com/new">点击这个链接</a></p>
-<p>Repository name里填<code>username.github.io</code>, username替换为你的用户名</p>
-<blockquote>
-<p>注意！注意！注意！你的用户名是说你注册Github的用户名，例如：<code>liutsyyds.github.io</code>，而不是<code>你的用户名.github.io</code>，下文同样如此</p>
-</blockquote>
-<p>其他的不用管，点击Create repository<br>创建成功后，进行下一步</p>
 <ul>
-<li><strong>安装termux并进行配置</strong></li>
+<li>搭建博客</li>
 </ul>
-<p><a href="https://f-droid.org/repo/com.termux_118.apk">下载链接</a><br>如果访问不了或太慢建议百度搜索一下<br>接着使用代码进行更新  </p>
-<blockquote>
-<p>如果运行过程中停顿并出现[Y&#x2F;n]选项，输入y并回车</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade &amp;&amp; apt install wget curl git vim </span><br></pre></td></tr></table></figure>
-<p>然后再安装proot-distro，通过proot-distro安装Debian，再登陆进去，而且以后进入Debian只需执行第三行代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install proot-distro -y</span><br><span class="line">proot-distro install debian-oldstable</span><br><span class="line">proot-distro login debian-oldstable</span><br></pre></td></tr></table></figure>
-<p>输入代码时可以三行一起输，也可以一行一行输。<br>进入Debian后输入  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install wget curl git vim <span class="built_in">sudo</span> -y &amp;&amp; curl -o- https://raw.gitmirror.com/nvm-sh/nvm/v0.38.0/install.sh | bash &amp;&amp;<span class="built_in">source</span> ~/.bashrc &amp;&amp; nvm install node</span><br></pre></td></tr></table></figure>
-
+<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
+<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
+<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>选择域名</th>
+<th>记录类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>blog</td>
+<td>example.com</td>
+<td>A</td>
+<td>1.2.3.4</td>
+</tr>
+</tbody></table>
+<p>完整域名就是 blog.example.com</p>
+<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
 <ul>
-<li><strong>安装Hexo</strong></li>
+<li>美化</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog    <span class="comment">#这是你博客的根目录</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>接着输入，期间一直回车就行了，遇到(y&#x2F;n)选项时输入y再回车</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你注册github的邮箱&quot;</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你注册github的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后输入<code>cd</code>  </p>
-<p>再输入<code>vi .ssh/id_rsa.pub</code>  </p>
-<p>复制其中的全部内容，然后打开<a href="https://github.com/settings/ssh/new">链接</a>粘贴到key里，然后点Add ssh key<br>接着<code>cd blog/</code>  </p>
-<p><code>vi _config.yml</code><br>找到文件最后一行的 deploy 替换以下代码</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的github用户名/你的github用户名.github.io.git,main</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意：文件的排列必须和上面的代码一样，不然会报错</strong>  </p>
-</blockquote>
-<p>接着输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>然后打开<a href="https://github.com/settings/tokens">链接</a><br>点击 Generate new token<br>出现弹窗，选择下面的那个。<br>点击Expiration下面的小方块，选择最下面的选项<br>然后把能打的对勾都打上，点击Generate token，把生成的密钥保存上，一定要保存好。<br>接着回到termux，然后输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
-<p>出现username输入Github的用户名，出现password输入之前的token，如果没显示token不用慌，这是保护隐私的设置，输完后回车就行。</p>
-<p>最后稍等几分钟，在浏览器输入<code>你的github用户名.github.io</code></p>
-<p>如果想要创建新的文章，就输入 <code>hexo new &quot;标题&quot;</code>  </p>
-<p>记得要在博客根目录执行</p>
+<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
+<ul>
+<li>结尾</li>
+</ul>
+<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
 ]]></content>
       <categories>
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Hexo博客</tag>
-        <tag>GitHub Pages</tag>
-        <tag>免费博客</tag>
-        <tag>Termux</tag>
-        <tag>Node.js安装</tag>
+        <tag>免费域名</tag>
+        <tag>博客搭建</tag>
+        <tag>Typecho博客</tag>
+        <tag>免费主机</tag>
+        <tag>Joe主题</tag>
+        <tag>动态博客</tag>
+        <tag>域名绑定</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CFblog添加Waline</title>
+    <url>/2024/07/14/waline/</url>
+    <content><![CDATA[<blockquote>
+<p>之前教大家创建 CFblog, 但是没有评论功能, 这次教大家如何建使用Waline 开启评论功能</p>
+</blockquote>
+<ul>
+<li>注册 leancloud</li>
+</ul>
+<p>打开 <a href="https://console.leancloud.app/register">注册链接</a> 进行注册, 然后打开邮箱进行邮箱验证<br><img src="https://b2.333375.xyz/img/waline/1.webp" alt="1"></p>
+<p>验证完成之后进行登陆, 点击创建应用,<br><img src="https://b2.333375.xyz/img/waline/2.webp" alt="2"></p>
+<p>点击设置, 找到应用凭证, 把 AppID, AppKey 和 MasterKey 复制下来<br><img src="https://b2.333375.xyz/img/waline/3.webp" alt="3"></p>
+<ul>
+<li>部署 Waline</li>
+</ul>
+<p>点击按钮进行搭建</p>
+<p><a href="https://vercel.com/import/project?template=https://github.com/walinejs/waline/tree/main/example"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a></p>
+<p>用 Github 登陆, 可能需要验证手机号</p>
+<p>输入名字后进行部署,等待几分钟,安装完毕后是这样<br><img src="https://b2.333375.xyz/img/waline/4.webp" alt="4"></p>
+<ul>
+<li>设置变量</li>
+</ul>
+<p>到管理面板, 点击 Settings-&gt;Environment Variables</p>
+<p><img src="https://b2.333375.xyz/img/waline/5.webp" alt="5"></p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>变量值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LEAN_ID</td>
+<td>你的 AppID</td>
+</tr>
+<tr>
+<td>LEAN_KEY</td>
+<td>你的 AppKey</td>
+</tr>
+<tr>
+<td>LEAN_MASTER_KEY</td>
+<td>你的 MasterKey</td>
+</tr>
+</tbody></table>
+<p><img src="https://b2.333375.xyz/img/waline/6.webp" alt="6"></p>
+<p>点击 Save</p>
+<p>点击 Deployment-&gt;…-&gt;Redeploy</p>
+<p><img src="https://b2.333375.xyz/img/waline/7.webp" alt="7"></p>
+<ul>
+<li>绑定域名</li>
+</ul>
+<p>Settings-&gt;Domains, 将以 <code>vercel.app</code> 为结尾的域名复制下来</p>
+<p>登陆 Cloudflare, 创建一个 workers, 把内容删除并粘贴下面的代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;xxx.vercel.app&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加 workers 路由,设置-&gt;触发器-&gt;添加路由</p>
+<p><img src="https://b2.333375.xyz/img/waline/8.webp" alt="8"></p>
+<p>把路由添加为这样的形式 <code>xxx.example.com/*</code> 选择的区域必须是 example.com OK之后点击添加路由</p>
+<p>添加 DNS 记录,为 CNAME 名称是添加路由时的 xxx.example.com 目标是 cloudflare.182682.xyz 代理状态关闭, 保存</p>
+<p>会到 vercel 把自己设置的域名粘贴上去-&gt;add, 等一会就行了</p>
+<p>接着浏览器访问: https:&#x2F;&#x2F;[你的域名]&#x2F;ui&#x2F;register, 注册用户(第一个注册的用户是管理员)</p>
+<ul>
+<li>编辑 workers</li>
+</ul>
+<p>回到 Cloudflare 之前创建的 CFblog workers -&gt;编辑代码<br><img src="https://b2.333375.xyz/img/waline/9.webp" alt="9"></p>
+<blockquote>
+<p>在右侧小部件区域,添加一个小部件 div , 名为&lt;最近评论&gt;</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;widgetOther&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;linkcat-0&quot;</span> <span class="attr">class</span>=<span class="string">&quot;widget widget_links&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">&quot;widget-title&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>最近评论<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline-recent&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在评论区加一个 div ,来显示评论</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;commentCode&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline&quot;</span>  <span class="attr">name</span>=<span class="string">&quot;waline&quot;</span> <span class="attr">class</span>=<span class="string">&quot;comments-area&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>头部加上样式,和Waline的js</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforHead&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">img</span> &#123;<span class="attribute">max-width</span>: <span class="number">100%</span>;&#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">li</span> &#123;<span class="attribute">border</span>: thick double <span class="number">#32a1ce</span>;&#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;//gcore.jsdelivr.net/npm/@waline/client/dist/Waline.min.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>底部加上Waline初始化代码,以及加载最近评论的代码</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforBody&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是初始化Waline的,visitor: true记得开启</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">new</span> <span class="title class_">Waline</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>:<span class="string">&#x27;#waline&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appId</span>: <span class="string">&#x27;eWrOzSzYP1Fm8QD96P0vKli-MdYXbMMI&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appKey</span>: <span class="string">&#x27;jMF98EwbmKvdGnDLamPwAk1&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">avatar</span>:<span class="string">&#x27;monsterid&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">recordIP</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">requiredFields</span>:[<span class="string">&#x27;nick&#x27;</span>],</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">visitor</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">//path:&quot;/&quot;,</span></span></span><br><span class="line"><span class="language-javascript">                <span class="attr">placeholder</span>:<span class="string">&quot;整两句...&quot;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是加载最近评论的</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="title class_">Waline</span>.<span class="property">Widget</span>.<span class="title class_">RecentComments</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>: <span class="string">&#x27;#waline-recent&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">count</span>: <span class="number">10</span></span></span><br><span class="line"><span class="language-javascript">              &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
+<p>把代码中的AppID,AppKey,serverURL(serverURL两个都要改)修改成你自己的, 并粘贴到workers代码里, 再点击部署就可以了</p>
+<ul>
+<li>最后</li>
+</ul>
+<p>Waline 还可以在 Hexo 上使用, 你们自己研究一下, 就不出教程了</p>
+]]></content>
+      <categories>
+        <category>图文教程</category>
+      </categories>
+      <tags>
+        <tag>Cloudflare Workers</tag>
+        <tag>CFblog</tag>
+        <tag>域名绑定</tag>
+        <tag>Waline部署</tag>
+        <tag>LeanCloud注册</tag>
+        <tag>第三方评论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>翻墙方式汇总</title>
+    <url>/2025/03/01/usevpn/</url>
+    <content><![CDATA[<blockquote>
+<p>今天为大家浅谈一下翻墙的常见的方式, 以及它们各自的特性, 优缺点等</p>
+</blockquote>
+<ul>
+<li>什么是翻墙</li>
+</ul>
+<p>翻墙就是在国内使用特殊手段绕过<code>GFW</code>(长城防火墙)的封锁访问通常在国内无法访问的网站, 无法使用的软件等, 如Youtube, ChatGPT</p>
+<ul>
+<li>免费VPN软件</li>
+</ul>
+<p>这一类翻墙通常是最容易接触到的, 也通常是萌新翻墙的选择</p>
+<p>而且在网络上有很多的<code>VPN软件破解版</code>, 所以使用成本几乎没有, 但是由于使用人数过多, 所以有时体验会很差</p>
+<p>在此不过多赘述了, 感兴趣的可以自己去搜索一下</p>
+<ul>
+<li>节点订阅</li>
+</ul>
+<p>这一类翻墙方式通常相比VPN软件更加便捷, 但是由于节点订阅通常是在网络上搜寻的节点, 所以可用性会比较差, 可以多订阅几个链接来解决</p>
+<p><code>https://skr.daozhang.site/clash</code></p>
+<p><code>https://cfkr.freeargo.eu.org/0bb601ac-ebc9-46bf-a126-eb4647b07690</code></p>
+<p>可以在网络上搜索更多的订阅</p>
+<ul>
+<li>使用方法</li>
+</ul>
+<p>下载 <a href="https://ghfast.top/https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/download/1.3.7/NekoBox-1.3.7-arm64-v8a.apk">Nokebox</a></p>
+<p>点击左上角菜单-&gt;分组-&gt;右上角-&gt;分组类型:订阅-&gt;将订阅链接粘贴进去-&gt;完成</p>
+<p>回到订阅-&gt;右上角-&gt;连接测试-&gt;url test</p>
+<p>等待测试完成即可使用</p>
+<ul>
+<li>机场订阅</li>
+</ul>
+<p>相对于免费节点来说, 机场拥有很高的稳定度和可用性, 当然这里指的是付费机场, 免费机场和免费订阅坐一桌去</p>
+<p>机场也分有高端机场和低端机场</p>
+<p><code>高端机场</code>通常比较贵, 以我之前的观察大概就是小几十块一个月500G流量, 流量每月重置, 年订阅更便宜一些, 但是相比于低端机场节点很多, 延迟更低更稳定, 通常是用<code>IEPL专线</code>或<code>国内中转</code></p>
+<p><code>低端机场</code>的定价就比较有差别, 但通常以经济实惠为主, 一些比较大的机场节点也比较多, 且比较稳定, 就是延迟速度没那么好, 不过对于一般用户绝对够了</p>
+<p>在选择机场时一定要<code>选择比较大的机场</code>, 且评价不要过低, 以免机场跑路导致不必要的损失</p>
+<ul>
+<li>自建节点</li>
+</ul>
+<p>这个分类比较大, 我来一个一个说</p>
+<p>首先就是<code>纯自建节点</code>, 就是使用一个便宜的普通VPS, 搭建一个<code>vmess+ws</code>（不推荐容易被GFW拦截）或<code>vless+vision+reality</code>节点, 这种节点相较于机场只有一个优点, 就是IP纯净</p>
+<p>机场由于使用人数过多, 无法保证其他人没有使用节点干坏事, 但是机场每个节点的IP都是固定的, VPN软件和免费订阅也是一个道理, 所以导致IP被判定为风险IP, 而对于注册国外账号来说IP纯净是很重要的, 不然会导致账号被<code>风控</code></p>
+<p>接着就是<code>优化线路</code>VPS搭建的节点, 这些线路一般叫<code>CN2 GIA</code>,<code>CMI</code>,<code>AS9929</code>等等, 这种机器搭建的节点延迟更低更稳定, 并且一般不会限速, 除非你被<code>QOS</code>了(机场为了防止被刷流量会限速)</p>
+<p>然后就是<code>中转节点</code>, 就是使用国内的国际线路机器帮你连接节点, 你连接国内机器使用</p>
+<p>还有<code>专线节点</code>和中转节点一个道理, 但是这个延迟更低更稳定, 通常最多只有几十ms的延迟, 但是由于过于昂贵通常都是合租, 注意不要被骗</p>
+<p><code>CDN节点</code>, 一般就是纯自建节点套上CDN, 套上CDN后延迟会更低且不会被GFW拦截</p>
+<p><code>解锁节点</code>, 顾名思义就是解锁了正常节点无法访问的网站, 例如Netflix, 而且通常这类节点都会套上CDN或使用中转来获得更低的延迟</p>
+<p><code>住宅IP节点</code>, 这种节点非常小众, 一般没有住宅IP的VPS, 大部分都是<code>socks</code>节点, 且被GFW拦截了, 只能通过链式代理来连接, 这种IP极其纯净, 搭配指纹浏览器, 拿来注册账号十分好用</p>
+<p>最后还有一种小众的节点就是其他人分享的自建节点, 这种对于我们这些穷逼来说非常好用</p>
+<ul>
+<li>蝗虫流节点</li>
+</ul>
+<p>我在这里只是介绍一下, 从小标题就可以看出我对这种蝗虫行为的极其抵制, 这种就是极致的<code>滥用</code></p>
+<p>首先在网上找到一个免费的docker服务, 接着打开Github项目<a href="https://github.com/mjjonone/mjj">mjj</a> 根据教程即可白嫖</p>
+<p>这种搭建的节点可用性极差, 并且会浪费公共资源导致服务提供商损失大量CPU资源, 简直就是蝗虫, 连蝗虫也不如, 简直就是臭煞笔</p>
+<ul>
+<li>总结</li>
+</ul>
+<blockquote>
+<p>追求速度买机场<br>追求纯净用自建<br>追求免费用订阅<br>没有父母当蝗虫</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>翻墙</tag>
+        <tag>VPN</tag>
+        <tag>节点订阅</tag>
+        <tag>机场订阅</tag>
+        <tag>自建节点</tag>
+        <tag>GFW</tag>
+        <tag>网络工具</tag>
+        <tag>IP纯净</tag>
+        <tag>MJJ</tag>
       </tags>
   </entry>
   <entry>
@@ -594,150 +1067,64 @@
       </tags>
   </entry>
   <entry>
-    <title>回到Hexo的怀抱</title>
-    <url>/2024/09/15/imback/</url>
+    <title>使用Claw Run创建Webssh</title>
+    <url>/2025/06/15/webssh/</url>
     <content><![CDATA[<blockquote>
-<p><del>孩子们我回来了</del></p>
+<p>利用Claw Run免费容器创建Webssh, 从而使用浏览器管理自己的VPS, 并且该Webssh支持文件管理<br>项目地址: <a href="https://github.com/hochenggang/managi-backend">hochenggang&#x2F;managi-backend</a></p>
 </blockquote>
-<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
-<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
-<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
-<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
-]]></content>
-      <categories>
-        <category>水</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SSL申请</title>
-    <url>/2024/05/02/ssl/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教了大家如何创建博客，有静态有动态博客，今天教大家如何申请ssl证书，让自己的网站用上https</p>
-</blockquote>
-<ol>
-<li>acme.sh</li>
-</ol>
-<p>先一个给VPS绑定域名，连接上VPS后进行操作<br><strong><del>VPS广告位招租(bushi</del></strong></p>
-<p>输入代码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh| sh  <span class="comment">#安装acme</span></span><br><span class="line">apt install socat -y  <span class="comment">#安装socat</span></span><br><span class="line"><span class="built_in">ln</span> -s  /root/.acme.sh/acme.sh /usr/local/bin/acme <span class="comment">#添加软链接</span></span><br><span class="line">acme --set-default-ca --server letsencrypt  <span class="comment">#切换CA机构</span></span><br><span class="line">acme  --issue -d 你的域名  --standalone -k ec-256  <span class="comment">#申请证书</span></span><br><span class="line">acme --installcert -d 你的域名 --ecc  <span class="comment">#安装证书</span></span><br></pre></td></tr></table></figure>
-<p>之后使用vim命令打开证书文件和密钥即可<br>(由于没有测试，所以有问题请在下面评论)</p>
-<p>之后在你的虚拟主机平台配置ssl</p>
-<p><del>2. cert.kinh.cc</del>  网站关闭</p>
-<p><del>打开<a href="https://cert.kinh.cc/">kinh cert</a>，选择证书，默认即可</del></p>
-<p><del>输入域名点击创建订单后进行验证，在你的域名解析处新建txt记录</del></p>
-<p><del>如果你的域名是二级域名的话(例如 example.eu.org)申请blog.example.eu.org的证书时候会让你添加_acme-challenge.blog.example名称的TXT记录，但是你在域名解析处添加的记录名称为_acme-challenge.blog，记录的值不用变</del></p>
-<p><del>添加完成后稍等一下，回到kinh点击验证记录即可，建议将证书和密钥都下载下来，然后就可以配置ssl了</del></p>
-<ol start="3">
-<li>在主机平台申请</li>
-</ol>
-<p>只需打开ssl配置相关页面，一般都有自动申请，点击申请即可<del>水(bushi)</del></p>
-<ul>
-<li>总结</li>
-</ul>
-<p>前两个讲的都是<del>水字数</del>，最后一个才是真有用(doge)</p>
-]]></content>
-      <categories>
-        <category>水教程</category>
-      </categories>
-      <tags>
-        <tag>域名解析</tag>
-        <tag>免费SSL</tag>
-        <tag>acme.sh</tag>
-        <tag>LetsEncrypt</tag>
-        <tag>证书申请</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>随机图片api</title>
-    <url>/2024/07/12/loliapi/</url>
-    <content><![CDATA[<blockquote>
-<p>一个随机图片API</p>
-</blockquote>
-<p><img src="https://www.loliapi.com/acg/" alt="双端适应"></p>
-<p><img src="https://www.loliapi.com/bg/" alt="随机图片"></p>
+<h2 id="创建Claw-Run账号"><a href="#创建Claw-Run账号" class="headerlink" title="创建Claw Run账号"></a>创建Claw Run账号</h2><p>访问 <a href="https://run.claw.cloud/">https://run.claw.cloud</a> 注册</p>
 <blockquote>
-<p>刷新可以切换图片 都是二次元图片 有的图片尺度比较大</p>
+<p>使用180天以上的Github账号进行注册，每月赠送5刀余额</p>
 </blockquote>
-<blockquote>
-<p>API地址:<a href="https://www.loliapi.com/">loliapi</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>随机图片API</tag>
-        <tag>二次元图片</tag>
-        <tag>免费API</tag>
-        <tag>LoliAPI</tag>
-        <tag>动漫壁纸</tag>
-        <tag>双端适配</tag>
-        <tag>随机背景</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建Typecho博客</title>
-    <url>/2024/04/21/typechoblog/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>在之前教了大家如何搭建hexo静态博客，但是hexo没有后台写文章，每次更新还要在termux里面部署，比较不方便，今天教大家免费创建一个typecho动态博客，优点是简洁快速，缺点就是插件较少(反正我目前是没找到什么好的插件)，但是简洁的外表可以让博主更专注的写文章</strong></p>
-</blockquote>
-<ul>
-<li>找博客主机</li>
-</ul>
-<p>正如标题，要找一些php虚拟主机，最好要稳定一点，可以在B站上找，我的教程用的主机就是在B站上找的</p>
-<p>还有一些在国外的主机, 会更加稳定, 配置也更高, 比如Serv00 x10hosting等, 但是比较难以注册 (基本上都会提供免费域名)</p>
-<ul>
-<li>域名</li>
-</ul>
-<p>域名这个东西其实有不少网站免费提供的，基本上全都支持解析A记录和CNAME记录，但是有一些已经失效了如 eu.org(可以申请但是自2023年6月以后就没有通过的了),freenom 等，其余自行搜索。</p>
-<p>这里给出几个免费域名, 自己去百度搜教程, 如果自己没能力去注册的话就去买一个xyz域名吧, 也不贵</p>
-<blockquote>
-<p>pp.ua<br>f5.si<br>nyc.mn<br>nom.za<br>us.kg<br>cloudns.be<br>cloudns.ch</p>
-</blockquote>
-<ul>
-<li>搭建博客</li>
-</ul>
-<p>首先，拿到虚拟主机后，进入管理面板，选择PHP版本为php-74，这个版本比较稳定，后续操作也方便<br>接着打开在线文件管理，打开后先不要管这个</p>
-<p>点击<a href="https://ghfast.top/https://github.com/typecho/typecho/releases/latest/download/typecho.zip">Typecho下载链接</a> ，下载完成后回到文件管理，把文件全部删除，把下载的zip文件上传后上去解压，解压完成后把zip文件删除</p>
-<p>找到绑定域名的选项，一般有提示要添加A记录或CNAME记录，在你找到的域名添加上一个记录  </p>
+<h2 id="部署过程"><a href="#部署过程" class="headerlink" title="部署过程"></a>部署过程</h2><p>使用Github登陆, 进入首页选择<code>App Launchpad</code>，点击<code>Create App</code>按钮开始创建应用。</p>
+<p><img src="https://b2.333375.xyz/img/webssh/1.webp" alt="1"></p>
+<p><img src="https://b2.333375.xyz/img/webssh/2.webp" alt="2"></p>
+<p>名称随便填写, Image选择<code>Public</code>, Image Name填写<code>hochenggang/managi:0.5.0</code></p>
+<p>容器配置选择<code>Fixed</code> <code>0.1CPU</code> <code>128M</code>, 这样每个月费用仅有0.6刀, 剩余余额还可以部署其他项目</p>
+<p>网络端口修改为18001, <code>Public Access</code>打开, 可以点击<code>Custom Domain</code>来自定义域名, 推荐使用 <a href="https://zoneabc.net/register?invite=f316817b5eb8406dba388869b0767963">Zoneabc</a> 的免费域名（有AFF, 介意勿点）</p>
+<p>注册一个账号, 然后重新返回主页, 输入自己想要注册的域名</p>
 <table>
 <thead>
 <tr>
-<th>名称</th>
-<th>选择域名</th>
-<th>记录类型</th>
-<th>记录值</th>
+<th>域名位数</th>
+<th>价格</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>blog</td>
-<td>example.com</td>
-<td>A</td>
-<td>1.2.3.4</td>
+<td>4位域名</td>
+<td>30积分</td>
+</tr>
+<tr>
+<td>5位域名</td>
+<td>20积分</td>
+</tr>
+<tr>
+<td>6位域名</td>
+<td>10积分</td>
+</tr>
+<tr>
+<td>7位及以上域名</td>
+<td>免费</td>
 </tr>
 </tbody></table>
-<p>完整域名就是 blog.example.com</p>
-<p>将域名完整复制下来，添加到绑定域名这里，访问这个域名，数据库名称在数据库信息那里一般账号名就是数据库名称，密码也在数据库信息那里，其他不用管点击安装即可，这样就得到了一个博客，也有后台</p>
-<ul>
-<li>美化</li>
-</ul>
-<p>由于自带的主题太简陋，所以要换主题，首先打开<a href="https://www.123pan.com/s/kQExTd-vHpDv">Joe下载链接</a> 完成后打开文件管理器，点击usr文件夹，再打开themes文件夹，将zip文件上传上去解压，删除zip文件，再打开后台进入主题设置，启用Joe，在根据自己的喜好自定义即可。</p>
-<ul>
-<li>结尾</li>
-</ul>
-<p>如果搭建过程中有什么问题，可以在评论区下面留言，如果比较重要我会修改一下文章</p>
+<p>接着进入管理域名的页面, 添加DNS记录, 类型选择CNAME, 内容填入Claw Run提供的免费域名, TTL为60秒, 点击添加</p>
+<p><img src="https://b2.333375.xyz/img/webssh/3.webp" alt="3"></p>
+<p>如果对域名没有要求的也可以直接使用Claw Run提供的免费域名</p>
+<p><img src="https://b2.333375.xyz/img/webssh/4.webp" alt="4"></p>
+<p>确认没有问题后点击Deploy Application部署</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在设置完域名如果访问失败, 就耐心等待一会, 因为Claw Run本身相应比较慢, 并且不支持IPV6（我到时候研究一下能否使用Warp支持IPV6）</p>
+<p>示例网站: <a href="https://lts-webssh.zabc.net/">https://lts-webssh.zabc.net</a></p>
+<p>6.24更新: Claw是容器没法开TUN, 所以没法套warp, 可以使用koyeb搭建</p>
 ]]></content>
       <categories>
-        <category>教程</category>
+        <category>图文教程</category>
       </categories>
       <tags>
         <tag>免费域名</tag>
-        <tag>博客搭建</tag>
-        <tag>Typecho博客</tag>
-        <tag>免费主机</tag>
-        <tag>Joe主题</tag>
-        <tag>动态博客</tag>
-        <tag>域名绑定</tag>
+        <tag>Claw Run</tag>
+        <tag>Webssh</tag>
+        <tag>Zoneabc</tag>
+        <tag>免费容器</tag>
       </tags>
   </entry>
   <entry>
@@ -809,408 +1196,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Markdown图片超链接</title>
-    <url>/2024/07/29/mdimghref/</url>
-    <content><![CDATA[<blockquote>
-<p>今天简简单单水一篇文章, 教大家如何用 <code>Markdown</code>实现图片超链接 <del>(太水了)</del></p>
-</blockquote>
-<ul>
-<li>了解图片和链接的使用</li>
-</ul>
-<p>首先要了解如何在 <code>Markdown</code> 中显示图片和链接  –这是基础</p>
-<p>链接的插入</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">链接</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
-
-<p>图片的插入</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">![<span class="string">img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)</span><br></pre></td></tr></table></figure>
-
-<p>从上面可以看出来, 图片和链接之间使用的差别很小只需一个 <code>!</code> 就可以区别它们, 但是记住要使用英文状态的 <code>!</code></p>
-<p>而其中用中括号 <code>[]</code> 包着的文字就是描述, 这个东西在链接状态就会显示出来比如这样 <a href="/img/mdimghref/1.webp">链接</a> 这个就是上面代码块里的链接</p>
-<p>如果是图片状态就不会<code>直接</code>显示描述, 而是会直接显示图片, 例如</p>
-<p><img src="https://b2.333375.xyz/img/mdimghref/1.webp" alt="img"></p>
-<p>你甚至可以不用填写描述, 但是当图片显示错误的时候就会显示这个描述, 建议还是写上</p>
-<p>至于小括号的内容就必须是链接了, 而且显示图片的链接必须是纯图片链接, 就是后面必须加上 <code>.jpg</code> <code>.png</code> <code>.webp</code> 等后缀 (但是有些图床的图片没有后缀, 这个要靠自己辨别)</p>
-<ul>
-<li>了解图片超链接的逻辑</li>
-</ul>
-<p>这是 HTML 中的图片超链接</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://blog.333375.xyz/img/mdimghref/1.webp&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;img&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>我大概讲解一下, 这个 <code>&lt;a href=&quot;&quot;&gt;&lt;/a&gt;</code> 就相当于Markdown中的链接, <code>[]()</code>, 这个href后的””里面就是链接, 而<code>&gt;&lt;</code>中间要添加描述, <code>&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;</code>, src后面添加图片链接, alt后面添加描述, 就大概是这样</p>
-<p>而从这个HTML代码可以看出, 是把图片添加到了链接的描述中, 这样就可以实现图片超链接</p>
-<ul>
-<li>正确使用</li>
-</ul>
-<p>那么好了, 现在开始使用吧</p>
-<figure class="highlight md"><table><tr><td class="code"><pre><span class="line">[<span class="string">![img</span>](<span class="link">https://blog.333375.xyz/img/mdimghref/1.webp</span>)](<span class="link">https://blog.333375.xyz</span>)</span><br></pre></td></tr></table></figure>
-<p>效果</p>
-<p><a href="/"><img src="https://b2.333375.xyz/img/mdimghref/1.webp" alt="img"></a></p>
-]]></content>
-      <categories>
-        <category>水教程</category>
-      </categories>
-      <tags>
-        <tag>Markdown教程</tag>
-        <tag>图片超链接</tag>
-        <tag>链接插入</tag>
-        <tag>图片插入</tag>
-        <tag>HTML</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>翻墙方式汇总</title>
-    <url>/2025/03/01/usevpn/</url>
-    <content><![CDATA[<blockquote>
-<p>今天为大家浅谈一下翻墙的常见的方式, 以及它们各自的特性, 优缺点等</p>
-</blockquote>
-<ul>
-<li>什么是翻墙</li>
-</ul>
-<p>翻墙就是在国内使用特殊手段绕过<code>GFW</code>(长城防火墙)的封锁访问通常在国内无法访问的网站, 无法使用的软件等, 如Youtube, ChatGPT</p>
-<ul>
-<li>免费VPN软件</li>
-</ul>
-<p>这一类翻墙通常是最容易接触到的, 也通常是萌新翻墙的选择</p>
-<p>而且在网络上有很多的<code>VPN软件破解版</code>, 所以使用成本几乎没有, 但是由于使用人数过多, 所以有时体验会很差</p>
-<p>在此不过多赘述了, 感兴趣的可以自己去搜索一下</p>
-<ul>
-<li>节点订阅</li>
-</ul>
-<p>这一类翻墙方式通常相比VPN软件更加便捷, 但是由于节点订阅通常是在网络上搜寻的节点, 所以可用性会比较差, 可以多订阅几个链接来解决</p>
-<p><code>https://skr.daozhang.site/clash</code></p>
-<p><code>https://cfkr.freeargo.eu.org/0bb601ac-ebc9-46bf-a126-eb4647b07690</code></p>
-<p>可以在网络上搜索更多的订阅</p>
-<ul>
-<li>使用方法</li>
-</ul>
-<p>下载 <a href="https://ghfast.top/https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/download/1.3.7/NekoBox-1.3.7-arm64-v8a.apk">Nokebox</a></p>
-<p>点击左上角菜单-&gt;分组-&gt;右上角-&gt;分组类型:订阅-&gt;将订阅链接粘贴进去-&gt;完成</p>
-<p>回到订阅-&gt;右上角-&gt;连接测试-&gt;url test</p>
-<p>等待测试完成即可使用</p>
-<ul>
-<li>机场订阅</li>
-</ul>
-<p>相对于免费节点来说, 机场拥有很高的稳定度和可用性, 当然这里指的是付费机场, 免费机场和免费订阅坐一桌去</p>
-<p>机场也分有高端机场和低端机场</p>
-<p><code>高端机场</code>通常比较贵, 以我之前的观察大概就是小几十块一个月500G流量, 流量每月重置, 年订阅更便宜一些, 但是相比于低端机场节点很多, 延迟更低更稳定, 通常是用<code>IEPL专线</code>或<code>国内中转</code></p>
-<p><code>低端机场</code>的定价就比较有差别, 但通常以经济实惠为主, 一些比较大的机场节点也比较多, 且比较稳定, 就是延迟速度没那么好, 不过对于一般用户绝对够了</p>
-<p>在选择机场时一定要<code>选择比较大的机场</code>, 且评价不要过低, 以免机场跑路导致不必要的损失</p>
-<ul>
-<li>自建节点</li>
-</ul>
-<p>这个分类比较大, 我来一个一个说</p>
-<p>首先就是<code>纯自建节点</code>, 就是使用一个便宜的普通VPS, 搭建一个<code>vmess+ws</code>（不推荐容易被GFW拦截）或<code>vless+vision+reality</code>节点, 这种节点相较于机场只有一个优点, 就是IP纯净</p>
-<p>机场由于使用人数过多, 无法保证其他人没有使用节点干坏事, 但是机场每个节点的IP都是固定的, VPN软件和免费订阅也是一个道理, 所以导致IP被判定为风险IP, 而对于注册国外账号来说IP纯净是很重要的, 不然会导致账号被<code>风控</code></p>
-<p>接着就是<code>优化线路</code>VPS搭建的节点, 这些线路一般叫<code>CN2 GIA</code>,<code>CMI</code>,<code>AS9929</code>等等, 这种机器搭建的节点延迟更低更稳定, 并且一般不会限速, 除非你被<code>QOS</code>了(机场为了防止被刷流量会限速)</p>
-<p>然后就是<code>中转节点</code>, 就是使用国内的国际线路机器帮你连接节点, 你连接国内机器使用</p>
-<p>还有<code>专线节点</code>和中转节点一个道理, 但是这个延迟更低更稳定, 通常最多只有几十ms的延迟, 但是由于过于昂贵通常都是合租, 注意不要被骗</p>
-<p><code>CDN节点</code>, 一般就是纯自建节点套上CDN, 套上CDN后延迟会更低且不会被GFW拦截</p>
-<p><code>解锁节点</code>, 顾名思义就是解锁了正常节点无法访问的网站, 例如Netflix, 而且通常这类节点都会套上CDN或使用中转来获得更低的延迟</p>
-<p><code>住宅IP节点</code>, 这种节点非常小众, 一般没有住宅IP的VPS, 大部分都是<code>socks</code>节点, 且被GFW拦截了, 只能通过链式代理来连接, 这种IP极其纯净, 搭配指纹浏览器, 拿来注册账号十分好用</p>
-<p>最后还有一种小众的节点就是其他人分享的自建节点, 这种对于我们这些穷逼来说非常好用</p>
-<ul>
-<li>蝗虫流节点</li>
-</ul>
-<p>我在这里只是介绍一下, 从小标题就可以看出我对这种蝗虫行为的极其抵制, 这种就是极致的<code>滥用</code></p>
-<p>首先在网上找到一个免费的docker服务, 接着打开Github项目<a href="https://github.com/mjjonone/mjj">mjj</a> 根据教程即可白嫖</p>
-<p>这种搭建的节点可用性极差, 并且会浪费公共资源导致服务提供商损失大量CPU资源, 简直就是蝗虫, 连蝗虫也不如, 简直就是臭煞笔</p>
-<ul>
-<li>总结</li>
-</ul>
-<blockquote>
-<p>追求速度买机场<br>追求纯净用自建<br>追求免费用订阅<br>没有父母当蝗虫</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>翻墙</tag>
-        <tag>VPN</tag>
-        <tag>节点订阅</tag>
-        <tag>机场订阅</tag>
-        <tag>自建节点</tag>
-        <tag>GFW</tag>
-        <tag>网络工具</tag>
-        <tag>IP纯净</tag>
-        <tag>MJJ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CFblog添加Waline</title>
-    <url>/2024/07/14/waline/</url>
-    <content><![CDATA[<blockquote>
-<p>之前教大家创建 CFblog, 但是没有评论功能, 这次教大家如何建使用Waline 开启评论功能</p>
-</blockquote>
-<ul>
-<li>注册 leancloud</li>
-</ul>
-<p>打开 <a href="https://console.leancloud.app/register">注册链接</a> 进行注册, 然后打开邮箱进行邮箱验证<br><img src="https://b2.333375.xyz/img/waline/1.webp" alt="1"></p>
-<p>验证完成之后进行登陆, 点击创建应用,<br><img src="https://b2.333375.xyz/img/waline/2.webp" alt="2"></p>
-<p>点击设置, 找到应用凭证, 把 AppID, AppKey 和 MasterKey 复制下来<br><img src="https://b2.333375.xyz/img/waline/3.webp" alt="3"></p>
-<ul>
-<li>部署 Waline</li>
-</ul>
-<p>点击按钮进行搭建</p>
-<p><a href="https://vercel.com/import/project?template=https://github.com/walinejs/waline/tree/main/example"><img src="https://vercel.com/button" alt="Deploy with Vercel"></a></p>
-<p>用 Github 登陆, 可能需要验证手机号</p>
-<p>输入名字后进行部署,等待几分钟,安装完毕后是这样<br><img src="https://b2.333375.xyz/img/waline/4.webp" alt="4"></p>
-<ul>
-<li>设置变量</li>
-</ul>
-<p>到管理面板, 点击 Settings-&gt;Environment Variables</p>
-<p><img src="https://b2.333375.xyz/img/waline/5.webp" alt="5"></p>
-<table>
-<thead>
-<tr>
-<th>变量名</th>
-<th>变量值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>LEAN_ID</td>
-<td>你的 AppID</td>
-</tr>
-<tr>
-<td>LEAN_KEY</td>
-<td>你的 AppKey</td>
-</tr>
-<tr>
-<td>LEAN_MASTER_KEY</td>
-<td>你的 MasterKey</td>
-</tr>
-</tbody></table>
-<p><img src="https://b2.333375.xyz/img/waline/6.webp" alt="6"></p>
-<p>点击 Save</p>
-<p>点击 Deployment-&gt;…-&gt;Redeploy</p>
-<p><img src="https://b2.333375.xyz/img/waline/7.webp" alt="7"></p>
-<ul>
-<li>绑定域名</li>
-</ul>
-<p>Settings-&gt;Domains, 将以 <code>vercel.app</code> 为结尾的域名复制下来</p>
-<p>登陆 Cloudflare, 创建一个 workers, 把内容删除并粘贴下面的代码</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">	event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">	<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">	<span class="keyword">if</span>(url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>))&#123;</span><br><span class="line">		url.<span class="property">hostname</span>=<span class="string">&quot;xxx.vercel.app&quot;</span>; <span class="comment">// 修改成需要代理的网站地址 </span></span><br><span class="line">		<span class="keyword">let</span> new_request=<span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>添加 workers 路由,设置-&gt;触发器-&gt;添加路由</p>
-<p><img src="https://b2.333375.xyz/img/waline/8.webp" alt="8"></p>
-<p>把路由添加为这样的形式 <code>xxx.example.com/*</code> 选择的区域必须是 example.com OK之后点击添加路由</p>
-<p>添加 DNS 记录,为 CNAME 名称是添加路由时的 xxx.example.com 目标是 cloudflare.182682.xyz 代理状态关闭, 保存</p>
-<p>会到 vercel 把自己设置的域名粘贴上去-&gt;add, 等一会就行了</p>
-<p>接着浏览器访问: https:&#x2F;&#x2F;[你的域名]&#x2F;ui&#x2F;register, 注册用户(第一个注册的用户是管理员)</p>
-<ul>
-<li>编辑 workers</li>
-</ul>
-<p>回到 Cloudflare 之前创建的 CFblog workers -&gt;编辑代码<br><img src="https://b2.333375.xyz/img/waline/9.webp" alt="9"></p>
-<blockquote>
-<p>在右侧小部件区域,添加一个小部件 div , 名为&lt;最近评论&gt;</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;widgetOther&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;linkcat-0&quot;</span> <span class="attr">class</span>=<span class="string">&quot;widget widget_links&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">&quot;widget-title&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span>&gt;</span>最近评论<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline-recent&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在评论区加一个 div ,来显示评论</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;commentCode&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;waline&quot;</span>  <span class="attr">name</span>=<span class="string">&quot;waline&quot;</span> <span class="attr">class</span>=<span class="string">&quot;comments-area&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>头部加上样式,和Waline的js</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforHead&quot;:`</span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">img</span> &#123;<span class="attribute">max-width</span>: <span class="number">100%</span>;&#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-id">#waline-recent</span> <span class="selector-tag">li</span> &#123;<span class="attribute">border</span>: thick double <span class="number">#32a1ce</span>;&#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;//gcore.jsdelivr.net/npm/@waline/client/dist/Waline.min.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>底部加上Waline初始化代码,以及加载最近评论的代码</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;codeBeforBody&quot;:`</span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是初始化Waline的,visitor: true记得开启</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">new</span> <span class="title class_">Waline</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>:<span class="string">&#x27;#waline&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appId</span>: <span class="string">&#x27;eWrOzSzYP1Fm8QD96P0vKli-MdYXbMMI&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">appKey</span>: <span class="string">&#x27;jMF98EwbmKvdGnDLamPwAk1&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">avatar</span>:<span class="string">&#x27;monsterid&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">recordIP</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">requiredFields</span>:[<span class="string">&#x27;nick&#x27;</span>],</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">visitor</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">//path:&quot;/&quot;,</span></span></span><br><span class="line"><span class="language-javascript">                <span class="attr">placeholder</span>:<span class="string">&quot;整两句...&quot;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//这一段是加载最近评论的</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="title class_">Waline</span>.<span class="property">Widget</span>.<span class="title class_">RecentComments</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">el</span>: <span class="string">&#x27;#waline-recent&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">serverURL</span>: <span class="string">&#x27;https://xxx.vercel.app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">count</span>: <span class="number">10</span></span></span><br><span class="line"><span class="language-javascript">              &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    `,</span><br></pre></td></tr></table></figure>
-<p>把代码中的AppID,AppKey,serverURL(serverURL两个都要改)修改成你自己的, 并粘贴到workers代码里, 再点击部署就可以了</p>
-<ul>
-<li>最后</li>
-</ul>
-<p>Waline 还可以在 Hexo 上使用, 你们自己研究一下, 就不出教程了</p>
-]]></content>
-      <categories>
-        <category>图文教程</category>
-      </categories>
-      <tags>
-        <tag>Cloudflare Workers</tag>
-        <tag>CFblog</tag>
-        <tag>域名绑定</tag>
-        <tag>Waline部署</tag>
-        <tag>LeanCloud注册</tag>
-        <tag>第三方评论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Claw Run创建Webssh</title>
-    <url>/2025/06/15/webssh/</url>
-    <content><![CDATA[<blockquote>
-<p>利用Claw Run免费容器创建Webssh, 从而使用浏览器管理自己的VPS, 并且该Webssh支持文件管理<br>项目地址: <a href="https://github.com/hochenggang/managi-backend">hochenggang&#x2F;managi-backend</a></p>
-</blockquote>
-<h2 id="创建Claw-Run账号"><a href="#创建Claw-Run账号" class="headerlink" title="创建Claw Run账号"></a>创建Claw Run账号</h2><p>访问 <a href="https://run.claw.cloud/">https://run.claw.cloud</a> 注册</p>
-<blockquote>
-<p>使用180天以上的Github账号进行注册，每月赠送5刀余额</p>
-</blockquote>
-<h2 id="部署过程"><a href="#部署过程" class="headerlink" title="部署过程"></a>部署过程</h2><p>使用Github登陆, 进入首页选择<code>App Launchpad</code>，点击<code>Create App</code>按钮开始创建应用。</p>
-<p><img src="https://b2.333375.xyz/img/webssh/1.webp" alt="1"></p>
-<p><img src="https://b2.333375.xyz/img/webssh/2.webp" alt="2"></p>
-<p>名称随便填写, Image选择<code>Public</code>, Image Name填写<code>hochenggang/managi:0.5.0</code></p>
-<p>容器配置选择<code>Fixed</code> <code>0.1CPU</code> <code>128M</code>, 这样每个月费用仅有0.6刀, 剩余余额还可以部署其他项目</p>
-<p>网络端口修改为18001, <code>Public Access</code>打开, 可以点击<code>Custom Domain</code>来自定义域名, 推荐使用 <a href="https://zoneabc.net/register?invite=f316817b5eb8406dba388869b0767963">Zoneabc</a> 的免费域名（有AFF, 介意勿点）</p>
-<p>注册一个账号, 然后重新返回主页, 输入自己想要注册的域名</p>
-<table>
-<thead>
-<tr>
-<th>域名位数</th>
-<th>价格</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>4位域名</td>
-<td>30积分</td>
-</tr>
-<tr>
-<td>5位域名</td>
-<td>20积分</td>
-</tr>
-<tr>
-<td>6位域名</td>
-<td>10积分</td>
-</tr>
-<tr>
-<td>7位及以上域名</td>
-<td>免费</td>
-</tr>
-</tbody></table>
-<p>接着进入管理域名的页面, 添加DNS记录, 类型选择CNAME, 内容填入Claw Run提供的免费域名, TTL为60秒, 点击添加</p>
-<p><img src="https://b2.333375.xyz/img/webssh/3.webp" alt="3"></p>
-<p>如果对域名没有要求的也可以直接使用Claw Run提供的免费域名</p>
-<p><img src="https://b2.333375.xyz/img/webssh/4.webp" alt="4"></p>
-<p>确认没有问题后点击Deploy Application部署</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在设置完域名如果访问失败, 就耐心等待一会, 因为Claw Run本身相应比较慢, 并且不支持IPV6（我到时候研究一下能否使用Warp支持IPV6）</p>
-<p>示例网站: <a href="https://lts-webssh.zabc.net/">https://lts-webssh.zabc.net</a></p>
-<p>6.24更新: Claw是容器没法开TUN, 所以没法套warp, 可以使用koyeb搭建</p>
-]]></content>
-      <categories>
-        <category>图文教程</category>
-      </categories>
-      <tags>
-        <tag>免费域名</tag>
-        <tag>Claw Run</tag>
-        <tag>Webssh</tag>
-        <tag>Zoneabc</tag>
-        <tag>免费容器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用fofa寻找免费节点</title>
-    <url>/2025/03/15/fofaclash/</url>
-    <content><![CDATA[<blockquote>
-<p>今天不水教程, 今天来教学一下fofa获取免费节点<br>来源: <a href="https://m.youtube.com/watch?v=6UJocLvEXtM">https://m.youtube.com/watch?v=6UJocLvEXtM</a></p>
-</blockquote>
-<blockquote>
-<p>声明: 本文章发布仅供技术交流</p>
-</blockquote>
-<ul>
-<li>fofa搜索</li>
-</ul>
-<p>打开fofa网站 <a href="https://fofa.info/">https://fofa.info</a></p>
-<p>接着搜索</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;&#123;\&quot;hello\&quot;:\&quot;clash\&quot;&#125;&quot; &amp;&amp; country=&quot;CN&quot; &amp;&amp; port=&quot;9090&quot;</span><br></pre></td></tr></table></figure>
-
-<p>在搜索完成之后会出现很多IP和端口, 我们先放在一边</p>
-<ul>
-<li>打开网页Clash</li>
-</ul>
-<p><a href="http://clash.razord.top/">http://clash.razord.top/</a></p>
-<p>记住<code>不要使用https访问</code>, 如果自动跳转https就换个浏览器</p>
-<p>点击设置-&gt;外部控制设置-&gt;编辑</p>
-<p>将在fofa网站搜到的ip端口粘贴进去, 点击确定</p>
-<p>将<code>允许来自局域网的连接</code>选项打开</p>
-<p>点击<code>代理</code>查看是否有可用节点, 如果没有就换一个</p>
-<ul>
-<li>打开代理软件</li>
-</ul>
-<p>点击添加<code>http代理</code>, <code>服务器</code>选择自己找的IP, <code>服务器端口</code>选择在设置看到的<code>http代理端口</code>, 如果是0就使用<code>混合代理端口</code></p>
-<p>点击完成, 连接后进行测速, 如果成功即可使用, 如果失败就再找一个</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>在fofa寻找泄露的clash节点, 进行连接使用, 但是节点仅供娱乐, 请勿刷取他人节点流量, 以免给他人带来困扰</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>FOFA搜索</tag>
-        <tag>免费Clash节点</tag>
-        <tag>代理教程</tag>
-        <tag>技术交流</tag>
-        <tag>代理软件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通过Cloudflare Tunnel进行内网穿透</title>
-    <url>/2024/09/28/cloudflared/</url>
-    <content><![CDATA[<blockquote>
-<p>Cloudflare, 又称赛博活佛, 提供了不少的免费服务, 而内网穿透便是其通过的免费服务之一</p>
-</blockquote>
-<ul>
-<li>准备</li>
-</ul>
-<p>首先你必须有一个Cloudflare的账号, 且账号上必须有一个域名</p>
-<ul>
-<li>创建隧道</li>
-</ul>
-<p>首先登陆账号, 进入主页</p>
-<p>点击 侧边栏&gt;Zero Trust&gt;Networks&gt;Tunnels, 点击Create a Tunnel, 选择Cloudflared, 点击next, 输入名字, 在这里根据你的操作系统的不同选择不同的安装方式, 并且Debian和Ubuntu的安装方式是同一个方式</p>
-<p>并且如果有其他脚本需要内网穿透(或argo)的话, 需要的是那一段Token</p>
-<p>就是去掉<code>sudo cloudflared service install</code>的那一段ey开头的东西</p>
-<p>注: 这一段Token我替换了其中的几个字符, 是无效的</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> cloudflared service install eyJhIjoiMzQ3OTVmZGJlMjg5MjY5NTk0YmQxMzlhYmIxNjdiMzciLwCJ0IjoiZTFlqjlkNGUkOGE4ZS00ZjUxLTk2MjUtNmVlNjE2qTU0MjU1xiwicyIIllUZzFaVEk1TURVdFpEazNaaTAwTnprd0xUaGlaVFl0TldVeVlURXpOelUyTVdReSJ9</span><br></pre></td></tr></table></figure>
-<p>继续点击next</p>
-<p>输入subdomain并选择domain</p>
-<p>service大部分为, type: <code>http</code>, URL: <code>localhost:端口</code></p>
-<p>再点击save tunnel即可</p>
-<p>等待一会, 如果状态变为 Healthy 就是正常了, 如果等待很久都不变, 就需要检查操作是否正确</p>
-<ul>
-<li>Termux使用</li>
-</ul>
-<p>这里专门把Termux提出来就是因为在官方的安装方法中安卓无法使用, 因为权限不足, root后的安卓设备除外</p>
-<p>首先安装下来后先输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">termux-change-repo</span><br></pre></td></tr></table></figure>
-<p>接着回车, 通过上下光标移动选择<code>Mirror in Chinese Mainland</code>, 再回车, 等待完成后就换源成功了</p>
-<p>接着输入来安装<code>Cloudflared</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install cloudflared -y</span><br></pre></td></tr></table></figure>
-
-<p>然后输入, <code>Argo_Token</code>为之前获取的Token</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
-<p>如果你不希望一直这样运行, 而无法操作可以使用<code>screen</code>命令</p>
-<p>首先来安装screen</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg install screen -y</span><br></pre></td></tr></table></figure>
-<p>接着输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">screen cloudflared tunnel --edge-ip-version auto --protocol http2 --heartbeat-interval 10s run --token Argo_Token</span><br></pre></td></tr></table></figure>
-
-<p>然后在英文输入法下键入快捷键<code>Ctrl+a+d</code>就行了</p>
-<ul>
-<li>其他</li>
-</ul>
-<p>如果你的系统很冷门</p>
-<p>只需在搜索引擎搜索<code>Cloudflared-系统名称</code>, 基本上都能搜索到</p>
-<p>将其下载下来后, 如果为压缩包就将其解压 <code>tar -zxvf cloudflared.zip</code></p>
-<p>接着输入<code>chmod +x Cloudflared_NAME</code> 名称自行替换</p>
-<p>然后在使用时需要执行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./Cloudflared_NAME service install Argo_Token</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Termux</tag>
-        <tag>Cloudflare Tunnel</tag>
-        <tag>内网穿透</tag>
-        <tag>Zero Trust</tag>
-        <tag>免费服务</tag>
-        <tag>Argo Token</tag>
-        <tag>域名配置</tag>
-        <tag>HTTP服务</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用CFworkers路由加速网站</title>
     <url>/2024/07/23/workers-nginx/</url>
     <content><![CDATA[<blockquote>
@@ -1255,5 +1240,20 @@
         <tag>CF优选域名</tag>
         <tag>Nginx反代</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>回到Hexo的怀抱</title>
+    <url>/2024/09/15/imback/</url>
+    <content><![CDATA[<blockquote>
+<p><del>孩子们我回来了</del></p>
+</blockquote>
+<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
+<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
+<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
+<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
+]]></content>
+      <categories>
+        <category>水</category>
+      </categories>
   </entry>
 </search>
