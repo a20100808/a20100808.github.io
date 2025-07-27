@@ -113,13 +113,13 @@
       <category domain="https://blog.333375.xyz/categories/%E5%9B%BE%E6%96%87%E6%95%99%E7%A8%8B/">图文教程</category>
       
       
+      <category domain="https://blog.333375.xyz/tags/Cloudflare/">Cloudflare</category>
+      
       <category domain="https://blog.333375.xyz/tags/Backblaze/">Backblaze</category>
       
       <category domain="https://blog.333375.xyz/tags/%E5%9B%BE%E5%BA%8A/">图床</category>
       
       <category domain="https://blog.333375.xyz/tags/CF-Pages/">CF Pages</category>
-      
-      <category domain="https://blog.333375.xyz/tags/Cloudflare/">Cloudflare</category>
       
       
       <comments>https://blog.333375.xyz/2025/05/23/b2bucket/#disqus_thread</comments>
@@ -498,8 +498,6 @@
       <category domain="https://blog.333375.xyz/categories/%E6%95%99%E7%A8%8B/">教程</category>
       
       
-      <category domain="https://blog.333375.xyz/tags/Cloudflare/">Cloudflare</category>
-      
       <category domain="https://blog.333375.xyz/tags/Cloudflare-Workers/">Cloudflare Workers</category>
       
       <category domain="https://blog.333375.xyz/tags/CFblog/">CFblog</category>
@@ -509,6 +507,8 @@
       <category domain="https://blog.333375.xyz/tags/KV%E5%AE%B9%E5%99%A8/">KV容器</category>
       
       <category domain="https://blog.333375.xyz/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</category>
+      
+      <category domain="https://blog.333375.xyz/tags/Cloudflare/">Cloudflare</category>
       
       <category domain="https://blog.333375.xyz/tags/API%E4%BB%A4%E7%89%8C/">API令牌</category>
       
