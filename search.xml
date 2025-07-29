@@ -574,21 +574,6 @@
       </tags>
   </entry>
   <entry>
-    <title>回到Hexo的怀抱</title>
-    <url>/2024/09/15/imback/</url>
-    <content><![CDATA[<blockquote>
-<p><del>孩子们我回来了</del></p>
-</blockquote>
-<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
-<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
-<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
-<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
-]]></content>
-      <categories>
-        <category>水</category>
-      </categories>
-  </entry>
-  <entry>
     <title>使用Github Pages搭建个人主页</title>
     <url>/2025/06/24/homepage/</url>
     <content><![CDATA[<blockquote>
@@ -603,15 +588,15 @@
 </tr>
 </thead>
 <tbody><tr>
-<td><img src="https://www.nodeimage.com/i/8512/yiTtosnw3WNR5WfIsc0qA78GNtrctOYy.png" alt="yiTtosnw3WNR5WfIsc0qA78GNtrctOYy.webp"></td>
-<td><img src="https://www.nodeimage.com/i/8512/gdW3PLnM3WNR5WiIsc0qzAqscR2aRtxw.png" alt="gdW3PLnM3WNR5WiIsc0qzAqscR2aRtxw.webp"></td>
+<td><img src="https://cdn.nodeimage.com/i/zQWHOv4vpYAnYxslXac6wucMoZmcapaR.webp" alt="zQWHOv4vpYAnYxslXac6wucMoZmcapaR.webp"></td>
+<td><img src="https://cdn.nodeimage.com/i/p2dJujULsiXkB2lZwF7NP7SEH9KecdyD.webp" alt="p2dJujULsiXkB2lZwF7NP7SEH9KecdyD.webp"></td>
 </tr>
 </tbody></table>
 <h2 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h2><p>访问仓库 <a href="https://github.com/couldflyer/homepage">https://github.com/couldflyer/homepage</a></p>
 <h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>点击Fork本仓库-&gt;Create Fork</p>
-<p><img src="https://www.nodeimage.com/i/8512/5i33xOnw3WNR5WgDsc0q15blZ4FMDpVw.png" alt="5i33xOnw3WNR5WgDsc0q15blZ4FMDpVw.webp"></p>
+<p><img src="https://cdn.nodeimage.com/i/zZY02kxza0LwN2uNubJPJY5Y5q4lXAYH.webp" alt="zZY02kxza0LwN2uNubJPJY5Y5q4lXAYH.webp"></p>
 <p>然后修改<code>app.js</code></p>
-<p><img src="https://www.nodeimage.com/i/8512/zPLWrIn63WNR5WlHsc0q7grvldNP9jYt.png" alt="zPLWrIn63WNR5WlHsc0q7grvldNP9jYt.webp"></p>
+<p><img src="https://cdn.nodeimage.com/i/JlvIK0BMHFohVUndNYpOkECdNkNfeubW.webp" alt="JlvIK0BMHFohVUndNYpOkECdNkNfeubW.webp"></p>
 <table>
 <thead>
 <tr>
@@ -648,15 +633,15 @@
 <td>网页icon</td>
 </tr>
 </tbody></table>
-<p>social和favicon配置教程: <a href="https://github.com/couldflyer/homepage/social-favicon.md">social-favicon.md</a></p>
+<p>social和favicon配置教程: <a href="https://github.com/couldflyer/homepage/blob/main/social-favicon.md">social-favicon.md</a></p>
 <blockquote>
 <p>如果你的更改没有作用, 可能是CDN缓存了JS文件, 需要去CDN处清理缓存</p>
 </blockquote>
 <p>更改完成后上传即可</p>
 <h3 id="创建Github-Pages"><a href="#创建Github-Pages" class="headerlink" title="创建Github Pages"></a>创建Github Pages</h3><p>来到Settings-&gt;Pages,Branch选择main然后点击save</p>
-<p><img src="https://www.nodeimage.com/i/8512/ZV4WfSnQ3WNR5XcFsc0qzgwhOZIlQe9g.png" alt="ZV4WfSnQ3WNR5XcFsc0qzgwhOZIlQe9g.webp"></p>
+<p><img src="https://cdn.nodeimage.com/i/Z4IKrghGFfHzBJ5R83lC9LPWHoEWt7AH.webp" alt="Z4IKrghGFfHzBJ5R83lC9LPWHoEWt7AH.webp"></p>
 <p>自定义域名, 通过Custom domain, 里面填入你的域名点击save, 然后设置A记录, 记录内容为<code>185.199.108.133</code></p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>喜欢可以给项目点点star, 虽然是AI写的</p>
+<h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2><p>喜欢的话点个Star呗～</p>
 <ul>
 <li>6.25</li>
 </ul>
@@ -670,6 +655,21 @@
         <tag>Github Pages</tag>
         <tag>个人主页</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>回到Hexo的怀抱</title>
+    <url>/2024/09/15/imback/</url>
+    <content><![CDATA[<blockquote>
+<p><del>孩子们我回来了</del></p>
+</blockquote>
+<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
+<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
+<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
+<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
+]]></content>
+      <categories>
+        <category>水</category>
+      </categories>
   </entry>
   <entry>
     <title>随机图片api</title>
@@ -1117,6 +1117,67 @@
       </tags>
   </entry>
   <entry>
+    <title>使用Claw Run创建Webssh</title>
+    <url>/2025/06/15/webssh/</url>
+    <content><![CDATA[<blockquote>
+<p>利用Claw Run免费容器创建Webssh, 从而使用浏览器管理自己的VPS, 并且该Webssh支持文件管理<br>项目地址: <a href="https://github.com/hochenggang/managi-backend">hochenggang&#x2F;managi-backend</a></p>
+</blockquote>
+<h2 id="创建Claw-Run账号"><a href="#创建Claw-Run账号" class="headerlink" title="创建Claw Run账号"></a>创建Claw Run账号</h2><p>访问 <a href="https://run.claw.cloud/">https://run.claw.cloud</a> 注册</p>
+<blockquote>
+<p>使用180天以上的Github账号进行注册，每月赠送5刀余额</p>
+</blockquote>
+<h2 id="部署过程"><a href="#部署过程" class="headerlink" title="部署过程"></a>部署过程</h2><p>使用Github登陆, 进入首页选择<code>App Launchpad</code>，点击<code>Create App</code>按钮开始创建应用。</p>
+<p><img src="https://b2.333375.xyz/img/webssh/1.webp" alt="1"></p>
+<p><img src="https://b2.333375.xyz/img/webssh/2.webp" alt="2"></p>
+<p>名称随便填写, Image选择<code>Public</code>, Image Name填写<code>hochenggang/managi:0.5.0</code></p>
+<p>容器配置选择<code>Fixed</code> <code>0.1CPU</code> <code>128M</code>, 这样每个月费用仅有0.6刀, 剩余余额还可以部署其他项目</p>
+<p>网络端口修改为18001, <code>Public Access</code>打开, 可以点击<code>Custom Domain</code>来自定义域名, 推荐使用 <a href="https://zoneabc.net/register?invite=f316817b5eb8406dba388869b0767963">Zoneabc</a> 的免费域名（有AFF, 介意勿点）</p>
+<p>注册一个账号, 然后重新返回主页, 输入自己想要注册的域名</p>
+<table>
+<thead>
+<tr>
+<th>域名位数</th>
+<th>价格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4位域名</td>
+<td>30积分</td>
+</tr>
+<tr>
+<td>5位域名</td>
+<td>20积分</td>
+</tr>
+<tr>
+<td>6位域名</td>
+<td>10积分</td>
+</tr>
+<tr>
+<td>7位及以上域名</td>
+<td>免费</td>
+</tr>
+</tbody></table>
+<p>接着进入管理域名的页面, 添加DNS记录, 类型选择CNAME, 内容填入Claw Run提供的免费域名, TTL为60秒, 点击添加</p>
+<p><img src="https://b2.333375.xyz/img/webssh/3.webp" alt="3"></p>
+<p>如果对域名没有要求的也可以直接使用Claw Run提供的免费域名</p>
+<p><img src="https://b2.333375.xyz/img/webssh/4.webp" alt="4"></p>
+<p>确认没有问题后点击Deploy Application部署</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在设置完域名如果访问失败, 就耐心等待一会, 因为Claw Run本身相应比较慢, 并且不支持IPV6（我到时候研究一下能否使用Warp支持IPV6）</p>
+<p>示例网站: <a href="https://lts-webssh.zabc.net/">https://lts-webssh.zabc.net</a></p>
+<p>6.24更新: Claw是容器没法开TUN, 所以没法套warp, 可以使用koyeb搭建</p>
+]]></content>
+      <categories>
+        <category>图文教程</category>
+      </categories>
+      <tags>
+        <tag>免费域名</tag>
+        <tag>Claw Run</tag>
+        <tag>Webssh</tag>
+        <tag>Zoneabc</tag>
+        <tag>免费容器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CFblog添加Waline</title>
     <url>/2024/07/14/waline/</url>
     <content><![CDATA[<blockquote>
@@ -1261,67 +1322,6 @@
         <tag>Workers配置</tag>
         <tag>CF优选域名</tag>
         <tag>Nginx反代</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Claw Run创建Webssh</title>
-    <url>/2025/06/15/webssh/</url>
-    <content><![CDATA[<blockquote>
-<p>利用Claw Run免费容器创建Webssh, 从而使用浏览器管理自己的VPS, 并且该Webssh支持文件管理<br>项目地址: <a href="https://github.com/hochenggang/managi-backend">hochenggang&#x2F;managi-backend</a></p>
-</blockquote>
-<h2 id="创建Claw-Run账号"><a href="#创建Claw-Run账号" class="headerlink" title="创建Claw Run账号"></a>创建Claw Run账号</h2><p>访问 <a href="https://run.claw.cloud/">https://run.claw.cloud</a> 注册</p>
-<blockquote>
-<p>使用180天以上的Github账号进行注册，每月赠送5刀余额</p>
-</blockquote>
-<h2 id="部署过程"><a href="#部署过程" class="headerlink" title="部署过程"></a>部署过程</h2><p>使用Github登陆, 进入首页选择<code>App Launchpad</code>，点击<code>Create App</code>按钮开始创建应用。</p>
-<p><img src="https://b2.333375.xyz/img/webssh/1.webp" alt="1"></p>
-<p><img src="https://b2.333375.xyz/img/webssh/2.webp" alt="2"></p>
-<p>名称随便填写, Image选择<code>Public</code>, Image Name填写<code>hochenggang/managi:0.5.0</code></p>
-<p>容器配置选择<code>Fixed</code> <code>0.1CPU</code> <code>128M</code>, 这样每个月费用仅有0.6刀, 剩余余额还可以部署其他项目</p>
-<p>网络端口修改为18001, <code>Public Access</code>打开, 可以点击<code>Custom Domain</code>来自定义域名, 推荐使用 <a href="https://zoneabc.net/register?invite=f316817b5eb8406dba388869b0767963">Zoneabc</a> 的免费域名（有AFF, 介意勿点）</p>
-<p>注册一个账号, 然后重新返回主页, 输入自己想要注册的域名</p>
-<table>
-<thead>
-<tr>
-<th>域名位数</th>
-<th>价格</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>4位域名</td>
-<td>30积分</td>
-</tr>
-<tr>
-<td>5位域名</td>
-<td>20积分</td>
-</tr>
-<tr>
-<td>6位域名</td>
-<td>10积分</td>
-</tr>
-<tr>
-<td>7位及以上域名</td>
-<td>免费</td>
-</tr>
-</tbody></table>
-<p>接着进入管理域名的页面, 添加DNS记录, 类型选择CNAME, 内容填入Claw Run提供的免费域名, TTL为60秒, 点击添加</p>
-<p><img src="https://b2.333375.xyz/img/webssh/3.webp" alt="3"></p>
-<p>如果对域名没有要求的也可以直接使用Claw Run提供的免费域名</p>
-<p><img src="https://b2.333375.xyz/img/webssh/4.webp" alt="4"></p>
-<p>确认没有问题后点击Deploy Application部署</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在设置完域名如果访问失败, 就耐心等待一会, 因为Claw Run本身相应比较慢, 并且不支持IPV6（我到时候研究一下能否使用Warp支持IPV6）</p>
-<p>示例网站: <a href="https://lts-webssh.zabc.net/">https://lts-webssh.zabc.net</a></p>
-<p>6.24更新: Claw是容器没法开TUN, 所以没法套warp, 可以使用koyeb搭建</p>
-]]></content>
-      <categories>
-        <category>图文教程</category>
-      </categories>
-      <tags>
-        <tag>免费域名</tag>
-        <tag>Claw Run</tag>
-        <tag>Webssh</tag>
-        <tag>Zoneabc</tag>
-        <tag>免费容器</tag>
       </tags>
   </entry>
 </search>
