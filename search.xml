@@ -332,7 +332,8 @@
     yourdomain.com--国外用户--&gt;CF-CDN--回源--&gt;origin.yourdomain.com--&gt;服务器
     yourdomain.com--国内用户--&gt;优化CDN--&gt;服务器
     服务器--返回内容--&gt;用户浏览器
-    SSL验证服务器--&gt;yourdomain.com/.well-known/acme-challenge/1234--&gt;Workers路由--Host:yourdomain.com--&gt;优化CDN创建的验证文件</code></pre>
+    SSL验证服务器--&gt;yourdomain.com/.well-known/acme-challenge/1234--&gt;Workers路由--Host:yourdomain.com--&gt;cdn.yourcdn.com/.well-known/acme-challenge/1234
+    cdn.yourcdn.com/.well-known/acme-challenge/1234--&gt;SSL验证服务器</code></pre>
 
 <p>示例: <a href="https://xxx.333375.xyz/">https://xxx.333375.xyz/</a></p>
 ]]></content>
@@ -573,6 +574,21 @@
       </tags>
   </entry>
   <entry>
+    <title>回到Hexo的怀抱</title>
+    <url>/2024/09/15/imback/</url>
+    <content><![CDATA[<blockquote>
+<p><del>孩子们我回来了</del></p>
+</blockquote>
+<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
+<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
+<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
+<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
+]]></content>
+      <categories>
+        <category>水</category>
+      </categories>
+  </entry>
+  <entry>
     <title>使用Github Pages搭建个人主页</title>
     <url>/2025/06/24/homepage/</url>
     <content><![CDATA[<blockquote>
@@ -654,21 +670,6 @@
         <tag>Github Pages</tag>
         <tag>个人主页</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>回到Hexo的怀抱</title>
-    <url>/2024/09/15/imback/</url>
-    <content><![CDATA[<blockquote>
-<p><del>孩子们我回来了</del></p>
-</blockquote>
-<p>在用了几个月 Typecho 后终于还是回到了 Hexo, 也许是我没有找到好的主题, 反正就是感觉 Typecho 的主题的动画不如 Hexo, 这个butterfly主题的动画是真的符合我的胃口, 非常的细腻优美, 而且背靠 Github 不用担心博客数据丢失</p>
-<p>但是最最最关键的就是 Typecho 的运行需要虚拟主机而 Hexo 不需要, 这就是它们的最大的差距, 使用免费虚拟主机还需要每月登陆, 不然就是各种限制, 至于付费的我又用不起, 所以导致我非常烦, 但是 Hexo 就没有这个烦恼</p>
-<p>目前这个 Hexo 博客, 数据存储在 Github, CDN 靠CF优选, 之前用过 <a href="https://blogcdn.net/">Blogcdn</a> 但是感觉也就是ping的速度快了, 用起来的体验感觉和CF优选差不多 <del>除非CF线路爆炸</del></p>
-<p>现在就是靠 Hexo 养老了, 就是还得想个办法备份一下本地的数据, 到时候再想办法吧</p>
-]]></content>
-      <categories>
-        <category>水</category>
-      </categories>
   </entry>
   <entry>
     <title>随机图片api</title>
@@ -1217,6 +1218,52 @@
       </tags>
   </entry>
   <entry>
+    <title>使用CFworkers路由加速网站</title>
+    <url>/2024/07/23/workers-nginx/</url>
+    <content><![CDATA[<blockquote>
+<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
+</blockquote>
+<ul>
+<li>创建 Workers</li>
+</ul>
+<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">if</span> (url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>)) &#123;</span><br><span class="line">      url.<span class="property">hostname</span> = <span class="string">&#x27;xxx.vercel.app&#x27;</span>  <span class="comment">//修改为自己的网站</span></span><br><span class="line">      <span class="keyword">let</span> new_request = <span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> env.<span class="property">ASSETS</span>.<span class="title function_">fetch</span>(request);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>粘贴上去后是11行, 如果有多余几行就把这几行删除</p>
+<p>其实可以将这个看成 Nginx 反代</p>
+<ul>
+<li>配置 Workers 路由</li>
+</ul>
+<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
+<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
+<p>点击添加就行了</p>
+<ul>
+<li>配置 DNS</li>
+</ul>
+<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
+<ul>
+<li>总结</li>
+</ul>
+<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
+<ul>
+<li>2024.7.25更新</li>
+</ul>
+<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
+<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
+<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
+<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>分享</category>
+      </categories>
+      <tags>
+        <tag>CFworkers路由</tag>
+        <tag>Cloudflare代理</tag>
+        <tag>Workers配置</tag>
+        <tag>CF优选域名</tag>
+        <tag>Nginx反代</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用Claw Run创建Webssh</title>
     <url>/2025/06/15/webssh/</url>
     <content><![CDATA[<blockquote>
@@ -1275,52 +1322,6 @@
         <tag>Webssh</tag>
         <tag>Zoneabc</tag>
         <tag>免费容器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用CFworkers路由加速网站</title>
-    <url>/2024/07/23/workers-nginx/</url>
-    <content><![CDATA[<blockquote>
-<p>在上一篇文章中, 我们使用了 Workers 路由来代理 xxxx.Vercel.app , 但实际上, Workers 并不只能代理这个, 他可以代理大部分的网站</p>
-</blockquote>
-<ul>
-<li>创建 Workers</li>
-</ul>
-<p>还是老样子, 创建 Workers, 清除其中的代码, 粘贴下面代码的上去</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">if</span> (url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/&#x27;</span>)) &#123;</span><br><span class="line">      url.<span class="property">hostname</span> = <span class="string">&#x27;xxx.vercel.app&#x27;</span>  <span class="comment">//修改为自己的网站</span></span><br><span class="line">      <span class="keyword">let</span> new_request = <span class="keyword">new</span> <span class="title class_">Request</span>(url, request);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">fetch</span>(new_request);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> env.<span class="property">ASSETS</span>.<span class="title function_">fetch</span>(request);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>粘贴上去后是11行, 如果有多余几行就把这几行删除</p>
-<p>其实可以将这个看成 Nginx 反代</p>
-<ul>
-<li>配置 Workers 路由</li>
-</ul>
-<p>设置 -&gt; 触发器 -&gt; 路由, 点击添加路由</p>
-<p>路由填 <code>my.domain.com/*</code> (你要访问的域名)<br>区域填 <code>domain.com</code></p>
-<p>点击添加就行了</p>
-<ul>
-<li>配置 DNS</li>
-</ul>
-<p>找到 DNS 配置页, 添加 CNAME 记录, 记录名称为之前设置的路由, 目标为 <code>cloudflare.182682.xyz</code> 代理状态关闭, 点击保存即可</p>
-<ul>
-<li>总结</li>
-</ul>
-<p>只需 Workers 代理网站, 并添加路由, 添加 CNAME 记录, 记录目标为使用了 Cloudflare 的网站, 即可享受该网站的访问速度</p>
-<ul>
-<li>2024.7.25更新</li>
-</ul>
-<p>昨天, 我在搭建影视网站时, 决定用 Workers 路由加速一下, 然后用上这个代码时发现域名重定向了</p>
-<p>大概就是我访问上面的 <code>my.domain.com</code> 时, 会重定向到 <code>www.example.com</code> 就失去了加速效果</p>
-<p>但是我发现好像只有在一个主域名上的才会重定向, 也就是说当反代的域名为 <code>www.1.com</code> 时, Workers 路由为 <code>my.1.com</code> 时才会出现上面的情况</p>
-<p>如果你域名很多, 那么换个路由即可, 如果你不想换路由, 那么就把代码改成下面的代码 (GPT帮我写的, 我不会写,有问题去找GPT)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(<span class="string">&#x27;fetch&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">respondWith</span>(<span class="title function_">handleRequest</span>(event.<span class="property">request</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">  <span class="keyword">if</span> (url.<span class="property">hostname</span> === <span class="string">&#x27;my.domain.com&#x27;</span>) &#123;  <span class="comment">//你的workers路由</span></span><br><span class="line">    url.<span class="property">hostname</span> = <span class="string">&#x27;www.example.com&#x27;</span>;  <span class="comment">//被反代的域名</span></span><br><span class="line">    <span class="keyword">let</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(url, &#123;</span><br><span class="line">      <span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">      <span class="attr">headers</span>: request.<span class="property">headers</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>分享</category>
-      </categories>
-      <tags>
-        <tag>CFworkers路由</tag>
-        <tag>Cloudflare代理</tag>
-        <tag>Workers配置</tag>
-        <tag>CF优选域名</tag>
-        <tag>Nginx反代</tag>
       </tags>
   </entry>
 </search>
